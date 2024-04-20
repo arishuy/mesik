@@ -116,9 +116,7 @@ function HeaderUserbox() {
             <UserBoxLabel variant='body1'>
               {user.first_name} {user.last_name}
             </UserBoxLabel>
-            <UserBoxDescription variant='body2'>
-              {user.balance.toLocaleString('vi', { style: 'currency', currency: 'VND' })}
-            </UserBoxDescription>
+            <UserBoxDescription variant='body2'></UserBoxDescription>
           </UserBoxText>
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
@@ -141,29 +139,9 @@ function HeaderUserbox() {
           )}
           {user.role === 'ADMIN' && (
             <>
-              <ListItem button to={path.adminDashBoard} component={NavLink}>
+              <ListItem button to={path.adminMusic} component={NavLink}>
                 <SsidChartTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
-                <ListItemText primary='Thống kê' />
-              </ListItem>
-              <ListItem button to={path.adminListUser} component={NavLink}>
-                <CalendarMonthRoundedIcon fontSize='small' sx={{ mr: 1 }} />
-                <ListItemText primary={t('usersManagement')} />
-              </ListItem>
-              <ListItem button to={path.adminListMajor} component={NavLink}>
-                <AccountTreeTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
-                <ListItemText primary={t('majorsManagement')} />
-              </ListItem>
-              <ListItem button to={path.adminListDocument} component={NavLink}>
-                <TaskTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
-                <ListItemText primary={t('documentManagement')} />
-              </ListItem>
-              <ListItem button to={path.adminListTransaction} component={NavLink}>
-                <AccountBalanceWalletTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
-                <ListItemText primary={t('transactionManagement')} />
-              </ListItem>
-              <ListItem button to={path.adminVerifyExpert} component={NavLink}>
-                <VerifiedUserTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
-                <ListItemText primary={t('verifyExpert')} />
+                <ListItemText primary='Song management' />
               </ListItem>
             </>
           )}

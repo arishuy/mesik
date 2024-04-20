@@ -68,6 +68,25 @@ const urlConfig = {
     getReportById: `${process.env.REACT_APP_API_ENDPOINT}/reports`,
     deleteReport: `${process.env.REACT_APP_API_ENDPOINT}/reports`
   },
+  music: {
+    createMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
+    getAllMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
+    getMusicById: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
+    deleteMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
+    justReleased: `${process.env.REACT_APP_API_ENDPOINT}/songs/release`
+  },
+  genres: {
+    createGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
+    getAllGenres: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
+    getGenreById: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
+    deleteGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`
+  },
+  artists: {
+    createArtist: `${process.env.REACT_APP_API_ENDPOINT}/artists`,
+    getAllArtists: `${process.env.REACT_APP_API_ENDPOINT}/artists`,
+    getArtistById: `${process.env.REACT_APP_API_ENDPOINT}/artists`,
+    deleteArtist: `${process.env.REACT_APP_API_ENDPOINT}/artists`
+  },
   statistics: {
     getStatisticsAdmin: `${process.env.REACT_APP_API_ENDPOINT}/statistics/admin`,
     getStatisticsIncome: `${process.env.REACT_APP_API_ENDPOINT}/statistics/income`,

@@ -1,6 +1,8 @@
 import React from 'react'
-import { Box, Button, Typography, Stack } from '@mui/material'
+import { Box, Button, Typography, Stack, TextField } from '@mui/material'
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact'
+import InputAdornment from '@mui/material/InputAdornment'
+import SearchIcon from '@mui/icons-material/Search'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../hooks/useResponsive'
@@ -20,18 +22,17 @@ const HomeHeader = () => {
             margin: '0px 20px'
           }}
         >
-          <Typography
-            variant='h4'
-            component='h4'
-            onClick={() => navigate('/dashboard')}
-            sx={{
-              cursor: 'pointer'
+          <TextField
+            id='input-with-icon-textfield'
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position='start'>
+                  <SearchIcon />
+                </InputAdornment>
+              )
             }}
-          >
-            <ConnectWithoutContactIcon />
-            {'  '}
-            Expert Booking
-          </Typography>
+            variant='outlined'
+          />
           <div>
             <Stack direction='row' spacing={2} sx={{ padding: '10px' }}>
               <Button variant='text' color='secondary' onClick={() => navigate('/login')}>

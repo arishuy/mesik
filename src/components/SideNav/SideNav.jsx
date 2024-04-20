@@ -12,9 +12,12 @@ import SsidChartIcon from '@mui/icons-material/SsidChart'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../hooks/useResponsive'
 import HandymanIcon from '@mui/icons-material/Handyman'
+import AutoGraphIcon from '@mui/icons-material/AutoGraph'
 import ReportIcon from '@mui/icons-material/Report'
+import QueueMusicIcon from '@mui/icons-material/QueueMusic'
+import HomeIcon from '@mui/icons-material/Home'
 import React from 'react'
-import logo from '../../assets/images/404.svg'
+import logo from '../../assets/images/logo.png'
 export default function AdminSideNav() {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
@@ -81,55 +84,28 @@ export default function AdminSideNav() {
       ) : (
         // logo
         <>
-        <img src={logo} alt="logo" style={{ width: '100%', padding: '10px' }} />
-        <Menu>
-          <MenuItem icon={<SsidChartIcon />} component={<Link to={path.adminDashBoard} style={styleLink} />}>
-            Trang chủ
-          </MenuItem>
-          <MenuItem icon={<AccountBoxIcon />} component={<Link to={path.adminProfile} style={styleLink} />}>
-            {t('profile')}
-          </MenuItem>
-          <MenuItem icon={<VerifiedUserIcon />} component={<Link to={path.adminVerifyExpert} style={styleLink} />}>
-            {t('verifyExpert')}
-          </MenuItem>
-          <SubMenu label={t('management')} style={styleLink} icon={<HandymanIcon />}>
-            <MenuItem icon={<ManageAccountsIcon />} component={<Link to={path.adminListUser} style={styleLink} />}>
-              {t('usersManagement')}
+          <img src={logo} alt='logo' style={{ width: '100%', padding: '10px' }} />
+          <Menu>
+            <MenuItem icon={<HomeIcon />} component={<Link to={path.home} style={styleLink} />}>
+              Trang chủ
             </MenuItem>
-            <MenuItem icon={<ManageSearchIcon />} component={<Link to={path.adminListMajor} style={styleLink} />}>
-              {t('majorsManagement')}
+            <MenuItem icon={<QueueMusicIcon />} component={<Link to={path.myPlaylist} style={styleLink} />}>
+              Playlist
             </MenuItem>
-
-            <MenuItem icon={<FindInPageIcon />} component={<Link to={path.adminListDocument} style={styleLink} />}>
-              {t('documentManagement')}
+            <MenuItem icon={<AutoGraphIcon />} component={<Link to={path.chart} style={styleLink} />}>
+              BXH
             </MenuItem>
             <MenuItem
-              icon={<AccountBalanceWalletIcon />}
-              component={<Link to={path.adminListTransaction} style={styleLink} />}
-              >
-              {t('transactionManagement')}
-            </MenuItem>
-            <MenuItem icon={<ReportIcon />} component={<Link to={path.adminListReport} style={styleLink} />}>
-              {t('reportManagement')}
-            </MenuItem>
-            <MenuItem
-              icon={<AccountBalanceWalletIcon />}
-              component={<Link to={path.adminWithdraw} style={styleLink} />}
-              >
-              {t('withdrawManagement')}
-            </MenuItem>
-          </SubMenu>
-          <MenuItem
-            icon={<MenuOutlinedIcon />}
-            onClick={() => {
-              setIsCollapsed(!isCollapsed)
-            }}
-            style={styleLink}
+              icon={<MenuOutlinedIcon />}
+              onClick={() => {
+                setIsCollapsed(!isCollapsed)
+              }}
+              style={styleLink}
             >
-            {t('collapse')}
-          </MenuItem>
-        </Menu>
-      </>
+              {t('collapse')}
+            </MenuItem>
+          </Menu>
+        </>
       )}
     </Sidebar>
   )

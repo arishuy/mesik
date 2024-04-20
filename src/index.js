@@ -4,11 +4,12 @@ import App from './App'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { AppProvider } from './contexts/app.context'
+import 'react-jinke-music-player/assets/index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <BrowserRouter>
-      <AppProvider>
-        <App />
-      </AppProvider>
-    </BrowserRouter>
+  <BrowserRouter>
+    <AppProvider>
+      <App />
+    </AppProvider>
+  </BrowserRouter>
 )
