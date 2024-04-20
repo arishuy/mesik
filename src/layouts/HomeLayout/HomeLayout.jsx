@@ -10,38 +10,44 @@ import MusicPlayer from '../../components/MusicPlayer'
 function HomeLayoutInner({ children }) {
   const { isAuthenticated } = useContext(AppContext)
   return (
-    <div style={
-      {
-        overflow: 'hidden',
-      }
-    }>
-      <Box sx={{
-        display: 'flex',
-        height: '90vh',
-      }} >
-        <SideNav />
-        <Box sx={{
-          width: '100%',
+    <div
+      style={{
+        overflow: 'hidden'
+      }}
+    >
+      <Box
+        sx={{
           display: 'flex',
-          flexDirection: 'column',
-          height: '90vh',
-          overflowY: 'auto',
-        }}>
-      {!isAuthenticated ? <HomeHeader /> : <Header />}
-      {children}
-      <Outlet />
-      </Box>
-      </Box>
-      <Box sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '10vh',
-        backgroundColor: 'black',
-        color: 'white',
-      }}>
-        <MusicPlayer />
+          height: '92vh'
+        }}
+      >
+        <SideNav />
+        <Box
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            height: '92vh',
+            overflowY: 'auto'
+          }}
+        >
+          {!isAuthenticated ? <HomeHeader /> : <Header />}
+          {children}
+          <Outlet />
         </Box>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '8vh',
+          backgroundColor: 'black',
+          color: 'white'
+        }}
+      >
+        <MusicPlayer />
+      </Box>
     </div>
   )
 }

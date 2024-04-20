@@ -1,6 +1,11 @@
 const path = {
   home: '/',
+  detailArtist: '/artist/:nameId',
+  detailAlbum: '/album/:nameId',
+  detailPlaylist: '/playlist/:nameId',
   forgotPassword: '/forgotPassword',
+  myPlaylist: '/myPlaylist',
+  chart: '/chart',
   dashboard: '/dashboard',
   user: '/user',
   profile: '/user/profile',
@@ -38,7 +43,9 @@ const path = {
   adminListTransaction: '/admin/transaction-management',
   adminListReport: '/admin/report-management',
   adminDashBoard: '/admin/dashboard',
-  adminWithdraw: '/admin/withdraw-management'
+  adminWithdraw: '/admin/withdraw-management',
+  adminMusic: '/admin/music-management',
+  adminGenre: '/admin/genre-management'
 }
 
 export default path
