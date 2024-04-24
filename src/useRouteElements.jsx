@@ -20,6 +20,7 @@ const DetailAlbum = lazy(() => import('./pages/DetailAlbum'))
 const DetailPlaylist = lazy(() => import('./pages/DetailPlaylist'))
 const MyPlaylist = lazy(() => import('./pages/MyPlaylist'))
 const BXH = lazy(() => import('./pages/BXH'))
+const MyAlbum = lazy(() => import('./pages/MyAlbum'))
 
 // admin page
 const MusicManagement = lazy(() => import('./pages/Admin/pages/MusicManagement'))
@@ -44,6 +45,11 @@ function AdminRoute() {
 function UserRoute() {
   const { role } = useContext(AppContext)
   return role === 'USER' ? <Outlet /> : <Navigate to='/dashboard' />
+}
+
+function ArtistRoute() {
+  const { role } = useContext(AppContext)
+  return role === 'ARTIST' ? <Outlet /> : <Navigate to='/dashboard' />
 }
 
 export default function useRouteElements() {
@@ -184,6 +190,7 @@ export default function useRouteElements() {
               <DetailAlbum />
             </Suspense>
           )
+          
         },
         {
           path: path.detailPlaylist,
@@ -200,6 +207,25 @@ export default function useRouteElements() {
               <MyPlaylist />
             </Suspense>
           )
+        },
+        {
+          path: path.artist,
+          element: <ArtistRoute />,
+          children: [
+            {
+              path: '',
+              children: [
+                {
+                  path: path.myAlbum,
+                  element: (
+                    <Suspense>
+                      <MyAlbum />
+                    </Suspense>
+                  )
+                }
+              ]
+            }
+          ]
         },
         {
           path: path.chart,

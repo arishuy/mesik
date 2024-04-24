@@ -92,6 +92,9 @@ export default function AdminSideNav() {
             <MenuItem icon={<QueueMusicIcon />} component={<Link to={path.myPlaylist} style={styleLink} />}>
               Playlist
             </MenuItem>
+            <MenuItem icon={<AutoGraphIcon />} component={<Link to={path.myAlbum} style={styleLink} />}>
+              Album
+            </MenuItem>
             <MenuItem icon={<AutoGraphIcon />} component={<Link to={path.chart} style={styleLink} />}>
               BXH
             </MenuItem>

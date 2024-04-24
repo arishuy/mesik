@@ -1,6 +1,9 @@
 import React from 'react'
 import { Card, Grid, Stack, Typography, Box, Avatar } from '@mui/material'
 import JustReleased from './JustReleased'
+import FamousArtists from './FamousArtists'
+import RandomSong from './RandomSong'
+import RecentListen from './RecentListen'
 
 const HomePage = () => {
   return (
@@ -10,65 +13,28 @@ const HomePage = () => {
       }}
     >
       <Grid container spacing={3}>
-        <Grid item xs={8}>
-          <Card sx={{ padding: '20px' }}>
-            <img src='https://via.placeholder.com/200' alt='album' />
-          </Card>
+        <Grid item xs={12}>
+          <Stack direction='row' spacing={3}>
+            <Card>
+              <img src='https://photo-zmp3.zmdcdn.me/banner/8/1/1/0/8110bbecd7d2a358364047fea6be1e03.jpg' alt='album' />
+            </Card>
+            <Card>
+              <img src='https://photo-zmp3.zmdcdn.me/banner/5/3/c/7/53c750801ec118ba599c0f8e12f76ba0.jpg' alt='album' />
+            </Card>
+            <Card>
+              <img src='https://photo-zmp3.zmdcdn.me/banner/8/1/1/0/8110bbecd7d2a358364047fea6be1e03.jpg' alt='album' />
+            </Card>
+          </Stack>
           <Typography variant='h4' py={3}>
             Playlist cho bạn
           </Typography>
           <Card sx={{ padding: '20px' }}>
             <img src='https://via.placeholder.com/200' alt='album' />
           </Card>
+          <RandomSong />
+          <RecentListen />
           <JustReleased />
-        </Grid>
-        <Grid item xs={4}>
-          <Card sx={{ padding: '20px' }}>
-            <Typography variant='h4'>Nghệ sĩ nổi tiếng</Typography>
-            <Stack spacing={2} py={2}>
-              <Stack direction='row' alignItems='center'>
-                <Avatar alt='artist' src='https://via.placeholder.com/100' sx={{ width: 100, height: 100 }} />
-                <Typography variant='h6' padding={3}>
-                  Adele
-                </Typography>
-              </Stack>
-              <Stack direction='row' alignItems='center'>
-                <Avatar alt='artist' src='https://via.placeholder.com/100' sx={{ width: 100, height: 100 }} />
-                <Typography variant='h6' padding={3}>
-                  Adele
-                </Typography>
-              </Stack>
-              <Stack direction='row' alignItems='center'>
-                <Avatar alt='artist' src='https://via.placeholder.com/100' sx={{ width: 100, height: 100 }} />
-                <Typography variant='h6' padding={3}>
-                  Adele
-                </Typography>
-              </Stack>
-              <Stack direction='row' alignItems='center'>
-                <Avatar alt='artist' src='https://via.placeholder.com/100' sx={{ width: 100, height: 100 }} />
-                <Typography variant='h6' padding={3}>
-                  Adele
-                </Typography>
-              </Stack>
-            </Stack>
-          </Card>
-          <Card sx={{ padding: '20px', my: 2 }}>
-            <Typography variant='h4'>Vừa nghe</Typography>
-            <Stack spacing={2} py={2}>
-              <Stack direction='row' alignItems='center'>
-                <Avatar alt='artist' src='https://via.placeholder.com/100' sx={{ width: 100, height: 100 }} />
-                <Typography variant='h6' padding={3}>
-                  Adele
-                </Typography>
-              </Stack>
-              <Stack direction='row' alignItems='center'>
-                <Avatar alt='artist' src='https://via.placeholder.com/100' sx={{ width: 100, height: 100 }} />
-                <Typography variant='h6' padding={3}>
-                  Adele
-                </Typography>
-              </Stack>
-            </Stack>
-          </Card>
+          <FamousArtists />
         </Grid>
       </Grid>
     </div>

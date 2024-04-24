@@ -4,7 +4,7 @@ import Axios from 'axios'
 import urlConfig from '../../config/UrlConfig'
 import { useMusicPlayer } from '../../contexts/music.context'
 
-const JustReleased = () => {
+const RecentListen = () => {
   const [songs, setSongs] = useState([])
   const { playSong } = useMusicPlayer()
   const handleSongClick = (song) => {
@@ -24,7 +24,7 @@ const JustReleased = () => {
   return (
     <>
       <Typography variant='h4' py={3}>
-        Vừa phát hành
+        Nghe gần đây
       </Typography>
       <Stack direction='row' spacing={2}>
         {songs.map((song) => (
@@ -37,7 +37,7 @@ const JustReleased = () => {
             }
           }} key={song.id} onClick={() => handleSongClick(song)}>
             <img src={song.photo_url} alt='album' width='250px' />
-            <Typography variant='h6'pt={2}>{song.title}</Typography>
+            <Typography variant='h6' pt={2}>{song.title}</Typography>
             <Typography variant='body2'>
               {song.artist.user.first_name} {song.artist.user.last_name}
             </Typography>
@@ -48,4 +48,4 @@ const JustReleased = () => {
   )
 }
 
-export default JustReleased
+export default RecentListen
