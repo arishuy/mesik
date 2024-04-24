@@ -73,7 +73,9 @@ const urlConfig = {
     getAllMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
     getMusicById: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
     deleteMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
-    justReleased: `${process.env.REACT_APP_API_ENDPOINT}/songs/release`
+    justReleased: `${process.env.REACT_APP_API_ENDPOINT}/songs/release`,
+    getRandom: `${process.env.REACT_APP_API_ENDPOINT}/songs/random`,
+    getAllMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/artist`
   },
   genres: {
     createGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
@@ -81,11 +83,19 @@ const urlConfig = {
     getGenreById: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
     deleteGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`
   },
+  albums: {
+    createAlbum: `${process.env.REACT_APP_API_ENDPOINT}/albums`,
+    getAllAlbums: `${process.env.REACT_APP_API_ENDPOINT}/albums`,
+    getAllAlbumsByArtist: `${process.env.REACT_APP_API_ENDPOINT}/albums/artist`,
+    getAlbumById: `${process.env.REACT_APP_API_ENDPOINT}/albums`,
+    deleteAlbum: `${process.env.REACT_APP_API_ENDPOINT}/albums`
+  },
   artists: {
     createArtist: `${process.env.REACT_APP_API_ENDPOINT}/artists`,
     getAllArtists: `${process.env.REACT_APP_API_ENDPOINT}/artists`,
     getArtistById: `${process.env.REACT_APP_API_ENDPOINT}/artists`,
-    deleteArtist: `${process.env.REACT_APP_API_ENDPOINT}/artists`
+    deleteArtist: `${process.env.REACT_APP_API_ENDPOINT}/artists`,
+    get4Artist: `${process.env.REACT_APP_API_ENDPOINT}/artists/top-5-artist`
   },
   statistics: {
     getStatisticsAdmin: `${process.env.REACT_APP_API_ENDPOINT}/statistics/admin`,
