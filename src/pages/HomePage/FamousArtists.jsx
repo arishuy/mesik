@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Stack, Typography, Avatar, Grid } from '@mui/material'
+import { Stack, Typography, Avatar, Grid } from '@mui/material'
 import Axios from 'axios'
 import urlConfig from '../../config/UrlConfig'
 import { useEffect, useState } from 'react'

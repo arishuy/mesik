@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import RootModal from '../../components/Modal/RootModal'
 import { Stack, TextField } from '@mui/material'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'

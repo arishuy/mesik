@@ -27,9 +27,6 @@ const DetailAlbum = () => {
     photo_url: 'https://via.placeholder.com/300',
     songs: []
   })
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
-  const [page, setPage] = useState(0)
-
   const fetchData = async () => {
     await AxiosInterceptors.get(urlConfig.albums.getAlbumById + `/${id.nameId}`)
       .then((res) => {
@@ -61,7 +58,6 @@ const DetailAlbum = () => {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
             alignItems: 'center'
           }}
         >
@@ -97,16 +93,13 @@ const DetailAlbum = () => {
             <Table size='small'>
               <TableHead>
                 <TableRow>
-                  <TableCell>Bài hát</TableCell>
-                  <TableCell>Duration</TableCell>
-                  <TableCell align='right'>Time</TableCell>
+                  <TableCell>Bài Hát</TableCell>
+                  <TableCell>Thời Lượng</TableCell>
+                  <TableCell align='right'>Ngày Cập Nhật</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {(rowsPerPage > 0
-                  ? album.songs?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  : album.songs
-                ).map((majorsOrder) => {
+                {album.songs.map((majorsOrder) => {
                   return (
                     <TableRow hover key={majorsOrder._id}>
                       <TableCell>

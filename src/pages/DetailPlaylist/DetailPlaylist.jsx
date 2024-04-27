@@ -36,8 +36,6 @@ const DetailPlaylist = () => {
     songs: []
   })
   const [suggestedSongs, setSuggestedSongs] = useState([])
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
-  const [page, setPage] = useState(0)
   const fetchSuggestedSongs = async () => {
     await AxiosInterceptors.get(urlConfig.music.getRandom)
       .then((res) => {
@@ -155,16 +153,13 @@ const DetailPlaylist = () => {
               <Table size='small'>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Bài hát</TableCell>
-                    <TableCell>Thời lượng</TableCell>
-                    <TableCell align='right'>Ngày cập nhật</TableCell>
+                    <TableCell>Bài Hát</TableCell>
+                    <TableCell>Thời Lượng</TableCell>
+                    <TableCell align='right'>Ngày Cập Nhật</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {(rowsPerPage > 0
-                    ? playlist.songs?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    : playlist.songs
-                  ).map((majorsOrder) => {
+                  {playlist.songs.map((majorsOrder) => {
                     return (
                       <TableRow hover key={majorsOrder._id}>
                         <TableCell
@@ -205,7 +200,7 @@ const DetailPlaylist = () => {
                           </Stack>
                         </TableCell>
                         <TableCell>
-                          <Typography variant='body1' color='text.primary'  noWrap>
+                          <Typography variant='body1' color='text.primary' noWrap>
                             {convertToMinutes(majorsOrder.duration)}
                           </Typography>
                           <Tooltip title='Xóa khỏi playlist' arrow>
@@ -252,10 +247,7 @@ const DetailPlaylist = () => {
           <TableContainer>
             <Table size='small'>
               <TableBody>
-                {(rowsPerPage > 0
-                  ? suggestedSongs?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  : suggestedSongs
-                ).map((majorsOrder) => {
+                {suggestedSongs.map((majorsOrder) => {
                   return (
                     <TableRow hover key={majorsOrder._id}>
                       <TableCell
@@ -290,7 +282,7 @@ const DetailPlaylist = () => {
                         </Stack>
                       </TableCell>
                       <TableCell>
-                        <Typography variant='body1' color='text.primary'  noWrap>
+                        <Typography variant='body1' color='text.primary' noWrap>
                           {convertToMinutes(majorsOrder.duration)}
                         </Typography>
                         <Tooltip title='Thêm vào playlist' arrow>

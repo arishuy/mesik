@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Stack, Typography } from '@mui/material'
+import { Stack, Typography } from '@mui/material'
 import urlConfig from '../../config/UrlConfig'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import SongCard from '../../common/components/SongCard'
