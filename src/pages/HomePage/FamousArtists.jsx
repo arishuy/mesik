@@ -1,10 +1,12 @@
 import React from 'react'
-import { Card, Stack, Typography, Avatar } from '@mui/material'
+import { Card, Stack, Typography, Avatar, Grid } from '@mui/material'
 import Axios from 'axios'
 import urlConfig from '../../config/UrlConfig'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const FamousArtists = () => {
+  const navigate = useNavigate()
   const [artists, setArtists] = useState([])
   useEffect(() => {
     Axios.get(urlConfig.artists.get4Artist)
@@ -20,16 +22,30 @@ const FamousArtists = () => {
       <Typography variant='h4' py={3}>
         Nghệ sĩ nổi tiếng
       </Typography>
-      <Stack direction='row' spacing={5}>
+      <Grid container spacing={3}>
         {artists.map((artist) => (
-          <Stack direction='column' alignItems='center' key={artist._id} px={3}>
-            <Avatar alt='artist' src={artist.user.photo_url} sx={{ width: 200, height: 200 }} />
-            <Typography variant='h6' padding={3}>
-              {artist.user.first_name} {artist.user.last_name}
-            </Typography>
-          </Stack>
+          <Grid item xs={2}>
+            <Stack
+              direction='column'
+              alignItems='center'
+              key={artist._id}
+              px={3}
+              onClick={() => navigate(`/artist/${artist._id}`)}
+              sx={{
+                cursor: 'pointer',
+                '&:hover': {
+                  opacity: 0.8
+                }
+              }}
+            >
+              <Avatar alt='artist' src={artist.user.photo_url} sx={{ width: 200, height: 200 }} />
+              <Typography variant='h6' padding={3}>
+                {artist.user.first_name} {artist.user.last_name}
+              </Typography>
+            </Stack>
+          </Grid>
         ))}
-      </Stack>
+      </Grid>
     </>
   )
 }

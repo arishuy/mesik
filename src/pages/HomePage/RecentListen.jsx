@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Stack, Typography } from '@mui/material'
-import Axios from 'axios'
 import urlConfig from '../../config/UrlConfig'
-import { useMusicPlayer } from '../../contexts/music.context'
+import AxiosInterceptors from '../../common/utils/axiosInterceptors'
+import SongCard from '../../common/components/SongCard'
+import Empty from '../../common/components/Empty'
 
 const RecentListen = () => {
   const [songs, setSongs] = useState([])
-  const { playSong } = useMusicPlayer()
-  const handleSongClick = (song) => {
-    // convert song to array
-    song = [song]
-    playSong(song)
-  }
   useEffect(() => {
-    Axios.get(urlConfig.music.justReleased)
+    AxiosInterceptors.get(urlConfig.user.getHistoryListen)
       .then((res) => {
-        setSongs(res.data.result)
+        setSongs(res.data.songs)
       })
       .catch((err) => {
         console.log(err)
@@ -26,22 +21,10 @@ const RecentListen = () => {
       <Typography variant='h4' py={3}>
         Nghe gần đây
       </Typography>
+      {songs.length === 0 && <Empty message={'Không có bài hát nào'} />}
       <Stack direction='row' spacing={2}>
         {songs.map((song) => (
-          <Card sx={{
-            padding: '20px',
-            '&:hover': {
-              backgroundColor: '#f0f0f0',
-              cursor: 'pointer',
-              transform: 'scale(1.05)'
-            }
-          }} key={song.id} onClick={() => handleSongClick(song)}>
-            <img src={song.photo_url} alt='album' width='250px' />
-            <Typography variant='h6' pt={2}>{song.title}</Typography>
-            <Typography variant='body2'>
-              {song.artist.user.first_name} {song.artist.user.last_name}
-            </Typography>
-          </Card>
+          <SongCard song={song} key={song.id} />
         ))}
       </Stack>
     </>

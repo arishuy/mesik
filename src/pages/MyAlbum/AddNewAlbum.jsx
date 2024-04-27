@@ -12,6 +12,7 @@ const AddNewAlbum = ({ open, handleClose, fetchData }) => {
   const { t } = useTranslation()
   const { snack, setSnack } = useSnackbar()
   const [formData, setFormData] = useState(new FormData())
+  const [openDelete, setOpenDelete] = useState(false)
   const [allSongs, setAllSongs] = useState([])
   const [newAlbum, setNewAlbum] = useState({
     title: '',

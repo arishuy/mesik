@@ -223,7 +223,7 @@ const Header = () => {
               <Notification />
               {user.role === 'USER' && (
                 <>
-                  <Tooltip title={t('createRequest')} arrow>
+                  {/* <Tooltip title={t('createRequest')} arrow>
                     <Fab size='small' aria-label='add' onClick={() => setOpen(true)}>
                       <AddIcon />
                     </Fab>
@@ -232,7 +232,7 @@ const Header = () => {
                     <Fab size='small' aria-label='recharge' onClick={() => setOpenRecharge(true)}>
                       <AttachMoneyIcon />
                     </Fab>
-                  </Tooltip>
+                  </Tooltip> */}
                   <Report />
                 </>
               )}
