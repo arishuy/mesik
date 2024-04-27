@@ -18,7 +18,8 @@ const urlConfig = {
     getTransaction: `${process.env.REACT_APP_API_ENDPOINT}/users/current/transactions`,
     getNotification: `${process.env.REACT_APP_API_ENDPOINT}/users/current/notifications`,
     updateNotification: `${process.env.REACT_APP_API_ENDPOINT}/users/current/notifications`,
-    deleteUser: `${process.env.REACT_APP_API_ENDPOINT}/users`
+    deleteUser: `${process.env.REACT_APP_API_ENDPOINT}/users`,
+    getHistoryListen: `${process.env.REACT_APP_API_ENDPOINT}/users/current/history-listen`
   },
   expert: {
     current: `${process.env.REACT_APP_API_ENDPOINT}/experts/current`,
@@ -75,13 +76,22 @@ const urlConfig = {
     deleteMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
     justReleased: `${process.env.REACT_APP_API_ENDPOINT}/songs/release`,
     getRandom: `${process.env.REACT_APP_API_ENDPOINT}/songs/random`,
-    getAllMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/artist`
+    getAllMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/artist`,
+    playSong: `${process.env.REACT_APP_API_ENDPOINT}/songs`
   },
   genres: {
     createGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
     getAllGenres: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
     getGenreById: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
     deleteGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`
+  },
+  playlists: {
+    createPlaylist: `${process.env.REACT_APP_API_ENDPOINT}/playlists`,
+    getAllPlaylists: `${process.env.REACT_APP_API_ENDPOINT}/playlists`,
+    getPlaylistById: `${process.env.REACT_APP_API_ENDPOINT}/playlists`,
+    deletePlaylist: `${process.env.REACT_APP_API_ENDPOINT}/playlists`,
+    getAllPlaylistsByUser: `${process.env.REACT_APP_API_ENDPOINT}/playlists/current`,
+    addSongToPlaylist: `${process.env.REACT_APP_API_ENDPOINT}/playlists/add-song`
   },
   albums: {
     createAlbum: `${process.env.REACT_APP_API_ENDPOINT}/albums`,

@@ -32,7 +32,7 @@ const AddNewSong = ({ open, handleClose, fetchData }) => {
   const [artists, setArtists] = useState([])
   const [newSong, setNewSong] = useState({
     title: '',
-    year: 0,
+    year: 2020,
     duration: '',
     genre_id: '',
     artist_id: '',

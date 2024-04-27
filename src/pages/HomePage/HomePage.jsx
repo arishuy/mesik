@@ -6,6 +6,7 @@ import RandomSong from './RandomSong'
 import RecentListen from './RecentListen'
 
 const HomePage = () => {
+  const user = JSON.parse(localStorage.getItem('profile'))
   return (
     <div
       style={{
@@ -22,7 +23,7 @@ const HomePage = () => {
               <img src='https://photo-zmp3.zmdcdn.me/banner/5/3/c/7/53c750801ec118ba599c0f8e12f76ba0.jpg' alt='album' />
             </Card>
             <Card>
-              <img src='https://photo-zmp3.zmdcdn.me/banner/8/1/1/0/8110bbecd7d2a358364047fea6be1e03.jpg' alt='album' />
+              <img src='https://photo-zmp3.zmdcdn.me/banner/1/e/d/4/1ed445615d7119557c913c2c2cb31b2e.jpg' alt='album' />
             </Card>
           </Stack>
           <Typography variant='h4' py={3}>
@@ -32,7 +33,7 @@ const HomePage = () => {
             <img src='https://via.placeholder.com/200' alt='album' />
           </Card>
           <RandomSong />
-          <RecentListen />
+          {user && <RecentListen />}
           <JustReleased />
           <FamousArtists />
         </Grid>
