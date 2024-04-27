@@ -208,7 +208,7 @@ const Header = () => {
         <Typography
           variant='h4'
           component='h4'
-          onClick={() => navigate('/dashboard')}
+          onClick={() => navigate('/')}
           sx={{
             cursor: 'pointer'
           }}

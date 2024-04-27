@@ -21,7 +21,6 @@ import logo from '../../assets/images/logo.png'
 export default function AdminSideNav() {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
-  const [isCollapsed, setIsCollapsed] = React.useState(false)
   const styleLink = {
     textDecoration: 'none',
     color: 'black'
@@ -46,7 +45,7 @@ export default function AdminSideNav() {
     }
   }
   return (
-    <Sidebar style={isMobile ? styleMobile : { height: '100%' }} collapsed={isCollapsed}>
+    <Sidebar style={isMobile ? styleMobile : { height: '100%' }} collapsed={false}>
       {isMobile ? (
         <Menu rootStyles={menuMobile}>
           <MenuItem icon={<SsidChartIcon />} component={<Link to={path.adminDashBoard} style={styleLink} />}></MenuItem>
@@ -97,15 +96,6 @@ export default function AdminSideNav() {
             </MenuItem>
             <MenuItem icon={<AutoGraphIcon />} component={<Link to={path.chart} style={styleLink} />}>
               BXH
-            </MenuItem>
-            <MenuItem
-              icon={<MenuOutlinedIcon />}
-              onClick={() => {
-                setIsCollapsed(!isCollapsed)
-              }}
-              style={styleLink}
-            >
-              {t('collapse')}
             </MenuItem>
           </Menu>
         </>

@@ -34,22 +34,22 @@ function ProtectedRoute() {
 
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
-  return !isAuthenticated ? <Outlet /> : <Navigate to='/dashboard' />
+  return !isAuthenticated ? <Outlet /> : <Navigate to='/' />
 }
 
 function AdminRoute() {
   const { role } = useContext(AppContext)
-  return role === 'ADMIN' ? <Outlet /> : <Navigate to='/dashboard' />
+  return role === 'ADMIN' ? <Outlet /> : <Navigate to='/' />
 }
 
 function UserRoute() {
   const { role } = useContext(AppContext)
-  return role === 'USER' ? <Outlet /> : <Navigate to='/dashboard' />
+  return role === 'USER' ? <Outlet /> : <Navigate to='/' />
 }
 
 function ArtistRoute() {
   const { role } = useContext(AppContext)
-  return role === 'ARTIST' ? <Outlet /> : <Navigate to='/dashboard' />
+  return role === 'ARTIST' ? <Outlet /> : <Navigate to='/' />
 }
 
 export default function useRouteElements() {
@@ -190,7 +190,6 @@ export default function useRouteElements() {
               <DetailAlbum />
             </Suspense>
           )
-          
         },
         {
           path: path.detailPlaylist,

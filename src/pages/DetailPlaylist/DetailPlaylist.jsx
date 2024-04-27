@@ -10,7 +10,6 @@ import {
   Stack,
   Avatar,
   Button,
-  Card,
   useTheme,
   IconButton,
   Tooltip
@@ -22,9 +21,9 @@ import urlConfig from '../../config/UrlConfig'
 import { useParams } from 'react-router-dom'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import { useMusicPlayer } from '../../contexts/music.context'
-import empty from '../../assets/images/empty.png'
 import img_default from '../../assets/images/album_default.png'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
+import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined'
 import Empty from '../../common/components/Empty'
 
 const DetailPlaylist = () => {
@@ -39,7 +38,6 @@ const DetailPlaylist = () => {
   const [suggestedSongs, setSuggestedSongs] = useState([])
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [page, setPage] = useState(0)
-  const [songId, setSongId] = useState('')
   const fetchSuggestedSongs = async () => {
     await AxiosInterceptors.get(urlConfig.music.getRandom)
       .then((res) => {
@@ -83,6 +81,24 @@ const DetailPlaylist = () => {
         console.log(err)
       })
   }
+
+  const removeSongFromPlaylist = async (song) => {
+    await AxiosInterceptors.post(urlConfig.playlists.removeSongFromPlaylist, {
+      playlist_id: id.nameId,
+      song_id: song._id
+    })
+      .then((res) => {
+        setPlaylist((prevState) => {
+          return {
+            ...prevState,
+            songs: prevState.songs.filter((item) => item._id !== song._id)
+          }
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   useEffect(() => {
     fetchData()
     fetchSuggestedSongs()
@@ -101,12 +117,11 @@ const DetailPlaylist = () => {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
             alignItems: 'center'
           }}
         >
           <img
-            src={img_default}
+            src={playlist.songs[0]?.photo_url || img_default}
             alt='playlist'
             width='350'
             style={{
@@ -141,8 +156,8 @@ const DetailPlaylist = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Bài hát</TableCell>
-                    <TableCell>Duration</TableCell>
-                    <TableCell align='right'>Time</TableCell>
+                    <TableCell>Thời lượng</TableCell>
+                    <TableCell align='right'>Ngày cập nhật</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -174,16 +189,42 @@ const DetailPlaylist = () => {
                               }}
                             />
                             <Stack direction='column' spacing={0}>
-                              <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
+                              <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                                 {majorsOrder.title}
+                              </Typography>
+                              <Typography
+                                variant='subtitle1'
+                                fontWeight='bold'
+                                color='text.primary'
+                                gutterBottom
+                                noWrap
+                              >
+                                {majorsOrder.artist.user.first_name} {majorsOrder.artist.user.last_name}
                               </Typography>
                             </Stack>
                           </Stack>
                         </TableCell>
                         <TableCell>
-                          <Typography variant='body1' color='text.primary' gutterBottom noWrap>
+                          <Typography variant='body1' color='text.primary'  noWrap>
                             {convertToMinutes(majorsOrder.duration)}
                           </Typography>
+                          <Tooltip title='Xóa khỏi playlist' arrow>
+                            <IconButton
+                              sx={{
+                                '&:hover': {
+                                  background: theme.palette.error.light
+                                },
+                                color: theme.palette.error.main
+                              }}
+                              onClick={() => {
+                                removeSongFromPlaylist(majorsOrder)
+                              }}
+                              color='inherit'
+                              size='small'
+                            >
+                              <RemoveCircleOutlineOutlinedIcon fontSize='small' />
+                            </IconButton>
+                          </Tooltip>
                         </TableCell>
                         <TableCell align='right'>
                           <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
@@ -249,14 +290,14 @@ const DetailPlaylist = () => {
                         </Stack>
                       </TableCell>
                       <TableCell>
-                        <Typography variant='body1' color='text.primary' gutterBottom noWrap>
+                        <Typography variant='body1' color='text.primary'  noWrap>
                           {convertToMinutes(majorsOrder.duration)}
                         </Typography>
                         <Tooltip title='Thêm vào playlist' arrow>
                           <IconButton
                             sx={{
                               '&:hover': {
-                                background: theme.palette.primary.lighter
+                                background: theme.palette.primary.light
                               },
                               color: theme.palette.primary.main
                             }}

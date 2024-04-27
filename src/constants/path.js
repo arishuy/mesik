@@ -7,7 +7,7 @@ const path = {
   myPlaylist: '/myPlaylist',
   myAlbum: '/artist/myAlbum',
   chart: '/chart',
-  dashboard: '/dashboard',
+  dashboard: '/',
   user: '/user',
   artist: '/artist',
   profile: '/user/profile',
