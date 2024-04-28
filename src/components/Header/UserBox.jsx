@@ -145,19 +145,11 @@ function HeaderUserbox() {
               </ListItem>
             </>
           )}
-          {user.role === 'EXPERT' && (
+          {user.role === 'ARTIST' && (
             <>
-              <ListItem button to={path.expertProfile} component={NavLink}>
+              <ListItem button to={path.artistProfile} component={NavLink}>
                 <AccountBoxTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
                 <ListItemText primary={t('myProfile')} />
-              </ListItem>
-              <ListItem button to={path.expertTransactionHistory} component={NavLink}>
-                <CalendarMonthRoundedIcon fontSize='small' sx={{ mr: 1 }} />
-                <ListItemText primary={t('historyTransaction')} />
-              </ListItem>
-              <ListItem button to={path.expertChangePassword} component={NavLink}>
-                <AccountTreeTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
-                <ListItemText primary={t('changePassword')} />
               </ListItem>
             </>
           )}

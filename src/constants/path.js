@@ -9,7 +9,6 @@ const path = {
   chart: '/chart',
   dashboard: '/',
   user: '/user',
-  artist: '/artist',
   profile: '/user/profile',
   changePassword: '/user/changepassword',
   historyTransaction: '/user/transaction-history',
@@ -21,8 +20,9 @@ const path = {
   cart: '/cart',
   expertDetail: '/expertDetail/:nameId',
   validateEmail: '/validate-email/:token',
-  promoteToExpert: '/promote-to-expert',
+  promoteToArtist: '/promote-to-artist',
   paymentResponse: '/payment-response',
+  becomeArtist: '/user/become-artist',
 
   //Expert
   expert: '/expert',
@@ -34,6 +34,17 @@ const path = {
   expertShowListPost: '/expert/list-post',
   expertDashboard: '/expert/dashboard',
   expertWithdraw: '/expert/withdraw',
+
+  //Expert
+  artist: '/artist',
+  artistProfile: '/artist/profile',
+  artistChangePassword: '/artist/changepassword',
+  artistTransactionHistory: '/artist/transaction-history',
+  artistAnalytics: '/artist/analytics',
+  artistBookings: '/artist/bookings',
+  artistShowListPost: '/artist/list-post',
+  artistDashboard: '/artist/dashboard',
+  artistWithdraw: '/artist/withdraw',
 
   //Admin
   admin: '/admin',

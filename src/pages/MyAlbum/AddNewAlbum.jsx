@@ -78,7 +78,6 @@ const AddNewAlbum = ({ open, handleClose, fetchData }) => {
   useEffect(() => {
     fetchAllSongs()
   }, [])
-  console.log(newAlbum)
   return (
     <>
       <Snackbar />

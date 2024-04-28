@@ -14,7 +14,6 @@ import Snackbar from '../../common/components/SnackBar'
 import useResponsive from '../../hooks/useResponsive'
 import urlConfig from '../../config/UrlConfig'
 import dayjs from 'dayjs'
-import Axios from 'axios'
 
 const Profile = () => {
   const isMobile = useResponsive('down', 'sm')
@@ -76,8 +75,19 @@ const Profile = () => {
       }
     )
       .then((res) => {
-        setInformation(res.data.user)
-        localStorage.setItem('profile', JSON.stringify(res.data.user))
+        let artist
+        let newData
+        if (user.role === 'ARTIST') {
+          artist = user.artist
+          newData = {
+            ...res.data.user,
+            artist
+          }
+        } else {
+          newData = res.data.user
+        }
+        setInformation(newData)
+        localStorage.setItem('profile', JSON.stringify(newData))
         setSnack({
           open: true,
           message: t('updateProfileSuccess'),

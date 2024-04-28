@@ -26,7 +26,14 @@ const SongCard = ({ song }) => {
       onClick={() => handleSongClick(song)}
     >
       <img src={song.photo_url} alt='album' width='250px' />
-      <Typography variant='h6' pt={2}>
+      <Typography
+        variant='h6'
+        pt={2}
+        noWrap
+        sx={{
+          width: '200px'
+        }}
+      >
         {song.title}
       </Typography>
       <Typography

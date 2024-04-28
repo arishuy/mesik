@@ -9,6 +9,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import { useNavigate } from 'react-router-dom'
+import Empty from '../../common/components/Empty'
 
 const MyAlbum = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -44,6 +45,7 @@ const MyAlbum = () => {
           Tạo album mới
         </Button>
       </Box>
+      {albums.length === 0 && <Empty message={'Bạn chưa có album nào'} />}
       <Grid container spacing={3}>
         {albums.map((album) => (
           <Grid item spacing={3} xs={3}>
