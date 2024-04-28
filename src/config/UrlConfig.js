@@ -14,7 +14,7 @@ const urlConfig = {
     updatePassword: `${process.env.REACT_APP_API_ENDPOINT}/users/current/password`,
     getJobRequests: `${process.env.REACT_APP_API_ENDPOINT}/users/current/job_requests`,
     searchExpert: `${process.env.REACT_APP_API_ENDPOINT}/experts`,
-    promoteToExpert: `${process.env.REACT_APP_API_ENDPOINT}/users/current/promote-to-expert`,
+    promoteToArtist: `${process.env.REACT_APP_API_ENDPOINT}/users/current/promote-to-artist`,
     getTransaction: `${process.env.REACT_APP_API_ENDPOINT}/users/current/transactions`,
     getNotification: `${process.env.REACT_APP_API_ENDPOINT}/users/current/notifications`,
     updateNotification: `${process.env.REACT_APP_API_ENDPOINT}/users/current/notifications`,
@@ -77,6 +77,7 @@ const urlConfig = {
     justReleased: `${process.env.REACT_APP_API_ENDPOINT}/songs/release`,
     getRandom: `${process.env.REACT_APP_API_ENDPOINT}/songs/random`,
     getAllMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/artist`,
+    uploadMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/upload-by-artist`,
     playSong: `${process.env.REACT_APP_API_ENDPOINT}/songs`
   },
   genres: {

@@ -21,6 +21,10 @@ const DetailPlaylist = lazy(() => import('./pages/DetailPlaylist'))
 const MyPlaylist = lazy(() => import('./pages/MyPlaylist'))
 const BXH = lazy(() => import('./pages/BXH'))
 const MyAlbum = lazy(() => import('./pages/MyAlbum'))
+const Promote = lazy(() => import('./pages/Promote'))
+
+// user page
+const BecomeArtist = lazy(() => import('./pages/User/pages/BecomeArtist'))
 
 // admin page
 const MusicManagement = lazy(() => import('./pages/Admin/pages/MusicManagement'))
@@ -155,6 +159,38 @@ export default function useRouteElements() {
                       </UserLayout>
                     </Suspense>
                   )
+                },
+                {
+                  path: path.becomeArtist,
+                  element: (
+                    <Suspense>
+                      <UserLayout>
+                        <BecomeArtist />
+                      </UserLayout>
+                    </Suspense>
+                  )
+                }
+              ]
+            }
+          ]
+        },
+        {
+          path: path.artist,
+          element: <ArtistRoute />,
+          children: [
+            {
+              path: '',
+              element: <MainLayout />,
+              children: [
+                {
+                  path: path.artistProfile,
+                  element: (
+                    <Suspense>
+                      <UserLayout>
+                        <Profile />
+                      </UserLayout>
+                    </Suspense>
+                  )
                 }
               ]
             }
@@ -231,6 +267,14 @@ export default function useRouteElements() {
           element: (
             <Suspense>
               <BXH />
+            </Suspense>
+          )
+        },
+        {
+          path: path.promoteToArtist,
+          element: (
+            <Suspense>
+              <Promote />
             </Suspense>
           )
         },

@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import path from '../../../../constants/path'
 import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar'
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded'
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import SyncLockIcon from '@mui/icons-material/SyncLock'
@@ -13,7 +12,6 @@ import useResponsive from '../../../../hooks/useResponsive'
 export default function UserSideNav() {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
-  const { collapseSidebar } = useProSidebar()
   const styleLink = {
     textDecoration: 'none',
     color: 'black'
@@ -63,26 +61,8 @@ export default function UserSideNav() {
           <MenuItem icon={<ManageAccountsIcon />} component={<Link to={path.profile} style={styleLink} />}>
             {t('profile')}
           </MenuItem>
-          <MenuItem
-            icon={<CalendarMonthRoundedIcon />}
-            component={<Link to={path.historyTransaction} style={styleLink} />}
-          >
-            {t('historyTransaction')}
-          </MenuItem>
-          <MenuItem icon={<WorkIcon />} component={<Link to={path.jobRequest} style={styleLink} />}>
-            {t('jobRequest')}
-          </MenuItem>
           <MenuItem icon={<SyncLockIcon />} component={<Link to={path.changePassword} style={styleLink} />}>
             {t('changePassword')}
-          </MenuItem>
-          <MenuItem
-            icon={<MenuOutlinedIcon />}
-            onClick={() => {
-              collapseSidebar()
-            }}
-            style={styleLink}
-          >
-            {t('collapse')}
           </MenuItem>
         </Menu>
       )}
