@@ -25,9 +25,13 @@ import img_default from '../../assets/images/album_default.png'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
 import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined'
 import Empty from '../../common/components/Empty'
+import Loading from '../../common/components/Loading/Loading'
+
 
 const DetailPlaylist = () => {
   const id = useParams()
+  const [isLoading, setIsLoading] = useState(true)
+
   const theme = useTheme()
   const { playSong } = useMusicPlayer()
   const [playlist, setPlaylist] = useState({
@@ -49,6 +53,7 @@ const DetailPlaylist = () => {
     await AxiosInterceptors.get(urlConfig.playlists.getPlaylistById + `/${id.nameId}`)
       .then((res) => {
         setPlaylist(res.data.playlist)
+        setIsLoading(false)
       })
       .catch((err) => {
         console.log(err)
@@ -102,7 +107,9 @@ const DetailPlaylist = () => {
     fetchSuggestedSongs()
   }, [])
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div
       style={{
         padding: '20px 100px'

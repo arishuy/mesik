@@ -69,6 +69,9 @@ const urlConfig = {
     getReportById: `${process.env.REACT_APP_API_ENDPOINT}/reports`,
     deleteReport: `${process.env.REACT_APP_API_ENDPOINT}/reports`
   },
+  rank: {
+    getDailyRank: `${process.env.REACT_APP_API_ENDPOINT}/ranking/daily`
+  },
   music: {
     createMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
     getAllMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
