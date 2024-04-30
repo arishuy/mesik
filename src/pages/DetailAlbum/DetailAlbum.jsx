@@ -18,9 +18,11 @@ import urlConfig from '../../config/UrlConfig'
 import { useParams } from 'react-router-dom'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import { useMusicPlayer } from '../../contexts/music.context'
+import Loading from '../../common/components/Loading/Loading'
 
 const DetailAlbum = () => {
   const id = useParams()
+  const [isLoading, setIsLoading] = useState(true)
   const { playSong } = useMusicPlayer()
   const [album, setAblum] = useState({
     title: 'Album 1',
@@ -31,6 +33,7 @@ const DetailAlbum = () => {
     await AxiosInterceptors.get(urlConfig.albums.getAlbumById + `/${id.nameId}`)
       .then((res) => {
         setAblum(res.data.album)
+        setIsLoading(false)
       })
       .catch((err) => {
         console.log(err)
@@ -45,7 +48,9 @@ const DetailAlbum = () => {
     fetchData()
   }, [])
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) :  (
     <div
       style={{
         padding: '20px 100px'

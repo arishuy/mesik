@@ -12,6 +12,7 @@ import { useMusicPlayer } from '../../contexts/music.context'
 import img_default from '../../assets/images/album_default.png'
 import moment from 'moment'
 import Empty from '../../common/components/Empty'
+import Loading from '../../common/components/Loading/Loading'
 
 const MyPlaylist = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -21,11 +22,13 @@ const MyPlaylist = () => {
   const [openDelete, setOpenDelete] = useState(false)
   const [openAdd, setOpenAdd] = useState(false)
   const [id, setId] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
 
   const fetchData = async () => {
     await AxiosInterceptors.get(urlConfig.playlists.getAllPlaylistsByUser)
       .then((res) => {
         setPlaylists(res.data.playlists)
+        setIsLoading(false)
       })
       .catch((err) => {
         console.log(err)
@@ -40,7 +43,9 @@ const MyPlaylist = () => {
     checkPermission()
     fetchData()
   }, [])
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div
       style={{
         padding: '20px 100px'

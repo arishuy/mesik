@@ -10,10 +10,12 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import { useNavigate } from 'react-router-dom'
 import Empty from '../../common/components/Empty'
+import Loading from '../../common/components/Loading/Loading'
 
 const MyAlbum = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
   const navigation = useNavigate()
+  const [isLoading, setIsLoading] = useState(true)
   const { playSong } = useMusicPlayer()
   const [openAdd, setOpenAdd] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
@@ -23,6 +25,7 @@ const MyAlbum = () => {
     await AxiosInterceptors.get(urlConfig.albums.getAllAlbumsByArtist + `/${user.artist}`)
       .then((res) => {
         setAlbums(res.data.album)
+        setIsLoading(false)
       })
       .catch((err) => {
         console.log(err)
@@ -31,7 +34,9 @@ const MyAlbum = () => {
   useEffect(() => {
     fetchData()
   }, [])
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div
       style={{
         padding: '20px 100px'
