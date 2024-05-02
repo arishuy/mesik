@@ -32,6 +32,7 @@ const MusicPlayer = () => {
       showDownload={false}
       mode='full'
       toggleMode={false}
+      defaultPlayMode='orderLoop'
       audioLists={audioLists}
       onAudioPlay={(audioInfo) => playSong(audioInfo.lyric)}
     />

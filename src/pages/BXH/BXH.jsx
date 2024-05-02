@@ -49,7 +49,6 @@ const BXH = () => {
   useEffect(() => {
     fetchData()
   }, [])
-  console.log(data)
   return isLoading ? (
     <Loading />
   ) : (

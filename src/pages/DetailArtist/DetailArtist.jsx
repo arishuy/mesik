@@ -6,16 +6,19 @@ import moment from 'moment'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import Empty from '../../common/components/Empty'
+import Loading from '../../common/components/Loading/Loading'
 
 const DetailArtist = () => {
   const id = useParams()
   const { playSong } = useMusicPlayer()
   const [artist, setArtist] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
 
   const fetchData = async () => {
     await AxiosInterceptors.get(urlConfig.artists.getArtistById + `/${id.nameId}`)
       .then((res) => {
         setArtist(res.data.artist)
+        setIsLoading(false)
       })
       .catch((err) => {
         console.log(err)
@@ -34,7 +37,9 @@ const DetailArtist = () => {
   useEffect(() => {
     fetchData()
   }, [])
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div
       style={{
         padding: '20px 100px'

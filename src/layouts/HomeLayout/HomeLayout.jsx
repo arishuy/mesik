@@ -18,7 +18,7 @@ function HomeLayoutInner({ children }) {
       <Box
         sx={{
           display: 'flex',
-          height: '92vh'
+          height: 'calc(100vh - 80px)'
         }}
       >
         <SideNav />
@@ -27,7 +27,7 @@ function HomeLayoutInner({ children }) {
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
-            height: '92vh',
+            height: 'calc(100vh - 80px)',
             overflowY: 'auto'
           }}
         >
@@ -41,7 +41,7 @@ function HomeLayoutInner({ children }) {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '8vh',
+          height: '80px',
           backgroundColor: 'black',
           color: 'white'
         }}
