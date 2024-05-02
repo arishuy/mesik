@@ -114,6 +114,8 @@ const SearchBar = () => {
               key={index}
               button
               onClick={() => {
+                setSearchText(result.keyword)
+                setAnchorEl(null)
                 navigate(`/search?q=${result.keyword}`)
               }}
             >

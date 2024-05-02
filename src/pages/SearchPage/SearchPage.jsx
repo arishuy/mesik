@@ -45,7 +45,7 @@ const SearchPage = () => {
   }
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [searchParams])
 
   return isLoading ? (
     <Loading />
