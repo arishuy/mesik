@@ -13,6 +13,7 @@ import img_default from '../../assets/images/album_default.png'
 import moment from 'moment'
 import Empty from '../../common/components/Empty'
 import Loading from '../../common/components/Loading/Loading'
+import { Helmet } from 'react-helmet-async'
 
 const MyPlaylist = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -51,6 +52,9 @@ const MyPlaylist = () => {
         padding: '20px 100px'
       }}
     >
+      <Helmet>
+        <title>Playlist</title>
+      </Helmet>
       {openAdd && <AddNewPlaylist open={openAdd} handleClose={() => setOpenAdd(false)} fetchData={fetchData} />}
       {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} fetchData={fetchData} id={id} />}
       <Box sx={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

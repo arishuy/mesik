@@ -131,7 +131,7 @@ const Profile = () => {
     ) : (
       <div style={{ width: '100%', maxHeight: '93vh', overflow: 'auto' }}>
         <Helmet>
-          <title>{t('profile')}</title>
+          <title>Thông Tin Cá Nhân</title>
         </Helmet>
         <Snackbar />
         <Box

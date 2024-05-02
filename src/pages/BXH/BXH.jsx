@@ -19,6 +19,7 @@ import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded'
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded'
 import SwitchAccessShortcutRoundedIcon from '@mui/icons-material/SwitchAccessShortcutRounded'
 import Loading from '../../common/components/Loading/Loading'
+import { Helmet } from 'react-helmet-async'
 const BXH = () => {
   const { playSong } = useMusicPlayer()
   const [isLoading, setIsLoading] = useState(true)
@@ -57,6 +58,9 @@ const BXH = () => {
         padding: '20px 100px'
       }}
     >
+      <Helmet>
+        <title>Bảng Xếp Hạng</title>
+      </Helmet>
       <Typography variant='h4' py={3}>
         Bảng xếp hạng hằng ngày
       </Typography>

@@ -4,6 +4,7 @@ import JustReleased from './JustReleased'
 import FamousArtists from './FamousArtists'
 import RandomSong from './RandomSong'
 import RecentListen from './RecentListen'
+import { Helmet } from 'react-helmet-async'
 
 const HomePage = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -13,6 +14,9 @@ const HomePage = () => {
         padding: '20px 100px'
       }}
     >
+      <Helmet>
+        <title>Trang Chủ</title>
+      </Helmet>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Stack direction='row' spacing={3}>

@@ -6,6 +6,7 @@ import Axios from 'axios'
 import Empty from '../../common/components/Empty'
 import { useMusicPlayer } from '../../contexts/music.context'
 import Loading from '../../common/components/Loading/Loading'
+import { Helmet } from 'react-helmet-async'
 
 const SearchPage = () => {
   const navigate = useNavigate()
@@ -54,6 +55,9 @@ const SearchPage = () => {
         padding: '20px 100px'
       }}
     >
+      <Helmet>
+        <title>Tìm Kiếm</title>
+      </Helmet>
       <Typography variant='h4' py={3}>
         Bài hát
       </Typography>

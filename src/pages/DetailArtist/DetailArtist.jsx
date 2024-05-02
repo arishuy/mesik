@@ -7,6 +7,7 @@ import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import Empty from '../../common/components/Empty'
 import Loading from '../../common/components/Loading/Loading'
+import { Helmet } from 'react-helmet-async'
 
 const DetailArtist = () => {
   const id = useParams()
@@ -45,6 +46,9 @@ const DetailArtist = () => {
         padding: '20px 100px'
       }}
     >
+      <Helmet>
+        <title>Thông Tin Nghệ Sĩ</title>
+      </Helmet>
       <Card
         sx={{
           padding: '20px',
@@ -86,9 +90,7 @@ const DetailArtist = () => {
                   <img src={song.photo_url} alt='album' width={100} />
                   <Stack direction='column' justifyContent='center' alignItems='start'>
                     <Typography variant='h6'>{song.title}</Typography>
-                    <Typography variant='body2'>
-                      {artist.display_name}
-                    </Typography>
+                    <Typography variant='body2'>{artist.display_name}</Typography>
                     <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>
                   </Stack>
                 </Stack>
