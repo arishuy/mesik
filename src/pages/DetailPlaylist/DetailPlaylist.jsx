@@ -27,7 +27,6 @@ import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOut
 import Empty from '../../common/components/Empty'
 import Loading from '../../common/components/Loading/Loading'
 
-
 const DetailPlaylist = () => {
   const id = useParams()
   const [isLoading, setIsLoading] = useState(true)
@@ -201,7 +200,7 @@ const DetailPlaylist = () => {
                                 gutterBottom
                                 noWrap
                               >
-                                {majorsOrder.artist.user.first_name} {majorsOrder.artist.user.last_name}
+                                {majorsOrder.artist.display_name}
                               </Typography>
                             </Stack>
                           </Stack>
@@ -283,7 +282,7 @@ const DetailPlaylist = () => {
                               {majorsOrder.title}
                             </Typography>
                             <Typography variant='subtitle1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                              {majorsOrder.artist.user.first_name} {majorsOrder.artist.user.last_name}
+                              {majorsOrder.artist.display_name}
                             </Typography>
                           </Stack>
                         </Stack>

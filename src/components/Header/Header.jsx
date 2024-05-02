@@ -9,6 +9,7 @@ import Notification from './Notification'
 import Report from './Report'
 import useResponsive from '../../hooks/useResponsive'
 import UploadMusic from './UploadMusic'
+import SearchBar from '../../common/components/SearchBox'
 
 const Header = () => {
   const isMobile = useResponsive('down', 'sm')
@@ -27,18 +28,7 @@ const Header = () => {
           margin: '0px 20px'
         }}
       >
-        <Typography
-          variant='h4'
-          component='h4'
-          onClick={() => navigate('/')}
-          sx={{
-            cursor: 'pointer'
-          }}
-        >
-          <ConnectWithoutContactIcon />
-          {'  '}
-          {isMobile ? '' : 'Mesik'}
-        </Typography>
+        <SearchBar />
         <div>
           <Stack direction='row' spacing={isMobile ? 0 : 2} sx={{ padding: '10px' }}>
             <Box sx={isMobile ? {} : { '& > :not(style)': { m: 1 } }}>

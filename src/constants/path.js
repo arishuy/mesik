@@ -9,6 +9,7 @@ const path = {
   chart: '/chart',
   dashboard: '/',
   user: '/user',
+  search: '/search/',
   profile: '/user/profile',
   changePassword: '/user/changepassword',
   historyTransaction: '/user/transaction-history',

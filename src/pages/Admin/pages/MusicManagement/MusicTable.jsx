@@ -104,7 +104,7 @@ const MusicTable = ({ majorsOrder, fetchData }) => {
                     </TableCell>
                     <TableCell>
                       <Typography variant='body1' color='text.primary' gutterBottom noWrap>
-                        {majorsOrder.artist.user.first_name} {majorsOrder.artist.user.last_name}
+                        {majorsOrder.artist.diplay_name}
                       </Typography>
                     </TableCell>
                     <TableCell align='right'>

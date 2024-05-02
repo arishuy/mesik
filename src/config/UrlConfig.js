@@ -83,6 +83,10 @@ const urlConfig = {
     uploadMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/upload-by-artist`,
     playSong: `${process.env.REACT_APP_API_ENDPOINT}/songs`
   },
+  keyword: {
+    get5Keyword: `${process.env.REACT_APP_API_ENDPOINT}/search/keywords`,
+    search: `${process.env.REACT_APP_API_ENDPOINT}/search`
+  },
   genres: {
     createGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
     getAllGenres: `${process.env.REACT_APP_API_ENDPOINT}/genres`,

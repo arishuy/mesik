@@ -16,7 +16,7 @@ export const MusicPlayerProvider = ({ children }) => {
         duration: song.duration,
         musicSrc: song.file,
         name: song.title,
-        singer: song.artist.user.first_name + ' ' + song.artist.user.last_name,
+        singer: song.artist.display_name,
         lyric: song._id
       }
     })

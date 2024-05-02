@@ -44,7 +44,7 @@ const SongCard = ({ song }) => {
         }}
       >
         {' '}
-        {song.artist.user.first_name} {song.artist.user.last_name}
+        {song.artist.display_name}
       </Typography>
       <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>
     </Card>

@@ -87,7 +87,7 @@ const DetailArtist = () => {
                   <Stack direction='column' justifyContent='center' alignItems='start'>
                     <Typography variant='h6'>{song.title}</Typography>
                     <Typography variant='body2'>
-                      {artist.user.first_name} {artist.user.last_name}
+                      {artist.display_name}
                     </Typography>
                     <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>
                   </Stack>

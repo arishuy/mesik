@@ -40,7 +40,7 @@ const FamousArtists = () => {
             >
               <Avatar alt='artist' src={artist.user.photo_url} sx={{ width: 200, height: 200 }} />
               <Typography variant='h6' padding={3}>
-                {artist.user.first_name} {artist.user.last_name}
+                {artist.display_name}
               </Typography>
             </Stack>
           </Grid>

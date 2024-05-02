@@ -6,6 +6,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../hooks/useResponsive'
+import SearchBar from '../../common/components/SearchBox'
 const HomeHeader = () => {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
@@ -22,17 +23,7 @@ const HomeHeader = () => {
             margin: '0px 20px'
           }}
         >
-          <TextField
-            id='input-with-icon-textfield'
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position='start'>
-                  <SearchIcon />
-                </InputAdornment>
-              )
-            }}
-            variant='outlined'
-          />
+          <SearchBar />
           <div>
             <Stack direction='row' spacing={2} sx={{ padding: '10px' }}>
               <Button variant='text' color='secondary' onClick={() => navigate('/login')}>

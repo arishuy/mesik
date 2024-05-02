@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 const BecomeArtist = () => {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
+  const [displayName, setDisplayName] = useState('')
   const [descriptions, setDecriptions] = useState('')
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
   const [check, setCheck] = useState(false)
@@ -24,7 +25,8 @@ const BecomeArtist = () => {
   }
   const handlePromote = async () => {
     await AxiosInterceptors.post(urlConfig.user.promoteToArtist, {
-      descriptions: descriptions
+      descriptions: descriptions,
+      display_name: displayName
     })
       .then((res) => {
         setOpen(false)
@@ -70,6 +72,7 @@ const BecomeArtist = () => {
         closeOnly={false}
       >
         <Box sx={{ my: 3 }}>
+          <TextField fullWidth label={t('displayName')} onChange={(e) => setDisplayName(e.target.value)} />
           <TextField
             fullWidth
             label={t('description')}
