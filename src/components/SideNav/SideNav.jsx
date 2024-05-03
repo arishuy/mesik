@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next'
 import useResponsive from '../../hooks/useResponsive'
 import HandymanIcon from '@mui/icons-material/Handyman'
 import AutoGraphIcon from '@mui/icons-material/AutoGraph'
+import AlbumIcon from '@mui/icons-material/Album'
 import ReportIcon from '@mui/icons-material/Report'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic'
 import HomeIcon from '@mui/icons-material/Home'
@@ -91,7 +92,7 @@ export default function AdminSideNav() {
             <MenuItem icon={<QueueMusicIcon />} component={<Link to={path.myPlaylist} style={styleLink} />}>
               Playlist
             </MenuItem>
-            <MenuItem icon={<AutoGraphIcon />} component={<Link to={path.myAlbum} style={styleLink} />}>
+            <MenuItem icon={<AlbumIcon />} component={<Link to={path.myAlbum} style={styleLink} />}>
               Album
             </MenuItem>
             <MenuItem icon={<AutoGraphIcon />} component={<Link to={path.chart} style={styleLink} />}>

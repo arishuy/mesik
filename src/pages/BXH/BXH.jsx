@@ -10,7 +10,6 @@ import {
   Typography
 } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import moment from 'moment'
 import { useMusicPlayer } from '../../contexts/music.context'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
@@ -71,7 +70,7 @@ const BXH = () => {
               <TableCell></TableCell>
               <TableCell>Bài Hát</TableCell>
               <TableCell align='center'>Thời Lượng</TableCell>
-              <TableCell align='right'>Ngày Cập Nhật</TableCell>
+              <TableCell align='right'>Lượt Nghe</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -145,10 +144,7 @@ const BXH = () => {
                   </TableCell>
                   <TableCell align='right'>
                     <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                      {moment(majorsOrder.song.createdAt).format('DD/MM/YYYY')}
-                    </Typography>
-                    <Typography variant='body2' color='text.primary' gutterBottom noWrap>
-                      {moment(majorsOrder.song.createdAt).format('h:mm:ss A')}
+                      {majorsOrder.song.play_count_daily}
                     </Typography>
                   </TableCell>
                 </TableRow>
