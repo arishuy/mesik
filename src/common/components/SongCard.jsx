@@ -123,7 +123,14 @@ const SongCard = ({ song, allPlaylists }) => {
           {user && (
             <div>
               <Tooltip title='Add to playlist' arrow>
-                <IconButton onClick={() => setOpen(true)} color='success' size='small'>
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setOpen(true)
+                  }}
+                  color='success'
+                  size='small'
+                >
                   <AddCircleOutlineIcon />
                 </IconButton>
               </Tooltip>
