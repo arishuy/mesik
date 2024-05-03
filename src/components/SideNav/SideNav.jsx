@@ -17,6 +17,7 @@ import QueueMusicIcon from '@mui/icons-material/QueueMusic'
 import HomeIcon from '@mui/icons-material/Home'
 import React, { useContext } from 'react'
 import logo from '../../assets/images/logo.png'
+import LibraryMusicRoundedIcon from '@mui/icons-material/LibraryMusicRounded'
 import { AppContext } from '../../contexts/app.context'
 export default function AdminSideNav() {
   const { isAuthenticated } = useContext(AppContext)
@@ -92,6 +93,9 @@ export default function AdminSideNav() {
             </MenuItem>
             {isAuthenticated && (
               <>
+                <MenuItem icon={<LibraryMusicRoundedIcon />} component={<Link to={path.myLibrary} style={styleLink} />}>
+                  Thư Viện
+                </MenuItem>
                 <MenuItem icon={<QueueMusicIcon />} component={<Link to={path.myPlaylist} style={styleLink} />}>
                   Playlist
                 </MenuItem>
@@ -101,7 +105,7 @@ export default function AdminSideNav() {
               </>
             )}
             <MenuItem icon={<AutoGraphIcon />} component={<Link to={path.chart} style={styleLink} />}>
-              BXH
+              MesikChart
             </MenuItem>
           </Menu>
         </>

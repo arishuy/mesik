@@ -6,6 +6,7 @@ const path = {
   forgotPassword: '/forgotPassword',
   myPlaylist: '/myPlaylist',
   myAlbum: '/artist/myAlbum',
+  myLibrary: '/my-library',
   chart: '/chart',
   dashboard: '/',
   user: '/user',

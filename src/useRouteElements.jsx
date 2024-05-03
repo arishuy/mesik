@@ -23,6 +23,7 @@ const BXH = lazy(() => import('./pages/BXH'))
 const MyAlbum = lazy(() => import('./pages/MyAlbum'))
 const Promote = lazy(() => import('./pages/Promote'))
 const SearchPage = lazy(() => import('./pages/SearchPage'))
+const ThuVien = lazy(() => import('./pages/ThuVien'))
 
 // user page
 const BecomeArtist = lazy(() => import('./pages/User/pages/BecomeArtist'))
@@ -241,6 +242,14 @@ export default function useRouteElements() {
           element: (
             <Suspense>
               <MyPlaylist />
+            </Suspense>
+          )
+        },
+        {
+          path: path.myLibrary,
+          element: (
+            <Suspense>
+              <ThuVien />
             </Suspense>
           )
         },

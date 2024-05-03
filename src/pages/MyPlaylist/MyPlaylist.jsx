@@ -66,22 +66,22 @@ const MyPlaylist = () => {
       {playlists.length === 0 && <Empty message={'Bạn chưa có playlist nào'} />}
       <Grid container spacing={3}>
         {playlists?.map((playlist) => (
-          <Grid item spacing={3} xs={3} key={playlist.id}>
-            <div class='song-card'>
+          <Grid item xs={12} md={6} lg={3} key={playlist.id}>
+            <div className='song-card'>
               <img
-                class='song-card_image'
+                className='song-card_image'
                 src={playlist.songs[0]?.photo_url || img_default}
                 alt='David Bowie - Aladdin Sane'
               />
-              <div class='song-card_info'>
-                <div class='song-card_info_artist'>{playlist.songs.length} bài hát</div>
-                <div class='song-card_info_album'>
+              <div className='song-card_info'>
+                <div className='song-card_info_artist'>{playlist.songs.length} bài hát</div>
+                <div className='song-card_info_album'>
                   {' '}
                   {moment(playlist.createdAt).format('DD/MM/YYYY')} - {moment(playlist.createdAt).format('HH:mm')}
                 </div>
-                <div class='song-card_info_title'>{playlist.title}</div>
+                <div className='song-card_info_title'>{playlist.title}</div>
               </div>
-              <div class='song-card_play'>
+              <div className='song-card_play'>
                 <Stack direction='row' spacing={1} pt={2}>
                   <IconButton onClick={() => playSong(playlist.songs)} color='success'>
                     <PlayCircleFilledWhiteOutlinedIcon />

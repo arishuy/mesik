@@ -19,7 +19,9 @@ const urlConfig = {
     getNotification: `${process.env.REACT_APP_API_ENDPOINT}/users/current/notifications`,
     updateNotification: `${process.env.REACT_APP_API_ENDPOINT}/users/current/notifications`,
     deleteUser: `${process.env.REACT_APP_API_ENDPOINT}/users`,
-    getHistoryListen: `${process.env.REACT_APP_API_ENDPOINT}/users/current/history-listen`
+    getHistoryListen: `${process.env.REACT_APP_API_ENDPOINT}/users/current/history-listen`,
+    likedSongs: `${process.env.REACT_APP_API_ENDPOINT}/users/current/favourite`,
+    getLikedSongs: `${process.env.REACT_APP_API_ENDPOINT}/users/current/favourite`
   },
   expert: {
     current: `${process.env.REACT_APP_API_ENDPOINT}/experts/current`,

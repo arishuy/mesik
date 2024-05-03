@@ -58,6 +58,34 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
         })
       })
   }
+  const handleLikeSong = async () => {
+    // like song
+    await AxiosInterceptors.get(urlConfig.user.likedSongs + `/${song._id}`)
+      .then((res) => {
+        if (res.data.result.favourite === true) {
+          setSnack({
+            ...snack,
+            open: true,
+            message: 'Đã thêm vào thư viện',
+            type: 'success'
+          })
+        } else
+          setSnack({
+            ...snack,
+            open: true,
+            message: 'Đã xóa khỏi thư viện',
+            type: 'success'
+          })
+      })
+      .catch((err) => {
+        setSnack({
+          ...snack,
+          open: true,
+          message: 'Bài hát đã có trong thư viện',
+          type: 'error'
+        })
+      })
+  }
   return (
     <>
       <Snackbar />
@@ -155,7 +183,13 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
             <AddRoundedIcon sx={{ mr: 1, fontSize: '20px' }} />
             <Typography>Thêm vào playlist</Typography>
           </ListItem>
-          <ListItem button>
+          <ListItem
+            button
+            onClick={() => {
+              handleLikeSong()
+              handleClose()
+            }}
+          >
             <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px' }} />
             <Typography>Thêm vào thư viện</Typography>
           </ListItem>

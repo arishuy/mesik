@@ -24,7 +24,7 @@ const FamousArtists = () => {
       </Typography>
       <Grid container spacing={3}>
         {artists.map((artist) => (
-          <Grid item xs={2} key={artist.id}>
+          <Grid item xs={6} md={4} lg={2} key={artist._id}>
             <Stack
               direction='column'
               alignItems='center'
