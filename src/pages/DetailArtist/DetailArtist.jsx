@@ -8,12 +8,14 @@ import urlConfig from '../../config/UrlConfig'
 import Empty from '../../common/components/Empty'
 import Loading from '../../common/components/Loading/Loading'
 import { Helmet } from 'react-helmet-async'
+import SongCardVer2 from '../../common/components/SongCard_Ver2'
 
 const DetailArtist = () => {
   const id = useParams()
   const { playSong } = useMusicPlayer()
   const [artist, setArtist] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+  const [allPlaylists, setAllPlaylists] = React.useState([])
 
   const fetchData = async () => {
     await AxiosInterceptors.get(urlConfig.artists.getArtistById + `/${id.nameId}`)
@@ -25,18 +27,19 @@ const DetailArtist = () => {
         console.log(err)
       })
   }
-  const convertToMinutes = (duration) => {
-    let minutes = Math.floor(duration / 60)
-    let seconds = Math.floor(duration - minutes * 60)
-    return `${minutes}:${seconds}`
+  const fetchPlaylists = async () => {
+    await AxiosInterceptors.get(urlConfig.playlists.getAllPlaylistsByUser)
+      .then((res) => {
+        setAllPlaylists(res.data.playlists)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
-  const handleSongClick = (song) => {
-    // convert song to array
-    song = [song]
-    playSong(song)
-  }
+
   useEffect(() => {
     fetchData()
+    fetchPlaylists()
   }, [])
   return isLoading ? (
     <Loading />
@@ -52,7 +55,10 @@ const DetailArtist = () => {
       <Card
         sx={{
           padding: '20px',
-          backgroundImage: `url(https://api-prod-minimal-v510.vercel.app/assets/images/cover/cover_19.jpg)`
+          backgroundImage: `url(https://api-prod-minimal-v510.vercel.app/assets/images/cover/cover_19.jpg)`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
         }}
       >
         <Stack direction='row' spacing={5} justifyContent='space-around' alignItems='center'>
@@ -71,34 +77,8 @@ const DetailArtist = () => {
       <Grid container spacing={2}>
         {artist.songs?.length === 0 && <Empty message={'Không có bài hát nào'} />}
         {artist.songs?.map((song) => (
-          <Grid item xs={6} key={song._id}>
-            <Card
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                '&:hover': {
-                  backgroundColor: '#f0f0f0',
-                  cursor: 'pointer',
-                  transform: 'scale(1.05)'
-                }
-              }}
-              onClick={() => handleSongClick(song)}
-            >
-              <div>
-                <Stack direction='row' spacing={3}>
-                  <img src={song.photo_url} alt='album' width={100} />
-                  <Stack direction='column' justifyContent='center' alignItems='start'>
-                    <Typography variant='h6'>{song.title}</Typography>
-                    <Typography variant='body2'>{artist.display_name}</Typography>
-                    <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>
-                  </Stack>
-                </Stack>
-              </div>
-              <Typography variant='body2' p={3}>
-                {convertToMinutes(song.duration)}
-              </Typography>
-            </Card>
+          <Grid item xs={12} md={6} key={song._id}>
+            <SongCardVer2 song={song} allPlaylists={allPlaylists} />
           </Grid>
         ))}
       </Grid>

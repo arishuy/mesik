@@ -14,7 +14,7 @@ const Loading = () => {
           zIndex: 9999
         }}
       >
-        <div class='loader'></div>
+        <div className='loader'></div>
       </Box>
     </>
   )

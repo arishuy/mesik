@@ -11,6 +11,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { useTranslation } from 'react-i18next'
 import { styled } from '@mui/material/styles'
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
+import { memo } from 'react'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -24,7 +25,7 @@ const VisuallyHiddenInput = styled('input')({
   width: 1
 })
 
-const UploadMusic = () => {
+const UploadMusic = memo(function UploadMusic() {
   const [open, setOpen] = useState(false)
   const { t } = useTranslation()
   const { snack, setSnack } = useSnackbar()
@@ -215,6 +216,6 @@ const UploadMusic = () => {
       </Tooltip>
     </>
   )
-}
+})
 
 export default UploadMusic

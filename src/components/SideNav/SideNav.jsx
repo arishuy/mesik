@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import path from '../../constants/path'
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar'
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
+import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import ManageSearchIcon from '@mui/icons-material/ManageSearch'
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
@@ -11,15 +10,17 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
 import SsidChartIcon from '@mui/icons-material/SsidChart'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../hooks/useResponsive'
-import HandymanIcon from '@mui/icons-material/Handyman'
 import AutoGraphIcon from '@mui/icons-material/AutoGraph'
 import AlbumIcon from '@mui/icons-material/Album'
 import ReportIcon from '@mui/icons-material/Report'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic'
 import HomeIcon from '@mui/icons-material/Home'
-import React from 'react'
+import React, { useContext } from 'react'
 import logo from '../../assets/images/logo.png'
+import { AppContext } from '../../contexts/app.context'
 export default function AdminSideNav() {
+  const { isAuthenticated } = useContext(AppContext)
+
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
   const styleLink = {
@@ -89,12 +90,16 @@ export default function AdminSideNav() {
             <MenuItem icon={<HomeIcon />} component={<Link to={path.home} style={styleLink} />}>
               Trang chủ
             </MenuItem>
-            <MenuItem icon={<QueueMusicIcon />} component={<Link to={path.myPlaylist} style={styleLink} />}>
-              Playlist
-            </MenuItem>
-            <MenuItem icon={<AlbumIcon />} component={<Link to={path.myAlbum} style={styleLink} />}>
-              Album
-            </MenuItem>
+            {isAuthenticated && (
+              <>
+                <MenuItem icon={<QueueMusicIcon />} component={<Link to={path.myPlaylist} style={styleLink} />}>
+                  Playlist
+                </MenuItem>
+                <MenuItem icon={<AlbumIcon />} component={<Link to={path.myAlbum} style={styleLink} />}>
+                  Album
+                </MenuItem>
+              </>
+            )}
             <MenuItem icon={<AutoGraphIcon />} component={<Link to={path.chart} style={styleLink} />}>
               BXH
             </MenuItem>

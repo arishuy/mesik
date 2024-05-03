@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Card, Grid, Stack, Typography, Box, Avatar } from '@mui/material'
+import React, { useContext, useEffect } from 'react'
+import { Card, Grid, Stack, Typography } from '@mui/material'
 import JustReleased from './JustReleased'
 import FamousArtists from './FamousArtists'
 import RandomSong from './RandomSong'
@@ -7,8 +7,9 @@ import RecentListen from './RecentListen'
 import { Helmet } from 'react-helmet-async'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
+import { AppContext } from '../../contexts/app.context'
 const HomePage = () => {
-  const user = JSON.parse(localStorage.getItem('profile'))
+  const { isAuthenticated } = useContext(AppContext)
   const [allPlaylists, setAllPlaylists] = React.useState([])
 
   const fetchData = async () => {
@@ -53,7 +54,7 @@ const HomePage = () => {
             <img src='https://via.placeholder.com/200' alt='album' />
           </Card>
           <RandomSong allPlaylists={allPlaylists} />
-          {user && <RecentListen allPlaylists={allPlaylists} />}
+          {isAuthenticated && <RecentListen allPlaylists={allPlaylists} />}
           <JustReleased allPlaylists={allPlaylists} />
           <FamousArtists />
         </Grid>

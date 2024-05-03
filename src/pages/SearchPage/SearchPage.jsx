@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import urlConfig from '../../config/UrlConfig'
-import { Avatar, Card, Grid, Stack, Typography } from '@mui/material'
+import { Avatar, Grid, Stack, Typography } from '@mui/material'
 import Axios from 'axios'
 import Empty from '../../common/components/Empty'
-import { useMusicPlayer } from '../../contexts/music.context'
 import Loading from '../../common/components/Loading/Loading'
 import { Helmet } from 'react-helmet-async'
+import SongCardVer2 from '../../common/components/SongCard_Ver2'
+import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 
 const SearchPage = () => {
   const navigate = useNavigate()
   const [data, setData] = useState({})
-  const { playSong } = useMusicPlayer()
   const [isLoading, setIsLoading] = useState(true)
   const [searchParams, setSearchParams] = useSearchParams()
+  const [allPlaylists, setAllPlaylists] = React.useState([])
   const params = []
 
   for (let entry of searchParams.entries()) {
@@ -33,16 +34,19 @@ const SearchPage = () => {
         console.log(err)
       })
   }
-  const handleSongClick = (song) => {
-    // convert song to array
-    song = [song]
-    playSong(song)
+  const fetchPlaylists = async () => {
+    await AxiosInterceptors.get(urlConfig.playlists.getAllPlaylistsByUser)
+      .then((res) => {
+        setAllPlaylists(res.data.playlists)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
-  const convertToMinutes = (duration) => {
-    let minutes = Math.floor(duration / 60)
-    let seconds = Math.floor(duration - minutes * 60)
-    return `${minutes}:${seconds}`
-  }
+
+  useEffect(() => {
+    fetchPlaylists()
+  }, [])
   useEffect(() => {
     fetchData()
   }, [searchParams])
@@ -70,34 +74,8 @@ const SearchPage = () => {
           </>
         )}
         {data.songs?.map((song) => (
-          <Grid item xs={6} key={song._id}>
-            <Card
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                '&:hover': {
-                  backgroundColor: '#f0f0f0',
-                  cursor: 'pointer',
-                  transform: 'scale(1.05)'
-                }
-              }}
-              onClick={() => handleSongClick(song)}
-            >
-              <div>
-                <Stack direction='row' spacing={3}>
-                  <img src={song.photo_url} alt='album' width={100} />
-                  <Stack direction='column' justifyContent='center' alignItems='start'>
-                    <Typography variant='h6'>{song.title}</Typography>
-                    <Typography variant='body2'>{song.artist.display_name}</Typography>
-                    <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>
-                  </Stack>
-                </Stack>
-              </div>
-              <Typography variant='body2' p={3}>
-                {convertToMinutes(song.duration)}
-              </Typography>
-            </Card>
+          <Grid item xs={12} md={6} key={song._id}>
+            <SongCardVer2 song={song} allPlaylists={allPlaylists} />
           </Grid>
         ))}
       </Grid>

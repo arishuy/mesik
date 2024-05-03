@@ -1,30 +1,28 @@
 import React, { useContext } from 'react'
-import { Autocomplete, Card, IconButton, List, ListItem, Popover, Typography } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { Autocomplete, Card, IconButton, List, ListItem, Popover, Stack, TextField, Typography } from '@mui/material'
 import { useMusicPlayer } from '../../contexts/music.context'
+import RootModal from '../../components/Modal/RootModal'
 import AxiosInterceptors from '../utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
-import RootModal from '../../components/Modal/RootModal'
-import { Stack, TextField } from '@mui/material'
 import useSnackbar from '../../contexts/snackbar.context'
 import Snackbar from '../components/SnackBar'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../../contexts/app.context'
 
-const SongCard = ({ song, allPlaylists }) => {
+const SongCardVer2 = ({ song, allPlaylists }) => {
   const { isAuthenticated } = useContext(AppContext)
-
-  const { snack, setSnack } = useSnackbar()
-  const [open, setOpen] = React.useState(false)
   const navigate = useNavigate()
   const { playSong } = useMusicPlayer()
+  const { snack, setSnack } = useSnackbar()
+  const [open, setOpen] = React.useState(false)
+  const [anchorEl, setAnchorEl] = React.useState(null)
   const [data, setData] = React.useState({
     song_id: song._id,
     playlist_id: ''
   })
-  const [anchorEl, setAnchorEl] = React.useState(null)
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -36,12 +34,6 @@ const SongCard = ({ song, allPlaylists }) => {
 
   const openPopup = Boolean(anchorEl)
   const id = openPopup ? 'simple-popover' : undefined
-  const handleSongClick = (song) => {
-    // convert song to array
-    song = [song]
-    playSong(song)
-  }
-
   const handleAddToPlaylist = async () => {
     // add song to playlist
     await AxiosInterceptors.post(urlConfig.playlists.addSongToPlaylist, {
@@ -66,7 +58,6 @@ const SongCard = ({ song, allPlaylists }) => {
         })
       })
   }
-
   return (
     <>
       <Snackbar />
@@ -100,56 +91,48 @@ const SongCard = ({ song, allPlaylists }) => {
       </RootModal>
       <Card
         sx={{
-          padding: '20px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           '&:hover': {
             backgroundColor: '#f0f0f0',
             cursor: 'pointer',
             transform: 'scale(1.05)'
           }
         }}
-        key={song.id}
-        onClick={() => handleSongClick(song)}
+        onClick={() => playSong([song])}
       >
-        <img src={song.photo_url} alt='album' width='250px' />
-        <Typography
-          variant='h6'
-          pt={2}
-          noWrap
-          sx={{
-            width: '200px'
-          }}
-        >
-          {song.title}
-        </Typography>
-        <Stack direction='row' justifyContent='space-between' spacing={1}>
-          <div>
-            <Typography
-              variant='body2'
-              onClick={(e) => {
-                e.stopPropagation()
-                navigate(`/artist/${song.artist._id}`)
-              }}
-              noWrap
-            >
-              {' '}
-              {song.artist.display_name}
-            </Typography>
-            <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>
-          </div>
-          {isAuthenticated && (
-            <div>
-              <IconButton
+        <div>
+          <Stack direction='row' spacing={3}>
+            <img src={song.photo_url} alt='album' width={100} />
+            <Stack direction='column' justifyContent='center' alignItems='start'>
+              <Typography variant='h6'>{song.title}</Typography>
+              <Typography
+                variant='body2'
                 onClick={(e) => {
                   e.stopPropagation()
-                  handleClick(e)
+                  navigate(`/artist/${song.artist._id}`)
                 }}
-                size='small'
               >
-                <MoreVertIcon />
-              </IconButton>
-            </div>
-          )}
-        </Stack>
+                {song.artist.display_name}
+              </Typography>
+              <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>
+            </Stack>
+          </Stack>
+        </div>
+        {isAuthenticated && (
+          <div>
+            <IconButton
+              onClick={(e) => {
+                e.stopPropagation()
+                handleClick(e)
+              }}
+              size='small'
+            >
+              <MoreVertIcon />
+            </IconButton>
+          </div>
+        )}
       </Card>
       <Popover
         id={id}
@@ -182,4 +165,4 @@ const SongCard = ({ song, allPlaylists }) => {
   )
 }
 
-export default SongCard
+export default SongCardVer2

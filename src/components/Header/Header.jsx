@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
-import { Box, Typography, Stack } from '@mui/material'
+import React from 'react'
+import { Box, Stack } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import HeaderUserbox from './UserBox'
 // icon
-import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact'
 import { useTranslation } from 'react-i18next'
-import Notification from './Notification'
 import Report from './Report'
 import useResponsive from '../../hooks/useResponsive'
 import UploadMusic from './UploadMusic'

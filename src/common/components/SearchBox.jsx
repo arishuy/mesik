@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 
 const SearchBar = () => {
   const [searchText, setSearchText] = useState('')
-  const [searchResults, setSearchResults] = useState([])
   const [mostKeyword, setMostKeyword] = useState([])
 
   const navigate = useNavigate()
@@ -18,11 +17,6 @@ const SearchBar = () => {
     const value = e.target.value
     navigate(`/search?q=${value}`)
     setSearchText(value)
-    // Tính toán kết quả tìm kiếm ở đây, bạn có thể gọi API h   oặc xử lý dữ liệu ở đây.
-    // Ví dụ, ở đây sẽ là một danh sách giả định:
-    const mockData = ['Apple', 'Banana', 'Orange', 'Mango', 'Pineapple']
-    const filteredResults = mockData.filter((item) => item.toLowerCase().includes(value.toLowerCase()))
-    setSearchResults(filteredResults)
   }
   const [anchorEl, setAnchorEl] = React.useState(null)
 
