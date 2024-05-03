@@ -4,7 +4,7 @@ import Axios from 'axios'
 import urlConfig from '../../config/UrlConfig'
 import SongCard from '../../common/components/SongCard'
 
-const RandomSong = () => {
+const RandomSong = ({ allPlaylists }) => {
   const [songs, setSongs] = useState([])
   useEffect(() => {
     Axios.get(urlConfig.music.getRandom)
@@ -22,7 +22,7 @@ const RandomSong = () => {
       </Typography>
       <Stack direction='row' spacing={2}>
         {songs.map((song) => (
-          <SongCard song={song} key={song._id} />
+          <SongCard song={song} key={song._id} allPlaylists={allPlaylists} />
         ))}
       </Stack>
     </>

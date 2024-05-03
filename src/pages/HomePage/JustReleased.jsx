@@ -5,7 +5,7 @@ import urlConfig from '../../config/UrlConfig'
 import { useMusicPlayer } from '../../contexts/music.context'
 import SongCard from '../../common/components/SongCard'
 
-const JustReleased = () => {
+const JustReleased = ({allPlaylists}) => {
   const [songs, setSongs] = useState([])
   const { playSong } = useMusicPlayer()
   const handleSongClick = (song) => {
@@ -29,7 +29,7 @@ const JustReleased = () => {
       </Typography>
       <Stack direction='row' spacing={2}>
         {songs.map((song) => (
-          <SongCard song={song} key={song._id} />
+          <SongCard song={song} key={song._id}  allPlaylists={allPlaylists}/>
         ))}
       </Stack>
     </>

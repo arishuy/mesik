@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Card, Grid, Stack, Typography, Box, Avatar } from '@mui/material'
 import JustReleased from './JustReleased'
 import FamousArtists from './FamousArtists'
 import RandomSong from './RandomSong'
 import RecentListen from './RecentListen'
 import { Helmet } from 'react-helmet-async'
-
+import AxiosInterceptors from '../../common/utils/axiosInterceptors'
+import urlConfig from '../../config/UrlConfig'
 const HomePage = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
+  const [allPlaylists, setAllPlaylists] = React.useState([])
+
+  const fetchData = async () => {
+    await AxiosInterceptors.get(urlConfig.playlists.getAllPlaylistsByUser)
+      .then((res) => {
+        setAllPlaylists(res.data.playlists)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
   return (
     <div
       style={{
@@ -36,9 +52,9 @@ const HomePage = () => {
           <Card sx={{ padding: '20px' }}>
             <img src='https://via.placeholder.com/200' alt='album' />
           </Card>
-          <RandomSong />
-          {user && <RecentListen />}
-          <JustReleased />
+          <RandomSong allPlaylists={allPlaylists} />
+          {user && <RecentListen allPlaylists={allPlaylists} />}
+          <JustReleased allPlaylists={allPlaylists} />
           <FamousArtists />
         </Grid>
       </Grid>

@@ -5,7 +5,7 @@ import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import SongCard from '../../common/components/SongCard'
 import Empty from '../../common/components/Empty'
 
-const RecentListen = () => {
+const RecentListen = ({ allPlaylists }) => {
   const [songs, setSongs] = useState([])
   useEffect(() => {
     AxiosInterceptors.get(urlConfig.user.getHistoryListen)
@@ -24,7 +24,7 @@ const RecentListen = () => {
       {songs.length === 0 && <Empty message={'Không có bài hát nào'} />}
       <Stack direction='row' spacing={2}>
         {songs.map((song) => (
-          <SongCard song={song} key={song.id} />
+          <SongCard song={song} key={song.id} allPlaylists={allPlaylists} />
         ))}
       </Stack>
     </>
