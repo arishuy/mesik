@@ -19,15 +19,21 @@ import React, { useContext } from 'react'
 import logo from '../../assets/images/logo.png'
 import LibraryMusicRoundedIcon from '@mui/icons-material/LibraryMusicRounded'
 import { AppContext } from '../../contexts/app.context'
-export default function AdminSideNav() {
+export default function AdminSideNav({ param }) {
   const { isAuthenticated } = useContext(AppContext)
-
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
   const styleLink = {
     textDecoration: 'none',
     color: 'black'
   }
+
+  const styleActive = {
+    color: 'white',
+    fontWeight: 'bold',
+    backgroundColor: '#2065D1'
+  }
+
   const styleMobile = {
     maxWidth: '100vw',
     width: '100vw',
@@ -88,23 +94,38 @@ export default function AdminSideNav() {
         <>
           <img src={logo} alt='logo' style={{ width: '100%', padding: '10px' }} />
           <Menu>
-            <MenuItem icon={<HomeIcon />} component={<Link to={path.home} style={styleLink} />}>
+            <MenuItem
+              icon={<HomeIcon />}
+              component={<Link to={path.home} style={param === path.home ? styleActive : styleLink} />}
+            >
               Trang chủ
             </MenuItem>
             {isAuthenticated && (
               <>
-                <MenuItem icon={<LibraryMusicRoundedIcon />} component={<Link to={path.myLibrary} style={styleLink} />}>
+                <MenuItem
+                  icon={<LibraryMusicRoundedIcon />}
+                  component={<Link to={path.myLibrary} style={param === path.myLibrary ? styleActive : styleLink} />}
+                >
                   Thư Viện
                 </MenuItem>
-                <MenuItem icon={<QueueMusicIcon />} component={<Link to={path.myPlaylist} style={styleLink} />}>
+                <MenuItem
+                  icon={<QueueMusicIcon />}
+                  component={<Link to={path.myPlaylist} style={param === path.myPlaylist ? styleActive : styleLink} />}
+                >
                   Playlist
                 </MenuItem>
-                <MenuItem icon={<AlbumIcon />} component={<Link to={path.myAlbum} style={styleLink} />}>
+                <MenuItem
+                  icon={<AlbumIcon />}
+                  component={<Link to={path.myAlbum} style={param === path.myAlbum ? styleActive : styleLink} />}
+                >
                   Album
                 </MenuItem>
               </>
             )}
-            <MenuItem icon={<AutoGraphIcon />} component={<Link to={path.chart} style={styleLink} />}>
+            <MenuItem
+              icon={<AutoGraphIcon />}
+              component={<Link to={path.chart} style={param === path.chart ? styleActive : styleLink} />}
+            >
               MesikChart
             </MenuItem>
           </Menu>

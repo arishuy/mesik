@@ -3,12 +3,10 @@ import Rootmodal from '../../../../components/Modal/RootModal'
 import { Container } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
-import useSnack from '../../../../contexts/snackbar.context'
-import Snackbar from '../../../../common/components/SnackBar'
+
 import { useTranslation } from 'react-i18next'
-const DeleteConfirm = ({ open, setOpen, id, fetchData }) => {
+const DeleteConfirm = ({ open, setOpen, id, fetchData, snack, setSnack }) => {
   const { t } = useTranslation()
-  const { snack, setSnack } = useSnack()
   const handleDelete = async () => {
     await AxiosInterceptors.delete(urlConfig.music.deleteMusic + `/${id}`)
       .then((res) => {
@@ -34,7 +32,6 @@ const DeleteConfirm = ({ open, setOpen, id, fetchData }) => {
   }
   return (
     <>
-      <Snackbar />
       <Rootmodal
         variant='Info'
         title='Xác nhận xóa'

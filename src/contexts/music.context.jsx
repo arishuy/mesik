@@ -17,7 +17,7 @@ export const MusicPlayerProvider = ({ children }) => {
         musicSrc: song.file,
         name: song.title,
         singer: song.artist.display_name,
-        lyric: song._id
+        songId: song._id
       }
     })
     setCurrentSong(mappToReactJkMusicPlayerAudioInfo)

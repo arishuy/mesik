@@ -18,6 +18,7 @@ import {
 } from '@mui/material'
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone'
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
+import EditTwoToneIcon from '@mui/icons-material/EditTwoTone'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../../../hooks/useResponsive'
 import moment from 'moment'
@@ -25,13 +26,18 @@ import DeleteConfirm from './DeleteConfirm'
 import AddNewSong from './AddNewSong'
 import { Box, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-
+import AddLyric from './AddLyric'
+import useSnack from '../../../../contexts/snackbar.context'
+import Snackbar from '../../../../common/components/SnackBar'
+import EditSong from './EditSong'
 const MusicTable = ({ majorsOrder, fetchData }) => {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
   const [page, setPage] = useState(0)
+  const { snack, setSnack } = useSnack()
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [openAdd, setOpenAdd] = useState(false)
+  const [openAddLyric, setOpenAddLyric] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
   const [id, setId] = useState('')
@@ -43,8 +49,47 @@ const MusicTable = ({ majorsOrder, fetchData }) => {
   }, [isMobile])
   return (
     <>
-      {openAdd && <AddNewSong open={openAdd} handleClose={() => setOpenAdd(false)} fetchData={fetchData} />}
-      {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} fetchData={fetchData} id={id} />}
+      <Snackbar />
+      {openModal && (
+        <EditSong
+          open={openModal}
+          handleClose={() => setOpenModal(false)}
+          fetchData={fetchData}
+          snack={snack}
+          setSnack={setSnack}
+          id={id}
+        />
+      )}
+      {openAdd && (
+        <AddNewSong
+          open={openAdd}
+          handleClose={() => setOpenAdd(false)}
+          fetchData={fetchData}
+          snack={snack}
+          setSnack={setSnack}
+        />
+      )}
+      {openAddLyric && (
+        <AddLyric
+          open={openAddLyric}
+          handleClose={() => setOpenAddLyric(false)}
+          fetchData={fetchData}
+          id={id}
+          snack={snack}
+          setSnack={setSnack}
+        />
+      )}
+      {openDelete && (
+        <DeleteConfirm
+          open={openDelete}
+          setOpen={setOpenDelete}
+          fetchData={fetchData}
+          id={id}
+          snack={snack}
+          setSnack={setSnack}
+        />
+      )}
+
       <Card>
         <CardHeader
           title={'Song Management'}
@@ -104,7 +149,7 @@ const MusicTable = ({ majorsOrder, fetchData }) => {
                     </TableCell>
                     <TableCell>
                       <Typography variant='body1' color='text.primary' gutterBottom noWrap>
-                        {majorsOrder.artist.diplay_name}
+                        {majorsOrder.artist.display_name}
                       </Typography>
                     </TableCell>
                     <TableCell align='right'>
@@ -132,6 +177,24 @@ const MusicTable = ({ majorsOrder, fetchData }) => {
                           size='small'
                         >
                           <VisibilityTwoToneIcon fontSize='small' />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title={t('Edit lyric')} arrow>
+                        <IconButton
+                          sx={{
+                            '&:hover': {
+                              background: theme.palette.warning.lighter
+                            },
+                            color: theme.palette.warning.main
+                          }}
+                          onClick={() => {
+                            setId(majorsOrder._id)
+                            setOpenAddLyric(true)
+                          }}
+                          color='inherit'
+                          size='small'
+                        >
+                          <EditTwoToneIcon fontSize='small' />
                         </IconButton>
                       </Tooltip>
                       <Tooltip title={t('delete')} arrow>

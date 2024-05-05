@@ -76,6 +76,7 @@ const urlConfig = {
   },
   music: {
     createMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
+    updateMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
     getAllMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
     getMusicById: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
     deleteMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
@@ -83,7 +84,9 @@ const urlConfig = {
     getRandom: `${process.env.REACT_APP_API_ENDPOINT}/songs/random`,
     getAllMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/artist`,
     uploadMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/upload-by-artist`,
-    playSong: `${process.env.REACT_APP_API_ENDPOINT}/songs`
+    playSong: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
+    getLyricFromSong: `${process.env.REACT_APP_API_ENDPOINT}/songs/lyric`,
+    addLyricToSong: `${process.env.REACT_APP_API_ENDPOINT}/songs/lyric`
   },
   keyword: {
     get5Keyword: `${process.env.REACT_APP_API_ENDPOINT}/search/keywords`,

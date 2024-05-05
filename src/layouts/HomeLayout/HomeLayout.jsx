@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import HomeHeader from '../../components/HomeHeader/HomeHeader'
 import Header from '../../components/Header/Header'
 import { AppContext } from '../../contexts/app.context'
@@ -8,6 +8,7 @@ import { Box } from '@mui/material'
 import SideNav from '../../components/SideNav'
 import MusicPlayer from '../../components/MusicPlayer'
 function HomeLayoutInner({ children }) {
+  const param = useLocation()
   const { isAuthenticated } = useContext(AppContext)
   return (
     <div
@@ -21,7 +22,7 @@ function HomeLayoutInner({ children }) {
           height: 'calc(100vh - 80px)'
         }}
       >
-        <SideNav />
+        <SideNav param={param.pathname} />
         <Box
           sx={{
             width: '100%',

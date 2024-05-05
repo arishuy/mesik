@@ -3,8 +3,6 @@ import RootModal from '../../../../components/Modal/RootModal'
 import { Stack, TextField, MenuItem, Button, Typography } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
-import useSnackbar from '../../../../contexts/snackbar.context'
-import Snackbar from '../../../../common/components/SnackBar'
 import { GenreContext } from '../../../../contexts/genre.context'
 import UploadPhoto from '../../../../common/components/UploadPhoto'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
@@ -23,9 +21,8 @@ const VisuallyHiddenInput = styled('input')({
   width: 1
 })
 
-const AddNewSong = ({ open, handleClose, fetchData }) => {
+const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack }) => {
   const { t } = useTranslation()
-  const { snack, setSnack } = useSnackbar()
   const [formData, setFormData] = useState(new FormData())
   const [formMusic, setFormMusic] = useState(new FormData())
   const { genres, getGenres } = useContext(GenreContext)
@@ -111,7 +108,6 @@ const AddNewSong = ({ open, handleClose, fetchData }) => {
   }, [])
   return (
     <>
-      <Snackbar />
       {genres.length > 0 && (
         <RootModal
           variant='Create'
