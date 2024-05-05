@@ -1,0 +1,320 @@
+{
+  "vi": "Tiếng Việt",
+  "en": "Tiếng Anh",
+  "dashboard": "Trang chủ",
+  "search": "Tìm kiếm",
+  "myProfile": "Hồ sơ của tôi",
+  "historyTransaction": "Lịch sử giao dịch",
+  "changePassword": "Đổi mật khẩu",
+  "usersManagement": "Quản lý người dùng",
+  "majorsManagement": "Quản lý chuyên ngành",
+  "withdrawManagement": "Quản lý rút tiền",
+  "management": "Quản lý",
+  "statitics": "Thống kê",
+  "signIn": "Đăng nhập",
+  "signUp": "Đăng ký",
+  "login": "Đăng nhập",
+  "register": "Đăng ký",
+  "signOut": "Đăng xuất",
+  "username": "Tên đăng nhập",
+  "password": "Mật khẩu",
+  "forgotPassword": "Quên mật khẩu",
+  "rememberMe": "Ghi nhớ tôi",
+  "dontHaveAccount": "Chưa có tài khoản?",
+  "registerNow": "Đăng ký ngay",
+  "firstName": "Tên",
+  "lastName": "Họ",
+  "fullName": "Họ và tên",
+  "passwordConfirm": "Xác nhận mật khẩu",
+  "passwordsNotMatch": "Mật khẩu không khớp!",
+  "alreadyMember": "Đã có tài khoản?",
+  "major": "Chuyên ngành",
+  "searchResults": "Kết quả tìm kiếm",
+  "reviews": "Đánh giá",
+  "collapse": "Thu gọn",
+  "description": "Mô tả",
+  "action": "Hành động",
+  "edit": "Chỉnh sửa",
+  "delete": "Xóa",
+  "profile": "Hồ sơ",
+  "goToLogin": "Đi đến trang đăng nhập",
+  "goToHome": "Đi đến trang chủ",
+  "notFound": "Không tìm thấy trang",
+  "notFoundMessage": "Có thể bạn đã gõ sai địa chỉ hoặc trang đã bị xóa.",
+  "notifications": "Thông báo",
+  "all": "Tất cả",
+  "noResults": "Không có kết quả nào!",
+  "next": "Tiếp",
+  "previous": "Trước",
+  "status": "Trạng thái",
+  "address": "Địa chỉ",
+
+  "pending": "Đang chờ",
+  "processing": "Đang xử lý",
+  "completed": "Đã hoàn thành",
+  "cancelled": "Đã hủy",
+
+  "discover": "Khám phá những chuyên gia hàng đầu",
+  "topExpert": "Chuyên gia hàng đầu",
+  "searchTitle": "Tìm kiếm chuyên gia",
+
+  "addMajor": "Thêm mới",
+  "majorId": "Mã chuyên ngành",
+  "majorName": "Tên chuyên ngành",
+  "editMajor": "Chỉnh sửa chuyên ngành",
+  "newMajor": "Thêm mới chuyên ngành",
+
+  "validateMail": "Vui lòng xác nhận email của bạn!",
+  "uploadPhoto": "Tải ảnh lên",
+  "changeProfile": "Thay đổi thông tin cá nhân",
+  "phoneNumber": "Số điện thoại",
+  "gender": "Giới tính",
+  "male": "Nam",
+  "female": "Nữ",
+  "dateOfBirth": "Ngày sinh",
+  "city": "Tỉnh/Thành phố",
+  "district": "Quận",
+  "ward": "Phường/Xã",
+  "saveChanges": "Lưu thay đổi",
+  "reset": "Đặt lại",
+  "deleteAccount": "Xóa tài khoản",
+  "deleteAccountMessage": "Tôi hiểu rằng tôi sẽ không thể hoàn tác hành động này và tất cả dữ liệu của tôi sẽ bị xóa vĩnh viễn.",
+
+  "promoteTitle": "Nói cho chúng tôi biết về bạn",
+  "becomeExpert": "Trở thành chuyên gia",
+  "agreeTerm": "Tôi đồng ý với các điều khoản và điều kiện của các bạn",
+  "promote": "Nâng cấp",
+  "promoteExpert": "Nâng cấp lên chuyên gia",
+  "promoteSuccess": "Xin chúc mừng! Bây giờ bạn là một chuyên gia.",
+  "promoteMessage": "Bây giờ bạn có thể chấp nhận yêu cầu công việc từ người dùng và kiếm tiền.",
+
+  "jobRequest": "Yêu cầu công việc",
+
+  "validateEmail": "Xác nhận Email",
+
+  "forgotPasswordReminder": "Vui lòng nhập thông tin của bạn. Chúng tôi sẽ gửi cho bạn một mật khẩu mới.",
+  "resetPasswordSuccess": "Đặt lại mật khẩu thành công!",
+  "resetPasswordFailed": "Đặt lại mật khẩu không thành công!",
+  "sendResetLink": "Gửi liên kết đặt lại",
+
+  "expertDetails": "Chi tiết chuyên gia",
+  "averageRating": "Đánh giá trung bình",
+  "certificate": "Chứng chỉ",
+
+  "recharge": "Nạp tiền",
+  "moneyAmount": "Số tiền",
+
+  "createRequest": "Tạo yêu cầu",
+  "title": "Tiêu đề",
+  "price": "Giá",
+  "detailInfo": "Thông tin chi tiết",
+  "done": "Hoàn thành",
+  "payMoney": "Thanh toán",
+
+  "detailJobRequest": "Chi tiết yêu cầu công việc",
+  "expertAccept": "Chuyên gia nhận",
+  "rating": "Đánh giá",
+  "timeBooking": "Thời gian đặt lịch",
+
+  "reviewJobRequest": "Đánh giá công việc",
+  "comment": "Nhận xét",
+
+  "paymentConfirm": "Bạn có chắc chắn muốn thanh toán cho công việc này?",
+
+  "currentPassword": "Mật khẩu hiện tại",
+  "newPassword": "Mật khẩu mới",
+  "confirmNewPassword": "Xác nhận mật khẩu mới",
+  "passwordRequirements": "Yêu cầu mật khẩu",
+  "passwordRequirements.1": "Tối thiểu 8 ký tự",
+  "passwordRequirements.2": "Tối thiểu 1 chữ cái viết hoa và 1 chữ cái viết thường",
+  "passwordRequirements.3": "Tối thiểu 1 số hoặc 1 ký tự đặc biệt",
+
+  "recentTransaction": "Giao dịch gần đây",
+  "fromDate": "Từ ngày",
+  "toDate": "Đến ngày",
+  "to": "Đến",
+  "time": "Thời gian",
+  "type": "Loại",
+  "me": "Tôi",
+  "exportData": "Xuất dữ liệu",
+  "payment": "Thanh toán",
+
+  "listJobRequests": "Danh sách yêu cầu",
+  "myBookings": "Công việc đã nhận",
+  "certificateInformation": "Thông tin bằng cấp",
+  "certificateName": "Tên bằng cấp",
+  "confirmed": "Đã xác nhận",
+  "unconfirmed": "Chưa xác nhận",
+
+  "adminProfile": "Thông tin quản trị viên",
+  "userProfile": "Thông tin người dùng",
+  "expertProfile": "Thông tin chuyên gia",
+  "chooseMajor": "Chọn chuyên ngành",
+  "showDetail": "Xem chi tiết",
+  "role": "Quyền hạn",
+  "verify": "Xác nhận",
+  "userManagement": "Quản lý người dùng",
+  "unlock": "Mở khóa",
+  "lock": "Khóa",
+  "active": "Đã kích hoạt",
+  "unactive": "Chưa kích hoạt",
+  "cancel": "Hủy",
+
+  "USER": "Người dùng",
+  "EXPERT": "Chuyên gia",
+  "ADMIN": "Quản trị viên",
+  "YES": "Đã xác nhận",
+  "NO": "Chưa xác nhận",
+
+  "createJobRequestSuccess": "Tạo yêu cầu công việc thành công!",
+  "createJobRequestFail": "Tạo yêu cầu công việc không thành công!",
+
+  "acceptJobRequestSuccess": "Chấp nhận yêu cầu công việc thành công!",
+  "acceptJobRequestFail": "Chấp nhận yêu cầu công việc không thành công!",
+
+  "deleteJobRequestSuccess": "Xóa yêu cầu công việc thành công!",
+  "deleteJobRequestFail": "Xóa yêu cầu công việc không thành công!",
+
+  "rechargeFailed": "Nạp tiền không thành công!",
+  "rechargeSuccess": "Nạp tiền thành công!",
+
+  "thankYou": "Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!",
+
+  "updateAccountSuccess": "Cập nhật thông tin tài khoản thành công!",
+  "updateAccountFail": "Cập nhật thông tin tài khoản không thành công!",
+
+  "addNewMajorSuccess": "Thêm mới chuyên ngành thành công!",
+  "addNewMajorFail": "Thêm mới chuyên ngành không thành công!",
+
+  "editMajorSuccess": "Cập nhật thông tin chuyên ngành thành công!",
+  "editMajorFail": "Cập nhật thông tin chuyên ngành không thành công!",
+
+  "deleteMajorSuccess": "Xóa chuyên ngành thành công!",
+  "deleteMajorFail": "Xóa chuyên ngành không thành công!",
+
+  "unlockedAccountSuccess": "Mở khóa tài khoản thành công!",
+  "unlockedAccountFail": "Mở khóa tài khoản không thành công!",
+
+  "lockedAccountSuccess": "Khóa tài khoản thành công!",
+  "lockedAccountFail": "Khóa tài khoản không thành công!",
+
+  "searchSuccess": "Tìm kiếm thành công!",
+  "searchFail": "Tìm kiếm không thành công!",
+
+  "cancelJobRequestSuccess": "Hủy yêu cầu công việc thành công!",
+  "cancelJobRequestFail": "Hủy yêu cầu công việc không thành công!",
+
+  "deleteCertificateSuccess": "Xóa thông tin bằng cấp thành công!",
+  "deleteCertificateFail": "Xóa thông tin bằng cấp không thành công!",
+
+  "createCertificateSuccess": "Tạo thông tin bằng cấp thành công!",
+  "createCertificateFail": "Tạo thông tin bằng cấp không thành công!",
+
+  "passwordMustMatch": "Mật khẩu mới và mật khẩu xác nhận phải trùng khớp!",
+
+  "updatePasswordSuccess": "Cập nhật mật khẩu thành công!",
+  "updatePasswordFail": "Cập nhật mật khẩu không thành công!",
+
+  "updateProfileSuccess": "Cập nhật thông tin cá nhân thành công!",
+  "updateProfileFail": "Cập nhật thông tin cá nhân không thành công!",
+
+  "promoteToExpertSuccess": "Chúc mừng bạn trở thành chuyên gia thành công!",
+  "promoteToExpertFail": "Có một vài lỗi đã xảy ra, vui lòng thử lại sau!",
+
+  "pleaseAgreeToTheTermAndCondition": "Vui lòng đồng ý với các điều khoản và điều kiện",
+
+  "confirmPasswordIsNotMatch": "Mật khẩu xác nhận không khớp!",
+  "newPasswordMustBeDiffFromOldPassword": "Mật khẩu mới phải khác với mật khẩu cũ!",
+
+  "changePasswordSuccess": "Đổi mật khẩu thành công!",
+  "changePasswordFail": "Đổi mật khẩu không thành công!",
+
+  "changeStatusSuccess": "Thay đổi trạng thái thành công!",
+  "changeStatusFail": "Thay đổi trạng thái không thành công!",
+
+  "yourBalanceIsNotEnough": "Số dư của bạn không đủ!",
+
+  "paymentSuccess": "Thanh toán thành công!",
+  "paymentFail": "Thanh toán không thành công!",
+
+  "reviewSuccess": "Nhận xét thành công!",
+
+  "reportSuccess": "Phản hồi thành công!",
+  "reportFailed": "Phản hồi không thành công!",
+  "deleteReportSuccess": "Xóa phản hồi thành công!",
+  "report": "Phản hồi",
+
+  "verifyExpert": "Xác thực chuyên gia",
+  "documentManagement": "Quản lý tài liệu",
+  "transactionManagement": "Quản lý giao dịch",
+  "reportManagement": "Quản lý phản hồi",
+
+  "pleaseFillOutAllFields": "Vui lòng điền đầy đủ thông tin!",
+  "new": "Mới",
+  "beforeThat": "Trước đó",
+
+  "cancelBooking": "Huỷ đơn",
+  "close": "Đóng",
+
+  "acceptAt": "Nhận đơn lúc",
+
+  "addCertificate": "Thêm chứng chỉ",
+
+  "postSuccess": "Hủy yêu cầu công việc thành công!",
+  "postFail": "Hủy yêu cầu công việc thất bại!",
+
+  "deny": "Từ chối",
+  "confirm": "Xác nhận",
+  "from": "Từ",
+  "recentRequests": "Yêu cầu gần đây",
+
+  "bankName": "Tên ngân hàng",
+  "bankAccount": "Số tài khoản",
+  "bankAccountName": "Tên tài khoản",
+  "withdraw": "Rút tiền",
+
+  "welcomeBack": "Chào mừng trở lại",
+  "subWelcomeBack": "Hãy kiểm tra các số liệu thống kê của bạn để biết bạn đã làm được gì trong tuần qua.",
+  "expert": "Chuyên gia",
+  "user": "Người dùng",
+  "totalDeposit": "Tổng tiền đã nạp",
+  "jobRequestAccepted": "Công việc đã nhận",
+
+  "week": "Tuần",
+  "month": "Tháng",
+
+  "lastUpdate": "Cập nhật lần cuối",
+  "joinedDate": "Ngày tham gia",
+
+  "updateSuccess": "Cập nhật thành công",
+  "updateFailed": "Cập nhật thất bại",
+
+  "documentInfo": "Thông tin tài liệu",
+  "paymentInfo": "Thông tin thanh toán",
+
+  "youCanWithdraw": "Bạn có thể rút",
+  "makeRequest": "Tạo yêu cầu",
+
+  "makeRequestSuccess": "Tạo yêu cầu thành công",
+  "makeRequestFail": "Tạo yêu cầu thất bại",
+
+  "uploadDocumentSuccess": "Tải tài liệu thành công",
+
+  "verifyCertificate": "Xác thực chứng chỉ",
+  "verifyCertificateSuccess": "Xác thực chứng chỉ thành công",
+  "verifyCertificateFail": "Xác thực chứng chỉ thất bại",
+
+  "document": "Tài liệu",
+  "image": "Hình ảnh",
+
+  "rejectSuccess": "Từ chối thành công",
+  "rejectFail": "Từ chối thất bại",
+
+  "confirmSuccess": "Xác nhận thành công",
+  "confirmFail": "Xác nhận thất bại",
+
+  "deleteSuccess": "Xóa thành công",
+  "deleteFail": "Xóa thất bại",
+  "rechargeAmount": "Số tiền cần nạp tối thiểu 50.000 và tối đa 5.000.000!",
+  "uploadDocumentFail": "Vui lòng tải lên tài liệu!"
+}

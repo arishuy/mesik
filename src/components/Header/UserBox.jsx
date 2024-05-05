@@ -127,10 +127,6 @@ function HeaderUserbox() {
                 <AccountBoxTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
                 <ListItemText primary={t('myProfile')} />
               </ListItem>
-              <ListItem button to={path.historyTransaction} component={NavLink}>
-                <CalendarMonthRoundedIcon fontSize='small' sx={{ mr: 1 }} />
-                <ListItemText primary={t('historyTransaction')} />
-              </ListItem>
               <ListItem button to={path.changePassword} component={NavLink}>
                 <AccountTreeTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
                 <ListItemText primary={t('changePassword')} />
@@ -143,6 +139,10 @@ function HeaderUserbox() {
                 <SsidChartTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
                 <ListItemText primary='Song management' />
               </ListItem>
+              <ListItem button to={path.changePassword} component={NavLink}>
+                <AccountTreeTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
+                <ListItemText primary={t('changePassword')} />
+              </ListItem>
             </>
           )}
           {user.role === 'ARTIST' && (
@@ -150,6 +150,10 @@ function HeaderUserbox() {
               <ListItem button to={path.artistProfile} component={NavLink}>
                 <AccountBoxTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
                 <ListItemText primary={t('myProfile')} />
+              </ListItem>
+              <ListItem button to={path.changePassword} component={NavLink}>
+                <AccountTreeTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
+                <ListItemText primary={t('changePassword')} />
               </ListItem>
             </>
           )}

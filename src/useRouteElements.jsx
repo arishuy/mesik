@@ -24,6 +24,7 @@ const MyAlbum = lazy(() => import('./pages/MyAlbum'))
 const Promote = lazy(() => import('./pages/Promote'))
 const SearchPage = lazy(() => import('./pages/SearchPage'))
 const ThuVien = lazy(() => import('./pages/ThuVien'))
+const ChangePassword = lazy(() => import('./pages/User/pages/ChangePassword'))
 
 // user page
 const BecomeArtist = lazy(() => import('./pages/User/pages/BecomeArtist'))
@@ -153,16 +154,6 @@ export default function useRouteElements() {
               element: <MainLayout />,
               children: [
                 {
-                  path: path.profile,
-                  element: (
-                    <Suspense>
-                      <UserLayout>
-                        <Profile />
-                      </UserLayout>
-                    </Suspense>
-                  )
-                },
-                {
                   path: path.becomeArtist,
                   element: (
                     <Suspense>
@@ -176,6 +167,7 @@ export default function useRouteElements() {
             }
           ]
         },
+
         {
           path: path.artist,
           element: <ArtistRoute />,
@@ -183,18 +175,7 @@ export default function useRouteElements() {
             {
               path: '',
               element: <MainLayout />,
-              children: [
-                {
-                  path: path.artistProfile,
-                  element: (
-                    <Suspense>
-                      <UserLayout>
-                        <Profile />
-                      </UserLayout>
-                    </Suspense>
-                  )
-                }
-              ]
+              children: []
             }
           ]
         }
@@ -250,6 +231,30 @@ export default function useRouteElements() {
           element: (
             <Suspense>
               <ThuVien />
+            </Suspense>
+          )
+        },
+        {
+          path: path.changePassword,
+          element: (
+            <Suspense>
+              <ChangePassword />
+            </Suspense>
+          )
+        },
+        {
+          path: path.artistProfile,
+          element: (
+            <Suspense>
+              <Profile />
+            </Suspense>
+          )
+        },
+        {
+          path: path.profile,
+          element: (
+            <Suspense>
+              <Profile />
             </Suspense>
           )
         },

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Box,
   InputAdornment,
@@ -20,8 +20,11 @@ import urlConfig from '../../../../config/UrlConfig'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../../../hooks/useResponsive'
+import { useNavigate } from 'react-router-dom'
 const ChangePassword = () => {
   const isMobile = useResponsive('down', 'sm')
+  const user = JSON.parse(localStorage.getItem('profile'))
+  const navigation = useNavigate()
   const { t } = useTranslation()
   const [showPassword, setShowPassword] = React.useState(false)
   const [oldPassword, setOldPassword] = React.useState('')
@@ -30,7 +33,11 @@ const ChangePassword = () => {
   const { snack, setSnack } = useSnackbar()
 
   const handleClickShowPassword = () => setShowPassword((show) => !show)
-
+  const checkPermission = () => {
+    if (!user) {
+      navigation('/login')
+    }
+  }
   const handleMouseDownPassword = (event) => {
     event.preventDefault()
   }
@@ -80,6 +87,9 @@ const ChangePassword = () => {
         })
     }
   }
+  useEffect(() => {
+    checkPermission()
+  }, [])
   return (
     <div style={{ width: '100%' }}>
       <SnackBar />

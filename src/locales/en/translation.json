@@ -1,0 +1,320 @@
+{
+  "vi": "Vietnamese",
+  "en": "English",
+  "dashboard": "Dashboard",
+  "search": "Search",
+  "myProfile": "My Profile",
+  "historyTransaction": "History Transaction",
+  "changePassword": "Change Password",
+  "usersManagement": "Users Management",
+  "majorsManagement": "Majors Management",
+  "withdrawManagement": "Withdraw Management",
+  "management": "Management",
+  "statitics": "Statitics",
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "login": "Login",
+  "register": "Register",
+  "signOut": "Sign Out",
+  "username": "Username",
+  "password": "Password",
+  "forgotPassword": "Forgot Password",
+  "rememberMe": "Remember Me",
+  "dontHaveAccount": "Don't have an account?",
+  "registerNow": "Register Now",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "fullName": "Full Name",
+  "passwordConfirm": "Password Confirm",
+  "passwordsNotMatch": "Passwords do not match",
+  "alreadyMember": "Already a member?",
+  "major": "Major",
+  "searchResults": "Search Results",
+  "reviews": "Reviews",
+  "collapse": "Collapse",
+  "description": "Description",
+  "action": "Action",
+  "edit": "Edit",
+  "delete": "Delete",
+  "profile": "Profile",
+  "goToLogin": "Go to Login Page",
+  "goToHome": "Go to Home Page",
+  "notFound": "The page you were looking for doesn't exist.",
+  "notFoundMessage": "You may have mistyped the address or the page may have moved.",
+  "notifications": "Notifications",
+  "all": "All",
+  "noResults": "No results found!",
+  "next": "Next",
+  "previous": "Previous",
+  "status": "Status",
+  "address": "Address",
+
+  "pending": "Pending",
+  "processing": "Processing",
+  "completed": "Completed",
+  "cancelled": "Cancelled",
+
+  "discover": "Discover Top Experts",
+  "topExpert": "Top Expert",
+  "searchTitle": "Find an expert",
+
+  "addMajor": "Add Major",
+  "majorId": "Major ID",
+  "majorName": "Major Name",
+  "editMajor": "Edit Major",
+  "newMajor": "New Major",
+
+  "validateMail": "Please check your email to validate your account!",
+  "uploadPhoto": "Upload Photo",
+  "changeProfile": "Change Profile Information",
+  "phoneNumber": "Phone Number",
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+  "dateOfBirth": "Date of Birth",
+  "city": "City",
+  "district": "District",
+  "ward": "Ward",
+  "saveChanges": "Save Changes",
+  "reset": "Reset",
+  "deleteAccount": "Delete Account",
+  "deleteAccountMessage": "I understand that I will not be able to undo this action and that all my data will be deleted.",
+
+  "promoteTitle": "Tell us about yourself",
+  "becomeExpert": "Become an expert",
+  "agreeTerm": "I agree to the terms and conditions",
+  "promote": "Promote",
+  "promoteExpert": "Promote To Expert",
+  "promoteSuccess": "Congrate! You are now an expert.",
+  "promoteMessage": "Now you can accept job request from user and earn money.",
+
+  "jobRequest": "Job Request",
+
+  "validateEmail": "Validate Email",
+
+  "forgotPasswordReminder": "Please enter your email address and we'll send you a new password.",
+  "resetPasswordSuccess": "Reset password successfully!",
+  "resetPasswordFailed": "Reset password failed!",
+  "sendResetLink": "Send Reset Link",
+
+  "expertDetails": "Expert Details",
+  "averageRating": "Average Rating",
+  "certificate": "Certificate",
+
+  "recharge": "Recharge",
+  "moneyAmount": "Money Amount",
+
+  "createRequest": "Create Request",
+  "title": "Title",
+  "price": "Price",
+  "detailInfo": "Detail Information",
+  "done": "Done",
+  "payMoney": "Pay Money",
+
+  "detailJobRequest": "Detail Job Request",
+  "expertAccept": "Expert Accept",
+  "rating": "Rating",
+  "timeBooking": "Time Booking",
+
+  "reviewJobRequest": "Review Job Request",
+  "comment": "Comment",
+
+  "paymentConfirm": "Do you want to pay for this job request?",
+
+  "currentPassword": "Current Password",
+  "newPassword": "New Password",
+  "confirmNewPassword": "Confirm New Password",
+  "passwordRequirements": "Password Requirements",
+  "passwordRequirements.1": "Minimum 8 characters long - the more, the better",
+  "passwordRequirements.2": "At least one lowercase & one uppercase character",
+  "passwordRequirements.3": "At least one number, symbol, or special character",
+
+  "recentTransaction": "Recent Transactions",
+  "fromDate": "From Date",
+  "toDate": "To Date",
+  "to": "To",
+  "time": "Time",
+  "type": "Type",
+  "me": "Me",
+  "exportData": "Export Data",
+  "payment": "Payment",
+
+  "listJobRequests": "List job requests",
+  "myBookings": "My Bookings",
+  "certificateInformation": "Certificate Information",
+  "certificateName": "Certificate Name",
+  "confirmed": "Confirmed",
+  "unconfirmed": "Unconfirmed",
+
+  "adminProfile": "Admin Profile",
+  "userProfile": "User Profile",
+  "expertProfile": "Expert Profile",
+  "chooseMajor": "Choose major",
+  "showDetail": "Show detail",
+  "role": "Role",
+  "verify": "Verify",
+  "userManagement": "User Management",
+  "unlock": "Unlock",
+  "lock": "Lock",
+  "active": "Active",
+  "unactive": "Unactive",
+  "cancel": "Cancel",
+
+  "USER": "USER",
+  "EXPERT": "EXPERT",
+  "ADMIN": "ADMIN",
+  "YES": "YES",
+  "NO": "NO",
+
+  "createJobRequestSuccess": "Create job request successfully!",
+  "createJobRequestFail": "Create job request failed!",
+
+  "acceptJobRequestSuccess": "Create job request successfully!",
+  "acceptJobRequestFail": "Create job request failed!",
+
+  "deleteJobRequestSuccess": "Delete job request successfully!",
+  "deleteJobRequestFail": "Delete job request failed!",
+
+  "rechargeFailed": "Recharge failed!",
+  "rechargeSuccess": "Recharge successfully!",
+
+  "thankYou": "Thank you for using our service!!",
+
+  "updateAccountSuccess": "Updated account successfully!",
+  "updateAccountFail": "Updated account failed!",
+
+  "addNewMajorSuccess": "Add new major successfully!",
+  "addNewMajorFail": "Add new major failed!",
+
+  "editMajorSuccess": "Edit major successfully!",
+  "editMajorFail": "Edit major failed!",
+
+  "deleteMajorSuccess": "Delete major successfully!",
+  "deleteMajorFail": "Delete major failed!",
+
+  "unlockedAccountSuccess": "Unlocked account successfully!",
+  "unlockedAccountFail": "Unlocked account failed!",
+
+  "lockedAccountSuccess": "Locked account successfully!",
+  "lockedAccountFail": "Locked account failed!",
+
+  "searchSuccess": "Search successfully!",
+  "searchFail": "Search failed!",
+
+  "cancelJobRequestSuccess": "Cancel job request successfully!",
+  "cancelJobRequestFail": "Cancel job request failed!",
+
+  "deleteCertificateSuccess": "Delete certificate successfully!",
+  "deleteCertificateFail": "Delete certificate failed!",
+
+  "createCertificateSuccess": "Create certificate successfully!",
+  "createCertificateFail": "Create certificate failed!",
+
+  "passwordMustMatch": "New password and confirm password must match!",
+
+  "updatePasswordSuccess": "Update password successfully!",
+  "updatePasswordFail": "Update password failed!",
+
+  "updateProfileSuccess": "Update profile successfully!",
+  "updateProfileFail": "Update profile failed!",
+
+  "promoteToExpertSuccess": "Promote to expert successfully!",
+  "promoteToExpertFail": "Promote to expert failed!",
+
+  "pleaseAgreeToTheTermAndCondition": "Please agree to the terms and conditions",
+
+  "confirmPasswordIsNotMatch": "Confirm password is not match!",
+  "newPasswordMustBeDiffFromOldPassword": "New password must be different from old password!",
+
+  "changePasswordSuccess": "Change password successfully!",
+  "changePasswordFail": "Change password failed!",
+
+  "changeStatusSuccess": "Change status successfully!",
+  "changeStatusFail": "Change status failed!",
+
+  "yourBalanceIsNotEnough": "Your balance is not enough!",
+
+  "paymentSuccess": "Payment successfully!",
+  "paymentFail": "Payment failed!",
+
+  "reviewSuccess": "Review successfully!",
+
+  "reportSuccess": "Report successfully!",
+  "reportFailed": "Report failed!",
+  "deleteReportSuccess": "Delete report successfully!",
+  "report": "Report",
+
+  "verifyExpert": "Verify Expert",
+  "documentManagement": "Document Management",
+  "transactionManagement": "Transaction Management",
+  "reportManagement": "Report Management",
+
+  "pleaseFillOutAllFields": "Please fill out all fields!",
+  "new": "New",
+  "beforeThat": "Before That",
+
+  "cancelBooking": "Cancel booking",
+  "close": "Close",
+
+  "acceptAt": "Accept at",
+
+  "addCertificate": "Add Certificate",
+
+  "postSuccess": "Cancel job request successfully!",
+  "postFail": "Cancel job request failed!",
+
+  "deny": "Deny",
+  "confirm": "Confirm",
+  "from": "From",
+  "recentRequests": "Recent Requests",
+
+  "bankName": "Bank Name",
+  "bankAccount": "Bank Account",
+  "bankAccountName": "Bank Account Name",
+  "withdraw": "Withdraw",
+
+  "welcomeBack": "Welcome Back",
+  "subWelcomeBack": "We're so excited to see you again!",
+  "expert": "Expert",
+  "user": "User",
+  "totalDeposit": "Total Deposit",
+  "jobRequestAccepted": "Job Request Accepted",
+
+  "week": "Week",
+  "month": "Month",
+
+  "lastUpdate": "Last update",
+  "joinedDate": "Joined date",
+
+  "updateSuccess": "Update successfully",
+  "updateFailed": "Update failed",
+
+  "documentInfo": "Document information",
+  "paymentInfo": "Payment information",
+
+  "youCanWithdraw": "You can withdraw",
+  "makeRequest": "Make request",
+
+  "makeRequestSuccess": "Created request successfully",
+  "makeRequestFail": "Created request failed",
+
+  "uploadDocumentSuccess": "Upload document success",
+
+  "verifyCertificate": "Verify certificate",
+  "verifyCertificateSuccess": "Verify certificate success",
+  "verifyCertificateFail": "Verify certificate failed",
+
+  "document": "Document",
+  "image": "image",
+
+  "rejectSuccess": "Rejected success",
+  "rejectFail": "Rejected failed",
+
+  "confirmSuccess": "Confirmed success",
+  "confirmFail": "Confirmed failed",
+
+  "deleteSuccess": "Delete success",
+  "deleteFail": "Delete failed",
+  "rechargeAmount": "Recharge amount must be minimum 50.000 and maximum 5.000.000!",
+  "uploadDocumentFail": "Please upload document!"
+}

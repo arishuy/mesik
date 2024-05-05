@@ -11,8 +11,8 @@ const path = {
   dashboard: '/',
   user: '/user',
   search: '/search/',
-  profile: '/user/profile',
-  changePassword: '/user/changepassword',
+  profile: '/profile',
+  changePassword: '/change-password',
   historyTransaction: '/user/transaction-history',
   jobRequest: '/user/job-request',
   login: '/login',
@@ -39,7 +39,7 @@ const path = {
 
   //Expert
   artist: '/artist',
-  artistProfile: '/artist/profile',
+  artistProfile: '/profile',
   artistChangePassword: '/artist/changepassword',
   artistTransactionHistory: '/artist/transaction-history',
   artistAnalytics: '/artist/analytics',
