@@ -1,5 +1,5 @@
-import React from 'react'
-import { Box, Stack } from '@mui/material'
+import React, { useState } from 'react'
+import { Box, Fab, Stack, Tooltip } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import HeaderUserbox from './UserBox'
 // icon
@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import Report from './Report'
 import useResponsive from '../../hooks/useResponsive'
 import UploadMusic from './UploadMusic'
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import SearchBar from '../../common/components/SearchBox'
 
 const Header = () => {
@@ -14,6 +15,7 @@ const Header = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('profile'))
+  const [open, setOpen] = useState(false)
 
   return (
     <div>
@@ -30,7 +32,14 @@ const Header = () => {
         <div>
           <Stack direction='row' spacing={isMobile ? 0 : 2} sx={{ padding: '10px' }}>
             <Box sx={isMobile ? {} : { '& > :not(style)': { m: 1 } }}>
-              {user.role === 'ARTIST' && <UploadMusic />}
+              {user && user.role === 'ARTIST' && open && <UploadMusic open={open} setOpen={setOpen} />}
+              {user.role === 'ARTIST' && (
+                <Tooltip title='Tải nhạc lên' arrow>
+                  <Fab size='small' aria-label='notifi' onClick={() => setOpen(true)}>
+                    <FileUploadOutlinedIcon />
+                  </Fab>
+                </Tooltip>
+              )}
               {/* <Notification /> */}
               {user.role === 'USER' && (
                 <>

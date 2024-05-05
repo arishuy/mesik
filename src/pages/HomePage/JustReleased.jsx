@@ -4,9 +4,11 @@ import Axios from 'axios'
 import urlConfig from '../../config/UrlConfig'
 import { useMusicPlayer } from '../../contexts/music.context'
 import SongCard from '../../common/components/SongCard'
-
-const JustReleased = ({allPlaylists}) => {
+import useSnackbar from '../../contexts/snackbar.context'
+import Snackbar from '../../common/components/SnackBar'
+const JustReleased = ({ allPlaylists }) => {
   const [songs, setSongs] = useState([])
+  const { snack, setSnack } = useSnackbar()
   const { playSong } = useMusicPlayer()
   const handleSongClick = (song) => {
     // convert song to array
@@ -24,12 +26,13 @@ const JustReleased = ({allPlaylists}) => {
   }, [])
   return (
     <>
+      <Snackbar />
       <Typography variant='h4' py={3}>
         Vừa phát hành
       </Typography>
       <Stack direction='row' spacing={2}>
         {songs.map((song) => (
-          <SongCard song={song} key={song._id}  allPlaylists={allPlaylists}/>
+          <SongCard song={song} key={song._id} allPlaylists={allPlaylists} snack={snack} setSnack={setSnack} />
         ))}
       </Stack>
     </>

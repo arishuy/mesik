@@ -10,7 +10,6 @@ import UploadPhoto from '../../common/components/UploadPhoto'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { useTranslation } from 'react-i18next'
 import { styled } from '@mui/material/styles'
-import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import { memo } from 'react'
 
 const VisuallyHiddenInput = styled('input')({
@@ -25,8 +24,7 @@ const VisuallyHiddenInput = styled('input')({
   width: 1
 })
 
-const UploadMusic = memo(function UploadMusic() {
-  const [open, setOpen] = useState(false)
+const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
   const { t } = useTranslation()
   const { snack, setSnack } = useSnackbar()
   const [formData, setFormData] = useState(new FormData())
@@ -209,11 +207,6 @@ const UploadMusic = memo(function UploadMusic() {
           </Stack>
         </RootModal>
       )}
-      <Tooltip title='Tải nhạc lên' arrow>
-        <Fab size='small' aria-label='notifi' onClick={() => setOpen(true)}>
-          <FileUploadOutlinedIcon />
-        </Fab>
-      </Tooltip>
     </>
   )
 })

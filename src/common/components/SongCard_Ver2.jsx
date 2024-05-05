@@ -15,6 +15,7 @@ import { AppContext } from '../../contexts/app.context'
 const SongCardVer2 = ({ song, allPlaylists }) => {
   const { isAuthenticated } = useContext(AppContext)
   const navigate = useNavigate()
+  const user = JSON.parse(localStorage.getItem('profile'))
   const { playSong } = useMusicPlayer()
   const { snack, setSnack } = useSnackbar()
   const [open, setOpen] = React.useState(false)
@@ -69,6 +70,8 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
             message: 'Đã thêm vào thư viện',
             type: 'success'
           })
+          user.liked_songs.push(song._id)
+          localStorage.setItem('profile', JSON.stringify(user))
         } else
           setSnack({
             ...snack,
@@ -76,6 +79,8 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
             message: 'Đã xóa khỏi thư viện',
             type: 'success'
           })
+        user.liked_songs = user.liked_songs.filter((item) => item !== song._id)
+        localStorage.setItem('profile', JSON.stringify(user))
       })
       .catch((err) => {
         setSnack({
@@ -105,7 +110,6 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
           sx={{ m: 3 }}
           options={allPlaylists}
           getOptionLabel={(option) => option.title}
-          disableCloseOnSelect
           onChange={(e, value) => {
             setData({
               ...data,
@@ -191,7 +195,11 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
             }}
           >
             <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px' }} />
-            <Typography>Thêm vào thư viện</Typography>
+            {user?.liked_songs.includes(song._id) ? (
+              <Typography>Xoá khỏi thư viện</Typography>
+            ) : (
+              <Typography>Thêm vào thư viện</Typography>
+            )}
           </ListItem>
         </List>
       </Popover>

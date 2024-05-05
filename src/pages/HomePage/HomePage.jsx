@@ -23,7 +23,7 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    fetchData()
+    if (isAuthenticated) fetchData()
   }, [])
   return (
     <div
