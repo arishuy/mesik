@@ -13,10 +13,9 @@ import {
   Typography,
   useTheme,
   CardHeader,
-  Avatar,
   Stack
 } from '@mui/material'
-import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone'
+import EditTwoToneIcon from '@mui/icons-material/EditTwoTone'
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../../../hooks/useResponsive'
@@ -25,6 +24,8 @@ import DeleteConfirm from './DeleteConfirm'
 import AddNewGenre from './AddNewGenre'
 import { Box, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
+import Snackbar from '../../../../common/components/SnackBar'
+import EditGenre from './EditGenre'
 
 const GenreTable = ({ majorsOrder, fetchData }) => {
   const isMobile = useResponsive('down', 'sm')
@@ -43,6 +44,10 @@ const GenreTable = ({ majorsOrder, fetchData }) => {
   }, [isMobile])
   return (
     <>
+      <Snackbar />
+      {openModal && (
+        <EditGenre open={openModal} handleClose={() => setOpenModal(false)} fetchData={fetchData} id={id} />
+      )}
       {openAdd && <AddNewGenre open={openAdd} handleClose={() => setOpenAdd(false)} fetchData={fetchData} />}
       {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} fetchData={fetchData} id={id} />}
       <Card>
@@ -101,13 +106,13 @@ const GenreTable = ({ majorsOrder, fetchData }) => {
                       </Typography>
                     </TableCell>
                     <TableCell align='right'>
-                      <Tooltip title={t('detailInfo')} arrow>
+                      <Tooltip title={t('edit')} arrow>
                         <IconButton
                           sx={{
                             '&:hover': {
-                              background: theme.palette.primary.lighter
+                              background: theme.palette.warning.lighter
                             },
-                            color: theme.palette.primary.main
+                            color: theme.palette.warning.main
                           }}
                           onClick={() => {
                             setId(majorsOrder._id)
@@ -116,7 +121,7 @@ const GenreTable = ({ majorsOrder, fetchData }) => {
                           color='inherit'
                           size='small'
                         >
-                          <VisibilityTwoToneIcon fontSize='small' />
+                          <EditTwoToneIcon fontSize='small' />
                         </IconButton>
                       </Tooltip>
                       <Tooltip title={t('delete')} arrow>

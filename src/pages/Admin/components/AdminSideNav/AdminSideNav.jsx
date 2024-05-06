@@ -7,6 +7,7 @@ import ManageSearchIcon from '@mui/icons-material/ManageSearch'
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
 import FindInPageIcon from '@mui/icons-material/FindInPage'
+import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined'
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
 import SsidChartIcon from '@mui/icons-material/SsidChart'
 import { useTranslation } from 'react-i18next'
@@ -89,24 +90,28 @@ export default function AdminSideNav() {
             Profile
           </MenuItem>
           <SubMenu label='Management' style={styleLink} icon={<HandymanIcon />}>
-            <MenuItem icon={<AudioFileOutlinedIcon />} component={<Link to={path.adminMusic} style={styleLink} />}>
-              Music
-            </MenuItem>
-            <MenuItem icon={<LyricsOutlinedIcon />} component={<Link to={path.adminGenre} style={styleLink} />}>
-              Genre
-            </MenuItem>
-            <MenuItem
-              icon={<SupervisedUserCircleOutlinedIcon />}
-              component={<Link to={path.adminListDocument} style={styleLink} />}
-            >
-              Artist
-            </MenuItem>
             <MenuItem
               icon={<ManageAccountsOutlinedIcon />}
               component={<Link to={path.adminListUser} style={styleLink} />}
             >
               User
             </MenuItem>
+            <MenuItem icon={<AudioFileOutlinedIcon />} component={<Link to={path.adminMusic} style={styleLink} />}>
+              Music
+            </MenuItem>
+            <MenuItem icon={<LyricsOutlinedIcon />} component={<Link to={path.adminGenre} style={styleLink} />}>
+              Genre
+            </MenuItem>
+            <MenuItem icon={<VerifiedUserOutlinedIcon />} component={<Link to={path.adminRequest} style={styleLink} />}>
+              Request
+            </MenuItem>
+            {/* <MenuItem
+              icon={<SupervisedUserCircleOutlinedIcon />}
+              component={<Link to={path.adminListDocument} style={styleLink} />}
+            >
+              Artist
+            </MenuItem> */}
+
             <MenuItem icon={<AlbumOutlinedIcon />} component={<Link to={path.adminListReport} style={styleLink} />}>
               Album
             </MenuItem>

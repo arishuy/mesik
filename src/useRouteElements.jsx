@@ -33,6 +33,7 @@ const BecomeArtist = lazy(() => import('./pages/User/pages/BecomeArtist'))
 const MusicManagement = lazy(() => import('./pages/Admin/pages/MusicManagement'))
 const GenreManagement = lazy(() => import('./pages/Admin/pages/GenreManagement'))
 const UserManagement = lazy(() => import('./pages/Admin/pages/UsersManagement'))
+const RequestManagement = lazy(() => import('./pages/Admin/pages/RequestManagement'))
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -107,6 +108,16 @@ export default function useRouteElements() {
                     <Suspense>
                       <AdminLayout>
                         <Profile />
+                      </AdminLayout>
+                    </Suspense>
+                  )
+                },
+                {
+                  path: path.adminRequest,
+                  element: (
+                    <Suspense>
+                      <AdminLayout>
+                        <RequestManagement />
                       </AdminLayout>
                     </Suspense>
                   )

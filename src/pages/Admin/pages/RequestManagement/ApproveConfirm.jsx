@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Rootmodal from '../../../../components/Modal/RootModal'
-import { Container } from '@mui/material'
+import { Container, TextField } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import useSnack from '../../../../contexts/snackbar.context'
 import { useTranslation } from 'react-i18next'
-const DeleteConfirm = ({ open, setOpen, id, fetchData }) => {
+const ApproveConfirm = ({ open, setOpen, id, fetchData }) => {
   const { t } = useTranslation()
   const { snack, setSnack } = useSnack()
   const handleDelete = async () => {
-    await AxiosInterceptors.delete(urlConfig.genres.deleteGenre + `/${id}`)
+    await AxiosInterceptors.post(urlConfig.requests.rejectRequest + `/${id}/accept`)
       .then((res) => {
         if (res && res.status === 200) {
           setSnack({
@@ -35,7 +35,7 @@ const DeleteConfirm = ({ open, setOpen, id, fetchData }) => {
     <>
       <Rootmodal
         variant='Info'
-        title='Xác nhận xóa'
+        title='Xác nhận chấp nhận'
         open={open}
         handleClose={() => setOpen(false)}
         handleOk={handleDelete}
@@ -47,11 +47,11 @@ const DeleteConfirm = ({ open, setOpen, id, fetchData }) => {
             mt: 3
           }}
         >
-          Bạn có chắc chắn muốn xóa thể loại này?
+          Bạn có chắc chắn muốn chấp nhận yêu cầu này?
         </Container>
       </Rootmodal>
     </>
   )
 }
 
-export default DeleteConfirm
+export default ApproveConfirm

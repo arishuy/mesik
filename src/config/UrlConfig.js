@@ -21,7 +21,8 @@ const urlConfig = {
     deleteUser: `${process.env.REACT_APP_API_ENDPOINT}/users`,
     getHistoryListen: `${process.env.REACT_APP_API_ENDPOINT}/users/current/history-listen`,
     likedSongs: `${process.env.REACT_APP_API_ENDPOINT}/users/current/favourite`,
-    getLikedSongs: `${process.env.REACT_APP_API_ENDPOINT}/users/current/favourite`
+    getLikedSongs: `${process.env.REACT_APP_API_ENDPOINT}/users/current/favourite`,
+    getMyRequest: `${process.env.REACT_APP_API_ENDPOINT}/users/current/request`
   },
   expert: {
     current: `${process.env.REACT_APP_API_ENDPOINT}/experts/current`,
@@ -96,7 +97,17 @@ const urlConfig = {
     createGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
     getAllGenres: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
     getGenreById: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
-    deleteGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`
+    deleteGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
+    updateGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`
+  },
+  requests: {
+    createRequest: `${process.env.REACT_APP_API_ENDPOINT}/requests`,
+    getAllRequests: `${process.env.REACT_APP_API_ENDPOINT}/requests`,
+    getRequestById: `${process.env.REACT_APP_API_ENDPOINT}/requests`,
+    deleteRequest: `${process.env.REACT_APP_API_ENDPOINT}/requests`,
+    updateRequest: `${process.env.REACT_APP_API_ENDPOINT}/requests`,
+    approveRequest: `${process.env.REACT_APP_API_ENDPOINT}/requests`,
+    rejectRequest: `${process.env.REACT_APP_API_ENDPOINT}/requests`
   },
   playlists: {
     createPlaylist: `${process.env.REACT_APP_API_ENDPOINT}/playlists`,
