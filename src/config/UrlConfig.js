@@ -22,7 +22,9 @@ const urlConfig = {
     getHistoryListen: `${process.env.REACT_APP_API_ENDPOINT}/users/current/history-listen`,
     likedSongs: `${process.env.REACT_APP_API_ENDPOINT}/users/current/favourite`,
     getLikedSongs: `${process.env.REACT_APP_API_ENDPOINT}/users/current/favourite`,
-    getMyRequest: `${process.env.REACT_APP_API_ENDPOINT}/users/current/request`
+    getMyRequest: `${process.env.REACT_APP_API_ENDPOINT}/users/current/request`,
+    followArtist: `${process.env.REACT_APP_API_ENDPOINT}/users/current/follow`,
+    getFollowArtist: `${process.env.REACT_APP_API_ENDPOINT}/users/current/following`
   },
   expert: {
     current: `${process.env.REACT_APP_API_ENDPOINT}/experts/current`,

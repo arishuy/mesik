@@ -13,7 +13,8 @@ import {
   Stack,
   Avatar,
   IconButton,
-  Tooltip
+  Tooltip,
+  Button
 } from '@mui/material'
 import Loading from '../../common/components/Loading/Loading'
 import Empty from '../../common/components/Empty'
@@ -61,9 +62,23 @@ const LikedSongs = () => {
     <Loading />
   ) : (
     <div>
-      <Typography variant='h4' py={3}>
-        Bài hát yêu thích
-      </Typography>
+      <Stack direction='row' justifyContent='space-between' alignItems='center'>
+        <Typography variant='h4' py={3}>
+          Bài hát yêu thích
+        </Typography>
+        {likedSongs.length > 0 && (
+          <Button
+            variant='outlined'
+            color='primary'
+            sx={{
+              borderRadius: '20px'
+            }}
+            onClick={() => playSong(likedSongs)}
+          >
+            Phát tất cả
+          </Button>
+        )}
+      </Stack>
       {likedSongs.length === 0 ? (
         <Empty message={'Không có bài hát yêu thích nào!'} />
       ) : (

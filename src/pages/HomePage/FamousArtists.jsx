@@ -28,6 +28,7 @@ const FamousArtists = () => {
             <Stack
               direction='column'
               alignItems='center'
+              justifyContent='center'
               key={artist._id}
               px={3}
               onClick={() => navigate(`/artist/${artist._id}`)}
@@ -38,8 +39,8 @@ const FamousArtists = () => {
                 }
               }}
             >
-              <Avatar alt='artist' src={artist.user.photo_url} sx={{ width: 200, height: 200 }} />
-              <Typography variant='h6' padding={3}>
+              <Avatar alt='artist' src={artist.user.photo_url} sx={{ width: 150, height: 150 }} />
+              <Typography variant='h6' p={2} textAlign='center'>
                 {artist.display_name}
               </Typography>
             </Stack>

@@ -1,5 +1,5 @@
-import { Avatar, Card, Grid, IconButton, Stack, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { Avatar, Button, Card, Grid, IconButton, Stack, Typography } from '@mui/material'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMusicPlayer } from '../../contexts/music.context'
 import moment from 'moment'
@@ -11,19 +11,29 @@ import { Helmet } from 'react-helmet-async'
 import SongCardVer2 from '../../common/components/SongCard_Ver2'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
+import { LoadingButton } from '@mui/lab'
+import GroupAddRoundedIcon from '@mui/icons-material/GroupAddRounded'
+import GroupRemoveRoundedIcon from '@mui/icons-material/GroupRemoveRounded'
+import { AppContext } from '../../contexts/app.context'
 
 const DetailArtist = () => {
   const id = useParams()
+  const { isAuthenticated, profile } = useContext(AppContext)
   const { playSong } = useMusicPlayer()
   const navigation = useNavigate()
   const [artist, setArtist] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [allPlaylists, setAllPlaylists] = React.useState([])
+  const [isFollow, setIsFollow] = React.useState(false)
+  const [totalFollowers, setTotalFollowers] = React.useState()
+  const [isClick, setIsClick] = React.useState(false)
 
   const fetchData = async () => {
     await AxiosInterceptors.get(urlConfig.artists.getArtistById + `/${id.nameId}`)
       .then((res) => {
         setArtist(res.data.artist)
+        setTotalFollowers(res.data.artist.followers.length)
+        setIsFollow(res.data.artist.followers.includes(profile?._id))
         setIsLoading(false)
       })
       .catch((err) => {
@@ -40,9 +50,22 @@ const DetailArtist = () => {
       })
   }
 
+  const handleFollow = async () => {
+    setIsClick(true)
+    await AxiosInterceptors.get(urlConfig.user.followArtist + `/${id.nameId}`)
+      .then((res) => {
+        setIsFollow(res.data.result.isFollow)
+        setTotalFollowers(res.data.result.totalFollow)
+        setIsClick(false)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   useEffect(() => {
     fetchData()
-    fetchPlaylists()
+    isAuthenticated && fetchPlaylists()
   }, [])
   return isLoading ? (
     <Loading />
@@ -66,8 +89,55 @@ const DetailArtist = () => {
       >
         <Stack direction='row' spacing={5} justifyContent='space-around' alignItems='center'>
           <Stack direction='column' spacing={3}>
-            <Typography variant='h1'>{artist.display_name}</Typography>
-            <Typography variant='h4'>{artist.descriptions}</Typography>
+            <Typography
+              variant='h1'
+              component='h1'
+              sx={{
+                background: '-webkit-linear-gradient(#000, #ff7878)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}
+            >
+              {artist.display_name}
+            </Typography>
+            <Stack direction='row' spacing={3} alignItems='center'>
+              <Typography variant='h6'>{totalFollowers} người quan tâm</Typography>
+              {!isFollow
+                ? isAuthenticated && (
+                    <LoadingButton
+                      loading={isClick}
+                      variant='outlined'
+                      onClick={() => handleFollow()}
+                      sx={{
+                        borderRadius: '20px'
+                      }}
+                    >
+                      <GroupAddRoundedIcon
+                        sx={{
+                          mr: 1
+                        }}
+                      />
+                      Theo dõi
+                    </LoadingButton>
+                  )
+                : isAuthenticated && (
+                    <LoadingButton
+                      loading={isClick}
+                      variant='outlined'
+                      onClick={() => handleFollow()}
+                      sx={{
+                        borderRadius: '20px'
+                      }}
+                    >
+                      <GroupRemoveRoundedIcon
+                        sx={{
+                          mr: 1
+                        }}
+                      />
+                      Bỏ theo dõi
+                    </LoadingButton>
+                  )}
+            </Stack>
           </Stack>
           <Avatar alt='Remy Sharp' src={artist.user?.photo_url} sx={{ width: 300, height: 300 }} />
         </Stack>

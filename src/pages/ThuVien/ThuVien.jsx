@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import LikedSongs from './LikedSongs'
 import HistoryListen from './HistoryListen'
+import FollowingArtist from './FollowingArtist'
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props
@@ -68,6 +69,7 @@ const ThuVien = () => {
           <Tabs value={value} onChange={handleChange} aria-label='basic tabs example'>
             <Tab label='Bài hát yêu thích' {...a11yProps(0)} />
             <Tab label='Nghe gần đây' {...a11yProps(1)} />
+            <Tab label='Đang theo dõi' {...a11yProps(2)} />
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
@@ -75,6 +77,9 @@ const ThuVien = () => {
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           <HistoryListen />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={2}>
+          <FollowingArtist />
         </CustomTabPanel>
       </Box>
     </div>
