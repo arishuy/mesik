@@ -61,7 +61,9 @@ const path = {
   adminWithdraw: '/admin/withdraw-management',
   adminMusic: '/admin/music-management',
   adminGenre: '/admin/genre-management',
-  adminRequest: '/admin/request-management'
+  adminRequest: '/admin/request-management',
+  adminAlbum: '/admin/album-management',
+  adminPlaylist: '/admin/playlist-management'
 }
 
 export default path

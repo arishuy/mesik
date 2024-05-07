@@ -71,13 +71,12 @@ const BecomeArtist = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <>
+    <div style={{ width: '75%' }}>
       {request && request.status === 'PENDING' && (
         <Box
           sx={{
             padding: '20px',
-            margin: '20px 100px',
-            width: '100%'
+            margin: '20px 100px'
           }}
         >
           <Typography variant='h3' component='h3' sx={{ margin: '1rem' }}>
@@ -182,7 +181,7 @@ const BecomeArtist = () => {
           </Box>
         </>
       )}
-    </>
+    </div>
   )
 }
 

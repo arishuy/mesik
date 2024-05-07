@@ -66,7 +66,7 @@ const RequestTable = ({ majorsOrder, fetchData }) => {
       {openApprove && <ApproveConfirm open={openApprove} setOpen={setOpenApprove} fetchData={fetchData} id={id} />}
       {openReject && <RejectConfirm open={openReject} setOpen={setOpenReject} fetchData={fetchData} id={id} />}
       <Card>
-        <CardHeader title={'Request Management'} />
+        <CardHeader title={t('requestManagement')} />
         <Divider />
         <TableContainer>
           <Table size='small'>

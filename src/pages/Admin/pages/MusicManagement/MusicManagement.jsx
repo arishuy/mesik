@@ -42,7 +42,7 @@ const MusicManagement = () => {
       }
     >
       <Helmet>
-        <title>{t('MusicManagement')}</title>
+        <title>{t('songManagement')}</title>
       </Helmet>
       {isLoading ? (
         <Loading />

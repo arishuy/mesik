@@ -200,7 +200,7 @@ const UsersTable = ({ users, fetchData }) => {
                         <Stack direction='row' spacing={2} alignItems='center'>
                           <Avatar src={users.photo_url} />
                           <Stack direction='column' spacing={0}>
-                            <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
+                            <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                               {users.first_name} {users.last_name}
                             </Typography>
                             <Typography variant='body2' color='text.secondary' noWrap>
@@ -216,17 +216,17 @@ const UsersTable = ({ users, fetchData }) => {
                       </TableCell>
                       {!isMobile && (
                         <>
-                          <TableCell align='center'>
+                          <TableCell align='right'>
                             <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
                               {getLabel(users.role)}
                             </Typography>
                           </TableCell>
-                          <TableCell align='center'>
+                          <TableCell align='right'>
                             <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
                               {users.isConfirmed === true ? getLabel('YES') : getLabel('NO')}
                             </Typography>
                           </TableCell>
-                          <TableCell align='center'>
+                          <TableCell align='right'>
                             <Typography variant='body2' color='text.primary' gutterBottom noWrap>
                               {users.isRestricted ? getLabel('UNACTIVE') : getLabel('ACTIVE')}
                             </Typography>

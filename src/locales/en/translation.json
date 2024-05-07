@@ -248,6 +248,10 @@
   "documentManagement": "Document Management",
   "transactionManagement": "Transaction Management",
   "reportManagement": "Report Management",
+  "albumManagement": "Album Management",
+  "songManagement": "Song Management",
+  "requestManagement": "Request Management",
+  "playlistManagement": "Playlist Management",
 
   "pleaseFillOutAllFields": "Please fill out all fields!",
   "new": "New",
@@ -316,5 +320,8 @@
   "deleteSuccess": "Delete success",
   "deleteFail": "Delete failed",
   "rechargeAmount": "Recharge amount must be minimum 50.000 and maximum 5.000.000!",
-  "uploadDocumentFail": "Please upload document!"
+  "uploadDocumentFail": "Please upload document!",
+
+  "deleteAlbumSuccess": "Delete album successfully",
+  "deletePlaylistSuccess": "Delete playlist successfully"
 }

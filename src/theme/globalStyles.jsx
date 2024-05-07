@@ -54,7 +54,6 @@ export default function GlobalStyles() {
             }
           }
         },
-
         img: {
           display: 'block',
           maxWidth: '100%'

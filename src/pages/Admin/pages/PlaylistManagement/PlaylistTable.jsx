@@ -13,31 +13,23 @@ import {
   Typography,
   useTheme,
   CardHeader,
-  Avatar,
-  Stack
+  Stack,
+  Avatar
 } from '@mui/material'
-import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone'
-import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone'
+import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../../../hooks/useResponsive'
 import moment from 'moment'
 import DeleteConfirm from './DeleteConfirm'
-import AddNewSong from './AddNewSong'
-import { Box, Button } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
-import AddLyric from './AddLyric'
-import useSnack from '../../../../contexts/snackbar.context'
 import Snackbar from '../../../../common/components/SnackBar'
-import EditSong from './EditSong'
-const MusicTable = ({ majorsOrder, fetchData }) => {
+import EditPlaylist from './EditPlaylist'
+
+const PlaylistTable = ({ majorsOrder, fetchData }) => {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
   const [page, setPage] = useState(0)
-  const { snack, setSnack } = useSnack()
   const [rowsPerPage, setRowsPerPage] = useState(10)
-  const [openAdd, setOpenAdd] = useState(false)
-  const [openAddLyric, setOpenAddLyric] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
   const [id, setId] = useState('')
@@ -51,71 +43,18 @@ const MusicTable = ({ majorsOrder, fetchData }) => {
     <>
       <Snackbar />
       {openModal && (
-        <EditSong
-          open={openModal}
-          handleClose={() => setOpenModal(false)}
-          fetchData={fetchData}
-          snack={snack}
-          setSnack={setSnack}
-          id={id}
-        />
+        <EditPlaylist open={openModal} handleClose={() => setOpenModal(false)} fetchData={fetchData} id={id} />
       )}
-      {openAdd && (
-        <AddNewSong
-          open={openAdd}
-          handleClose={() => setOpenAdd(false)}
-          fetchData={fetchData}
-          snack={snack}
-          setSnack={setSnack}
-        />
-      )}
-      {openAddLyric && (
-        <AddLyric
-          open={openAddLyric}
-          handleClose={() => setOpenAddLyric(false)}
-          fetchData={fetchData}
-          id={id}
-          snack={snack}
-          setSnack={setSnack}
-        />
-      )}
-      {openDelete && (
-        <DeleteConfirm
-          open={openDelete}
-          setOpen={setOpenDelete}
-          fetchData={fetchData}
-          id={id}
-          snack={snack}
-          setSnack={setSnack}
-        />
-      )}
-
+      {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} fetchData={fetchData} id={id} />}
       <Card>
-        <CardHeader
-          title={t('songManagement')}
-          action={
-            <Box width={isMobile ? '' : 150}>
-              <Button
-                variant='contained'
-                color='primary'
-                onClick={() => setOpenAdd(true)}
-                fullWidth
-                startIcon={<AddIcon />}
-              >
-                {isMobile ? '' : 'Add song'}
-              </Button>
-            </Box>
-          }
-        />
+        <CardHeader title={t('playlistManagement')} />
         <Divider />
         <TableContainer>
           <Table size='small'>
             <TableHead>
               <TableRow>
-                <TableCell>Title</TableCell>
-                <TableCell>Year</TableCell>
-                <TableCell>Duration</TableCell>
-                <TableCell>Nghệ sĩ</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Số bài hát</TableCell>
                 <TableCell align='right'>Time</TableCell>
                 <TableCell align='right'>Action</TableCell>
               </TableRow>
@@ -129,57 +68,32 @@ const MusicTable = ({ majorsOrder, fetchData }) => {
                   <TableRow hover key={majorsOrder._id}>
                     <TableCell>
                       <Stack direction='row' spacing={2} alignItems='center'>
-                        <Avatar src={majorsOrder.photo_url} />
+                        <Avatar src={majorsOrder.user.photo_url} />
                         <Stack direction='column' spacing={0}>
-                          <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
+                          <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                             {majorsOrder.title}
+                          </Typography>
+                          <Typography variant='body2' color='text.secondary' noWrap>
+                            {majorsOrder.user.first_name} {majorsOrder.user.last_name}
                           </Typography>
                         </Stack>
                       </Stack>
                     </TableCell>
                     <TableCell>
                       <Typography variant='body1' color='text.primary' gutterBottom noWrap>
-                        {majorsOrder.year}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant='body1' color='text.primary' gutterBottom noWrap>
-                        {majorsOrder.duration}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant='body1' color='text.primary' gutterBottom noWrap>
-                        {majorsOrder.artist.display_name}
+                        {majorsOrder.songs.length}
                       </Typography>
                     </TableCell>
                     <TableCell align='right'>
                       <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                        {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
+                        {moment(majorsOrder.updatedAt).format('DD/MM/YYYY')}
                       </Typography>
                       <Typography variant='body2' color='text.primary' gutterBottom noWrap>
-                        {moment(majorsOrder.createdAt).format('h:mm:ss A')}
+                        {moment(majorsOrder.updatedAt).format('h:mm:ss A')}
                       </Typography>
                     </TableCell>
                     <TableCell align='right'>
-                      <Tooltip title={t('detailInfo')} arrow>
-                        <IconButton
-                          sx={{
-                            '&:hover': {
-                              background: theme.palette.primary.lighter
-                            },
-                            color: theme.palette.primary.main
-                          }}
-                          onClick={() => {
-                            setId(majorsOrder._id)
-                            setOpenModal(true)
-                          }}
-                          color='inherit'
-                          size='small'
-                        >
-                          <VisibilityTwoToneIcon fontSize='small' />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title={t('Edit lyric')} arrow>
+                      <Tooltip title={t('edit')} arrow>
                         <IconButton
                           sx={{
                             '&:hover': {
@@ -189,7 +103,7 @@ const MusicTable = ({ majorsOrder, fetchData }) => {
                           }}
                           onClick={() => {
                             setId(majorsOrder._id)
-                            setOpenAddLyric(true)
+                            setOpenModal(true)
                           }}
                           color='inherit'
                           size='small'
@@ -225,4 +139,4 @@ const MusicTable = ({ majorsOrder, fetchData }) => {
   )
 }
 
-export default MusicTable
+export default PlaylistTable

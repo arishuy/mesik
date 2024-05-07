@@ -34,6 +34,8 @@ const MusicManagement = lazy(() => import('./pages/Admin/pages/MusicManagement')
 const GenreManagement = lazy(() => import('./pages/Admin/pages/GenreManagement'))
 const UserManagement = lazy(() => import('./pages/Admin/pages/UsersManagement'))
 const RequestManagement = lazy(() => import('./pages/Admin/pages/RequestManagement'))
+const AlbumManagement = lazy(() => import('./pages/Admin/pages/AlbumManagement'))
+const PlaylistManagement = lazy(() => import('./pages/Admin/pages/PlaylistManagement'))
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -143,6 +145,26 @@ export default function useRouteElements() {
                   )
                 },
                 {
+                  path: path.adminAlbum,
+                  element: (
+                    <Suspense>
+                      <AdminLayout>
+                        <AlbumManagement />
+                      </AdminLayout>
+                    </Suspense>
+                  )
+                },
+                {
+                  path: path.adminPlaylist,
+                  element: (
+                    <Suspense>
+                      <AdminLayout>
+                        <PlaylistManagement />
+                      </AdminLayout>
+                    </Suspense>
+                  )
+                },
+                {
                   path: path.adminListUser,
                   element: (
                     <Suspense>
@@ -163,18 +185,7 @@ export default function useRouteElements() {
             {
               path: '',
               element: <MainLayout />,
-              children: [
-                {
-                  path: path.becomeArtist,
-                  element: (
-                    <Suspense>
-                      <UserLayout>
-                        <BecomeArtist />
-                      </UserLayout>
-                    </Suspense>
-                  )
-                }
-              ]
+              children: []
             }
           ]
         },
@@ -281,6 +292,25 @@ export default function useRouteElements() {
                   element: (
                     <Suspense>
                       <MyAlbum />
+                    </Suspense>
+                  )
+                }
+              ]
+            }
+          ]
+        },
+        {
+          path: path.user,
+          element: <UserRoute />,
+          children: [
+            {
+              path: '',
+              children: [
+                {
+                  path: path.becomeArtist,
+                  element: (
+                    <Suspense>
+                      <BecomeArtist />
                     </Suspense>
                   )
                 }

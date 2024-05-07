@@ -138,7 +138,14 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
         key={song.id}
         onClick={() => handleSongClick(song)}
       >
-        <img src={song.photo_url} alt='album' width='250px' />
+        <img
+          src={song.photo_url}
+          alt='album'
+          width='250px'
+          style={{
+            objectFit: 'contain'
+          }}
+        />
         <Typography
           variant='h6'
           pt={2}

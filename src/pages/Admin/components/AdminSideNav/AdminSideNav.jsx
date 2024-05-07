@@ -97,7 +97,7 @@ export default function AdminSideNav() {
               User
             </MenuItem>
             <MenuItem icon={<AudioFileOutlinedIcon />} component={<Link to={path.adminMusic} style={styleLink} />}>
-              Music
+              Song
             </MenuItem>
             <MenuItem icon={<LyricsOutlinedIcon />} component={<Link to={path.adminGenre} style={styleLink} />}>
               Genre
@@ -112,10 +112,10 @@ export default function AdminSideNav() {
               Artist
             </MenuItem> */}
 
-            <MenuItem icon={<AlbumOutlinedIcon />} component={<Link to={path.adminListReport} style={styleLink} />}>
+            <MenuItem icon={<AlbumOutlinedIcon />} component={<Link to={path.adminAlbum} style={styleLink} />}>
               Album
             </MenuItem>
-            <MenuItem icon={<ArtTrackOutlinedIcon />} component={<Link to={path.adminWithdraw} style={styleLink} />}>
+            <MenuItem icon={<ArtTrackOutlinedIcon />} component={<Link to={path.adminPlaylist} style={styleLink} />}>
               Playlist
             </MenuItem>
           </SubMenu>

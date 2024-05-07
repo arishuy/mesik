@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Skeleton, Stack, Typography } from '@mui/material'
+import { Grid, Skeleton, Stack, Typography } from '@mui/material'
 import Axios from 'axios'
 import urlConfig from '../../config/UrlConfig'
 import SongCard from '../../common/components/SongCard'
@@ -26,7 +26,7 @@ const RandomSong = ({ allPlaylists }) => {
       <Typography variant='h4' py={3}>
         Trải nghiệm ngẫu nhiên
       </Typography>
-      <Stack direction='row' spacing={2}>
+      <Grid container spacing={2}>
         {isLoading && (
           <Skeleton
             variant='rounded'
@@ -38,9 +38,11 @@ const RandomSong = ({ allPlaylists }) => {
           />
         )}
         {songs.map((song) => (
-          <SongCard song={song} key={song._id} allPlaylists={allPlaylists} snack={snack} setSnack={setSnack} />
+          <Grid item xs={6} md={4} lg={2} key={song._id}>
+            <SongCard song={song} allPlaylists={allPlaylists} snack={snack} setSnack={setSnack} />
+          </Grid>
         ))}
-      </Stack>
+      </Grid>
     </>
   )
 }

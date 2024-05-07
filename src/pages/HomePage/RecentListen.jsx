@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Skeleton, Stack, Typography } from '@mui/material'
+import { Grid, Skeleton, Stack, Typography } from '@mui/material'
 import urlConfig from '../../config/UrlConfig'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import SongCard from '../../common/components/SongCard'
@@ -28,7 +28,7 @@ const RecentListen = ({ allPlaylists }) => {
         Nghe gần đây
       </Typography>
       {!isLoading && songs.length === 0 && <Empty message={'Không có bài hát nào'} />}
-      <Stack direction='row' spacing={2}>
+      <Grid container spacing={2}>
         {isLoading && (
           <Skeleton
             variant='rounded'
@@ -40,9 +40,11 @@ const RecentListen = ({ allPlaylists }) => {
           />
         )}
         {songs.map((song) => (
-          <SongCard song={song} key={song.id} allPlaylists={allPlaylists} snack={snack} setSnack={setSnack} />
+          <Grid item xs={6} md={4} lg={2} key={song._id}>
+            <SongCard song={song} allPlaylists={allPlaylists} snack={snack} setSnack={setSnack} />
+          </Grid>
         ))}
-      </Stack>
+      </Grid>
     </>
   )
 }

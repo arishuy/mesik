@@ -20,7 +20,7 @@ import logo from '../../assets/images/logo.png'
 import LibraryMusicRoundedIcon from '@mui/icons-material/LibraryMusicRounded'
 import { AppContext } from '../../contexts/app.context'
 export default function AdminSideNav({ param }) {
-  const { isAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, role } = useContext(AppContext)
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
   const styleLink = {
@@ -114,12 +114,14 @@ export default function AdminSideNav({ param }) {
                 >
                   Playlist
                 </MenuItem>
-                <MenuItem
-                  icon={<AlbumIcon />}
-                  component={<Link to={path.myAlbum} style={param === path.myAlbum ? styleActive : styleLink} />}
-                >
-                  Album
-                </MenuItem>
+                {role === 'ARTIST' && (
+                  <MenuItem
+                    icon={<AlbumIcon />}
+                    component={<Link to={path.myAlbum} style={param === path.myAlbum ? styleActive : styleLink} />}
+                  >
+                    Album
+                  </MenuItem>
+                )}
               </>
             )}
             <MenuItem
