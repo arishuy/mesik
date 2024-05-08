@@ -11,6 +11,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { useTranslation } from 'react-i18next'
 import { styled } from '@mui/material/styles'
 import { memo } from 'react'
+import { RegionContext } from '../../contexts/region.context'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -30,11 +31,13 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
   const [formData, setFormData] = useState(new FormData())
   const [formMusic, setFormMusic] = useState(new FormData())
   const { genres, getGenres } = useContext(GenreContext)
+  const { regions, getRegions } = useContext(RegionContext)
   const [newSong, setNewSong] = useState({
     title: '',
     year: 2020,
     duration: '',
     genre_id: '',
+    region_id: '',
     file: '',
     photo: '',
     play_count: 0
@@ -56,6 +59,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
         year: newSong.year,
         duration: newSong.duration,
         genre_id: newSong.genre_id,
+        region_id: newSong.region_id,
         file: formMusic.get('audio'),
         photo: formData.get('photo'),
         play_count: newSong.play_count
@@ -98,6 +102,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
   }
   useEffect(() => {
     getGenres()
+    getRegions()
     return () => {
       setNewSong({
         title: '',
@@ -165,6 +170,23 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
                 onChange={(e) => setNewSong({ ...newSong, genre_id: e.target.value })}
               >
                 {genres?.map((option) => (
+                  <MenuItem key={option._id} value={option._id}>
+                    {option.name}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                id='outlined-select-currency'
+                select
+                label='Region'
+                required
+                defaultValue=''
+                sx={{
+                  width: '50%'
+                }}
+                onChange={(e) => setNewSong({ ...newSong, region_id: e.target.value })}
+              >
+                {regions?.map((option) => (
                   <MenuItem key={option._id} value={option._id}>
                     {option.name}
                   </MenuItem>
