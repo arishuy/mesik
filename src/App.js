@@ -14,6 +14,7 @@ import 'simplebar-react/dist/simplebar.min.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { GenreProvider } from './contexts/genre.context'
+import { RegionProvider } from './contexts/region.context'
 
 const App = () => {
   const routeElements = useRouteElements()
@@ -28,15 +29,17 @@ const App = () => {
     <HelmetProvider>
       <ErrorBoundary>
         <MusicPlayerProvider>
-          <GenreProvider>
-            <CookiesProvider>
-              <SnackbarContextProvider>
-                <ProSidebarProvider>
-                  <ThemeProvider>{routeElements}</ThemeProvider>
-                </ProSidebarProvider>
-              </SnackbarContextProvider>
-            </CookiesProvider>
-          </GenreProvider>
+          <RegionProvider>
+            <GenreProvider>
+              <CookiesProvider>
+                <SnackbarContextProvider>
+                  <ProSidebarProvider>
+                    <ThemeProvider>{routeElements}</ThemeProvider>
+                  </ProSidebarProvider>
+                </SnackbarContextProvider>
+              </CookiesProvider>
+            </GenreProvider>
+          </RegionProvider>
         </MusicPlayerProvider>
       </ErrorBoundary>
     </HelmetProvider>

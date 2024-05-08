@@ -63,7 +63,8 @@ const path = {
   adminGenre: '/admin/genre-management',
   adminRequest: '/admin/request-management',
   adminAlbum: '/admin/album-management',
-  adminPlaylist: '/admin/playlist-management'
+  adminPlaylist: '/admin/playlist-management',
+  adminRegion: '/admin/region-management'
 }
 
 export default path

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
 import RootModal from '../../../../components/Modal/RootModal'
-import { Stack, TextField, MenuItem, Button, Typography } from '@mui/material'
+import { Stack, TextField, MenuItem, Button, Typography, Avatar } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import { GenreContext } from '../../../../contexts/genre.context'
@@ -8,6 +8,7 @@ import UploadPhoto from '../../../../common/components/UploadPhoto'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { useTranslation } from 'react-i18next'
 import { styled } from '@mui/material/styles'
+import { RegionContext } from '../../../../contexts/region.context'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -21,17 +22,17 @@ const VisuallyHiddenInput = styled('input')({
   width: 1
 })
 
-const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack }) => {
+const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, regions }) => {
   const { t } = useTranslation()
   const [formData, setFormData] = useState(new FormData())
   const [formMusic, setFormMusic] = useState(new FormData())
-  const { genres, getGenres } = useContext(GenreContext)
   const [artists, setArtists] = useState([])
   const [newSong, setNewSong] = useState({
     title: '',
     year: 2020,
     duration: '',
     genre_id: '',
+    region_id: '',
     artist_id: '',
     file: '',
     photo: '',
@@ -54,6 +55,7 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack }) => {
         year: newSong.year,
         duration: newSong.duration,
         genre_id: newSong.genre_id,
+        region_id: newSong.region_id,
         artist_id: newSong.artist_id,
         file: formMusic.get('audio'),
         photo: formData.get('photo'),
@@ -103,7 +105,6 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack }) => {
   }
 
   useEffect(() => {
-    getGenres()
     fetchArtist()
   }, [])
   return (
@@ -167,21 +168,38 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack }) => {
               <TextField
                 id='outlined-select-currency'
                 select
-                label='Artist'
+                label='Region'
                 required
                 defaultValue=''
                 sx={{
                   width: '50%'
                 }}
-                onChange={(e) => setNewSong({ ...newSong, artist_id: e.target.value })}
+                onChange={(e) => setNewSong({ ...newSong, region_id: e.target.value })}
               >
-                {artists?.map((option) => (
+                {regions?.map((option) => (
                   <MenuItem key={option._id} value={option._id}>
-                    {option.user.first_name} {option.user.last_name}
+                    {option.name}
                   </MenuItem>
                 ))}
               </TextField>
             </Stack>
+            <TextField
+              id='outlined-select-currency'
+              select
+              label='Artist'
+              required
+              defaultValue=''
+              onChange={(e) => setNewSong({ ...newSong, artist_id: e.target.value })}
+            >
+              {artists?.map((option) => (
+                <MenuItem key={option._id} value={option._id}>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Avatar src={option.user.photo_url} sx={{ width: 24, height: 24, mr: 1 }} />
+                    {option.display_name}
+                  </div>
+                </MenuItem>
+              ))}
+            </TextField>
             {formMusic.get('audio') && (
               <Typography variant='body2' color='text.secondary' noWrap>
                 {formMusic.get('audio').name}

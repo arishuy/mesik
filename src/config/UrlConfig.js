@@ -102,6 +102,13 @@ const urlConfig = {
     deleteGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
     updateGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`
   },
+  regions: {
+    createRegion: `${process.env.REACT_APP_API_ENDPOINT}/regions`,
+    getAllRegions: `${process.env.REACT_APP_API_ENDPOINT}/regions`,
+    getRegionById: `${process.env.REACT_APP_API_ENDPOINT}/regions`,
+    deleteRegion: `${process.env.REACT_APP_API_ENDPOINT}/regions`,
+    updateRegion: `${process.env.REACT_APP_API_ENDPOINT}/regions`
+  },
   requests: {
     createRequest: `${process.env.REACT_APP_API_ENDPOINT}/requests`,
     getAllRequests: `${process.env.REACT_APP_API_ENDPOINT}/requests`,

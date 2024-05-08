@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {
   Tooltip,
   Divider,
@@ -30,7 +30,8 @@ import AddLyric from './AddLyric'
 import useSnack from '../../../../contexts/snackbar.context'
 import Snackbar from '../../../../common/components/SnackBar'
 import EditSong from './EditSong'
-const MusicTable = ({ majorsOrder, fetchData }) => {
+
+const MusicTable = ({ majorsOrder, fetchData, genres, regions }) => {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
   const [page, setPage] = useState(0)
@@ -42,6 +43,7 @@ const MusicTable = ({ majorsOrder, fetchData }) => {
   const [openDelete, setOpenDelete] = useState(false)
   const [id, setId] = useState('')
   const theme = useTheme()
+
   useEffect(() => {
     if (isMobile) {
       setRowsPerPage(5)
@@ -58,6 +60,8 @@ const MusicTable = ({ majorsOrder, fetchData }) => {
           snack={snack}
           setSnack={setSnack}
           id={id}
+          genres={genres}
+          regions={regions}
         />
       )}
       {openAdd && (
@@ -67,6 +71,8 @@ const MusicTable = ({ majorsOrder, fetchData }) => {
           fetchData={fetchData}
           snack={snack}
           setSnack={setSnack}
+          genres={genres}
+          regions={regions}
         />
       )}
       {openAddLyric && (

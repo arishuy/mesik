@@ -36,6 +36,7 @@ const UserManagement = lazy(() => import('./pages/Admin/pages/UsersManagement'))
 const RequestManagement = lazy(() => import('./pages/Admin/pages/RequestManagement'))
 const AlbumManagement = lazy(() => import('./pages/Admin/pages/AlbumManagement'))
 const PlaylistManagement = lazy(() => import('./pages/Admin/pages/PlaylistManagement'))
+const RegionManagement = lazy(() => import('./pages/Admin/pages/RegionManagement'))
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -160,6 +161,16 @@ export default function useRouteElements() {
                     <Suspense>
                       <AdminLayout>
                         <PlaylistManagement />
+                      </AdminLayout>
+                    </Suspense>
+                  )
+                },
+                {
+                  path: path.adminRegion,
+                  element: (
+                    <Suspense>
+                      <AdminLayout>
+                        <RegionManagement />
                       </AdminLayout>
                     </Suspense>
                   )

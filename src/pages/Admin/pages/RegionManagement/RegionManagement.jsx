@@ -1,30 +1,27 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import { Helmet } from 'react-helmet-async'
-import MusicTable from './MusicTable'
+import RegionTable from './RegionTable'
 import { Box, Pagination, Container, Typography } from '@mui/material'
 import Loading from '../../../../common/components/Loading/Loading'
 import svg from '../../../../assets/images/empty.png'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../../../hooks/useResponsive'
-import { GenreContext } from '../../../../contexts/genre.context'
-import { RegionContext } from '../../../../contexts/region.context'
-const MusicManagement = () => {
+
+const RegionManagement = () => {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
-  const [music, setMusic] = React.useState([])
+  const [region, setRegion] = React.useState([])
   const [pageCount, setPageCount] = React.useState(1)
   const [isLoading, setIsLoading] = React.useState(true)
   const [totalPages, setTotalPages] = React.useState(0)
-  const { genres, getGenres } = useContext(GenreContext)
-  const { regions, getRegions } = useContext(RegionContext)
   const fetchData = async () => {
-    await AxiosInterceptors.get(urlConfig.music.getAllMusic + `?limit=10&page=${pageCount}`)
+    await AxiosInterceptors.get(urlConfig.regions.getAllRegions + `?limit=10&page=${pageCount}`)
       .then((res) => {
         if (res && res.status === 200) {
-          if (res.data.pagination.songs) {
-            setMusic(res.data.pagination.songs)
+          if (res.data.pagination.regions) {
+            setRegion(res.data.pagination.regions)
             setTotalPages(res.data.pagination.totalPages)
             setIsLoading(false)
           }
@@ -32,10 +29,6 @@ const MusicManagement = () => {
       })
       .catch((err) => console.log(err))
   }
-  React.useEffect(() => {
-    getGenres()
-    getRegions()
-  }, [])
   React.useEffect(() => {
     setIsLoading(true)
     fetchData()
@@ -49,37 +42,12 @@ const MusicManagement = () => {
       }
     >
       <Helmet>
-        <title>{t('songManagement')}</title>
+        <title>{t('RegionManagement')}</title>
       </Helmet>
       {isLoading ? (
         <Loading />
-      ) : music.length > 0 ? (
-        <MusicTable
-          majorsOrder={music}
-          fetchData={fetchData}
-          pageCount={pageCount}
-          setPageCount={setPageCount}
-          genres={genres}
-          regions={regions}
-        />
       ) : (
-        <div style={{ width: '100%', textAlign: 'center' }}>
-          <Container maxWidth='md'>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center'
-              }}
-            >
-              <img alt='404' height={200} src={svg} />
-              <Typography variant='h3' color='text.secondary' fontWeight='500' sx={{ mt: 2 }}>
-                {t('noResults')}
-              </Typography>
-            </Box>
-          </Container>
-        </div>
+        <RegionTable majorsOrder={region} fetchData={fetchData} pageCount={pageCount} setPageCount={setPageCount} />
       )}
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Pagination
@@ -97,4 +65,4 @@ const MusicManagement = () => {
   )
 }
 
-export default MusicManagement
+export default RegionManagement

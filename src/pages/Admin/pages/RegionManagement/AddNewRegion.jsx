@@ -6,15 +6,15 @@ import urlConfig from '../../../../config/UrlConfig'
 import useSnackbar from '../../../../contexts/snackbar.context'
 import Snackbar from '../../../../common/components/SnackBar'
 import { useTranslation } from 'react-i18next'
-const AddNewGenre = ({ open, handleClose, fetchData }) => {
+const AddNewRegion = ({ open, handleClose, fetchData }) => {
   const { t } = useTranslation()
   const { snack, setSnack } = useSnackbar()
-  const [newGenre, setNewGenre] = useState({
+  const [newRegion, setNewRegion] = useState({
     name: '',
     description: ''
   })
   const handleAddNew = async () => {
-    if (newGenre.name === '' || newGenre.description === '') {
+    if (newRegion.name === '' || newRegion.description === '') {
       setSnack({
         ...snack,
         open: true,
@@ -23,13 +23,13 @@ const AddNewGenre = ({ open, handleClose, fetchData }) => {
       })
       return
     }
-    await AxiosInterceptors.post(urlConfig.genres.createGenre, newGenre)
+    await AxiosInterceptors.post(urlConfig.regions.createRegion, newRegion)
       .then((res) => {
         fetchData()
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorSuccess'),
+          message: t('addRegionSuccess'),
           type: 'success'
         })
       })
@@ -37,7 +37,7 @@ const AddNewGenre = ({ open, handleClose, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorFail'),
+          message: t('addRegionFail'),
           type: 'error'
         })
       )
@@ -47,7 +47,7 @@ const AddNewGenre = ({ open, handleClose, fetchData }) => {
       <Snackbar />
       <RootModal
         variant='Create'
-        title={t('newGenre')}
+        title={t('newRegion')}
         open={open}
         handleClose={handleClose}
         handleOk={() => {
@@ -63,8 +63,8 @@ const AddNewGenre = ({ open, handleClose, fetchData }) => {
             variant='outlined'
             fullWidth
             onChange={(e) =>
-              setNewGenre({
-                ...newGenre,
+              setNewRegion({
+                ...newRegion,
                 name: e.target.value
               })
             }
@@ -75,8 +75,8 @@ const AddNewGenre = ({ open, handleClose, fetchData }) => {
             variant='outlined'
             fullWidth
             onChange={(e) =>
-              setNewGenre({
-                ...newGenre,
+              setNewRegion({
+                ...newRegion,
                 description: e.target.value
               })
             }
@@ -87,4 +87,4 @@ const AddNewGenre = ({ open, handleClose, fetchData }) => {
   )
 }
 
-export default AddNewGenre
+export default AddNewRegion

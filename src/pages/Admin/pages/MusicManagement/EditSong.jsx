@@ -5,10 +5,10 @@ import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import { GenreContext } from '../../../../contexts/genre.context'
 import { useTranslation } from 'react-i18next'
+import { RegionContext } from '../../../../contexts/region.context'
 
-const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack }) => {
+const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, regions }) => {
   const { t } = useTranslation()
-  const { genres, getGenres } = useContext(GenreContext)
   const [newSong, setNewSong] = useState({})
   const handleUpdate = async () => {
     if (newSong.title === '' || newSong.year === '' || newSong.photo === '' || newSong.genre === '') {
@@ -25,6 +25,7 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack }) => {
       year: newSong.year,
       duration: newSong.duration,
       genre: newSong.genre,
+      region: newSong.region,
       artist: newSong.artist
     })
       .then((res) => {
@@ -55,7 +56,6 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack }) => {
       })
   }
   useEffect(() => {
-    getGenres()
     fetchMusic()
   }, [id])
   return (
@@ -143,15 +143,29 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack }) => {
               </TextField>
               <TextField
                 id='outlined-select-currency'
-                label='Artist'
+                select
+                label='Region'
                 required
-                value={newSong?.artist?.display_name}
+                value={newSong.region}
                 sx={{
                   width: '50%'
                 }}
-                disabled
-              ></TextField>
+                onChange={(e) => setNewSong({ ...newSong, region: e.target.value })}
+              >
+                {regions?.map((option) => (
+                  <MenuItem key={option._id} value={option._id} selected={option._id === newSong.region}>
+                    {option.name}
+                  </MenuItem>
+                ))}
+              </TextField>
             </Stack>
+            <TextField
+              id='outlined-select-currency'
+              label='Artist'
+              required
+              value={newSong?.artist?.display_name}
+              disabled
+            ></TextField>
           </Stack>
         </RootModal>
       )}

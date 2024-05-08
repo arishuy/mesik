@@ -5,12 +5,12 @@ import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import useSnackbar from '../../../../contexts/snackbar.context'
 import { useTranslation } from 'react-i18next'
-const EditGenre = ({ open, handleClose, id, fetchData }) => {
+const EditRegion = ({ open, handleClose, id, fetchData }) => {
   const { t } = useTranslation()
   const { snack, setSnack } = useSnackbar()
-  const [genre, setGenre] = useState({})
+  const [region, setRegion] = useState({})
   const handleEdit = async () => {
-    if (genre.name === '' || genre.description === '') {
+    if (region.title === '' || region.description === '' || region.photo === '') {
       setSnack({
         ...snack,
         open: true,
@@ -19,13 +19,13 @@ const EditGenre = ({ open, handleClose, id, fetchData }) => {
       })
       return
     }
-    await AxiosInterceptors.put(urlConfig.genres.updateGenre + `/${id}`, genre)
+    await AxiosInterceptors.put(urlConfig.regions.updateRegion + `/${id}`, region)
       .then((res) => {
         fetchData()
         setSnack({
           ...snack,
           open: true,
-          message: t('updateGenreSuccess'),
+          message: t('updateRegionSuccess'),
           type: 'success'
         })
       })
@@ -33,35 +33,35 @@ const EditGenre = ({ open, handleClose, id, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('updateGenreFail'),
+          message: t('updateRegionFail'),
           type: 'error'
         })
       )
   }
 
-  const fetchGenre = async () => {
-    await AxiosInterceptors.get(urlConfig.genres.getGenreById + `/${id}`)
+  const fetchRegion = async () => {
+    await AxiosInterceptors.get(urlConfig.regions.getRegionById + `/${id}`)
       .then((res) => {
-        setGenre(res.data.genre)
+        setRegion(res.data.region)
       })
       .catch((err) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('getGenreFail'),
+          message: t('getRegionFail'),
           type: 'error'
         })
       })
   }
   useEffect(() => {
-    fetchGenre()
+    fetchRegion()
   }, [id])
   return (
     <>
-      {genre && genre.name && (
+      {region && region.name && (
         <RootModal
           variant='Create'
-          title={t('genre')}
+          title={t('region')}
           open={open}
           handleClose={handleClose}
           handleOk={() => {
@@ -76,10 +76,10 @@ const EditGenre = ({ open, handleClose, id, fetchData }) => {
               label='Name'
               variant='outlined'
               fullWidth
-              value={genre.name}
+              value={region.name}
               onChange={(e) =>
-                setGenre({
-                  ...genre,
+                setRegion({
+                  ...region,
                   name: e.target.value
                 })
               }
@@ -89,10 +89,10 @@ const EditGenre = ({ open, handleClose, id, fetchData }) => {
               label='Description'
               variant='outlined'
               fullWidth
-              value={genre.description}
+              value={region.description}
               onChange={(e) =>
-                setGenre({
-                  ...genre,
+                setRegion({
+                  ...region,
                   description: e.target.value
                 })
               }
@@ -104,4 +104,4 @@ const EditGenre = ({ open, handleClose, id, fetchData }) => {
   )
 }
 
-export default EditGenre
+export default EditRegion

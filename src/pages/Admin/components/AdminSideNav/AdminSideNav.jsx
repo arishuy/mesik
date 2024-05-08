@@ -118,6 +118,9 @@ export default function AdminSideNav() {
             <MenuItem icon={<ArtTrackOutlinedIcon />} component={<Link to={path.adminPlaylist} style={styleLink} />}>
               Playlist
             </MenuItem>
+            <MenuItem icon={<ArtTrackOutlinedIcon />} component={<Link to={path.adminRegion} style={styleLink} />}>
+              Region
+            </MenuItem>
           </SubMenu>
           <MenuItem
             icon={<MenuOutlinedIcon />}
