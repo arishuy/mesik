@@ -55,6 +55,15 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
       })
       return
     }
+    if (newSong.release_date > dayjs()) {
+      setSnack({
+        ...snack,
+        open: true,
+        message: 'Ngày phát hành không được lớn hơn ngày hiện tại',
+        type: 'error'
+      })
+      return
+    }
     await AxiosInterceptors.post(
       urlConfig.music.uploadMusicByArtist,
       {

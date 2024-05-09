@@ -12,11 +12,20 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
   const { t } = useTranslation()
   const [newSong, setNewSong] = useState({})
   const handleUpdate = async () => {
-    if (newSong.title === '' || newSong.year === '' || newSong.photo === '' || newSong.genre === '') {
+    if (newSong.title === '' || newSong.release_date === '' || newSong.photo === '' || newSong.genre === '') {
       setSnack({
         ...snack,
         open: true,
         message: t('pleaseFillOutAllFields'),
+        type: 'error'
+      })
+      return
+    }
+    if (newSong.release_date > dayjs()) {
+      setSnack({
+        ...snack,
+        open: true,
+        message: 'Ngày phát hành không được lớn hơn ngày hiện tại',
         type: 'error'
       })
       return
