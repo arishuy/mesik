@@ -15,6 +15,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { GenreProvider } from './contexts/genre.context'
 import { RegionProvider } from './contexts/region.context'
+import { ChatbotProvider } from './contexts/chatbot.context'
 
 const App = () => {
   const routeElements = useRouteElements()
@@ -28,19 +29,21 @@ const App = () => {
   return (
     <HelmetProvider>
       <ErrorBoundary>
-        <MusicPlayerProvider>
-          <RegionProvider>
-            <GenreProvider>
-              <CookiesProvider>
-                <SnackbarContextProvider>
-                  <ProSidebarProvider>
-                    <ThemeProvider>{routeElements}</ThemeProvider>
-                  </ProSidebarProvider>
-                </SnackbarContextProvider>
-              </CookiesProvider>
-            </GenreProvider>
-          </RegionProvider>
-        </MusicPlayerProvider>
+        <ChatbotProvider>
+          <MusicPlayerProvider>
+            <RegionProvider>
+              <GenreProvider>
+                <CookiesProvider>
+                  <SnackbarContextProvider>
+                    <ProSidebarProvider>
+                      <ThemeProvider>{routeElements}</ThemeProvider>
+                    </ProSidebarProvider>
+                  </SnackbarContextProvider>
+                </CookiesProvider>
+              </GenreProvider>
+            </RegionProvider>
+          </MusicPlayerProvider>
+        </ChatbotProvider>
       </ErrorBoundary>
     </HelmetProvider>
   )

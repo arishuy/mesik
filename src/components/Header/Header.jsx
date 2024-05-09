@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Fab, Stack, Tooltip } from '@mui/material'
+import { Avatar, Box, Fab, Stack, Tooltip } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import HeaderUserbox from './UserBox'
 // icon
@@ -9,8 +9,10 @@ import useResponsive from '../../hooks/useResponsive'
 import UploadMusic from './UploadMusic'
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import SearchBar from '../../common/components/SearchBox'
+import { ChatbotContext } from '../../contexts/chatbot.context'
 
 const Header = () => {
+  const { openChatbot, setOpenChatbot } = React.useContext(ChatbotContext)
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -28,7 +30,19 @@ const Header = () => {
           margin: '0px 20px'
         }}
       >
-        <SearchBar />
+        <Stack direction='row' spacing={2}>
+          <SearchBar />
+          <Tooltip title='Mesik Bot' arrow>
+            <Avatar
+              alt='logo'
+              src='https://th.bing.com/th/id/OIG1.4gYx47L7n1GpDyVqrk3m?w=1024&h=1024&rs=1&pid=ImgDetMain'
+              sx={{ width: 50, height: 50 }}
+              onClick={() => {
+                setOpenChatbot(!openChatbot)
+              }}
+            />
+          </Tooltip>
+        </Stack>
         <div>
           <Stack direction='row' spacing={isMobile ? 0 : 2} sx={{ padding: '10px' }}>
             <Box sx={isMobile ? {} : { '& > :not(style)': { m: 1 } }}>

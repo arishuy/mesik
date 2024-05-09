@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import { Box } from '@mui/material'
 import SideNav from '../../components/SideNav'
 import MusicPlayer from '../../components/MusicPlayer'
+import ChatBot from '../../components/ChatBot'
 function HomeLayoutInner({ children }) {
   const param = useLocation()
   const { isAuthenticated } = useContext(AppContext)
@@ -49,6 +50,7 @@ function HomeLayoutInner({ children }) {
       >
         <MusicPlayer />
       </Box>
+      <ChatBot />
     </div>
   )
 }
