@@ -14,6 +14,9 @@ import moment from 'moment'
 import Empty from '../../common/components/Empty'
 import Loading from '../../common/components/Loading/Loading'
 import { Helmet } from 'react-helmet-async'
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
+import EditPlaylist from './EditPlaylist'
+import Snackbar from '../../common/components/SnackBar'
 
 const MyPlaylist = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -22,8 +25,10 @@ const MyPlaylist = () => {
   const [playlists, setPlaylists] = useState([])
   const [openDelete, setOpenDelete] = useState(false)
   const [openAdd, setOpenAdd] = useState(false)
+  const [openEdit, setOpenEdit] = useState(false)
   const [id, setId] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [item, setItem] = useState({})
 
   const fetchData = async () => {
     await AxiosInterceptors.get(urlConfig.playlists.getAllPlaylistsByUser)
@@ -55,7 +60,11 @@ const MyPlaylist = () => {
       <Helmet>
         <title>Playlist</title>
       </Helmet>
+      <Snackbar />
       {openAdd && <AddNewPlaylist open={openAdd} handleClose={() => setOpenAdd(false)} fetchData={fetchData} />}
+      {openEdit && (
+        <EditPlaylist open={openEdit} handleClose={() => setOpenEdit(false)} fetchData={fetchData} item={item} />
+      )}
       {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} fetchData={fetchData} id={id} />}
       <Box sx={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant='h4'>Playlist của tôi</Typography>
@@ -88,6 +97,15 @@ const MyPlaylist = () => {
                   </IconButton>
                   <IconButton onClick={() => navigation(`/playlist/${playlist._id}`)} color='primary'>
                     <InfoOutlinedIcon />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => {
+                      setItem(playlist)
+                      setOpenEdit(true)
+                    }}
+                    color='warning'
+                  >
+                    <EditOutlinedIcon />
                   </IconButton>
                   <IconButton
                     onClick={() => {

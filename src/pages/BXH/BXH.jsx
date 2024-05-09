@@ -19,6 +19,7 @@ import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded'
 import SwitchAccessShortcutRoundedIcon from '@mui/icons-material/SwitchAccessShortcutRounded'
 import Loading from '../../common/components/Loading/Loading'
 import { Helmet } from 'react-helmet-async'
+import convertToMinutes from '../../common/utils/convertToMinutes'
 const BXH = () => {
   const { playSong } = useMusicPlayer()
   const [isLoading, setIsLoading] = useState(true)
@@ -30,11 +31,6 @@ const BXH = () => {
       rankChange: 0
     }
   ])
-  const convertToMinutes = (duration) => {
-    let minutes = Math.floor(duration / 60)
-    let seconds = Math.floor(duration - minutes * 60)
-    return `${minutes}:${seconds}`
-  }
 
   const fetchData = async () => {
     await AxiosInterceptors.get(urlConfig.rank.getDailyRank)

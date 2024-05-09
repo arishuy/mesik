@@ -18,6 +18,7 @@ const HomePage = lazy(() => import('./pages/HomePage'))
 const DetailArtist = lazy(() => import('./pages/DetailArtist'))
 const DetailAlbum = lazy(() => import('./pages/DetailAlbum'))
 const DetailPlaylist = lazy(() => import('./pages/DetailPlaylist'))
+const ArtistSongs = lazy(() => import('./pages/ArtistSongs'))
 const MyPlaylist = lazy(() => import('./pages/MyPlaylist'))
 const BXH = lazy(() => import('./pages/BXH'))
 const MyAlbum = lazy(() => import('./pages/MyAlbum'))
@@ -334,6 +335,14 @@ export default function useRouteElements() {
           element: (
             <Suspense>
               <BXH />
+            </Suspense>
+          )
+        },
+        {
+          path: path.artistSongs,
+          element: (
+            <Suspense>
+              <ArtistSongs />
             </Suspense>
           )
         },

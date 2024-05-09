@@ -5,14 +5,12 @@ import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import useSnackbar from '../../contexts/snackbar.context'
 import { useTranslation } from 'react-i18next'
-const AddNewPlaylist = ({ open, handleClose, fetchData }) => {
+const EditPlaylist = ({ open, handleClose, fetchData, item }) => {
   const { t } = useTranslation()
   const { snack, setSnack } = useSnackbar()
-  const [newPlaylist, setNewPlaylist] = useState({
-    title: ''
-  })
+  const [playlist, setPlaylist] = useState(item)
   const handleAddNew = async () => {
-    if (newPlaylist.title === '') {
+    if (playlist.title === '') {
       setSnack({
         ...snack,
         open: true,
@@ -21,21 +19,24 @@ const AddNewPlaylist = ({ open, handleClose, fetchData }) => {
       })
       return
     }
-    await AxiosInterceptors.post(urlConfig.playlists.createPlaylist, newPlaylist)
+    await AxiosInterceptors.put(urlConfig.playlists.updatePlaylist + `/${playlist._id}`, {
+      title: playlist.title
+    })
       .then((res) => {
         fetchData()
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewPlaylistSuccess'),
+          message: t('updatePlaylistSuccess'),
           type: 'success'
         })
+        handleClose()
       })
       .catch((err) =>
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewPlaylistFail'),
+          message: t('updatePlaylistFail'),
           type: 'error'
         })
       )
@@ -49,7 +50,6 @@ const AddNewPlaylist = ({ open, handleClose, fetchData }) => {
         handleClose={handleClose}
         handleOk={() => {
           handleAddNew()
-          handleClose()
         }}
         closeOnly={false}
       >
@@ -58,11 +58,12 @@ const AddNewPlaylist = ({ open, handleClose, fetchData }) => {
             id='outlined-basic'
             label='Title'
             variant='outlined'
+            value={playlist.title}
             placeholder='Nhập tên playlist'
             fullWidth
             onChange={(e) =>
-              setNewPlaylist({
-                ...newPlaylist,
+              setPlaylist({
+                ...playlist,
                 title: e.target.value
               })
             }
@@ -73,4 +74,4 @@ const AddNewPlaylist = ({ open, handleClose, fetchData }) => {
   )
 }
 
-export default AddNewPlaylist
+export default EditPlaylist

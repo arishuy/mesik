@@ -322,6 +322,11 @@
   "rechargeAmount": "Recharge amount must be minimum 50.000 and maximum 5.000.000!",
   "uploadDocumentFail": "Please upload document!",
 
+  "addNewPlaylistSuccess": "Add new playlist successfully",
+  "addNewPlaylistFail": "Add new playlist failed",
   "deleteAlbumSuccess": "Delete album successfully",
-  "deletePlaylistSuccess": "Delete playlist successfully"
+  "deletePlaylistSuccess": "Delete playlist successfully",
+  "updatePlaylistSuccess": "Update playlist successfully",
+  "updatePlaylistFail": "Update playlist failed",
+  "updateAlbumSuccess": "Update album successfully"
 }

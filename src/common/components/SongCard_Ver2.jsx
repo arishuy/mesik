@@ -5,7 +5,6 @@ import RootModal from '../../components/Modal/RootModal'
 import AxiosInterceptors from '../utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import useSnackbar from '../../contexts/snackbar.context'
-import Snackbar from '../components/SnackBar'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
@@ -93,7 +92,6 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
   }
   return (
     <>
-      <Snackbar />
       <RootModal
         variant='Create'
         title='Thêm vào playlist'

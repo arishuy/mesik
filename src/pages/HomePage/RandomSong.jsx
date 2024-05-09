@@ -4,7 +4,6 @@ import Axios from 'axios'
 import urlConfig from '../../config/UrlConfig'
 import SongCard from '../../common/components/SongCard'
 import useSnackbar from '../../contexts/snackbar.context'
-import Snackbar from '../../common/components/SnackBar'
 
 const RandomSong = ({ allPlaylists }) => {
   const [songs, setSongs] = useState([])
@@ -22,7 +21,6 @@ const RandomSong = ({ allPlaylists }) => {
   }, [])
   return (
     <>
-      <Snackbar />
       <Typography variant='h4' py={3}>
         Trải nghiệm ngẫu nhiên
       </Typography>

@@ -34,8 +34,16 @@ function HomeLayoutInner({ children }) {
           }}
         >
           {!isAuthenticated ? <HomeHeader /> : <Header />}
-          {children}
-          <Outlet />
+          <Box
+            sx={{
+              width: '100%',
+              height: 'calc(93vh - 80px)',
+              overflowY: 'auto'
+            }}
+          >
+            {children}
+            <Outlet />
+          </Box>
         </Box>
       </Box>
       <Box

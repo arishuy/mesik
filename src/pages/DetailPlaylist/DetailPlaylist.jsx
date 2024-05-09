@@ -26,6 +26,7 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined'
 import Empty from '../../common/components/Empty'
 import Loading from '../../common/components/Loading/Loading'
+import convertToMinutes from '../../common/utils/convertToMinutes'
 
 const DetailPlaylist = () => {
   const id = useParams()
@@ -58,11 +59,7 @@ const DetailPlaylist = () => {
         console.log(err)
       })
   }
-  const convertToMinutes = (duration) => {
-    let minutes = Math.floor(duration / 60)
-    let seconds = Math.floor(duration - minutes * 60)
-    return `${minutes}:${seconds}`
-  }
+
   const addSongToPlaylist = async (song) => {
     await AxiosInterceptors.post(urlConfig.playlists.addSongToPlaylist, {
       playlist_id: id.nameId,
@@ -242,13 +239,20 @@ const DetailPlaylist = () => {
               </Table>
             </TableContainer>
           )}
-          <Stack direction='column' py={2}>
-            <Typography variant='h3' color='text.primary'>
-              Bài Hát Gợi Ý
+          <Stack direction='row' justifyContent='space-between' alignItems='center' py={2}>
+            <Typography variant='h4' color='text.primary'>
+              Bài Hát Ngẫu Nhiên
             </Typography>
-            <Typography variant='h5' color='text.primary' gutterBottom>
-              Dựa trên lịch sử nghe gần đây
-            </Typography>
+            <Button
+              variant='outlined'
+              color='primary'
+              sx={{
+                borderRadius: '20px'
+              }}
+              onClick={fetchSuggestedSongs}
+            >
+              Làm mới
+            </Button>
           </Stack>
           <TableContainer>
             <Table size='small'>

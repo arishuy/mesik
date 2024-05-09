@@ -18,16 +18,12 @@ import {
   IconButton,
   Tooltip
 } from '@mui/material'
+import convertToMinutes from '../../common/utils/convertToMinutes'
 const HistoryListen = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [historyListen, setHistoryListen] = useState([])
   const { playSong } = useMusicPlayer()
 
-  const convertToMinutes = (duration) => {
-    let minutes = Math.floor(duration / 60)
-    let seconds = Math.floor(duration - minutes * 60)
-    return `${minutes}:${seconds}`
-  }
   const fetchHistoryListen = async () => {
     await AxiosInterceptors.get(urlConfig.user.getHistoryListen)
       .then((res) => {

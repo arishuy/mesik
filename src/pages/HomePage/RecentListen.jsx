@@ -5,7 +5,6 @@ import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import SongCard from '../../common/components/SongCard'
 import Empty from '../../common/components/Empty'
 import useSnackbar from '../../contexts/snackbar.context'
-import Snackbar from '../../common/components/SnackBar'
 
 const RecentListen = ({ allPlaylists }) => {
   const [songs, setSongs] = useState([])
@@ -23,7 +22,6 @@ const RecentListen = ({ allPlaylists }) => {
   }, [])
   return (
     <>
-      <Snackbar />
       <Typography variant='h4' py={3}>
         Nghe gần đây
       </Typography>

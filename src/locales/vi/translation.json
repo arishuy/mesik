@@ -322,6 +322,10 @@
   "rechargeAmount": "Số tiền cần nạp tối thiểu 50.000 và tối đa 5.000.000!",
   "uploadDocumentFail": "Vui lòng tải lên tài liệu!",
 
+  "addNewPlaylistSuccess": "Thêm mới playlist thành công",
+  "addNewPlaylistFail": "Thêm mới playlist thất bại",
   "deleteAlbumSuccess": "Xóa album thành công",
-  "deletePlaylistSuccess": "Xóa playlist thành công"
+  "deletePlaylistSuccess": "Xóa playlist thành công",
+  "updatePlaylistSuccess": "Cập nhật playlist thành công",
+  "updatePlaylistFail": "Cập nhật playlist thất bại"
 }

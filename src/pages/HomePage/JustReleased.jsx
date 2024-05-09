@@ -5,7 +5,6 @@ import urlConfig from '../../config/UrlConfig'
 import { useMusicPlayer } from '../../contexts/music.context'
 import SongCard from '../../common/components/SongCard'
 import useSnackbar from '../../contexts/snackbar.context'
-import Snackbar from '../../common/components/SnackBar'
 const JustReleased = ({ allPlaylists }) => {
   const [songs, setSongs] = useState([])
   const { snack, setSnack } = useSnackbar()
@@ -23,7 +22,6 @@ const JustReleased = ({ allPlaylists }) => {
   }, [])
   return (
     <>
-      <Snackbar />
       <Typography variant='h4' py={3}>
         Vừa phát hành
       </Typography>

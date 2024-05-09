@@ -125,7 +125,8 @@ const urlConfig = {
     deletePlaylist: `${process.env.REACT_APP_API_ENDPOINT}/playlists`,
     getAllPlaylistsByUser: `${process.env.REACT_APP_API_ENDPOINT}/playlists/current`,
     addSongToPlaylist: `${process.env.REACT_APP_API_ENDPOINT}/playlists/add-song`,
-    removeSongFromPlaylist: `${process.env.REACT_APP_API_ENDPOINT}/playlists/remove-song`
+    removeSongFromPlaylist: `${process.env.REACT_APP_API_ENDPOINT}/playlists/remove-song`,
+    updatePlaylist: `${process.env.REACT_APP_API_ENDPOINT}/playlists`
   },
   albums: {
     createAlbum: `${process.env.REACT_APP_API_ENDPOINT}/albums`,

@@ -3,21 +3,7 @@ import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import Loading from '../../common/components/Loading/Loading'
 import Empty from '../../common/components/Empty'
-import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-  Stack,
-  Avatar,
-  IconButton,
-  Tooltip,
-  Grid
-} from '@mui/material'
+import { Typography, Stack, Avatar, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 const FollowingArtist = () => {
@@ -25,11 +11,6 @@ const FollowingArtist = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [following, setFollowing] = useState([])
 
-  const convertToMinutes = (duration) => {
-    let minutes = Math.floor(duration / 60)
-    let seconds = Math.floor(duration - minutes * 60)
-    return `${minutes}:${seconds}`
-  }
   const fetchFollowing = async () => {
     await AxiosInterceptors.get(urlConfig.user.getFollowArtist)
       .then((res) => {

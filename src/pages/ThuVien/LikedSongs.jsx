@@ -19,6 +19,7 @@ import {
 import Loading from '../../common/components/Loading/Loading'
 import Empty from '../../common/components/Empty'
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded'
+import convertToMinutes from '../../common/utils/convertToMinutes'
 
 const LikedSongs = () => {
   const [likedSongs, setLikedSongs] = useState([])
@@ -26,11 +27,6 @@ const LikedSongs = () => {
   const { playSong } = useMusicPlayer()
   const user = JSON.parse(localStorage.getItem('profile'))
 
-  const convertToMinutes = (duration) => {
-    let minutes = Math.floor(duration / 60)
-    let seconds = Math.floor(duration - minutes * 60)
-    return `${minutes}:${seconds}`
-  }
   const fetchLikedSongs = async () => {
     await AxiosInterceptors.get(urlConfig.user.getLikedSongs)
       .then((res) => {
@@ -92,9 +88,9 @@ const LikedSongs = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {likedSongs.map((majorsOrder) => {
+              {likedSongs.map((song) => {
                 return (
-                  <TableRow hover key={majorsOrder._id}>
+                  <TableRow hover key={song._id}>
                     <TableCell
                       sx={{
                         width: '500px'
@@ -102,9 +98,9 @@ const LikedSongs = () => {
                     >
                       <Stack direction='row' spacing={2} alignItems='center'>
                         <Avatar
-                          src={majorsOrder.photo_url}
+                          src={song.photo_url}
                           onClick={() => {
-                            playSong([majorsOrder])
+                            playSong([song])
                           }}
                           sx={{
                             width: 50,
@@ -118,22 +114,22 @@ const LikedSongs = () => {
                         />
                         <Stack direction='column' spacing={0}>
                           <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
-                            {majorsOrder.title}
+                            {song.title}
                           </Typography>
                           <Typography variant='subtitle1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                            {majorsOrder.artist.display_name}
+                            {song.artist.display_name}
                           </Typography>
                         </Stack>
                       </Stack>
                     </TableCell>
                     <TableCell align='right'>
                       <Typography variant='body1' color='text.primary' noWrap>
-                        {convertToMinutes(majorsOrder.duration)}
+                        {convertToMinutes(song.duration)}
                       </Typography>
                     </TableCell>
                     <TableCell align='right'>
                       <Tooltip title='Xóa khỏi danh sách yêu thích' arrow>
-                        <IconButton onClick={() => removeLikedSong(majorsOrder._id)} color='error'>
+                        <IconButton onClick={() => removeLikedSong(song._id)} color='error'>
                           <DeleteOutlineRoundedIcon />
                         </IconButton>
                       </Tooltip>

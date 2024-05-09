@@ -7,6 +7,7 @@ import RecentListen from './RecentListen'
 import { Helmet } from 'react-helmet-async'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
+import Snackbar from '../../common/components/SnackBar'
 import { AppContext } from '../../contexts/app.context'
 const HomePage = () => {
   const { isAuthenticated } = useContext(AppContext)
@@ -31,6 +32,7 @@ const HomePage = () => {
         padding: '20px 100px'
       }}
     >
+      <Snackbar />
       <Helmet>
         <title>Trang Chủ</title>
       </Helmet>

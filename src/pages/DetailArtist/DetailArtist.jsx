@@ -1,6 +1,6 @@
 import { Avatar, Button, Card, Grid, IconButton, Stack, Typography } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useMusicPlayer } from '../../contexts/music.context'
 import moment from 'moment'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
@@ -15,6 +15,8 @@ import { LoadingButton } from '@mui/lab'
 import GroupAddRoundedIcon from '@mui/icons-material/GroupAddRounded'
 import GroupRemoveRoundedIcon from '@mui/icons-material/GroupRemoveRounded'
 import { AppContext } from '../../contexts/app.context'
+import NavigateNextIcon from '@mui/icons-material/NavigateNext'
+import Snackbar from '../../common/components/SnackBar'
 
 const DetailArtist = () => {
   const id = useParams()
@@ -78,6 +80,7 @@ const DetailArtist = () => {
       <Helmet>
         <title>Thông Tin Nghệ Sĩ</title>
       </Helmet>
+      <Snackbar />
       <Card
         sx={{
           padding: '20px',
@@ -142,9 +145,23 @@ const DetailArtist = () => {
           <Avatar alt='Remy Sharp' src={artist.user?.photo_url} sx={{ width: 300, height: 300 }} />
         </Stack>
       </Card>
-      <Typography variant='h4' py={3}>
-        Bài hát nổi bật
-      </Typography>
+      <Stack direction='row' justifyContent='space-between' alignItems='center'>
+        <Typography variant='h4' py={3}>
+          Bài hát nổi bật
+        </Typography>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Link
+            to={`/artist/${id.nameId}/songs`}
+            style={{
+              textDecoration: 'none',
+              color: 'black'
+            }}
+          >
+            Tất cả
+          </Link>
+          <NavigateNextIcon />
+        </div>
+      </Stack>
       <Grid container spacing={2}>
         {artist.songs?.length === 0 && <Empty message={'Không có bài hát nào'} />}
         {artist.songs?.map((song) => (

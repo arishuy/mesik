@@ -19,6 +19,7 @@ import { useParams } from 'react-router-dom'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import { useMusicPlayer } from '../../contexts/music.context'
 import Loading from '../../common/components/Loading/Loading'
+import convertToMinutes from '../../common/utils/convertToMinutes'
 
 const DetailAlbum = () => {
   const id = useParams()
@@ -39,18 +40,13 @@ const DetailAlbum = () => {
         console.log(err)
       })
   }
-  const convertToMinutes = (duration) => {
-    let minutes = Math.floor(duration / 60)
-    let seconds = Math.floor(duration - minutes * 60)
-    return `${minutes}:${seconds}`
-  }
   useEffect(() => {
     fetchData()
   }, [])
 
   return isLoading ? (
     <Loading />
-  ) :  (
+  ) : (
     <div
       style={{
         padding: '20px 100px'

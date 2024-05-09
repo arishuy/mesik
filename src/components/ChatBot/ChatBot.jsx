@@ -297,7 +297,8 @@ export default function ChatBot() {
           zIndex: 9999,
           height: '450px',
           width: '350px',
-          backgroundColor: 'white'
+          backgroundColor: '#f3f7fc',
+          boxShadow: 5
         }}
       >
         <CardHeader
