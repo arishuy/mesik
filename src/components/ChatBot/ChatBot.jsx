@@ -21,206 +21,207 @@ import urlConfig from '../../config/UrlConfig'
 export default function ChatBot() {
   const { openChatbot, setOpenChatbot } = React.useContext(ChatbotContext)
   const [threadId, setThreadId] = React.useState('')
+  const chatContentRef = React.useRef(null)
   const mockData = [
     {
       id: 1,
-      message: 'Nhà ngươi là ai?'
+      message: 'Làm quá nó ô dề.'
     },
     {
       id: 2,
-      message: 'Hông biết, hỏi lại đi :D'
+      message: 'U là trời.'
     },
     {
       id: 3,
-      message: 'Hôm nay bạn khỏe không?'
+      message: 'Còn cái nịt.'
     },
     {
       id: 4,
-      message: 'Sao bạn lại tìm bài hát có lời thế này?'
+      message: 'Tấm chiếu mới.'
     },
     {
       id: 5,
-      message: 'Trời hôm nay nhiều mây quá, bạn thấy sao?'
+      message: 'Xu cà na.'
     },
     {
       id: 6,
-      message: 'Cái gì đó vừa rơi từ trên trời xuống đây!'
+      message: 'Mình không sinh ra để đi làm, bạn cũng thế!'
     },
     {
       id: 7,
-      message: 'Hôm nay là ngày gì vậy nhỉ?'
+      message: 'Game On Baby, Game On!'
     },
     {
       id: 8,
-      message: 'Bạn có tin vào ma quỷ không?'
+      message: 'Con trai bà bán bánh mì.'
     },
     {
       id: 9,
-      message: 'Sao mà nắng quá trời, tôi muốn làm gì đó vui vẻ!'
+      message: 'Kiwi kiwi.'
     },
     {
       id: 10,
-      message: 'Bạn có thích ăn bánh mì không?'
+      message: 'Gwenchana.'
     },
     {
       id: 11,
-      message: 'Ai đang truyền thông tin mạng nhanh nhất hôm nay?'
+      message: 'Kiếp nạn thứ 82.'
     },
     {
       id: 12,
-      message: 'Sao mà sáng nay tôi thức dậy sớm thế nhỉ?'
+      message: 'Mãi mận mãi keo.'
     },
     {
       id: 13,
-      message: 'Nghỉ hè này bạn có kế hoạch gì không?'
+      message: 'Slay.'
     },
     {
       id: 14,
-      message: 'Hôm nay trời có mưa không?'
+      message: 'Uwu.'
     },
     {
       id: 15,
-      message: 'Bạn thích đọc sách không?'
+      message: 'Mắc cỡ quá 2 ơi!'
     },
     {
       id: 16,
-      message: 'Sao mà hôm nay mọi người im lặng thế nhỉ?'
+      message: 'Hay ra dẻ quá à!'
     },
     {
       id: 17,
-      message: 'Bạn đã từng bay lượn trên mây chưa?'
+      message: 'Bật chế độ bay lên.'
     },
     {
       id: 18,
-      message: 'Làm thế nào để làm bạn cười đây?'
+      message: 'Làm cục cưng hong bé ơi.'
     },
     {
       id: 19,
-      message: 'Bạn có nhớ giấc mơ của mình không?'
+      message: 'Bé ơi từ từ.'
     },
     {
       id: 20,
-      message: 'Sao mà bạn thích trò chơi điện tử nhỉ?'
+      message: 'Mai đẹt ti ni.'
     },
     {
       id: 21,
-      message: 'Hôm nay bạn đã làm gì chưa?'
+      message: 'Bing Chilling.'
     },
     {
       id: 22,
-      message: 'Con mèo nhà bạn tên gì vậy?'
+      message: 'Hê sờ lô hơ sờ ly ly.'
     },
     {
       id: 23,
-      message: 'Tôi có thể gửi cho bạn một hình ảnh về gì đó không?'
+      message: 'Bất ngờ chưa bà già.'
     },
     {
       id: 24,
-      message: 'Bạn đã từng thấy ma chưa?'
+      message: 'Oải cả chưởng.'
     },
     {
       id: 25,
-      message: 'Sao mà cà phê hôm nay ngon thế nhỉ?'
+      message: 'Cưng vô lây.'
     },
     {
       id: 26,
-      message: 'Mưa rơi nhẹ nhàng, bạn có thích không?'
+      message: 'Pressing.'
     },
     {
       id: 27,
-      message: 'Hôm nay bạn sẽ làm gì vào buổi tối?'
+      message: 'Red flag.'
     },
     {
       id: 28,
-      message: 'Trời nóng quá, bạn muốn đi tắm biển không?'
+      message: 'Cà nhính, cà nhính.'
     },
     {
       id: 29,
-      message: 'Bạn thích ăn kem không?'
+      message: 'Hong bé ơi.'
     },
     {
       id: 30,
-      message: 'Bạn đã từng thấy UFO chưa?'
+      message: 'Ét o Ét (SOS).'
     },
     {
       id: 31,
-      message: 'Mùa hè này bạn muốn đi đâu chơi?'
+      message: 'Thử thách 6 ngày 6 đêm.'
     },
     {
       id: 32,
-      message: 'Có phải bạn thích chơi game không?'
+      message: '10 điểm.'
     },
     {
       id: 33,
-      message: 'Sao mà ngày hôm nay có vẻ đẹp quá nhỉ?'
+      message: 'Vì mình quá thích cậu rồi phải làm sao phải làm sao.'
     },
     {
       id: 34,
-      message: 'Bạn có thích hoa không?'
+      message: 'Cứu tôi trời ơi trời ơi cứu tôi.'
     },
     {
       id: 35,
-      message: 'Hôm nay là sinh nhật của ai vậy?'
+      message: 'Tôi năm nay 70 tuổi mà chưa gặp trường hợp nào như này.'
     },
     {
       id: 36,
-      message: 'Bạn có thích xem phim không?'
+      message: 'Nghèo cho sạch, rách cho sexy.'
     },
     {
       id: 37,
-      message: 'Sao mà bạn thích màu xanh lá cây vậy?'
+      message: 'Đúng nhận sai cãi.'
     },
     {
       id: 38,
-      message: 'Bạn đã từng nấu ăn chưa?'
+      message: 'Flex.'
     },
     {
       id: 39,
-      message: 'Mùa đông này bạn muốn có một chiếc ôm ấm không?'
+      message: 'Over hợp.'
     },
     {
       id: 40,
-      message: 'Bạn có thích thú cưng không?'
+      message: 'Dữ chưa?'
     },
     {
       id: 41,
-      message: 'Hôm nay trời se lạnh, bạn muốn uống trà không?'
+      message: 'Cíu bé.'
     },
     {
       id: 42,
-      message: 'Sao mà cái đồng hồ của bạn đẹp quá vậy nhỉ?'
+      message: 'Kiểm tra người.'
     },
     {
       id: 43,
-      message: 'Bạn có thích hát hò không?'
+      message: 'Anh cho em mượn cái kéo. Để em làm gì?... Cắt đôi nỗi sầu.'
     },
     {
       id: 44,
-      message: 'Bạn đã từng gặp phải tai nạn giao thông chưa?'
+      message: 'Ảnh chất lượng thấp, nhưng em thì chất lượng cao.'
     },
     {
       id: 45,
-      message: 'Sao mà hôm nay có vẻ buồn buồn nhỉ?'
+      message: 'Cắm sừng ai đừng cắm sừng em. Cơm sườn hay cơm tấm chứ anh đừng cơm sườn em.'
     },
     {
       id: 46,
-      message: 'Bạn đã từng bay lượn trên mặt nước chưa?'
+      message: 'Dịu dàng thì em không thiếu, nhưng chủ yếu là em không thích anh.'
     },
     {
       id: 47,
-      message: 'Bạn thích đi du lịch không?'
+      message: 'Biết ông Thương không?'
     },
     {
       id: 48,
-      message: 'Mùa xuân này bạn muốn làm gì?'
+      message: "You don't hợp with me."
     },
     {
       id: 49,
-      message: 'Bạn có thích trời mưa không?'
+      message: 'Lần đầu tiên trái thanh long có trong mỳ tôm…'
     },
     {
       id: 50,
-      message: 'Hôm nay là ngày quốc tế gì vậy?'
+      message: 'Tôi thất bại rồi mọi người ạ.'
     }
   ]
 
@@ -236,7 +237,6 @@ export default function ChatBot() {
     if (input === '') return
     setMessages([...messages, { message: input, sender: 'user' }])
     setInput('')
-    scrollToBottom()
     // Call API to get response from bot
     // await AxiosInterceptors.post(urlConfig.chatbot.chat, {
     //   threadId: threadId,
@@ -261,6 +261,7 @@ export default function ChatBot() {
       { message: input, sender: 'user' },
       { message: mockData[randomIndex].message, sender: 'bot' }
     ])
+    scrollToBottom()
   }
   const createThread = async () => {
     // Call API to create thread
@@ -279,7 +280,13 @@ export default function ChatBot() {
     const chatbot = document.getElementById('chatbot-content')
     chatbot.scrollTop = chatbot.scrollHeight
   }
-  console.log(threadId)
+
+  React.useEffect(() => {
+    // Scroll to bottom when messages change
+    if (chatContentRef.current) {
+      chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight
+    }
+  }, [messages])
   return (
     openChatbot && (
       <Card
@@ -318,6 +325,7 @@ export default function ChatBot() {
             overflowY: 'auto'
           }}
           id='chatbot-content'
+          ref={chatContentRef}
         >
           <Typography variant='subtitle2' color='text.secondary'>
             Tính năng đang được phát triển!
@@ -332,7 +340,7 @@ export default function ChatBot() {
               <Chip
                 sx={{
                   height: 'auto',
-                  width: '80%',
+                  width: 'fit-content',
                   '& .MuiChip-label': {
                     display: 'block',
                     whiteSpace: 'normal'
