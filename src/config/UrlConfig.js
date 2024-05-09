@@ -153,6 +153,10 @@ const urlConfig = {
     getAllWithdrawRequest: `${process.env.REACT_APP_API_ENDPOINT}/withdrawal-requests`,
     deleteWithdrawRequest: `${process.env.REACT_APP_API_ENDPOINT}/withdrawal-requests`,
     accepterWithdrawRequest: `${process.env.REACT_APP_API_ENDPOINT}/withdrawal-requests`
+  },
+  chatbot: {
+    createThread: `${process.env.REACT_APP_API_ENDPOINT}/chatbot/thread`,
+    chat: `${process.env.REACT_APP_API_ENDPOINT}/chatbot/message`
   }
 }
 
