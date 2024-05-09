@@ -119,7 +119,7 @@ const MusicTable = ({ majorsOrder, fetchData, genres, regions }) => {
             <TableHead>
               <TableRow>
                 <TableCell>Title</TableCell>
-                <TableCell>Year</TableCell>
+                <TableCell>Release Date</TableCell>
                 <TableCell>Duration</TableCell>
                 <TableCell>Nghệ sĩ</TableCell>
                 <TableCell align='right'>Time</TableCell>
@@ -144,8 +144,8 @@ const MusicTable = ({ majorsOrder, fetchData, genres, regions }) => {
                       </Stack>
                     </TableCell>
                     <TableCell>
-                      <Typography variant='body1' color='text.primary' gutterBottom noWrap>
-                        {majorsOrder.year}
+                      <Typography variant='body1' color='text.primary' fontWeight='bold' gutterBottom noWrap>
+                        {moment(majorsOrder.release_date).format('DD/MM/YYYY')}
                       </Typography>
                     </TableCell>
                     <TableCell>

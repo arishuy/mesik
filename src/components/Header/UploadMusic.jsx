@@ -12,6 +12,9 @@ import { useTranslation } from 'react-i18next'
 import { styled } from '@mui/material/styles'
 import { memo } from 'react'
 import { RegionContext } from '../../contexts/region.context'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import dayjs from 'dayjs'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -34,7 +37,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
   const { regions, getRegions } = useContext(RegionContext)
   const [newSong, setNewSong] = useState({
     title: '',
-    year: 2020,
+    release_date: dayjs(),
     duration: '',
     genre_id: '',
     region_id: '',
@@ -43,7 +46,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
     play_count: 0
   })
   const handleAddNew = async () => {
-    if (newSong.title === '' || newSong.desyearcription === '' || newSong.photo === '' || newSong.genre_id === '') {
+    if (newSong.title === '' || newSong.release_date === '' || newSong.photo === '' || newSong.genre_id === '') {
       setSnack({
         ...snack,
         open: true,
@@ -56,7 +59,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
       urlConfig.music.uploadMusicByArtist,
       {
         title: newSong.title,
-        year: newSong.year,
+        release_date: newSong.release_date,
         duration: newSong.duration,
         genre_id: newSong.genre_id,
         region_id: newSong.region_id,
@@ -106,9 +109,10 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
     return () => {
       setNewSong({
         title: '',
-        year: 2020,
+        release_date: dayjs(),
         duration: '',
         genre_id: '',
+        region_id: '',
         file: '',
         photo: '',
         play_count: 0
@@ -132,32 +136,33 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
           closeOnly={false}
         >
           <Stack spacing={2} direction='column' sx={{ width: '100%', my: 2 }}>
-            <TextField
-              id='outlined-basic'
-              label='Title'
-              variant='outlined'
-              fullWidth
-              onChange={(e) =>
-                setNewSong({
-                  ...newSong,
-                  title: e.target.value
-                })
-              }
-            />
             <Stack direction='row' spacing={3}>
               <TextField
                 id='outlined-basic'
-                label='Year'
+                label='Title'
                 variant='outlined'
                 fullWidth
-                type='number'
                 onChange={(e) =>
                   setNewSong({
                     ...newSong,
-                    year: e.target.value
+                    title: e.target.value
                   })
                 }
               />
+              <LocalizationProvider dateAdapter={AdapterDayjs} sx={{ width: '45%', m: 2 }}>
+                <DatePicker
+                  label='Release Date'
+                  value={dayjs(newSong.release_date)}
+                  onChange={(newValue) =>
+                    setNewSong({
+                      ...newSong,
+                      release_date: newValue
+                    })
+                  }
+                />
+              </LocalizationProvider>
+            </Stack>
+            <Stack direction='row' spacing={3}>
               <TextField
                 id='outlined-select-currency'
                 select

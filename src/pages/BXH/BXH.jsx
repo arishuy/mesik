@@ -86,8 +86,8 @@ const BXH = () => {
                         <>
                           <Stack direction='row' alignItems='center'>
                             <ArrowDropUpRoundedIcon style={{ color: 'green' }} />
-                            <Typography variant='body1' color='text.primary' noWrap>
-                              <span style={{ color: 'green' }}>{majorsOrder.rankChange}</span>
+                            <Typography variant='body1' color='green' noWrap fontWeight='bold'>
+                              {majorsOrder.rankChange}
                             </Typography>
                           </Stack>
                         </>
@@ -96,15 +96,15 @@ const BXH = () => {
                       ) : majorsOrder.rankChange === 'NEW' ? (
                         <Stack direction='row' alignItems='center'>
                           <SwitchAccessShortcutRoundedIcon style={{ color: 'blue', padding: '5px' }} />
-                          <Typography variant='subtile1' color='text.primary' fontWeight='bold' noWrap>
-                            <span style={{ color: 'red' }}>{majorsOrder.rankChange}</span>
+                          <Typography variant='subtile1' color='blue' fontWeight='bold' noWrap>
+                            {majorsOrder.rankChange}
                           </Typography>
                         </Stack>
                       ) : (
                         <Stack direction='row' alignItems='center'>
                           <ArrowDropDownRoundedIcon style={{ color: 'red' }} />
-                          <Typography variant='body1' color='text.primary' noWrap>
-                            <span style={{ color: 'red' }}>{majorsOrder.rankChange.toString().replace('-', '')}</span>
+                          <Typography variant='body1' color='red' noWrap fontWeight='bold'>
+                            {majorsOrder.rankChange.toString().replace('-', '')}
                           </Typography>
                         </Stack>
                       )}
@@ -132,7 +132,7 @@ const BXH = () => {
                           {majorsOrder.song.title}
                         </Typography>
                         <Typography variant='subtitle1' fontWeight='bold' color='text.primary' noWrap>
-                          {majorsOrder.song.artist?.user.first_name} {majorsOrder.song.artist?.user.last_name}
+                          {majorsOrder.song.artist?.display_name}
                         </Typography>
                       </Stack>
                     </Stack>

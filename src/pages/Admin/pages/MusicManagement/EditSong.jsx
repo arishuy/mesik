@@ -3,9 +3,10 @@ import RootModal from '../../../../components/Modal/RootModal'
 import { Stack, TextField, MenuItem, Button, Typography } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
-import { GenreContext } from '../../../../contexts/genre.context'
 import { useTranslation } from 'react-i18next'
-import { RegionContext } from '../../../../contexts/region.context'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import dayjs from 'dayjs'
 
 const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, regions }) => {
   const { t } = useTranslation()
@@ -22,7 +23,7 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
     }
     await AxiosInterceptors.put(urlConfig.music.updateMusic + `/${id}`, {
       title: newSong.title,
-      year: newSong.year,
+      release_date: newSong.release_date,
       duration: newSong.duration,
       genre: newSong.genre,
       region: newSong.region,
@@ -87,23 +88,18 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
               }
             />
             <Stack direction='row' spacing={3}>
-              <TextField
-                id='outlined-basic'
-                label='Year'
-                variant='outlined'
-                fullWidth
-                value={newSong.year}
-                type='number'
-                sx={{
-                  width: '50%'
-                }}
-                onChange={(e) =>
-                  setNewSong({
-                    ...newSong,
-                    year: e.target.value
-                  })
-                }
-              />{' '}
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label='Release Date'
+                  value={dayjs(newSong.release_date)}
+                  onChange={(newValue) =>
+                    setNewSong({
+                      ...newSong,
+                      release_date: newValue
+                    })
+                  }
+                />
+              </LocalizationProvider>
               <TextField
                 id='outlined-basic'
                 label='Duration'
