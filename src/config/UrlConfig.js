@@ -158,6 +158,10 @@ const urlConfig = {
   chatbot: {
     createThread: `${process.env.REACT_APP_API_ENDPOINT}/chatbot/thread`,
     chat: `${process.env.REACT_APP_API_ENDPOINT}/chatbot/message`
+  },
+  suggestedPlaylists: {
+    getSuggestedPlaylist: `${process.env.REACT_APP_API_ENDPOINT}/suggested-playlists`,
+    addToMyPlaylist: `${process.env.REACT_APP_API_ENDPOINT}/suggested-playlists`
   }
 }
 

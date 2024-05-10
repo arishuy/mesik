@@ -25,7 +25,7 @@ const HistoryListen = () => {
   const { playSong } = useMusicPlayer()
 
   const fetchHistoryListen = async () => {
-    await AxiosInterceptors.get(urlConfig.user.getHistoryListen)
+    await AxiosInterceptors.get(urlConfig.user.getHistoryListen + `?limit=-1`)
       .then((res) => {
         setHistoryListen(res.data.songs)
         setIsLoading(false)
