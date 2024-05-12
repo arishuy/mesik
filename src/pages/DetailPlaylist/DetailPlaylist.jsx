@@ -30,8 +30,9 @@ import convertToMinutes from '../../common/utils/convertToMinutes'
 
 const DetailPlaylist = () => {
   const id = useParams()
+  const user = JSON.parse(localStorage.getItem('profile'))
   const [isLoading, setIsLoading] = useState(true)
-
+  const [isMyPlaylist, setIsMyPlaylist] = useState(false)
   const theme = useTheme()
   const { playSong } = useMusicPlayer()
   const [playlist, setPlaylist] = useState({
@@ -53,6 +54,7 @@ const DetailPlaylist = () => {
     await AxiosInterceptors.get(urlConfig.playlists.getPlaylistById + `/${id.nameId}`)
       .then((res) => {
         setPlaylist(res.data.playlist)
+        setIsMyPlaylist(res.data.playlist.user === user?._id)
         setIsLoading(false)
       })
       .catch((err) => {
@@ -102,7 +104,6 @@ const DetailPlaylist = () => {
     fetchData()
     fetchSuggestedSongs()
   }, [])
-
   return isLoading ? (
     <Loading />
   ) : (
@@ -114,7 +115,8 @@ const DetailPlaylist = () => {
       <Grid container spacing={2}>
         <Grid
           item
-          xs={4}
+          sm={12}
+          md={4}
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -148,7 +150,7 @@ const DetailPlaylist = () => {
             <PlayCircleFilledWhiteOutlinedIcon /> <span style={{ padding: '5px 5px' }}>Phát tất cả</span>
           </Button>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item sm={12} md={8}>
           {playlist.songs.length === 0 ? (
             <Empty message={'Không có bài hát trong playlist của bạn'} />
           ) : (
@@ -206,23 +208,25 @@ const DetailPlaylist = () => {
                           <Typography variant='body1' color='text.primary' noWrap>
                             {convertToMinutes(majorsOrder.duration)}
                           </Typography>
-                          <Tooltip title='Xóa khỏi playlist' arrow>
-                            <IconButton
-                              sx={{
-                                '&:hover': {
-                                  background: theme.palette.error.light
-                                },
-                                color: theme.palette.error.main
-                              }}
-                              onClick={() => {
-                                removeSongFromPlaylist(majorsOrder)
-                              }}
-                              color='inherit'
-                              size='small'
-                            >
-                              <RemoveCircleOutlineOutlinedIcon fontSize='small' />
-                            </IconButton>
-                          </Tooltip>
+                          {isMyPlaylist && (
+                            <Tooltip title='Xóa khỏi playlist' arrow>
+                              <IconButton
+                                sx={{
+                                  '&:hover': {
+                                    background: theme.palette.error.light
+                                  },
+                                  color: theme.palette.error.main
+                                }}
+                                onClick={() => {
+                                  removeSongFromPlaylist(majorsOrder)
+                                }}
+                                color='inherit'
+                                size='small'
+                              >
+                                <RemoveCircleOutlineOutlinedIcon fontSize='small' />
+                              </IconButton>
+                            </Tooltip>
+                          )}
                         </TableCell>
                         <TableCell align='right'>
                           <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
@@ -239,94 +243,104 @@ const DetailPlaylist = () => {
               </Table>
             </TableContainer>
           )}
-          <Stack direction='row' justifyContent='space-between' alignItems='center' py={2}>
-            <Typography variant='h4' color='text.primary'>
-              Bài Hát Ngẫu Nhiên
-            </Typography>
-            <Button
-              variant='outlined'
-              color='primary'
-              sx={{
-                borderRadius: '20px'
-              }}
-              onClick={fetchSuggestedSongs}
-            >
-              Làm mới
-            </Button>
-          </Stack>
-          <TableContainer>
-            <Table size='small'>
-              <TableBody>
-                {suggestedSongs.map((majorsOrder) => {
-                  return (
-                    <TableRow hover key={majorsOrder._id}>
-                      <TableCell
-                        sx={{
-                          width: '500px'
-                        }}
-                      >
-                        <Stack direction='row' spacing={2} alignItems='center'>
-                          <Avatar
-                            src={majorsOrder.photo_url}
-                            onClick={() => {
-                              playSong([majorsOrder])
-                            }}
+          {isMyPlaylist && (
+            <>
+              <Stack direction='row' justifyContent='space-between' alignItems='center' py={2}>
+                <Typography variant='h4' color='text.primary'>
+                  Bài Hát Ngẫu Nhiên
+                </Typography>
+                <Button
+                  variant='outlined'
+                  color='primary'
+                  sx={{
+                    borderRadius: '20px'
+                  }}
+                  onClick={fetchSuggestedSongs}
+                >
+                  Làm mới
+                </Button>
+              </Stack>
+              <TableContainer>
+                <Table size='small'>
+                  <TableBody>
+                    {suggestedSongs.map((majorsOrder) => {
+                      return (
+                        <TableRow hover key={majorsOrder._id}>
+                          <TableCell
                             sx={{
-                              width: 50,
-                              height: 50,
-                              cursor: 'pointer',
-                              '&:hover': {
-                                opacity: 0.7,
-                                transform: 'scale(1.1)'
-                              }
+                              width: '500px'
                             }}
-                          />
-                          <Stack direction='column' spacing={0}>
-                            <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
-                              {majorsOrder.title}
-                            </Typography>
-                            <Typography variant='subtitle1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                              {majorsOrder.artist.display_name}
-                            </Typography>
-                          </Stack>
-                        </Stack>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant='body1' color='text.primary' noWrap>
-                          {convertToMinutes(majorsOrder.duration)}
-                        </Typography>
-                        <Tooltip title='Thêm vào playlist' arrow>
-                          <IconButton
-                            sx={{
-                              '&:hover': {
-                                background: theme.palette.primary.light
-                              },
-                              color: theme.palette.primary.main
-                            }}
-                            onClick={() => {
-                              addSongToPlaylist(majorsOrder)
-                            }}
-                            color='inherit'
-                            size='small'
                           >
-                            <AddCircleOutlineOutlinedIcon fontSize='small' />
-                          </IconButton>
-                        </Tooltip>
-                      </TableCell>
-                      <TableCell align='right'>
-                        <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                          {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
-                        </Typography>
-                        <Typography variant='body2' color='text.primary' gutterBottom noWrap>
-                          {moment(majorsOrder.createdAt).format('h:mm:ss A')}
-                        </Typography>
-                      </TableCell>
-                    </TableRow>
-                  )
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                            <Stack direction='row' spacing={2} alignItems='center'>
+                              <Avatar
+                                src={majorsOrder.photo_url}
+                                onClick={() => {
+                                  playSong([majorsOrder])
+                                }}
+                                sx={{
+                                  width: 50,
+                                  height: 50,
+                                  cursor: 'pointer',
+                                  '&:hover': {
+                                    opacity: 0.7,
+                                    transform: 'scale(1.1)'
+                                  }
+                                }}
+                              />
+                              <Stack direction='column' spacing={0}>
+                                <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
+                                  {majorsOrder.title}
+                                </Typography>
+                                <Typography
+                                  variant='subtitle1'
+                                  fontWeight='bold'
+                                  color='text.primary'
+                                  gutterBottom
+                                  noWrap
+                                >
+                                  {majorsOrder.artist.display_name}
+                                </Typography>
+                              </Stack>
+                            </Stack>
+                          </TableCell>
+                          <TableCell>
+                            <Typography variant='body1' color='text.primary' noWrap>
+                              {convertToMinutes(majorsOrder.duration)}
+                            </Typography>
+                            <Tooltip title='Thêm vào playlist' arrow>
+                              <IconButton
+                                sx={{
+                                  '&:hover': {
+                                    background: theme.palette.primary.light
+                                  },
+                                  color: theme.palette.primary.main
+                                }}
+                                onClick={() => {
+                                  addSongToPlaylist(majorsOrder)
+                                }}
+                                color='inherit'
+                                size='small'
+                              >
+                                <AddCircleOutlineOutlinedIcon fontSize='small' />
+                              </IconButton>
+                            </Tooltip>
+                          </TableCell>
+                          <TableCell align='right'>
+                            <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
+                              {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
+                            </Typography>
+                            <Typography variant='body2' color='text.primary' gutterBottom noWrap>
+                              {moment(majorsOrder.createdAt).format('h:mm:ss A')}
+                            </Typography>
+                          </TableCell>
+                        </TableRow>
+                      )
+                    })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </>
+          )}
         </Grid>
       </Grid>
     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, IconButton, Skeleton, Stack, Typography } from '@mui/material'
+import { Grid, IconButton, Skeleton, Stack, Tooltip, Typography } from '@mui/material'
 import urlConfig from '../../config/UrlConfig'
 import { useMusicPlayer } from '../../contexts/music.context'
 import useSnackbar from '../../contexts/snackbar.context'
@@ -7,9 +7,11 @@ import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import Empty from '../../common/components/Empty'
+import { useNavigate } from 'react-router-dom'
 
 const SuggestedPlaylist = () => {
   const [playlists, setPlaylists] = useState([])
+  const navigate = useNavigate()
   const { snack, setSnack } = useSnackbar()
   const { playSong } = useMusicPlayer()
   const [isLoading, setIsLoading] = useState(true)
@@ -63,7 +65,12 @@ const SuggestedPlaylist = () => {
         )}
         {playlists.map((playlist) => (
           <Grid item xs={12} md={6} lg={3} key={playlist.playlist._id}>
-            <div className='song-card'>
+            <div
+              className='song-card'
+              onClick={() => {
+                navigate(`/playlist/${playlist.playlist._id}`)
+              }}
+            >
               <img
                 className='song-card_image'
                 src={playlist.playlist.songs[0]?.photo_url}
@@ -76,12 +83,28 @@ const SuggestedPlaylist = () => {
               </div>
               <div className='song-card_play'>
                 <Stack direction='row' spacing={1} pt={2}>
-                  <IconButton onClick={() => playSong(playlist.playlist.songs)} color='success'>
-                    <PlayCircleFilledWhiteOutlinedIcon />
-                  </IconButton>
-                  <IconButton onClick={() => handleAddToPlaylist(playlist.playlist._id)} color='primary'>
-                    <AddCircleOutlineOutlinedIcon />
-                  </IconButton>
+                  <Tooltip title='Phát ngay'>
+                    <IconButton
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        playSong(playlist.playlist.songs)
+                      }}
+                      color='success'
+                    >
+                      <PlayCircleFilledWhiteOutlinedIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title='Thêm vào playlist'>
+                    <IconButton
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleAddToPlaylist(playlist.playlist._id)
+                      }}
+                      color='primary'
+                    >
+                      <AddCircleOutlineOutlinedIcon />
+                    </IconButton>
+                  </Tooltip>
                 </Stack>
               </div>
             </div>
