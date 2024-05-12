@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import { Helmet } from 'react-helmet-async'
@@ -19,8 +19,12 @@ const MusicManagement = () => {
   const [totalPages, setTotalPages] = React.useState(0)
   const { genres, getGenres } = useContext(GenreContext)
   const { regions, getRegions } = useContext(RegionContext)
+  const [filterName, setFilterName] = useState('')
+  const [filterGenre, setFilterGenre] = useState('all')
   const fetchData = async () => {
-    await AxiosInterceptors.get(urlConfig.music.getAllMusic + `?limit=10&page=${pageCount}`)
+    await AxiosInterceptors.get(
+      urlConfig.music.getAllMusic + `?limit=10&page=${pageCount}&name=${filterName}&genre=${filterGenre}`
+    )
       .then((res) => {
         if (res && res.status === 200) {
           if (res.data.pagination.songs) {
@@ -32,6 +36,19 @@ const MusicManagement = () => {
       })
       .catch((err) => console.log(err))
   }
+  const handleFilterName = (filterName, fetch = false) => {
+    setFilterName(filterName)
+    if (fetch) {
+      setIsLoading(true)
+      fetchData()
+      setPageCount(1)
+    }
+  }
+
+  const handleFilterGenre = (event) => {
+    setFilterGenre(event.target.value)
+    setPageCount(1)
+  }
   React.useEffect(() => {
     getGenres()
     getRegions()
@@ -39,7 +56,7 @@ const MusicManagement = () => {
   React.useEffect(() => {
     setIsLoading(true)
     fetchData()
-  }, [pageCount])
+  }, [pageCount, filterGenre])
   return (
     <div
       style={
@@ -53,46 +70,34 @@ const MusicManagement = () => {
       </Helmet>
       {isLoading ? (
         <Loading />
-      ) : music.length > 0 ? (
-        <MusicTable
-          majorsOrder={music}
-          fetchData={fetchData}
-          pageCount={pageCount}
-          setPageCount={setPageCount}
-          genres={genres}
-          regions={regions}
-        />
       ) : (
-        <div style={{ width: '100%', textAlign: 'center' }}>
-          <Container maxWidth='md'>
-            <Box
+        <>
+          <MusicTable
+            majorsOrder={music}
+            fetchData={fetchData}
+            pageCount={pageCount}
+            setPageCount={setPageCount}
+            genres={genres}
+            regions={regions}
+            filterName={filterName}
+            filterGenre={filterGenre}
+            handleFilterName={handleFilterName}
+            handleFilterGenre={handleFilterGenre}
+          />
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Pagination
+              count={totalPages}
+              color='primary'
+              page={pageCount}
+              onChange={(e, value) => setPageCount(value)}
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center'
+                p: 2,
+                mb: isMobile ? 5 : 0
               }}
-            >
-              <img alt='404' height={200} src={svg} />
-              <Typography variant='h3' color='text.secondary' fontWeight='500' sx={{ mt: 2 }}>
-                {t('noResults')}
-              </Typography>
-            </Box>
-          </Container>
-        </div>
+            />
+          </Box>
+        </>
       )}
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Pagination
-          count={totalPages}
-          color='primary'
-          page={pageCount}
-          onChange={(e, value) => setPageCount(value)}
-          sx={{
-            p: 2,
-            mb: isMobile ? 5 : 0
-          }}
-        />
-      </Box>
     </div>
   )
 }

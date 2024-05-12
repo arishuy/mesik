@@ -19,12 +19,12 @@ import AlbumOutlinedIcon from '@mui/icons-material/AlbumOutlined'
 import SupervisedUserCircleOutlinedIcon from '@mui/icons-material/SupervisedUserCircleOutlined'
 import LyricsOutlinedIcon from '@mui/icons-material/LyricsOutlined'
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
+import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined'
 import ReportIcon from '@mui/icons-material/Report'
 import React from 'react'
 export default function AdminSideNav() {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
-  const [isCollapsed, setIsCollapsed] = React.useState(false)
   const styleLink = {
     textDecoration: 'none',
     color: 'black'
@@ -49,7 +49,7 @@ export default function AdminSideNav() {
     }
   }
   return (
-    <Sidebar style={isMobile ? styleMobile : { height: '100%' }} collapsed={isCollapsed}>
+    <Sidebar style={isMobile ? styleMobile : { height: '100%' }} collapsed={false}>
       {isMobile ? (
         <Menu rootStyles={menuMobile}>
           <MenuItem icon={<SsidChartIcon />} component={<Link to={path.adminDashBoard} style={styleLink} />}></MenuItem>
@@ -102,6 +102,9 @@ export default function AdminSideNav() {
             <MenuItem icon={<LyricsOutlinedIcon />} component={<Link to={path.adminGenre} style={styleLink} />}>
               Genre
             </MenuItem>
+            <MenuItem icon={<PublicOutlinedIcon />} component={<Link to={path.adminRegion} style={styleLink} />}>
+              Region
+            </MenuItem>
             <MenuItem icon={<VerifiedUserOutlinedIcon />} component={<Link to={path.adminRequest} style={styleLink} />}>
               Request
             </MenuItem>
@@ -118,19 +121,7 @@ export default function AdminSideNav() {
             <MenuItem icon={<ArtTrackOutlinedIcon />} component={<Link to={path.adminPlaylist} style={styleLink} />}>
               Playlist
             </MenuItem>
-            <MenuItem icon={<ArtTrackOutlinedIcon />} component={<Link to={path.adminRegion} style={styleLink} />}>
-              Region
-            </MenuItem>
           </SubMenu>
-          <MenuItem
-            icon={<MenuOutlinedIcon />}
-            onClick={() => {
-              setIsCollapsed(!isCollapsed)
-            }}
-            style={styleLink}
-          >
-            {t('collapse')}
-          </MenuItem>
         </Menu>
       )}
     </Sidebar>

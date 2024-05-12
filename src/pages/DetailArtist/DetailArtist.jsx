@@ -104,7 +104,7 @@ const DetailArtist = () => {
               {artist.display_name}
             </Typography>
             <Stack direction='row' spacing={3} alignItems='center'>
-              <Typography variant='h6'>{totalFollowers} người quan tâm</Typography>
+              <Typography variant='h6'>{totalFollowers} người theo dõi</Typography>
               {!isFollow
                 ? isAuthenticated && (
                     <LoadingButton

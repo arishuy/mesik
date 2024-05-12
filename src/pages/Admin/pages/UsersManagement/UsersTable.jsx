@@ -18,7 +18,6 @@ import {
   Avatar,
   Stack
 } from '@mui/material'
-import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import Snackbar from '../../../../common/components/SnackBar'
@@ -30,10 +29,12 @@ import Label from '../../../../components/Label'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import LockIcon from '@mui/icons-material/Lock'
+import Loading from '../../../../common/components/Loading/Loading'
+import UserTableToolbar from './UserTableToolBar'
 // import DocumentModal from './DocumentModal'
 const UserInfoModal = lazy(() => import('../../components/UserInfoModal'))
-
-const UsersTable = ({ users, fetchData }) => {
+const ROLE_OPTIONS = ['all', 'USER', 'ARTIST', 'ADMIN']
+const UsersTable = () => {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
   const [page, setPage] = useState(0)
@@ -44,11 +45,23 @@ const UsersTable = ({ users, fetchData }) => {
   const [item, setItem] = useState({})
   const { snack, setSnack } = useSnackbar()
   const theme = useTheme()
+  const [filterName, setFilterName] = useState('')
+  const [filterRole, setFilterRole] = useState('all')
+  const [isLoading, setIsLoading] = useState(true)
+  const [users, setUsers] = useState([])
 
   const handlePageChange = (event, newPage) => {
     setPage(newPage)
   }
+  const handleFilterName = (filterName) => {
+    setFilterName(filterName)
+    setPage(0)
+  }
 
+  const handleFilterRole = (event) => {
+    setFilterRole(event.target.value)
+    setPage(0)
+  }
   const handleLimitChange = (event) => {
     setRowsPerPage(parseInt(event.target.value))
   }
@@ -160,13 +173,30 @@ const UsersTable = ({ users, fetchData }) => {
   const handleCloseModal = () => {
     setOpenModal(false)
   }
-
+  const fetchData = async (limit = 100000) => {
+    const res = await AxiosInterceptors.get(
+      urlConfig.user.users + `?limit=${limit}&role=${filterRole}&name=${filterName}`
+    )
+    if (res && res.status === 200) {
+      if (res.data.pagination) {
+        if (res.data.pagination.users) {
+          setUsers(res.data.pagination.users)
+          setIsLoading(false)
+        }
+      }
+    }
+  }
+  useEffect(() => {
+    fetchData()
+  }, [filterName, filterRole])
   useEffect(() => {
     if (isMobile) {
       setRowsPerPage(5)
     }
   }, [isMobile])
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <>
       <Snackbar />
       {openModal && (
@@ -174,6 +204,14 @@ const UsersTable = ({ users, fetchData }) => {
       )}
       <Card>
         <CardHeader title={t('userManagement')} />
+        <Divider />
+        <UserTableToolbar
+          filterName={filterName}
+          filterRole={filterRole}
+          onFilterName={handleFilterName}
+          onFilterRole={handleFilterRole}
+          optionsRole={ROLE_OPTIONS}
+        />
         <Divider />
         <TableContainer>
           <Table size='small'>

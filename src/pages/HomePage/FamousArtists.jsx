@@ -40,8 +40,11 @@ const FamousArtists = () => {
               }}
             >
               <Avatar alt='artist' src={artist.user.photo_url} sx={{ width: 150, height: 150 }} />
-              <Typography variant='h6' p={2} textAlign='center'>
+              <Typography variant='h6' px={2} mt={2} textAlign='center'>
                 {artist.display_name}
+              </Typography>
+              <Typography variant='subtitle1' textAlign='center'>
+                {artist.total_followers} người theo dõi
               </Typography>
             </Stack>
           </Grid>

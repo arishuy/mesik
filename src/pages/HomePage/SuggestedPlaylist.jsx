@@ -6,6 +6,7 @@ import useSnackbar from '../../contexts/snackbar.context'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
+import Empty from '../../common/components/Empty'
 
 const SuggestedPlaylist = () => {
   const [playlists, setPlaylists] = useState([])
@@ -54,6 +55,11 @@ const SuggestedPlaylist = () => {
               width: '100%'
             }}
           />
+        )}
+        {!isLoading && playlists.length === 0 && (
+          <Grid item xs={12}>
+            <Empty message={'Hãy nghe nhạc và tận hưởng âm nhạc cùng chúng tôi!'} />
+          </Grid>
         )}
         {playlists.map((playlist) => (
           <Grid item xs={12} md={6} lg={3} key={playlist.playlist._id}>

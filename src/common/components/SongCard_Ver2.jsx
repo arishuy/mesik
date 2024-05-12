@@ -193,7 +193,7 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
             }}
           >
             <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px' }} />
-            {user?.liked_songs.includes(song._id) ? (
+            {user?.liked_songs?.includes(song._id) ? (
               <Typography>Xoá khỏi thư viện</Typography>
             ) : (
               <Typography>Thêm vào thư viện</Typography>

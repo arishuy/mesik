@@ -14,7 +14,8 @@ import {
   useTheme,
   CardHeader,
   Avatar,
-  Stack
+  Stack,
+  Container
 } from '@mui/material'
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone'
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
@@ -30,8 +31,19 @@ import AddLyric from './AddLyric'
 import useSnack from '../../../../contexts/snackbar.context'
 import Snackbar from '../../../../common/components/SnackBar'
 import EditSong from './EditSong'
+import MusicTableToolbar from './MusicTableToolBar'
+import svg from '../../../../assets/images/empty.png'
 
-const MusicTable = ({ majorsOrder, fetchData, genres, regions }) => {
+const MusicTable = ({
+  majorsOrder,
+  fetchData,
+  genres,
+  regions,
+  filterName,
+  filterGenre,
+  handleFilterName,
+  handleFilterGenre
+}) => {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
   const [page, setPage] = useState(0)
@@ -41,6 +53,7 @@ const MusicTable = ({ majorsOrder, fetchData, genres, regions }) => {
   const [openAddLyric, setOpenAddLyric] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
+
   const [id, setId] = useState('')
   const theme = useTheme()
 
@@ -115,115 +128,153 @@ const MusicTable = ({ majorsOrder, fetchData, genres, regions }) => {
         />
         <Divider />
         <TableContainer>
+          <MusicTableToolbar
+            filterName={filterName}
+            onFilterName={handleFilterName}
+            filterGenre={filterGenre}
+            onFilterGenre={handleFilterGenre}
+            optionsGenre={[
+              {
+                _id: 'all',
+                name: 'All'
+              },
+              ...genres.map((genre) => ({
+                _id: genre._id,
+                name: genre.name
+              }))
+            ]}
+          />
           <Table size='small'>
-            <TableHead>
-              <TableRow>
-                <TableCell>Title</TableCell>
-                <TableCell>Release Date</TableCell>
-                <TableCell>Duration</TableCell>
-                <TableCell>Nghệ sĩ</TableCell>
-                <TableCell align='right'>Time</TableCell>
-                <TableCell align='right'>Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {(rowsPerPage > 0
-                ? majorsOrder.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                : majorsOrder
-              ).map((majorsOrder) => {
-                return (
-                  <TableRow hover key={majorsOrder._id}>
-                    <TableCell>
-                      <Stack direction='row' spacing={2} alignItems='center'>
-                        <Avatar src={majorsOrder.photo_url} />
-                        <Stack direction='column' spacing={0}>
-                          <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                            {majorsOrder.title}
-                          </Typography>
-                        </Stack>
-                      </Stack>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant='body1' color='text.primary' fontWeight='bold' gutterBottom noWrap>
-                        {moment(majorsOrder.release_date).format('DD/MM/YYYY')}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant='body1' color='text.primary' gutterBottom noWrap>
-                        {majorsOrder.duration}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography variant='body1' color='text.primary' gutterBottom noWrap>
-                        {majorsOrder.artist.display_name}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align='right'>
-                      <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                        {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
-                      </Typography>
-                      <Typography variant='body2' color='text.primary' gutterBottom noWrap>
-                        {moment(majorsOrder.createdAt).format('h:mm:ss A')}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align='right'>
-                      <Tooltip title={t('detailInfo')} arrow>
-                        <IconButton
-                          sx={{
-                            '&:hover': {
-                              background: theme.palette.primary.lighter
-                            },
-                            color: theme.palette.primary.main
-                          }}
-                          onClick={() => {
-                            setId(majorsOrder._id)
-                            setOpenModal(true)
-                          }}
-                          color='inherit'
-                          size='small'
-                        >
-                          <VisibilityTwoToneIcon fontSize='small' />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title={t('Edit lyric')} arrow>
-                        <IconButton
-                          sx={{
-                            '&:hover': {
-                              background: theme.palette.warning.lighter
-                            },
-                            color: theme.palette.warning.main
-                          }}
-                          onClick={() => {
-                            setId(majorsOrder._id)
-                            setOpenAddLyric(true)
-                          }}
-                          color='inherit'
-                          size='small'
-                        >
-                          <EditTwoToneIcon fontSize='small' />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title={t('delete')} arrow>
-                        <IconButton
-                          sx={{
-                            '&:hover': { background: theme.palette.error.lighter },
-                            color: theme.palette.error.main
-                          }}
-                          color='inherit'
-                          size='small'
-                          onClick={() => {
-                            setId(majorsOrder._id)
-                            setOpenDelete(true)
-                          }}
-                        >
-                          <DeleteTwoToneIcon fontSize='small' />
-                        </IconButton>
-                      </Tooltip>
-                    </TableCell>
+            {majorsOrder.length > 0 ? (
+              <>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Title</TableCell>
+                    <TableCell>Release Date</TableCell>
+                    <TableCell>Duration</TableCell>
+                    <TableCell>Nghệ sĩ</TableCell>
+                    <TableCell align='right'>Time</TableCell>
+                    <TableCell align='right'>Action</TableCell>
                   </TableRow>
-                )
-              })}
-            </TableBody>
+                </TableHead>
+                <TableBody>
+                  {(rowsPerPage > 0
+                    ? majorsOrder.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    : majorsOrder
+                  ).map((majorsOrder) => {
+                    return (
+                      <TableRow hover key={majorsOrder._id}>
+                        <TableCell>
+                          <Stack direction='row' spacing={2} alignItems='center'>
+                            <Avatar src={majorsOrder.photo_url} />
+                            <Stack direction='column' spacing={0}>
+                              <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
+                                {majorsOrder.title}
+                              </Typography>
+                            </Stack>
+                          </Stack>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant='body1' color='text.primary' fontWeight='bold' gutterBottom noWrap>
+                            {moment(majorsOrder.release_date).format('DD/MM/YYYY')}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant='body1' color='text.primary' gutterBottom noWrap>
+                            {majorsOrder.duration}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant='body1' color='text.primary' gutterBottom noWrap>
+                            {majorsOrder.artist.display_name}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align='right'>
+                          <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
+                            {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
+                          </Typography>
+                          <Typography variant='body2' color='text.primary' gutterBottom noWrap>
+                            {moment(majorsOrder.createdAt).format('h:mm:ss A')}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align='right'>
+                          <Tooltip title={t('detailInfo')} arrow>
+                            <IconButton
+                              sx={{
+                                '&:hover': {
+                                  background: theme.palette.primary.lighter
+                                },
+                                color: theme.palette.primary.main
+                              }}
+                              onClick={() => {
+                                setId(majorsOrder._id)
+                                setOpenModal(true)
+                              }}
+                              color='inherit'
+                              size='small'
+                            >
+                              <VisibilityTwoToneIcon fontSize='small' />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip title={t('Edit lyric')} arrow>
+                            <IconButton
+                              sx={{
+                                '&:hover': {
+                                  background: theme.palette.warning.lighter
+                                },
+                                color: theme.palette.warning.main
+                              }}
+                              onClick={() => {
+                                setId(majorsOrder._id)
+                                setOpenAddLyric(true)
+                              }}
+                              color='inherit'
+                              size='small'
+                            >
+                              <EditTwoToneIcon fontSize='small' />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip title={t('delete')} arrow>
+                            <IconButton
+                              sx={{
+                                '&:hover': { background: theme.palette.error.lighter },
+                                color: theme.palette.error.main
+                              }}
+                              color='inherit'
+                              size='small'
+                              onClick={() => {
+                                setId(majorsOrder._id)
+                                setOpenDelete(true)
+                              }}
+                            >
+                              <DeleteTwoToneIcon fontSize='small' />
+                            </IconButton>
+                          </Tooltip>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
+                </TableBody>
+              </>
+            ) : (
+              <div style={{ width: '100%', textAlign: 'center' }}>
+                <Container maxWidth='md'>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      textAlign: 'center'
+                    }}
+                  >
+                    <img alt='404' height={200} src={svg} />
+                    <Typography variant='h3' color='text.secondary' fontWeight='500' sx={{ mt: 2 }} gutterBottom>
+                      {t('noResults')}
+                    </Typography>
+                  </Box>
+                </Container>
+              </div>
+            )}
           </Table>
         </TableContainer>
       </Card>
