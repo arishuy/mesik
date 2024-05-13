@@ -20,6 +20,7 @@ import SupervisedUserCircleOutlinedIcon from '@mui/icons-material/SupervisedUser
 import LyricsOutlinedIcon from '@mui/icons-material/LyricsOutlined'
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined'
+import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined'
 import ReportIcon from '@mui/icons-material/Report'
 import React from 'react'
 export default function AdminSideNav() {
@@ -126,6 +127,12 @@ export default function AdminSideNav() {
               component={<Link to={path.adminListReport} style={styleLink} />}
             >
               Report
+            </MenuItem>
+            <MenuItem
+              icon={<WorkspacePremiumOutlinedIcon />}
+              component={<Link to={path.adminPremiumPackage} style={styleLink} />}
+            >
+              Premium Package
             </MenuItem>
           </SubMenu>
         </Menu>

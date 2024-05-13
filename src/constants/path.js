@@ -26,6 +26,7 @@ const path = {
   promoteToArtist: '/promote-to-artist',
   paymentResponse: '/payment-response',
   becomeArtist: '/user/become-artist',
+  buyPremium: '/buy-premium',
 
   //Expert
   expert: '/expert',
@@ -65,7 +66,8 @@ const path = {
   adminRequest: '/admin/request-management',
   adminAlbum: '/admin/album-management',
   adminPlaylist: '/admin/playlist-management',
-  adminRegion: '/admin/region-management'
+  adminRegion: '/admin/region-management',
+  adminPremiumPackage: '/admin/premium-package-management'
 }
 
 export default path

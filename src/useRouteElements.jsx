@@ -27,6 +27,7 @@ const SearchPage = lazy(() => import('./pages/SearchPage'))
 const ThuVien = lazy(() => import('./pages/ThuVien'))
 const PayMent = lazy(() => import('./pages/PayMent'))
 const ChangePassword = lazy(() => import('./pages/User/pages/ChangePassword'))
+const BuyPremium = lazy(() => import('./pages/BuyPremium'))
 
 // user page
 const BecomeArtist = lazy(() => import('./pages/User/pages/BecomeArtist'))
@@ -40,6 +41,7 @@ const AlbumManagement = lazy(() => import('./pages/Admin/pages/AlbumManagement')
 const PlaylistManagement = lazy(() => import('./pages/Admin/pages/PlaylistManagement'))
 const RegionManagement = lazy(() => import('./pages/Admin/pages/RegionManagement'))
 const ReportManagement = lazy(() => import('./pages/Admin/pages/ReportManagement'))
+const PremiumPackageManagement = lazy(() => import('./pages/Admin/pages/PremiumPackageManagement'))
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -197,6 +199,16 @@ export default function useRouteElements() {
                       </AdminLayout>
                     </Suspense>
                   )
+                },
+                {
+                  path: path.adminPremiumPackage,
+                  element: (
+                    <Suspense>
+                      <AdminLayout>
+                        <PremiumPackageManagement />
+                      </AdminLayout>
+                    </Suspense>
+                  )
                 }
               ]
             }
@@ -347,6 +359,14 @@ export default function useRouteElements() {
           element: (
             <Suspense>
               <BXH />
+            </Suspense>
+          )
+        },
+        {
+          path: path.buyPremium,
+          element: (
+            <Suspense>
+              <BuyPremium />
             </Suspense>
           )
         },

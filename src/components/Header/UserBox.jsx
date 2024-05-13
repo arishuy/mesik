@@ -4,6 +4,7 @@ import {
   Avatar,
   Box,
   Button,
+  Chip,
   Divider,
   Fab,
   lighten,
@@ -26,6 +27,7 @@ import TaskTwoToneIcon from '@mui/icons-material/TaskTwoTone'
 import { useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
 import pusher from '../../common/utils/pusher'
+import dayjs from 'dayjs'
 
 const MenuUserBox = styled(Box)(
   ({ theme }) => `
@@ -112,10 +114,12 @@ function HeaderUserbox() {
       >
         <MenuUserBox sx={{ minWidth: 210 }} display='flex'>
           <Avatar variant='rounded' alt={user.first_name} src={user.photo_url} />
+
           <UserBoxText>
             <UserBoxLabel variant='body1'>
-              {user.first_name} {user.last_name}
+              {user.first_name} {user.last_name}{' '}
             </UserBoxLabel>
+
             <UserBoxDescription variant='body2'>
               {user.balance.toLocaleString('vi', { style: 'currency', currency: 'VND' })}
             </UserBoxDescription>
@@ -123,6 +127,22 @@ function HeaderUserbox() {
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
         <List sx={{ p: 1 }} component='nav'>
+          <ListItem button to={path.buyPremium} component={NavLink}>
+            <Typography variant='body1' color='text.primary' fontWeight='bold'>
+              Gói dịch vụ:
+            </Typography>
+            <Chip
+              label={user.premiumEndDate && dayjs(user.premiumEndDate) > dayjs() ? 'PREMIUM' : 'FREE'}
+              color={user.premiumEndDate && dayjs(user.premiumEndDate) > dayjs() ? 'secondary' : 'error'}
+              size='small'
+              sx={{
+                fontSize: '0.6rem',
+                fontWeight: 'bold',
+                px: 1,
+                ml: 1
+              }}
+            />
+          </ListItem>
           {user.role === 'USER' && (
             <>
               <ListItem button to={path.profile} component={NavLink}>

@@ -24,7 +24,8 @@ const urlConfig = {
     getLikedSongs: `${process.env.REACT_APP_API_ENDPOINT}/users/current/favourite`,
     getMyRequest: `${process.env.REACT_APP_API_ENDPOINT}/users/current/request`,
     followArtist: `${process.env.REACT_APP_API_ENDPOINT}/users/current/follow`,
-    getFollowArtist: `${process.env.REACT_APP_API_ENDPOINT}/users/current/following`
+    getFollowArtist: `${process.env.REACT_APP_API_ENDPOINT}/users/current/following`,
+    buyPremium: `${process.env.REACT_APP_API_ENDPOINT}/users/premium-package`
   },
   expert: {
     current: `${process.env.REACT_APP_API_ENDPOINT}/experts/current`,
@@ -101,6 +102,13 @@ const urlConfig = {
     getGenreById: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
     deleteGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
     updateGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`
+  },
+  premiumPackages: {
+    createPremiumPackage: `${process.env.REACT_APP_API_ENDPOINT}/premium-packages`,
+    getAllPremiumPackages: `${process.env.REACT_APP_API_ENDPOINT}/premium-packages`,
+    getPremiumPackageById: `${process.env.REACT_APP_API_ENDPOINT}/premium-packages`,
+    deletePremiumPackage: `${process.env.REACT_APP_API_ENDPOINT}/premium-packages`,
+    updatePremiumPackage: `${process.env.REACT_APP_API_ENDPOINT}/premium-packages`
   },
   regions: {
     createRegion: `${process.env.REACT_APP_API_ENDPOINT}/regions`,

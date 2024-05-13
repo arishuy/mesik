@@ -8,9 +8,11 @@ import Snackbar from '../../../../common/components/SnackBar'
 import { useTranslation } from 'react-i18next'
 import Loading from '../../../../common/components/Loading/Loading'
 import moment from 'moment'
+import { useNavigate } from 'react-router-dom'
 
 const BecomeArtist = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [displayName, setDisplayName] = useState('')
   const [descriptions, setDecriptions] = useState('')
@@ -18,8 +20,22 @@ const BecomeArtist = () => {
   const { snack, setSnack } = useSnackbar()
   const [request, setRequest] = useState({})
   const [isLoading, setIsLoading] = React.useState(true)
-
+  const user = JSON.parse(localStorage.getItem('profile'))
+  const checkPermission = () => {
+    if (!user) {
+      navigate('/login')
+    }
+  }
   const handlePromote = async () => {
+    if (displayName === '' || descriptions === '') {
+      setSnack({
+        ...snack,
+        open: true,
+        message: t('pleaseFillOutAllFields'),
+        type: 'error'
+      })
+      return
+    }
     await AxiosInterceptors.post(urlConfig.user.promoteToArtist, {
       descriptions: descriptions,
       display_name: displayName
@@ -66,6 +82,7 @@ const BecomeArtist = () => {
       })
   }
   useEffect(() => {
+    checkPermission()
     getMyRequest()
   }, [])
   return isLoading ? (
