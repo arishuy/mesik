@@ -25,6 +25,7 @@ const MyAlbum = lazy(() => import('./pages/MyAlbum'))
 const Promote = lazy(() => import('./pages/Promote'))
 const SearchPage = lazy(() => import('./pages/SearchPage'))
 const ThuVien = lazy(() => import('./pages/ThuVien'))
+const PayMent = lazy(() => import('./pages/PayMent'))
 const ChangePassword = lazy(() => import('./pages/User/pages/ChangePassword'))
 
 // user page
@@ -38,6 +39,7 @@ const RequestManagement = lazy(() => import('./pages/Admin/pages/RequestManageme
 const AlbumManagement = lazy(() => import('./pages/Admin/pages/AlbumManagement'))
 const PlaylistManagement = lazy(() => import('./pages/Admin/pages/PlaylistManagement'))
 const RegionManagement = lazy(() => import('./pages/Admin/pages/RegionManagement'))
+const ReportManagement = lazy(() => import('./pages/Admin/pages/ReportManagement'))
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -182,6 +184,16 @@ export default function useRouteElements() {
                     <Suspense>
                       <AdminLayout>
                         <UserManagement />
+                      </AdminLayout>
+                    </Suspense>
+                  )
+                },
+                {
+                  path: path.adminListReport,
+                  element: (
+                    <Suspense>
+                      <AdminLayout>
+                        <ReportManagement />
                       </AdminLayout>
                     </Suspense>
                   )
@@ -359,6 +371,14 @@ export default function useRouteElements() {
           element: (
             <Suspense>
               <Promote />
+            </Suspense>
+          )
+        },
+        {
+          path: path.paymentResponse,
+          element: (
+            <Suspense>
+              <PayMent />
             </Suspense>
           )
         },

@@ -10,6 +10,8 @@ import UploadMusic from './UploadMusic'
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import SearchBar from '../../common/components/SearchBox'
 import { ChatbotContext } from '../../contexts/chatbot.context'
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
+import Recharge from './Recharge'
 
 const Header = () => {
   const { openChatbot, setOpenChatbot } = React.useContext(ChatbotContext)
@@ -17,6 +19,7 @@ const Header = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('profile'))
+  const [openRecharge, setOpenRecharge] = React.useState(false)
   const [open, setOpen] = useState(false)
 
   return (
@@ -43,16 +46,32 @@ const Header = () => {
             />
           </Tooltip>
         </Stack>
+        {openRecharge && <Recharge openRecharge={openRecharge} setOpenRecharge={setOpenRecharge} />}
+
         <div>
           <Stack direction='row' spacing={isMobile ? 0 : 2} sx={{ padding: '10px' }}>
             <Box sx={isMobile ? {} : { '& > :not(style)': { m: 1 } }}>
               {user && user.role === 'ARTIST' && open && <UploadMusic open={open} setOpen={setOpen} />}
               {user.role === 'ARTIST' && (
-                <Tooltip title='Tải nhạc lên' arrow>
-                  <Fab size='small' aria-label='notifi' onClick={() => setOpen(true)}>
-                    <FileUploadOutlinedIcon />
-                  </Fab>
-                </Tooltip>
+                <>
+                  <Tooltip title='Tải nhạc lên' arrow>
+                    <Fab size='small' aria-label='notifi' onClick={() => setOpen(true)}>
+                      <FileUploadOutlinedIcon />
+                    </Fab>
+                  </Tooltip>
+                  {/* <Tooltip title={t('createRequest')} arrow>
+                    <Fab size='small' aria-label='add' onClick={() => setOpen(true)}>
+                      <AddIcon />
+                    </Fab>
+                  </Tooltip>
+                  */}
+                  <Tooltip title={t('recharge')} arrow>
+                    <Fab size='small' aria-label='recharge' onClick={() => setOpenRecharge(true)}>
+                      <AttachMoneyIcon />
+                    </Fab>
+                  </Tooltip>
+                  <Report />
+                </>
               )}
               {/* <Notification /> */}
               {user.role === 'USER' && (
@@ -65,11 +84,12 @@ const Header = () => {
                       <AddIcon />
                     </Fab>
                   </Tooltip>
+                  */}
                   <Tooltip title={t('recharge')} arrow>
                     <Fab size='small' aria-label='recharge' onClick={() => setOpenRecharge(true)}>
                       <AttachMoneyIcon />
                     </Fab>
-                  </Tooltip> */}
+                  </Tooltip>
                   <Report />
                 </>
               )}
