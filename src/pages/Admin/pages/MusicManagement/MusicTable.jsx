@@ -154,6 +154,7 @@ const MusicTable = ({
                     <TableCell>Release Date</TableCell>
                     <TableCell>Duration</TableCell>
                     <TableCell>Nghệ sĩ</TableCell>
+                    <TableCell align='right'>Premium</TableCell>
                     <TableCell align='right'>Time</TableCell>
                     <TableCell align='right'>Action</TableCell>
                   </TableRow>
@@ -189,6 +190,11 @@ const MusicTable = ({
                         <TableCell>
                           <Typography variant='body1' color='text.primary' gutterBottom noWrap>
                             {majorsOrder.artist.display_name}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align='right'>
+                          <Typography variant='body1' color='text.primary' gutterBottom noWrap>
+                            {majorsOrder.isPremium ? 'Yes' : 'No'}
                           </Typography>
                         </TableCell>
                         <TableCell align='right'>

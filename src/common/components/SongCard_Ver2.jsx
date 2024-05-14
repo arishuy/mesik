@@ -1,5 +1,17 @@
 import React, { useContext } from 'react'
-import { Autocomplete, Card, IconButton, List, ListItem, Popover, Stack, TextField, Typography } from '@mui/material'
+import {
+  Autocomplete,
+  Card,
+  IconButton,
+  List,
+  ListItem,
+  Popover,
+  Stack,
+  TextField,
+  Typography,
+  Badge,
+  Chip
+} from '@mui/material'
 import { useMusicPlayer } from '../../contexts/music.context'
 import RootModal from '../../components/Modal/RootModal'
 import AxiosInterceptors from '../utils/axiosInterceptors'
@@ -9,6 +21,7 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useNavigate } from 'react-router-dom'
+import DiamondRoundedIcon from '@mui/icons-material/DiamondRounded'
 import { AppContext } from '../../contexts/app.context'
 
 const SongCardVer2 = ({ song, allPlaylists }) => {
@@ -146,7 +159,20 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
               >
                 {song.artist.display_name}
               </Typography>
-              <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>
+              <Stack direction='row' spacing={1} alignItems='center'>
+                <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>
+                {song.isPremium && (
+                  <Chip
+                    label='Premium'
+                    size='small'
+                    sx={{
+                      backgroundColor: '#f0f0f0',
+                      color: 'black',
+                      fontWeight: 'bold'
+                    }}
+                  />
+                )}
+              </Stack>
             </Stack>
           </Stack>
         </div>

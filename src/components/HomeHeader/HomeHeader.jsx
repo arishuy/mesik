@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../hooks/useResponsive'
 import SearchBar from '../../common/components/SearchBox'
+import LanguagePopover from '../LanguagePopover/LanguagePopover'
+
 const HomeHeader = () => {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
@@ -49,6 +51,7 @@ const HomeHeader = () => {
               >
                 {t('register')}
               </Button>
+              <LanguagePopover />
             </Stack>
           </div>
         </Box>

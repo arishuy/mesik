@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Autocomplete, Card, IconButton, List, ListItem, Popover, Typography } from '@mui/material'
+import { Autocomplete, Badge, Card, Chip, IconButton, List, ListItem, Popover, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useMusicPlayer } from '../../contexts/music.context'
 import AxiosInterceptors from '../utils/axiosInterceptors'
@@ -11,6 +11,7 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
 import { AppContext } from '../../contexts/app.context'
 import { memo } from 'react'
+import DiamondRoundedIcon from '@mui/icons-material/DiamondRounded'
 
 const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
   const { isAuthenticated } = useContext(AppContext)
@@ -138,14 +139,31 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
         key={song.id}
         onClick={() => handleSongClick(song)}
       >
-        <img
-          src={song.photo_url}
-          alt='album'
-          width='250px'
-          style={{
-            objectFit: 'contain'
-          }}
-        />
+        {song.isPremium ? (
+          <Badge
+            color='primary'
+            badgeContent={<DiamondRoundedIcon sx={{ color: 'yellow', fontSize: '20px', fontWeight: 'bold' }} />}
+          >
+            <img
+              src={song.photo_url}
+              alt='album'
+              width='250px'
+              style={{
+                objectFit: 'contain'
+              }}
+            />
+          </Badge>
+        ) : (
+          <img
+            src={song.photo_url}
+            alt='album'
+            width='250px'
+            style={{
+              objectFit: 'contain'
+            }}
+          />
+        )}
+
         <Typography
           variant='h6'
           pt={2}
@@ -169,7 +187,9 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
               {' '}
               {song.artist.display_name}
             </Typography>
-            <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>
+            <Stack direction='row' justifyContent='space-between' spacing={1} alignItems='center'>
+              <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>{' '}
+            </Stack>
           </div>
           {isAuthenticated && (
             <div>

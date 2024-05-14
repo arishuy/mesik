@@ -11,6 +11,8 @@ import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import SearchBar from '../../common/components/SearchBox'
 import { ChatbotContext } from '../../contexts/chatbot.context'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
+import LanguaguePopover from '../LanguagePopover/LanguagePopover'
+
 import Recharge from './Recharge'
 
 const Header = () => {
@@ -93,7 +95,7 @@ const Header = () => {
                   <Report />
                 </>
               )}
-
+              <LanguaguePopover />
               <HeaderUserbox />
             </Box>
           </Stack>

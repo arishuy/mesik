@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
 import RootModal from '../../../../components/Modal/RootModal'
-import { Stack, TextField, MenuItem, Button, Typography } from '@mui/material'
+import { Stack, TextField, MenuItem, Button, Typography, FormControlLabel, Checkbox } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import { useTranslation } from 'react-i18next'
@@ -36,7 +36,8 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
       duration: newSong.duration,
       genre: newSong.genre,
       region: newSong.region,
-      artist: newSong.artist
+      artist: newSong.artist,
+      isPremium: newSong.isPremium
     })
       .then((res) => {
         fetchData()
@@ -171,6 +172,15 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
               value={newSong?.artist?.display_name}
               disabled
             ></TextField>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  defaultChecked={newSong.isPremium}
+                  onChange={(e) => setNewSong({ ...newSong, isPremium: e.target.checked })}
+                />
+              }
+              label='Premium'
+            />
           </Stack>
         </RootModal>
       )}

@@ -19,9 +19,12 @@ import React, { useContext } from 'react'
 import logo from '../../assets/images/logo.png'
 import LibraryMusicRoundedIcon from '@mui/icons-material/LibraryMusicRounded'
 import { AppContext } from '../../contexts/app.context'
+import dayjs from 'dayjs'
+import { Button, Card, Typography } from '@mui/material'
 export default function AdminSideNav({ param }) {
-  const { isAuthenticated, role } = useContext(AppContext)
+  const { isAuthenticated, role, profile } = useContext(AppContext)
   const isMobile = useResponsive('down', 'sm')
+  const isPremium = profile?.premiumEndDate && dayjs(profile.premiumEndDate) > dayjs()
   const { t } = useTranslation()
   const styleLink = {
     textDecoration: 'none',
@@ -131,6 +134,35 @@ export default function AdminSideNav({ param }) {
               MesikChart
             </MenuItem>
           </Menu>
+          {!isPremium && profile && (
+            <Card
+              sx={{
+                p: 1,
+                m: 1,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+                background: ' linear-gradient(30deg, #0400ff, #4ce3f7)'
+              }}
+            >
+              <Typography
+                variant='body1'
+                component='h6'
+                fontWeight='bold'
+                fontSize='14px'
+                textAlign='center'
+                color='white'
+              >
+                Nghe nhạc không quảng cáo cùng Mesik Premium
+              </Typography>
+              <Button variant='contained' color='warning' sx={{ my: 1, borderRadius: '20px' }}>
+                <Link to={path.buyPremium} style={{ textDecoration: 'none', color: 'black' }}>
+                  Nâng Cấp Premium
+                </Link>
+              </Button>
+            </Card>
+          )}
         </>
       )}
     </Sidebar>

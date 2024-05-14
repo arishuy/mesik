@@ -1,13 +1,8 @@
 // hooks
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 
 // context
 import { createContext } from 'react'
-
-import AxiosInterceptors from '../common/utils/axiosInterceptors'
-import urlConfig from '../config/UrlConfig'
-
-function displayChatbot(open) {}
 
 export const ChatbotContext = createContext()
 
