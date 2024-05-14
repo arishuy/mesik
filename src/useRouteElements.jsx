@@ -27,6 +27,7 @@ const ThuVien = lazy(() => import('./pages/ThuVien'))
 const PayMent = lazy(() => import('./pages/PayMent'))
 const ChangePassword = lazy(() => import('./pages/User/pages/ChangePassword'))
 const BuyPremium = lazy(() => import('./pages/BuyPremium'))
+const ValidateEmail = lazy(() => import('./pages/ValidateEmail'))
 
 // user page
 const BecomeArtist = lazy(() => import('./pages/User/pages/BecomeArtist'))
@@ -409,6 +410,14 @@ export default function useRouteElements() {
           element: (
             <Suspense>
               <PayMent />
+            </Suspense>
+          )
+        },
+        {
+          path: path.validateEmail,
+          element: (
+            <Suspense>
+              <ValidateEmail />
             </Suspense>
           )
         },
