@@ -123,10 +123,10 @@ const DetailTransaction = ({ open, setOpen, transaction }) => {
                   <Avatar>EP</Avatar>
                   <Stack direction='column' spacing={0}>
                     <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                      Expert Booking
+                      Mesik Services
                     </Typography>
                     <Typography variant='body2' color='text.secondary' noWrap>
-                      expertbookingpbl@gmail.com
+                      mesikadmin@gmail.com
                     </Typography>
                   </Stack>
                 </Stack>

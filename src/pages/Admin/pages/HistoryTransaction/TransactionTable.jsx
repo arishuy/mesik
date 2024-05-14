@@ -189,6 +189,7 @@ const TransactionTable = ({ transaction }) => {
           <Table size='small'>
             <TableHead>
               <TableRow>
+                <TableCell>#</TableCell>
                 <TableCell>{t('from')}</TableCell>
                 <TableCell>{t('to')}</TableCell>
                 <TableCell>{t('time')}</TableCell>
@@ -199,9 +200,10 @@ const TransactionTable = ({ transaction }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {paginatedCryptoOrders.map((cryptoOrder) => {
+              {paginatedCryptoOrders.map((cryptoOrder, index) => {
                 return (
                   <TableRow hover key={cryptoOrder.id}>
+                    <TableCell>{index + 1}</TableCell>
                     <TableCell>
                       <Stack direction='row' spacing={2} alignItems='center'>
                         <Avatar src={cryptoOrder.user.photo_url} />

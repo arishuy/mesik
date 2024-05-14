@@ -7,7 +7,6 @@ import MainLayout from './layouts/MainLayout'
 import RegisterLayout from './layouts/RegisterLayout'
 import HomeLayout from './layouts/HomeLayout'
 import AdminLayout from './pages/Admin/layouts/AdminLayout'
-import UserLayout from './pages/User/layouts/UserLayout'
 
 // common pages
 const Login = lazy(() => import('./pages/Login'))
@@ -42,6 +41,7 @@ const PlaylistManagement = lazy(() => import('./pages/Admin/pages/PlaylistManage
 const RegionManagement = lazy(() => import('./pages/Admin/pages/RegionManagement'))
 const ReportManagement = lazy(() => import('./pages/Admin/pages/ReportManagement'))
 const PremiumPackageManagement = lazy(() => import('./pages/Admin/pages/PremiumPackageManagement'))
+const HistoryTransaction = lazy(() => import('./pages/Admin/pages/HistoryTransaction'))
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -206,6 +206,16 @@ export default function useRouteElements() {
                     <Suspense>
                       <AdminLayout>
                         <PremiumPackageManagement />
+                      </AdminLayout>
+                    </Suspense>
+                  )
+                },
+                {
+                  path: path.adminListTransaction,
+                  element: (
+                    <Suspense>
+                      <AdminLayout>
+                        <HistoryTransaction />
                       </AdminLayout>
                     </Suspense>
                   )

@@ -72,6 +72,7 @@ const RequestTable = ({ majorsOrder, fetchData }) => {
           <Table size='small'>
             <TableHead>
               <TableRow>
+                <TableCell>#</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Display Name</TableCell>
                 <TableCell
@@ -90,9 +91,10 @@ const RequestTable = ({ majorsOrder, fetchData }) => {
               {(rowsPerPage > 0
                 ? majorsOrder.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 : majorsOrder
-              ).map((majorsOrder) => {
+              ).map((majorsOrder, index) => {
                 return (
                   <TableRow hover key={majorsOrder._id}>
+                    <TableCell>{index + 1}</TableCell>
                     <TableCell>
                       <Stack direction='row' spacing={2} alignItems='center'>
                         <Avatar src={majorsOrder.user.photo_url} />

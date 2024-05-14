@@ -93,6 +93,7 @@ const RegionTable = ({ majorsOrder, fetchData }) => {
             <Table size='small'>
               <TableHead>
                 <TableRow>
+                  <TableCell>#</TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell>Description</TableCell>
                   <TableCell align='right'>Time</TableCell>
@@ -103,9 +104,10 @@ const RegionTable = ({ majorsOrder, fetchData }) => {
                 {(rowsPerPage > 0
                   ? majorsOrder.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   : majorsOrder
-                ).map((majorsOrder) => {
+                ).map((majorsOrder, index) => {
                   return (
                     <TableRow hover key={majorsOrder._id}>
+                      <TableCell>{index + 1}</TableCell>
                       <TableCell>
                         <Stack direction='row' spacing={2} alignItems='center'>
                           <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>

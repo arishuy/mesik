@@ -149,6 +149,7 @@ const MusicTable = ({
               <>
                 <TableHead>
                   <TableRow>
+                    <TableCell>#</TableCell>
                     <TableCell>Title</TableCell>
                     <TableCell>Release Date</TableCell>
                     <TableCell>Duration</TableCell>
@@ -161,9 +162,10 @@ const MusicTable = ({
                   {(rowsPerPage > 0
                     ? majorsOrder.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     : majorsOrder
-                  ).map((majorsOrder) => {
+                  ).map((majorsOrder, index) => {
                     return (
                       <TableRow hover key={majorsOrder._id}>
+                        <TableCell>{index + 1}</TableCell>
                         <TableCell>
                           <Stack direction='row' spacing={2} alignItems='center'>
                             <Avatar src={majorsOrder.photo_url} />

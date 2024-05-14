@@ -16,23 +16,18 @@ import {
   Stack,
   Avatar
 } from '@mui/material'
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone'
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../../../hooks/useResponsive'
 import moment from 'moment'
 import DeleteConfirm from './DeleteConfirm'
-import { Box, Button } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
 import Snackbar from '../../../../common/components/SnackBar'
-import EditAlbum from './EditAlbum'
 
 const AlbumTable = ({ majorsOrder, fetchData }) => {
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
-  const [openModal, setOpenModal] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
   const [id, setId] = useState('')
   const theme = useTheme()
@@ -44,9 +39,6 @@ const AlbumTable = ({ majorsOrder, fetchData }) => {
   return (
     <>
       <Snackbar />
-      {openModal && (
-        <EditAlbum open={openModal} handleClose={() => setOpenModal(false)} fetchData={fetchData} id={id} />
-      )}
       {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} fetchData={fetchData} id={id} />}
       <Card>
         <CardHeader title={t('albumManagement')} />
@@ -55,6 +47,7 @@ const AlbumTable = ({ majorsOrder, fetchData }) => {
           <Table size='small'>
             <TableHead>
               <TableRow>
+                <TableCell>#</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Số bài hát</TableCell>
                 <TableCell align='right'>Time</TableCell>
@@ -65,9 +58,10 @@ const AlbumTable = ({ majorsOrder, fetchData }) => {
               {(rowsPerPage > 0
                 ? majorsOrder.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 : majorsOrder
-              ).map((majorsOrder) => {
+              ).map((majorsOrder, index) => {
                 return (
                   <TableRow hover key={majorsOrder._id}>
+                    <TableCell>{index + 1}</TableCell>
                     <TableCell>
                       <Stack direction='row' spacing={2} alignItems='center'>
                         <Avatar src={majorsOrder.photo_url} />
@@ -95,24 +89,6 @@ const AlbumTable = ({ majorsOrder, fetchData }) => {
                       </Typography>
                     </TableCell>
                     <TableCell align='right'>
-                      <Tooltip title={t('edit')} arrow>
-                        <IconButton
-                          sx={{
-                            '&:hover': {
-                              background: theme.palette.warning.lighter
-                            },
-                            color: theme.palette.warning.main
-                          }}
-                          onClick={() => {
-                            setId(majorsOrder._id)
-                            setOpenModal(true)
-                          }}
-                          color='inherit'
-                          size='small'
-                        >
-                          <EditTwoToneIcon fontSize='small' />
-                        </IconButton>
-                      </Tooltip>
                       <Tooltip title={t('delete')} arrow>
                         <IconButton
                           sx={{
