@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import LikedSongs from './LikedSongs'
 import HistoryListen from './HistoryListen'
 import FollowingArtist from './FollowingArtist'
+import HistoryUpload from './HistoryUpload'
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props
@@ -70,6 +71,7 @@ const ThuVien = () => {
             <Tab label='Bài hát yêu thích' {...a11yProps(0)} />
             <Tab label='Nghe gần đây' {...a11yProps(1)} />
             <Tab label='Đang theo dõi' {...a11yProps(2)} />
+            {user?.role === 'ARTIST' && <Tab label='Đã tải lên' {...a11yProps(3)} />}
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
@@ -81,6 +83,11 @@ const ThuVien = () => {
         <CustomTabPanel value={value} index={2}>
           <FollowingArtist />
         </CustomTabPanel>
+        {user?.role === 'ARTIST' && (
+          <CustomTabPanel value={value} index={3}>
+            <HistoryUpload />
+          </CustomTabPanel>
+        )}
       </Box>
     </div>
   )

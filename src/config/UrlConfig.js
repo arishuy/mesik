@@ -90,7 +90,10 @@ const urlConfig = {
     uploadMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/upload-by-artist`,
     playSong: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
     getLyricFromSong: `${process.env.REACT_APP_API_ENDPOINT}/songs/lyric`,
-    addLyricToSong: `${process.env.REACT_APP_API_ENDPOINT}/songs/lyric`
+    addLyricToSong: `${process.env.REACT_APP_API_ENDPOINT}/songs/lyric`,
+    addLyricToSongByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/artist/lyric`,
+    updateMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/artist`,
+    deleteMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/artist`
   },
   keyword: {
     get5Keyword: `${process.env.REACT_APP_API_ENDPOINT}/search/keywords`,
