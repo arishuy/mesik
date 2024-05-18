@@ -17,6 +17,7 @@ import GroupRemoveRoundedIcon from '@mui/icons-material/GroupRemoveRounded'
 import { AppContext } from '../../contexts/app.context'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import Snackbar from '../../common/components/SnackBar'
+import RelatedArtists from './RelatedArtists'
 
 const DetailArtist = () => {
   const id = useParams()
@@ -65,10 +66,23 @@ const DetailArtist = () => {
       })
   }
 
+  const handlePlayAlbum = async (album) => {
+    playSong(album.songs)
+    await AxiosInterceptors.post(`${urlConfig.albums.playAlbum}/play`, {
+      id: album._id
+    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   useEffect(() => {
     fetchData()
     isAuthenticated && fetchPlaylists()
-  }, [])
+  }, [id])
   return isLoading ? (
     <Loading />
   ) : (
@@ -188,7 +202,7 @@ const DetailArtist = () => {
                 </div>
                 <div className='song-card_play'>
                   <Stack direction='row' spacing={1} pt={2}>
-                    <IconButton onClick={() => playSong(album.songs)} color='success'>
+                    <IconButton onClick={() => handlePlayAlbum(album)} color='success'>
                       <PlayCircleFilledWhiteOutlinedIcon />
                     </IconButton>
                     <IconButton onClick={() => navigation(`/album/${album._id}`)} color='primary'>
@@ -201,6 +215,7 @@ const DetailArtist = () => {
           ))}
         </Grid>
       )}
+      <RelatedArtists id={id.nameId} />
     </div>
   )
 }

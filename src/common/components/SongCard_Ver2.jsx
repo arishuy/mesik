@@ -23,12 +23,13 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useNavigate } from 'react-router-dom'
 import DiamondRoundedIcon from '@mui/icons-material/DiamondRounded'
 import { AppContext } from '../../contexts/app.context'
+import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded'
 
 const SongCardVer2 = ({ song, allPlaylists }) => {
   const { isAuthenticated, likedSong, setLikedSong } = useContext(AppContext)
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('profile'))
-  const { playSong } = useMusicPlayer()
+  const { playSong, addToPlaylist } = useMusicPlayer()
   const { snack, setSnack } = useSnackbar()
   const [open, setOpen] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -221,12 +222,27 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
               handleClose()
             }}
           >
-            <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px' }} />
             {likedSong.includes(song._id) ? (
-              <Typography>Xoá khỏi thư viện</Typography>
+              <>
+                <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'blue' }} />
+                <Typography>Xoá khỏi thư viện</Typography>
+              </>
             ) : (
-              <Typography>Thêm vào thư viện</Typography>
+              <>
+                <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'red' }} />
+                <Typography>Thêm vào thư viện</Typography>
+              </>
             )}
+          </ListItem>
+          <ListItem
+            button
+            onClick={() => {
+              addToPlaylist(song)
+              handleClose()
+            }}
+          >
+            <SkipNextRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'green' }} />
+            <Typography>Phát tiếp theo</Typography>
           </ListItem>
         </List>
       </Popover>

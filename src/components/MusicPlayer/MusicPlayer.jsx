@@ -27,6 +27,7 @@ const MusicPlayer = () => {
   }, [currentSong])
   return (
     <ReactJkMusicPlayer
+      quietUpdate
       clearPriorAudioLists
       autoPlayInitLoadPlayList
       showDownload={false}

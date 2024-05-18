@@ -40,6 +40,18 @@ const DetailAlbum = () => {
         console.log(err)
       })
   }
+  const handlePlayAlbum = async () => {
+    playSong(album.songs)
+    await AxiosInterceptors.post(`${urlConfig.albums.playAlbum}/play`, {
+      id: id.nameId
+    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   useEffect(() => {
     fetchData()
   }, [])
@@ -83,7 +95,7 @@ const DetailAlbum = () => {
               borderRadius: '20px'
             }}
             onClick={() => {
-              playSong(album.songs)
+              handlePlayAlbum()
             }}
           >
             <PlayCircleFilledWhiteOutlinedIcon /> <span style={{ padding: '5px 5px' }}>Phát tất cả</span>

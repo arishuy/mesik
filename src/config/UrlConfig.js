@@ -144,14 +144,17 @@ const urlConfig = {
     getAllAlbums: `${process.env.REACT_APP_API_ENDPOINT}/albums`,
     getAllAlbumsByArtist: `${process.env.REACT_APP_API_ENDPOINT}/albums/artist`,
     getAlbumById: `${process.env.REACT_APP_API_ENDPOINT}/albums`,
-    deleteAlbum: `${process.env.REACT_APP_API_ENDPOINT}/albums`
+    deleteAlbum: `${process.env.REACT_APP_API_ENDPOINT}/albums`,
+    playAlbum: `${process.env.REACT_APP_API_ENDPOINT}/albums`,
+    getFamousAlbums: `${process.env.REACT_APP_API_ENDPOINT}/albums/top-4-album`
   },
   artists: {
     createArtist: `${process.env.REACT_APP_API_ENDPOINT}/artists`,
     getAllArtists: `${process.env.REACT_APP_API_ENDPOINT}/artists`,
     getArtistById: `${process.env.REACT_APP_API_ENDPOINT}/artists`,
     deleteArtist: `${process.env.REACT_APP_API_ENDPOINT}/artists`,
-    get4Artist: `${process.env.REACT_APP_API_ENDPOINT}/artists/top-5-artist`
+    get4Artist: `${process.env.REACT_APP_API_ENDPOINT}/artists/top-5-artist`,
+    getRelatedArtists: `${process.env.REACT_APP_API_ENDPOINT}/artists`
   },
   statistics: {
     getStatisticsAdmin: `${process.env.REACT_APP_API_ENDPOINT}/statistics/admin`,

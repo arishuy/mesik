@@ -10,6 +10,7 @@ import urlConfig from '../../config/UrlConfig'
 import Snackbar from '../../common/components/SnackBar'
 import { AppContext } from '../../contexts/app.context'
 import SuggestedPlaylist from './SuggestedPlaylist'
+import FamousAlbums from './FamousAlbums'
 const HomePage = () => {
   const { isAuthenticated } = useContext(AppContext)
   const [allPlaylists, setAllPlaylists] = React.useState([])
@@ -54,6 +55,7 @@ const HomePage = () => {
           {isAuthenticated && <RecentListen allPlaylists={allPlaylists} />}
           {isAuthenticated && <SuggestedPlaylist />}
           <JustReleased allPlaylists={allPlaylists} />
+          <FamousAlbums />
           <FamousArtists />
         </Grid>
       </Grid>

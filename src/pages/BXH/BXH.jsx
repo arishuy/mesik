@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Button,
   Stack,
   Table,
   TableBody,
@@ -56,9 +57,23 @@ const BXH = () => {
       <Helmet>
         <title>Bảng Xếp Hạng</title>
       </Helmet>
-      <Typography variant='h4' py={3}>
-        Bảng xếp hạng hằng ngày
-      </Typography>
+      <Stack direction='row' justifyContent='space-between' alignItems='center'>
+        <Typography variant='h4' py={3}>
+          Bảng Xếp Hạng Hàng Ngày
+        </Typography>
+        {data.length > 0 && (
+          <Button
+            variant='outlined'
+            color='primary'
+            sx={{
+              borderRadius: '20px'
+            }}
+            onClick={() => playSong(data.map((item) => item.song))}
+          >
+            Phát tất cả
+          </Button>
+        )}
+      </Stack>
       <TableContainer>
         <Table size='small'>
           <TableHead>
