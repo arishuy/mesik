@@ -14,7 +14,7 @@ import { memo } from 'react'
 import DiamondRoundedIcon from '@mui/icons-material/DiamondRounded'
 
 const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
-  const { isAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, likedSong, setLikedSong } = useContext(AppContext)
   const user = JSON.parse(localStorage.getItem('profile'))
   const [open, setOpen] = React.useState(false)
   const navigate = useNavigate()
@@ -40,7 +40,6 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
     song = [song]
     playSong(song)
   }
-
   const handleAddToPlaylist = async () => {
     // add song to playlist
     await AxiosInterceptors.post(urlConfig.playlists.addSongToPlaylist, {
@@ -77,17 +76,20 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
             message: 'Đã thêm vào thư viện',
             type: 'success'
           })
+          setLikedSong((prevLikedSong) => [...prevLikedSong, song._id])
           user.liked_songs.push(song._id)
           localStorage.setItem('profile', JSON.stringify(user))
-        } else
+        } else {
           setSnack({
             ...snack,
             open: true,
             message: 'Đã xóa khỏi thư viện',
             type: 'success'
           })
-        user.liked_songs = user.liked_songs.filter((item) => item !== song._id)
-        localStorage.setItem('profile', JSON.stringify(user))
+          setLikedSong((prevLikedSong) => prevLikedSong.filter((item) => item !== song._id))
+          user.liked_songs = user.liked_songs.filter((item) => item !== song._id)
+          localStorage.setItem('profile', JSON.stringify(user))
+        }
       })
       .catch((err) => {
         setSnack({
@@ -235,7 +237,7 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
             }}
           >
             <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px' }} />
-            {user?.liked_songs?.includes(song._id) ? (
+            {likedSong.includes(song._id) ? (
               <Typography>Xoá khỏi thư viện</Typography>
             ) : (
               <Typography>Thêm vào thư viện</Typography>

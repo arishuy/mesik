@@ -25,7 +25,7 @@ import DiamondRoundedIcon from '@mui/icons-material/DiamondRounded'
 import { AppContext } from '../../contexts/app.context'
 
 const SongCardVer2 = ({ song, allPlaylists }) => {
-  const { isAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, likedSong, setLikedSong } = useContext(AppContext)
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('profile'))
   const { playSong } = useMusicPlayer()
@@ -82,17 +82,20 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
             message: 'Đã thêm vào thư viện',
             type: 'success'
           })
+          setLikedSong((prevLikedSong) => [...prevLikedSong, song._id])
           user.liked_songs.push(song._id)
           localStorage.setItem('profile', JSON.stringify(user))
-        } else
+        } else {
           setSnack({
             ...snack,
             open: true,
             message: 'Đã xóa khỏi thư viện',
             type: 'success'
           })
-        user.liked_songs = user.liked_songs.filter((item) => item !== song._id)
-        localStorage.setItem('profile', JSON.stringify(user))
+          setLikedSong((prevLikedSong) => prevLikedSong.filter((item) => item !== song._id))
+          user.liked_songs = user.liked_songs.filter((item) => item !== song._id)
+          localStorage.setItem('profile', JSON.stringify(user))
+        }
       })
       .catch((err) => {
         setSnack({
@@ -219,7 +222,7 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
             }}
           >
             <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px' }} />
-            {user?.liked_songs?.includes(song._id) ? (
+            {likedSong.includes(song._id) ? (
               <Typography>Xoá khỏi thư viện</Typography>
             ) : (
               <Typography>Thêm vào thư viện</Typography>

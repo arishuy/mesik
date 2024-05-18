@@ -9,6 +9,8 @@ export const getInitialAppContext = () => ({
   setProfile: () => null,
   role: getProfileFromLS()?.role || 'USER',
   setRole: () => null,
+  likedSong: getProfileFromLS()?.liked_songs || [],
+  setLikedSong: () => null,
   reset: () => null
 })
 
@@ -21,11 +23,13 @@ export const AppProvider = ({ children, defaultValue = initialAppContext }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(cookies.access_token ? true : false)
   const [profile, setProfile] = useState(defaultValue.profile)
   const [role, setRole] = useState(defaultValue.role)
+  const [likedSong, setLikedSong] = useState(defaultValue.likedSong)
 
   const reset = () => {
     setIsAuthenticated(false)
     setRole('USER')
     setProfile(null)
+    setLikedSong([])
   }
 
   return (
@@ -37,6 +41,8 @@ export const AppProvider = ({ children, defaultValue = initialAppContext }) => {
         setProfile,
         role,
         setRole,
+        likedSong,
+        setLikedSong,
         reset
       }}
     >
