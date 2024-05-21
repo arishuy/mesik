@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useMusicPlayer } from '../../contexts/music.context'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
@@ -20,11 +20,13 @@ import Loading from '../../common/components/Loading/Loading'
 import Empty from '../../common/components/Empty'
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded'
 import convertToMinutes from '../../common/utils/convertToMinutes'
+import { SnackbarContext } from '../../contexts/snackbar.context'
 
 const LikedSongs = () => {
   const [likedSongs, setLikedSongs] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const { playSong } = useMusicPlayer()
+  const { snack, setSnack } = useContext(SnackbarContext)
   const user = JSON.parse(localStorage.getItem('profile'))
 
   const fetchLikedSongs = async () => {
@@ -45,10 +47,19 @@ const LikedSongs = () => {
           user.liked_songs = user.liked_songs.filter((item) => item !== song_id)
           localStorage.setItem('profile', JSON.stringify(user))
           fetchLikedSongs()
+          setSnack({
+            open: true,
+            message: 'Xóa bài hát yêu thích thành công',
+            type: 'success'
+          })
         }
       })
       .catch((err) => {
-        console.log(err)
+        setSnack({
+          open: true,
+          message: 'Xóa bài hát yêu thích thất bại',
+          type: 'error'
+        })
       })
   }
   useEffect(() => {

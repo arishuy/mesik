@@ -21,7 +21,6 @@ import CancelTwoToneIcon from '@mui/icons-material/CancelTwoTone'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../../../hooks/useResponsive'
 import moment from 'moment'
-import Snackbar from '../../../../common/components/SnackBar'
 import Label from '../../../../components/Label'
 import RejectConfirm from './RejectConfirm'
 import ApproveConfirm from './ApproveConfirm'
@@ -62,7 +61,6 @@ const RequestTable = ({ majorsOrder, fetchData }) => {
   }, [isMobile])
   return (
     <>
-      <Snackbar />
       {openApprove && <ApproveConfirm open={openApprove} setOpen={setOpenApprove} fetchData={fetchData} id={id} />}
       {openReject && <RejectConfirm open={openReject} setOpen={setOpenReject} fetchData={fetchData} id={id} />}
       <Card>

@@ -4,7 +4,6 @@ import { Stack, useTheme, Box, Typography, Tabs, Tab } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import useSnackbar from '../../../../contexts/snackbar.context'
-import Snackbar from '../../../../common/components/SnackBar'
 import { useTranslation } from 'react-i18next'
 import svg from '../../../../assets/icons/pdf_file.svg'
 import moment from 'moment'
@@ -64,7 +63,6 @@ const DocumentModal = ({ open, handleClose, fetchData, item }) => {
   }, [])
   return (
     <>
-      <Snackbar />
       {loading ? (
         <Loading />
       ) : (

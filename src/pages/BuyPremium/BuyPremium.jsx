@@ -2,7 +2,6 @@ import { Card, Grid, Typography, Button, useTheme, Stack, Chip } from '@mui/mate
 import React, { useEffect, useState } from 'react'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
-import Snackbar from '../../common/components/SnackBar'
 import useSnackbar from '../../contexts/snackbar.context'
 import { Helmet } from 'react-helmet-async'
 import { LoadingButton } from '@mui/lab'
@@ -81,7 +80,6 @@ const BuyPremium = () => {
       <Helmet>
         <title>Gói Premium</title>
       </Helmet>
-      <Snackbar />
       <Stack spacing={2} direction='row' sx={{ justifyContent: 'space-between' }}>
         <div>
           <Typography variant='h3' pt={3}>

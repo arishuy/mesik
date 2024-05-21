@@ -8,10 +8,10 @@ import RootModal from '../../components/Modal/RootModal'
 import { Stack, TextField } from '@mui/material'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
 import { AppContext } from '../../contexts/app.context'
 import { memo } from 'react'
 import DiamondRoundedIcon from '@mui/icons-material/DiamondRounded'
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
 import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded'
 
 const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {

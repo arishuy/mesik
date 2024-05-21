@@ -20,7 +20,6 @@ import {
 } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
-import Snackbar from '../../../../common/components/SnackBar'
 import useSnackbar from '../../../../contexts/snackbar.context'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../../../hooks/useResponsive'
@@ -198,7 +197,6 @@ const UsersTable = () => {
     <Loading />
   ) : (
     <>
-      <Snackbar />
       {openModal && (
         <UserInfoModal open={openModal} handleCloseModal={handleCloseModal} user={currentRow} fetchData={fetchData} />
       )}

@@ -25,7 +25,6 @@ import DeleteConfirm from './DeleteConfirm'
 import AddNewRegion from './AddNewRegion'
 import { Box, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-import Snackbar from '../../../../common/components/SnackBar'
 import EditRegion from './EditRegion'
 import svg from '../../../../assets/images/empty.png'
 
@@ -46,7 +45,6 @@ const RegionTable = ({ majorsOrder, fetchData }) => {
   }, [isMobile])
   return (
     <>
-      <Snackbar />
       {openModal && (
         <EditRegion open={openModal} handleClose={() => setOpenModal(false)} fetchData={fetchData} id={id} />
       )}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Stack, Typography, FormControlLabel, Checkbox, Button, Box, TextField } from '@mui/material'
+import { Stack, Typography, FormControlLabel, Checkbox, Button, Box, TextField, Card, CardHeader } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import RootModal from '../../../../components/Modal/RootModal'
@@ -88,10 +88,12 @@ const BecomeArtist = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div style={{ width: '75%' }}>
+    <div style={{ width: '100%' }}>
       {request && request.status === 'PENDING' && (
-        <Box
+        <Card
           sx={{
+            display: 'flex',
+            flexDirection: 'column',
             padding: '20px',
             margin: '20px 100px'
           }}
@@ -109,14 +111,15 @@ const BecomeArtist = () => {
               - Trạng thái: Đang chờ xử lý
             </Typography>
           </Stack>
-        </Box>
+        </Card>
       )}
       {request && request.status === 'REJECTED' && (
-        <Box
+        <Card
           sx={{
+            display: 'flex',
+            flexDirection: 'column',
             padding: '20px',
-            margin: '20px 100px',
-            width: '100%'
+            margin: '20px 100px'
           }}
         >
           <Typography variant='h3' component='h3' sx={{ margin: '1rem' }}>
@@ -132,7 +135,7 @@ const BecomeArtist = () => {
               {moment(request.updatedAt).format('DD/MM/YYYY')}{' '}
             </Typography>
           </Stack>
-        </Box>
+        </Card>
       )}
       {request && request.status === 'APPROVED' && ''}
       {!request && (
@@ -158,15 +161,16 @@ const BecomeArtist = () => {
               />
             </Box>
           </RootModal>
-          <Box
+          <Card
             sx={{
+              display: 'flex',
+              flexDirection: 'column',
               padding: '20px',
-              margin: '20px 100px',
-              width: '100%'
+              margin: '20px 100px'
             }}
           >
             <Typography variant='h3' component='h3' sx={{ margin: '1rem' }}>
-              Trở thành nghệ sĩ
+              {t('becomeArtist')}
             </Typography>
             <Typography variant='body1' sx={{ margin: '1rem' }}>
               Quyền lợi khi trở thành nghệ sĩ:
@@ -179,7 +183,7 @@ const BecomeArtist = () => {
             </Typography>
             <FormControlLabel
               control={<Checkbox checked={check} onChange={(e) => setCheck(e.target.checked)} />}
-              label='Tôi đồng ý với các điều khoản và điều kiện của trang web'
+              label={t('agreeTerm')}
               sx={{ marginLeft: '1.5rem' }}
             />
             <Stack
@@ -195,7 +199,7 @@ const BecomeArtist = () => {
                 {t('promote')}
               </Button>
             </Stack>
-          </Box>
+          </Card>
         </>
       )}
     </div>

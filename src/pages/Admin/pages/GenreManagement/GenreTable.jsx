@@ -24,7 +24,6 @@ import DeleteConfirm from './DeleteConfirm'
 import AddNewGenre from './AddNewGenre'
 import { Box, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-import Snackbar from '../../../../common/components/SnackBar'
 import EditGenre from './EditGenre'
 
 const GenreTable = ({ majorsOrder, fetchData }) => {
@@ -44,7 +43,6 @@ const GenreTable = ({ majorsOrder, fetchData }) => {
   }, [isMobile])
   return (
     <>
-      <Snackbar />
       {openModal && (
         <EditGenre open={openModal} handleClose={() => setOpenModal(false)} fetchData={fetchData} id={id} />
       )}

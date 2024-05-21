@@ -4,7 +4,6 @@ import { Stack, TextField, Autocomplete } from '@mui/material'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import useSnackbar from '../../contexts/snackbar.context'
-import Snackbar from '../../common/components/SnackBar'
 import { useTranslation } from 'react-i18next'
 import UploadPhoto from '../../common/components/UploadPhoto'
 const AddNewAlbum = ({ open, handleClose, fetchData }) => {
@@ -80,7 +79,6 @@ const AddNewAlbum = ({ open, handleClose, fetchData }) => {
   }, [])
   return (
     <>
-      <Snackbar />
       <RootModal
         variant='Create'
         title='New Album'

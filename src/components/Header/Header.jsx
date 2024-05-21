@@ -79,7 +79,7 @@ const Header = () => {
               {user.role === 'USER' && (
                 <>
                   <button className='become-artist' onClick={() => navigate('/user/become-artist')}>
-                    Become an Artist
+                    {t('becomeArtist')}
                   </button>
                   {/* <Tooltip title={t('createRequest')} arrow>
                     <Fab size='small' aria-label='add' onClick={() => setOpen(true)}>

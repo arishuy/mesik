@@ -16,7 +16,6 @@ import GroupAddRoundedIcon from '@mui/icons-material/GroupAddRounded'
 import GroupRemoveRoundedIcon from '@mui/icons-material/GroupRemoveRounded'
 import { AppContext } from '../../contexts/app.context'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
-import Snackbar from '../../common/components/SnackBar'
 import RelatedArtists from './RelatedArtists'
 
 const DetailArtist = () => {
@@ -94,7 +93,6 @@ const DetailArtist = () => {
       <Helmet>
         <title>Thông Tin Nghệ Sĩ</title>
       </Helmet>
-      <Snackbar />
       <Card
         sx={{
           padding: '20px',

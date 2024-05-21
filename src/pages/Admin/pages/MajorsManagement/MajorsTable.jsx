@@ -25,7 +25,6 @@ import AddNewMajor from '../MusicManagement/AddNewSong'
 import EditMajor from './EditMajor'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
-import Snackbar from '../../../../common/components/SnackBar'
 import useSnackbar from '../../../../contexts/snackbar.context'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../../../hooks/useResponsive'
@@ -75,7 +74,6 @@ const MajorsTable = ({ majorsOrder, fetchData }) => {
   }
   return (
     <>
-      <Snackbar />
       {openAdd && <AddNewMajor open={openAdd} handleClose={() => setOpenAdd(false)} fetchData={fetchData} />}
       {openEdit && (
         <EditMajor open={openEdit} handleClose={() => setOpenEdit(false)} fetchData={fetchData} item={item} />

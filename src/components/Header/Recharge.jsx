@@ -49,7 +49,6 @@ const Recharge = ({ openRecharge, setOpenRecharge }) => {
   }
   return (
     <>
-      <Snackbar />
       <RootModal
         variant='Create'
         title={t('recharge')}

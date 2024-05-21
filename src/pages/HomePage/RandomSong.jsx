@@ -4,8 +4,10 @@ import Axios from 'axios'
 import urlConfig from '../../config/UrlConfig'
 import SongCard from '../../common/components/SongCard'
 import useSnackbar from '../../contexts/snackbar.context'
+import { useTranslation } from 'react-i18next'
 
 const RandomSong = ({ allPlaylists }) => {
+  const { t } = useTranslation()
   const [songs, setSongs] = useState([])
   const { snack, setSnack } = useSnackbar()
   const [isLoading, setIsLoading] = useState(true)
@@ -22,7 +24,7 @@ const RandomSong = ({ allPlaylists }) => {
   return (
     <>
       <Typography variant='h4' py={3}>
-        Trải nghiệm ngẫu nhiên
+        {t('randomMusic')}
       </Typography>
       <Grid container spacing={2}>
         {isLoading && (

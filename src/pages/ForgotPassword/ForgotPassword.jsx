@@ -1,18 +1,16 @@
-// @mui
 import { styled } from '@mui/material/styles'
 import { Link, Container, Typography, Stack, TextField, Card } from '@mui/material'
 // hooks
 import useResponsive from '../../hooks/useResponsive'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import useSnackbar from '../../contexts/snackbar.context'
-import image from '../../assets/images/login.jpg'
-import axios from 'axios'
-import urlConfig from '../../config/UrlConfig'
 import { Helmet } from 'react-helmet-async'
+import Forgot_Photo from '../../assets/images/forgot_password.png'
 import { useTranslation } from 'react-i18next'
 import { LoadingButton } from '@mui/lab'
-
+import Axios from 'axios'
+import urlConfig from '../../config/UrlConfig'
+import useSnackbar from '../../contexts/snackbar.context'
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled('div')(({ theme }) => ({
@@ -42,57 +40,64 @@ const StyledContent = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function RegisterPage() {
+export default function ForgotPassword() {
   const { t } = useTranslation()
-  const navigate = useNavigate()
-  const [username, setUsername] = useState('')
-  const [firstname, setFirstname] = useState('')
-  const [lastname, setLastname] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
   const { snack, setSnack } = useSnackbar()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const navigate = useNavigate()
   const mdUp = useResponsive('up', 'md')
-  const register = async () => {
-    if (password !== confirmPassword) {
+  const [isSubmit, setIsSubmit] = useState(false)
+  const [formData, setFormData] = useState({
+    username: '',
+    email: ''
+  })
+  const handleResetPassword = async () => {
+    if (formData.username === '' || formData.email === '') {
       setSnack({
+        ...snack,
         open: true,
-        message: t('passwordsNotMatch'),
+        message: t('pleaseFillOutAllFields'),
         type: 'error'
       })
       return
     }
-    setIsSubmitting(true)
-    await axios
-      .post(urlConfig.authentication.register, {
-        first_name: firstname,
-        last_name: lastname,
-        email: email,
-        username: username,
-        password: password
-      })
+    setIsSubmit(true)
+    await Axios.post(urlConfig.authentication.resetPassword, {
+      username: formData.username,
+      email: formData.email
+    })
       .then((res) => {
-        navigate('/login')
+        if (res && res.status === 200) {
+          setIsSubmit(false)
+          setSnack({
+            ...snack,
+            open: true,
+            message: t('resetPasswordSuccess'),
+            type: 'success'
+          })
+          setTimeout(() => {
+            navigate('/login')
+          }, 3000)
+        }
       })
       .catch((err) => {
+        setIsSubmit(false)
         setSnack({
+          ...snack,
           open: true,
-          message: err.response.data.message,
+          message: t('resetPasswordFailed'),
           type: 'error'
         })
-        setIsSubmitting(false)
       })
   }
   return (
     <>
       <Helmet>
-        <title>{t('register')}</title>
+        <title>{t('forgotPassword')}</title>
       </Helmet>
       <StyledRoot>
         {mdUp && (
           <StyledSection>
-            <img src={image} alt='register' />
+            <img src={Forgot_Photo} alt='login' />
           </StyledSection>
         )}
         <Container maxWidth='sm'>
@@ -101,61 +106,32 @@ export default function RegisterPage() {
               variant='h4'
               gutterBottom
               sx={{
-                textTransform: 'uppercase',
-                mb: 2
+                textTransform: 'uppercase'
               }}
             >
-              {t('signUp')}
+              {t('forgotPassword')}
             </Typography>
-            <Stack spacing={3}>
+            <Typography sx={{ color: 'text.secondary' }}>{t('forgotPasswordReminder')}</Typography>
+            <Stack
+              spacing={3}
+              sx={{
+                my: 2
+              }}
+            >
               <TextField
                 name='username'
                 label={t('username')}
                 required
                 onChange={(e) => {
-                  setUsername(e.target.value)
+                  setFormData({ ...formData, username: e.target.value })
                 }}
               />
-              <Stack direction='row' alignItems='center' justifyContent='space-between' sx={{ my: 2 }}>
-                <TextField
-                  name='name'
-                  label={t('firstName')}
-                  required
-                  onChange={(e) => {
-                    setFirstname(e.target.value)
-                  }}
-                />
-                <TextField
-                  name='surname'
-                  label={t('lastName')}
-                  required
-                  onChange={(e) => {
-                    setLastname(e.target.value)
-                  }}
-                />
-              </Stack>
               <TextField
                 name='email'
                 label='Email'
                 required
                 onChange={(e) => {
-                  setEmail(e.target.value)
-                }}
-              />
-              <TextField
-                name='password'
-                label={t('password')}
-                type='password'
-                onChange={(e) => {
-                  setPassword(e.target.value)
-                }}
-              />
-              <TextField
-                name='passwordconfirm'
-                label={t('passwordConfirm')}
-                type='password'
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value)
+                  setFormData({ ...formData, email: e.target.value })
                 }}
               />
             </Stack>
@@ -165,17 +141,16 @@ export default function RegisterPage() {
               size='large'
               type='submit'
               variant='text'
-              loading={isSubmitting}
-              onClick={register}
-              sx={{ my: 2 }}
+              loading={isSubmit}
+              onClick={() => handleResetPassword()}
             >
-              {t('register')}
+              {t('sendResetLink')}
             </LoadingButton>
-            <Typography variant='body2' sx={{ mb: 5 }}>
-              {t('alreadyMember')}{' '}
+            <Typography variant='body2' sx={{ my: 2 }}>
+              {t('dontHaveAccount')}{' '}
               <Link
                 variant='subtitle2'
-                href='/login'
+                href='/register'
                 sx={{
                   fontWeight: 'bold',
                   textDecoration: 'none',
@@ -184,7 +159,7 @@ export default function RegisterPage() {
                   }
                 }}
               >
-                {t('signIn')}
+                {t('registerNow')}
               </Link>
             </Typography>
           </StyledContent>

@@ -23,7 +23,6 @@ import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone'
 import WithdrawDetail from './WithdrawDetail'
 import CheckCircleTwoToneIcon from '@mui/icons-material/CheckCircleTwoTone'
 import CancelTwoToneIcon from '@mui/icons-material/CancelTwoTone'
-import Snackbar from '../../../../common/components/SnackBar'
 import useSnackbar from '../../../../contexts/snackbar.context'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
@@ -106,7 +105,6 @@ const WithdrawHistoryTable = ({ request, fetchData }) => {
   }
   return (
     <>
-      <Snackbar />
       {open && <WithdrawDetail open={open} setOpen={setOpen} withdraw={item} />}
       <Card>
         <CardHeader title={t('recentRequests')} />

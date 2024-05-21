@@ -11,6 +11,7 @@ import AdminLayout from './pages/Admin/layouts/AdminLayout'
 // common pages
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const Profile = lazy(() => import('./pages/Profile'))
 const HomePage = lazy(() => import('./pages/HomePage'))
@@ -92,6 +93,14 @@ export default function useRouteElements() {
               element: (
                 <Suspense>
                   <Register />
+                </Suspense>
+              )
+            },
+            {
+              path: path.forgotPassword,
+              element: (
+                <Suspense>
+                  <ForgotPassword />
                 </Suspense>
               )
             }

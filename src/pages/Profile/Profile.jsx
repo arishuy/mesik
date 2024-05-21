@@ -10,7 +10,6 @@ import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import UploadAvatar from '../../components/UploadAvatar/UploadAvatar'
 import Loading from '../../common/components/Loading/Loading'
 import useSnackbar from '../../contexts/snackbar.context'
-import Snackbar from '../../common/components/SnackBar'
 import useResponsive from '../../hooks/useResponsive'
 import urlConfig from '../../config/UrlConfig'
 import dayjs from 'dayjs'
@@ -133,7 +132,6 @@ const Profile = () => {
         <Helmet>
           <title>Thông Tin Cá Nhân</title>
         </Helmet>
-        <Snackbar />
         <Box
           sx={
             isMobile

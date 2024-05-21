@@ -4,7 +4,6 @@ import { Grid, Typography, Button, Modal, Box } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import useSnackbar from '../../../../contexts/snackbar.context'
-import Snackbar from '../../../../common/components/SnackBar'
 import { styled } from '@mui/material/styles'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import svg from '../../../../assets/icons/pdf_file.svg'
@@ -90,7 +89,6 @@ const CertificateValidateForm = ({ open, setOpen, certificate, fetchData, expert
 
   return (
     <>
-      <Snackbar />
       <RootModal
         variant='Create'
         title={t('verifyCertificate')}

@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Loading from '../../common/components/Loading/Loading'
 import Empty from '../../common/components/Empty'
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded'
 import { useMusicPlayer } from '../../contexts/music.context'
 import urlConfig from '../../config/UrlConfig'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
+import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded'
+import AddRoundedIcon from '@mui/icons-material/AddRounded'
+
 import {
   Table,
   TableBody,
@@ -16,14 +21,38 @@ import {
   Stack,
   Avatar,
   IconButton,
-  Tooltip
+  Tooltip,
+  Popover,
+  List,
+  ListItem
 } from '@mui/material'
 import convertToMinutes from '../../common/utils/convertToMinutes'
+import { useTranslation } from 'react-i18next'
+import { AppContext } from '../../contexts/app.context'
+import { SnackbarContext } from '../../contexts/snackbar.context'
 const HistoryListen = () => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(true)
   const [historyListen, setHistoryListen] = useState([])
-  const { playSong } = useMusicPlayer()
+  const { isAuthenticated, likedSong, setLikedSong } = useContext(AppContext)
+  const user = JSON.parse(localStorage.getItem('profile'))
+  const { snack, setSnack } = useContext(SnackbarContext)
+  const [open, setOpen] = useState(false)
+  const [song, setSong] = useState({})
+  const { playSong, addToPlaylist } = useMusicPlayer()
+  const [anchorEl, setAnchorEl] = React.useState(null)
 
+  const handleClick = (event, majorsOrder) => {
+    setAnchorEl(event.currentTarget)
+    setSong(majorsOrder)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const openPopup = Boolean(anchorEl)
+  const id = openPopup ? 'simple-popover' : undefined
   const fetchHistoryListen = async () => {
     await AxiosInterceptors.get(urlConfig.user.getHistoryListen + `?limit=-1`)
       .then((res) => {
@@ -34,6 +63,41 @@ const HistoryListen = () => {
         console.log(err)
       })
   }
+  const handleLikeSong = async () => {
+    // like song
+    await AxiosInterceptors.get(urlConfig.user.likedSongs + `/${song._id}`)
+      .then((res) => {
+        if (res.data.result.favourite === true) {
+          setSnack({
+            ...snack,
+            open: true,
+            message: 'Đã thêm vào thư viện',
+            type: 'success'
+          })
+          setLikedSong((prevLikedSong) => [...prevLikedSong, song._id])
+          user.liked_songs.push(song._id)
+          localStorage.setItem('profile', JSON.stringify(user))
+        } else {
+          setSnack({
+            ...snack,
+            open: true,
+            message: 'Đã xóa khỏi thư viện',
+            type: 'success'
+          })
+          setLikedSong((prevLikedSong) => prevLikedSong.filter((item) => item !== song._id))
+          user.liked_songs = user.liked_songs.filter((item) => item !== song._id)
+          localStorage.setItem('profile', JSON.stringify(user))
+        }
+      })
+      .catch((err) => {
+        setSnack({
+          ...snack,
+          open: true,
+          message: 'Bài hát đã có trong thư viện',
+          type: 'error'
+        })
+      })
+  }
   useEffect(() => {
     fetchHistoryListen()
   }, [])
@@ -42,7 +106,7 @@ const HistoryListen = () => {
   ) : (
     <div>
       <Typography variant='h4' py={3}>
-        Nghe gần đây
+        {t('recentlyListened')}
       </Typography>
       {historyListen.length === 0 ? (
         <Empty message={'Không có lịch sử nghe nào!'} />
@@ -97,11 +161,15 @@ const HistoryListen = () => {
                       </Typography>
                     </TableCell>
                     <TableCell align='right'>
-                      <Tooltip title='Xóa khỏi lịch sử nghe' arrow>
-                        <IconButton color='error'>
-                          <DeleteOutlineRoundedIcon />
-                        </IconButton>
-                      </Tooltip>
+                      <IconButton
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          handleClick(e, majorsOrder)
+                        }}
+                        size='small'
+                      >
+                        <MoreVertIcon />
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 )
@@ -110,6 +178,48 @@ const HistoryListen = () => {
           </Table>
         </TableContainer>
       )}
+      <Popover
+        id={id}
+        open={openPopup}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left'
+        }}
+      >
+        <List component='nav'>
+          <ListItem
+            button
+            onClick={() => {
+              handleLikeSong()
+              handleClose()
+            }}
+          >
+            {likedSong.includes(song._id) ? (
+              <>
+                <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'red' }} />
+                <Typography>Xoá khỏi thư viện</Typography>
+              </>
+            ) : (
+              <>
+                <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'blue' }} />
+                <Typography>Thêm vào thư viện</Typography>
+              </>
+            )}
+          </ListItem>
+          <ListItem
+            button
+            onClick={() => {
+              addToPlaylist(song)
+              handleClose()
+            }}
+          >
+            <SkipNextRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'green' }} />
+            <Typography>Phát tiếp theo</Typography>
+          </ListItem>
+        </List>
+      </Popover>
     </div>
   )
 }

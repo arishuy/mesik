@@ -2,6 +2,7 @@
   "vi": "Vietnamese",
   "en": "English",
   "dashboard": "Dashboard",
+  "librabry": "Library",
   "search": "Search",
   "myProfile": "My Profile",
   "historyTransaction": "History Transaction",
@@ -81,12 +82,12 @@
   "deleteAccountMessage": "I understand that I will not be able to undo this action and that all my data will be deleted.",
 
   "promoteTitle": "Tell us about yourself",
-  "becomeExpert": "Become an expert",
+  "becomeArtist": "Become an Artist",
   "agreeTerm": "I agree to the terms and conditions",
   "promote": "Promote",
-  "promoteExpert": "Promote To Expert",
-  "promoteSuccess": "Congrate! You are now an expert.",
-  "promoteMessage": "Now you can accept job request from user and earn money.",
+  "promoteExpert": "Promote To Artist",
+  "promoteSuccess": "Congrate! You are now an artist.",
+  "promoteMessage": "You can now upload your music and create your own album.",
 
   "jobRequest": "Job Request",
 
@@ -328,5 +329,14 @@
   "deletePlaylistSuccess": "Delete playlist successfully",
   "updatePlaylistSuccess": "Update playlist successfully",
   "updatePlaylistFail": "Update playlist failed",
-  "updateAlbumSuccess": "Update album successfully"
+  "updateAlbumSuccess": "Update album successfully",
+
+  "randomMusic": "Random Music",
+  "justReleased": "Just Released",
+  "albumFeatured": "Album Featured",
+  "recentlyListened": "Recently Listened",
+  "playlistForYou": "Playlist For You",
+  "artistFamous": "Famous Artist",
+
+  "displayName": "Display Name"
 }

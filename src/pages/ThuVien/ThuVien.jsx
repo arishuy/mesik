@@ -7,6 +7,7 @@ import LikedSongs from './LikedSongs'
 import HistoryListen from './HistoryListen'
 import FollowingArtist from './FollowingArtist'
 import HistoryUpload from './HistoryUpload'
+import { useTranslation } from 'react-i18next'
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props
@@ -41,6 +42,7 @@ function a11yProps(index) {
   }
 }
 const ThuVien = () => {
+  const { t } = useTranslation()
   const [value, setValue] = React.useState(0)
   const user = JSON.parse(localStorage.getItem('profile'))
   const navigation = useNavigate()
@@ -69,7 +71,7 @@ const ThuVien = () => {
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label='basic tabs example'>
             <Tab label='Bài hát yêu thích' {...a11yProps(0)} />
-            <Tab label='Nghe gần đây' {...a11yProps(1)} />
+            <Tab label={t('recentlyListened')} {...a11yProps(1)} />
             <Tab label='Đang theo dõi' {...a11yProps(2)} />
             {user?.role === 'ARTIST' && <Tab label='Đã tải lên' {...a11yProps(3)} />}
           </Tabs>

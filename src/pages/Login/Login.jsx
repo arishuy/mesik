@@ -7,7 +7,6 @@ import LoginPhoto from '../../assets/images/login.jpg'
 import axios from 'axios'
 import useSnackbar from '../../contexts/snackbar.context'
 import urlConfig from '../../config/UrlConfig'
-import Snackbar from '../../common/components/SnackBar'
 import { setProfileToLS } from '../../utils/auth'
 import { useCookies } from 'react-cookie'
 import { Helmet } from 'react-helmet-async'
@@ -111,7 +110,6 @@ export default function LoginPage() {
         <Helmet>
           <title>{t('signIn')}</title>
         </Helmet>
-        <Snackbar />
         <StyledRoot>
           {mdUp && (
             <StyledSection>

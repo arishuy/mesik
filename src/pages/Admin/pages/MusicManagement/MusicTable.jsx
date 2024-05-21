@@ -29,7 +29,6 @@ import { Box, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import AddLyric from './AddLyric'
 import useSnack from '../../../../contexts/snackbar.context'
-import Snackbar from '../../../../common/components/SnackBar'
 import EditSong from './EditSong'
 import MusicTableToolbar from './MusicTableToolBar'
 import svg from '../../../../assets/images/empty.png'
@@ -64,7 +63,6 @@ const MusicTable = ({
   }, [isMobile])
   return (
     <>
-      <Snackbar />
       {openModal && (
         <EditSong
           open={openModal}

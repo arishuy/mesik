@@ -16,7 +16,6 @@ import Empty from '../../common/components/Empty'
 import Loading from '../../common/components/Loading/Loading'
 import { Helmet } from 'react-helmet-async'
 import EditPlaylist from './EditPlaylist'
-import Snackbar from '../../common/components/SnackBar'
 
 const MyPlaylist = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -60,7 +59,6 @@ const MyPlaylist = () => {
       <Helmet>
         <title>Playlist</title>
       </Helmet>
-      <Snackbar />
       {openAdd && <AddNewPlaylist open={openAdd} handleClose={() => setOpenAdd(false)} fetchData={fetchData} />}
       {openEdit && (
         <EditPlaylist open={openEdit} handleClose={() => setOpenEdit(false)} fetchData={fetchData} item={item} />

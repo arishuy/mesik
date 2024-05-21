@@ -2,6 +2,7 @@
   "vi": "Tiếng Việt",
   "en": "Tiếng Anh",
   "dashboard": "Trang chủ",
+  "librabry": "Thư viện",
   "search": "Tìm kiếm",
   "myProfile": "Hồ sơ của tôi",
   "historyTransaction": "Lịch sử giao dịch",
@@ -81,12 +82,12 @@
   "deleteAccountMessage": "Tôi hiểu rằng tôi sẽ không thể hoàn tác hành động này và tất cả dữ liệu của tôi sẽ bị xóa vĩnh viễn.",
 
   "promoteTitle": "Nói cho chúng tôi biết về bạn",
-  "becomeExpert": "Trở thành chuyên gia",
+  "becomeArtist": "Trở thành nghệ sĩ",
   "agreeTerm": "Tôi đồng ý với các điều khoản và điều kiện của các bạn",
   "promote": "Nâng cấp",
-  "promoteExpert": "Nâng cấp lên chuyên gia",
-  "promoteSuccess": "Xin chúc mừng! Bây giờ bạn là một chuyên gia.",
-  "promoteMessage": "Bây giờ bạn có thể chấp nhận yêu cầu công việc từ người dùng và kiếm tiền.",
+  "promoteArtist": "Nâng cấp lên nghệ sĩ",
+  "promoteSuccess": "Xin chúc mừng! Bây giờ bạn là một nghệ sĩ.",
+  "promoteMessage": "Bây giờ bạn có thể tải lên bài hát của mình.",
 
   "jobRequest": "Yêu cầu công việc",
 
@@ -327,5 +328,14 @@
   "deleteAlbumSuccess": "Xóa album thành công",
   "deletePlaylistSuccess": "Xóa playlist thành công",
   "updatePlaylistSuccess": "Cập nhật playlist thành công",
-  "updatePlaylistFail": "Cập nhật playlist thất bại"
+  "updatePlaylistFail": "Cập nhật playlist thất bại",
+
+  "randomMusic": "Trải nghiệm ngẫu nhiên",
+  "justReleased": "Vừa phát hành",
+  "albumFeatured": "Album nổi bật",
+  "recentlyListened": "Nghe gần đây",
+  "playlistForYou": "Playlist cho bạn",
+  "artistFamous": "Nghệ sĩ nổi tiếng",
+
+  "displayName": "Tên hiển thị"
 }

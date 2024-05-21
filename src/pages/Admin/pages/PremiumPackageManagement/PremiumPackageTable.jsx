@@ -25,7 +25,6 @@ import DeleteConfirm from './DeleteConfirm'
 import AddNewPremiumPackage from './AddNewPremiumPackage'
 import { Box, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-import Snackbar from '../../../../common/components/SnackBar'
 import EditPremiumPackage from './EditPremiumPackage'
 import svg from '../../../../assets/images/empty.png'
 
@@ -46,7 +45,6 @@ const PremiumPackageTable = ({ majorsOrder, fetchData }) => {
   }, [isMobile])
   return (
     <>
-      <Snackbar />
       {openModal && (
         <EditPremiumPackage open={openModal} handleClose={() => setOpenModal(false)} fetchData={fetchData} id={id} />
       )}

@@ -4,7 +4,6 @@ import { Stack, TextField } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import useSnackbar from '../../../../contexts/snackbar.context'
-import Snackbar from '../../../../common/components/SnackBar'
 import { useTranslation } from 'react-i18next'
 const EditMajor = ({ open, handleClose, fetchData, item }) => {
   const { t } = useTranslation()
@@ -35,7 +34,6 @@ const EditMajor = ({ open, handleClose, fetchData, item }) => {
   }
   return (
     <>
-      <Snackbar />
       <RootModal
         variant='Edit'
         title={t('editMajor')}

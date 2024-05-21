@@ -5,8 +5,10 @@ import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import SongCard from '../../common/components/SongCard'
 import Empty from '../../common/components/Empty'
 import useSnackbar from '../../contexts/snackbar.context'
+import { useTranslation } from 'react-i18next'
 
 const RecentListen = ({ allPlaylists }) => {
+  const { t } = useTranslation()
   const [songs, setSongs] = useState([])
   const { snack, setSnack } = useSnackbar()
   const [isLoading, setIsLoading] = useState(true)
@@ -23,7 +25,7 @@ const RecentListen = ({ allPlaylists }) => {
   return (
     <>
       <Typography variant='h4' py={3}>
-        Nghe gần đây
+        {t('recentlyListened')}
       </Typography>
       {!isLoading && songs.length === 0 && <Empty message={'Không có bài hát nào'} />}
       <Grid container spacing={2}>

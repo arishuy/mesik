@@ -101,7 +101,7 @@ export default function AdminSideNav({ param }) {
               icon={<HomeIcon />}
               component={<Link to={path.home} style={param === path.home ? styleActive : styleLink} />}
             >
-              Trang chủ
+              {t('dashboard')}
             </MenuItem>
             {isAuthenticated && (
               <>
@@ -109,7 +109,7 @@ export default function AdminSideNav({ param }) {
                   icon={<LibraryMusicRoundedIcon />}
                   component={<Link to={path.myLibrary} style={param === path.myLibrary ? styleActive : styleLink} />}
                 >
-                  Thư Viện
+                  {t('librabry')}
                 </MenuItem>
                 <MenuItem
                   icon={<QueueMusicIcon />}

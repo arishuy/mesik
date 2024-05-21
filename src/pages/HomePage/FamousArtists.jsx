@@ -4,8 +4,10 @@ import Axios from 'axios'
 import urlConfig from '../../config/UrlConfig'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const FamousArtists = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [artists, setArtists] = useState([])
   useEffect(() => {
@@ -20,7 +22,7 @@ const FamousArtists = () => {
   return (
     <>
       <Typography variant='h4' py={3}>
-        Nghệ sĩ nổi tiếng
+        {t('artistFamous')}
       </Typography>
       <Grid container spacing={3}>
         {artists.map((artist) => (

@@ -28,18 +28,7 @@ const path = {
   becomeArtist: '/user/become-artist',
   buyPremium: '/buy-premium',
 
-  //Expert
-  expert: '/expert',
-  expertProfile: '/expert/profile',
-  expertChangePassword: '/expert/changepassword',
-  expertTransactionHistory: '/expert/transaction-history',
-  expertAnalytics: '/expert/analytics',
-  expertBookings: '/expert/bookings',
-  expertShowListPost: '/expert/list-post',
-  expertDashboard: '/expert/dashboard',
-  expertWithdraw: '/expert/withdraw',
-
-  //Expert
+  //Artist
   artist: '/artist',
   artistProfile: '/profile',
   artistChangePassword: '/artist/changepassword',

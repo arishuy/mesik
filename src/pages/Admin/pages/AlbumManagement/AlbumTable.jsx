@@ -21,7 +21,6 @@ import { useTranslation } from 'react-i18next'
 import useResponsive from '../../../../hooks/useResponsive'
 import moment from 'moment'
 import DeleteConfirm from './DeleteConfirm'
-import Snackbar from '../../../../common/components/SnackBar'
 
 const AlbumTable = ({ majorsOrder, fetchData }) => {
   const isMobile = useResponsive('down', 'sm')
@@ -38,7 +37,6 @@ const AlbumTable = ({ majorsOrder, fetchData }) => {
   }, [isMobile])
   return (
     <>
-      <Snackbar />
       {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} fetchData={fetchData} id={id} />}
       <Card>
         <CardHeader title={t('albumManagement')} />

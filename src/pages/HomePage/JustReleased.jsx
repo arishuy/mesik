@@ -5,7 +5,9 @@ import urlConfig from '../../config/UrlConfig'
 import { useMusicPlayer } from '../../contexts/music.context'
 import SongCard from '../../common/components/SongCard'
 import useSnackbar from '../../contexts/snackbar.context'
+import { useTranslation } from 'react-i18next'
 const JustReleased = ({ allPlaylists }) => {
+  const { t } = useTranslation()
   const [songs, setSongs] = useState([])
   const { snack, setSnack } = useSnackbar()
   const { playSong } = useMusicPlayer()
@@ -23,7 +25,7 @@ const JustReleased = ({ allPlaylists }) => {
   return (
     <>
       <Typography variant='h4' py={3}>
-        Vừa phát hành
+        {t('justReleased')}
       </Typography>
       <Grid container spacing={2}>
         {isLoading && (

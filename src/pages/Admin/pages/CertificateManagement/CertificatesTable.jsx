@@ -20,7 +20,6 @@ import {
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone'
-import Snackbar from '../../../../common/components/SnackBar'
 import { useTranslation } from 'react-i18next'
 import CertificateValidateForm from './CertificateValidateForm'
 
@@ -153,7 +152,6 @@ const CertificatesTable = ({ majorsOrder, fetchData }) => {
   const theme = useTheme()
   return (
     <>
-      <Snackbar />
       <Card>
         <TableContainer>
           <Table size='small'>

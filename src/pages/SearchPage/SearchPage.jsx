@@ -80,7 +80,7 @@ const SearchPage = () => {
         ))}
       </Grid>
       <Typography variant='h4' py={3}>
-        Nghệ sĩ nổi tiếng
+        Nghệ sĩ
       </Typography>
       <Grid container spacing={3}>
         {data.artists?.length === 0 && (

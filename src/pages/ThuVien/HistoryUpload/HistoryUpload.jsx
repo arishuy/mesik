@@ -34,7 +34,6 @@ import DeleteConfirm from './DeleteConfirm'
 import { GenreContext } from '../../../contexts/genre.context'
 import { RegionContext } from '../../../contexts/region.context'
 import useSnackbar from '../../../contexts/snackbar.context'
-import Snackbar from '../../../common/components/SnackBar'
 
 const HistoryUpload = () => {
   const theme = useTheme()
@@ -78,7 +77,6 @@ const HistoryUpload = () => {
     <Loading />
   ) : (
     <div>
-      <Snackbar />
       {openModal && (
         <EditSong
           open={openModal}

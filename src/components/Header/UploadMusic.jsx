@@ -132,7 +132,6 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
   }, [])
   return (
     <>
-      <Snackbar />
       {genres.length > 0 && (
         <RootModal
           variant='Create'

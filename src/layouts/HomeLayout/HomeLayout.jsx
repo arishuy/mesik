@@ -8,6 +8,7 @@ import { Box } from '@mui/material'
 import SideNav from '../../components/SideNav'
 import MusicPlayer from '../../components/MusicPlayer'
 import ChatBot from '../../components/ChatBot'
+import Snackbar from '../../common/components/SnackBar'
 function HomeLayoutInner({ children }) {
   const param = useLocation()
   const { isAuthenticated } = useContext(AppContext)
@@ -17,6 +18,7 @@ function HomeLayoutInner({ children }) {
         overflow: 'hidden'
       }}
     >
+      <Snackbar />
       <Box
         sx={{
           display: 'flex',

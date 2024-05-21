@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { Grid, IconButton, Skeleton, Stack, Tooltip, Typography } from '@mui/material'
 import urlConfig from '../../config/UrlConfig'
 import { useMusicPlayer } from '../../contexts/music.context'
-import useSnackbar from '../../contexts/snackbar.context'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import Empty from '../../common/components/Empty'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const FamousAlbums = () => {
+  const { t } = useTranslation()
   const [albums, setAlbums] = useState([])
   const navigate = useNavigate()
-  const { snack, setSnack } = useSnackbar()
   const { playSong } = useMusicPlayer()
   const [isLoading, setIsLoading] = useState(true)
 
@@ -44,7 +44,7 @@ const FamousAlbums = () => {
   return (
     <>
       <Typography variant='h4' py={3}>
-        Album nổi bật
+        {t('albumFeatured')}
       </Typography>
       <Grid container spacing={2}>
         {isLoading && (
@@ -65,7 +65,7 @@ const FamousAlbums = () => {
         {albums.map((album) => (
           <Grid item xs={12} md={6} lg={3} key={album._id}>
             <div className='song-card'>
-              <img className='song-card_image' src={album.songs[0]?.photo_url} alt='David Bowie - Aladdin Sane' />
+              <img className='song-card_image' src={album.photo_url} alt='David Bowie - Aladdin Sane' />
               <div className='song-card_info'>
                 <div className='song-card_info_artist'>{album.songs.length} bài hát</div>
                 <div className='song-card_info_album'></div>

@@ -82,8 +82,9 @@ code {
 }
 .song-card_info_title {
   margin-top: 8px;
-  font-size: 1.3em;
+  font-size: 1em;
   line-height: 1.5em;
+  font-weight: bold;
 }
 .song-card_info_artist,
 .song-card_info_album,

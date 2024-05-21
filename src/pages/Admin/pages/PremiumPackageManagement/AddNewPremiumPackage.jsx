@@ -4,7 +4,6 @@ import { Stack, TextField } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import useSnackbar from '../../../../contexts/snackbar.context'
-import Snackbar from '../../../../common/components/SnackBar'
 import { useTranslation } from 'react-i18next'
 const AddNewPremiumPackage = ({ open, handleClose, fetchData }) => {
   const { t } = useTranslation()
@@ -51,7 +50,6 @@ const AddNewPremiumPackage = ({ open, handleClose, fetchData }) => {
   }
   return (
     <>
-      <Snackbar />
       <RootModal
         variant='Create'
         title={t('newPremiumPackage')}

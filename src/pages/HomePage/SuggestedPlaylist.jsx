@@ -8,8 +8,10 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import Empty from '../../common/components/Empty'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const SuggestedPlaylist = () => {
+  const { t } = useTranslation()
   const [playlists, setPlaylists] = useState([])
   const navigate = useNavigate()
   const { snack, setSnack } = useSnackbar()
@@ -45,7 +47,7 @@ const SuggestedPlaylist = () => {
   return (
     <>
       <Typography variant='h4' py={3}>
-        Playlist cho bạn
+        {t('playlistForYou')}
       </Typography>
       <Grid container spacing={2}>
         {isLoading && (
