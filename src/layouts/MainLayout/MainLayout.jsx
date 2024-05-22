@@ -1,13 +1,13 @@
 import { memo } from 'react'
 import { Outlet } from 'react-router-dom'
-import Header from '../../components/Header/Header'
+import AdminHeader from '../../components/AdminHeader/Header'
 import Snackbar from '../../common/components/SnackBar'
 
 function MainLayoutInner({ children }) {
   return (
     <div>
       <Snackbar />
-      <Header />
+      <AdminHeader />
       {children}
       <Outlet />
     </div>

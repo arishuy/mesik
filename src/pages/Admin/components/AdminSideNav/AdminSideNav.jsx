@@ -93,6 +93,10 @@ export default function AdminSideNav() {
         </Menu>
       ) : (
         <Menu>
+          <MenuItem icon={<SsidChartIcon />} component={<Link to={path.adminDashBoard} style={styleLink} />}>
+            {t('statistics')}
+          </MenuItem>
+
           <MenuItem
             icon={<AccountBoxIcon />}
             component={

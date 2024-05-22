@@ -4,14 +4,13 @@ import { useTranslation } from 'react-i18next'
 export default function BookingBooked({ pending, canceled, done, processing }) {
   const { t } = useTranslation()
   const _bookingsOverview = [
-    { status: 'Pending', quantity: pending, value: pending, tag: 'pending' },
     { status: 'Cancelled', quantity: canceled, value: canceled, tag: 'cancelled' },
-    { status: 'Completed', quantity: done, value: done, tag: 'completed' },
-    { status: 'Processing', quantity: processing, value: processing, tag: 'processing' }
+    { status: 'Processing', quantity: processing, value: processing, tag: 'processing' },
+    { status: 'Completed', quantity: done, value: done, tag: 'completed' }
   ]
   return (
     <Card>
-      <CardHeader title={t('jobRequest')} />
+      <CardHeader title='Transaction' />
       <Stack spacing={3} sx={{ px: 3, my: 5 }}>
         {_bookingsOverview.map((progress) => (
           <LinearProgress
@@ -19,7 +18,6 @@ export default function BookingBooked({ pending, canceled, done, processing }) {
             key={progress.status}
             value={progress.value}
             color={
-              (progress.status === 'Pending' && 'warning') ||
               (progress.status === 'Cancelled' && 'error') ||
               (progress.status === 'Processing' && 'secondary') ||
               'success'
@@ -39,7 +37,6 @@ export default function BookingBooked({ pending, canceled, done, processing }) {
                   height: 12,
                   borderRadius: 0.5,
                   bgcolor: 'success.main',
-                  ...(progress.status === 'Pending' && { bgcolor: 'warning.main' }),
                   ...(progress.status === 'Cancelled' && { bgcolor: 'error.main' }),
                   ...(progress.status === 'Processing' && { bgcolor: 'secondary.main' })
                 }}

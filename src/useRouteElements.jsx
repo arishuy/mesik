@@ -34,6 +34,7 @@ const ValidateEmail = lazy(() => import('./pages/ValidateEmail'))
 const BecomeArtist = lazy(() => import('./pages/User/pages/BecomeArtist'))
 
 // admin page
+const Dashboard = lazy(() => import('./pages/Admin/pages/DashBoard'))
 const MusicManagement = lazy(() => import('./pages/Admin/pages/MusicManagement'))
 const GenreManagement = lazy(() => import('./pages/Admin/pages/GenreManagement'))
 const UserManagement = lazy(() => import('./pages/Admin/pages/UsersManagement'))
@@ -226,6 +227,16 @@ export default function useRouteElements() {
                     <Suspense>
                       <AdminLayout>
                         <HistoryTransaction />
+                      </AdminLayout>
+                    </Suspense>
+                  )
+                },
+                {
+                  path: path.adminDashBoard,
+                  element: (
+                    <Suspense>
+                      <AdminLayout>
+                        <Dashboard />
                       </AdminLayout>
                     </Suspense>
                   )

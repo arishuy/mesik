@@ -3,6 +3,7 @@ import { Container, Grid, Stack, Card, CardContent, Typography } from '@mui/mate
 import BookingWidgetSummary from '../../components/Dashboard/BookingWidgetSummary'
 import BookingBooked from '../../components/Dashboard/BookingBooked'
 import BookingReview from '../../components/Dashboard/BookingReview'
+import MusicNoteRoundedIcon from '@mui/icons-material/MusicNoteRounded'
 import EmojiPeopleRoundedIcon from '@mui/icons-material/EmojiPeopleRounded'
 import WorkOutlineRoundedIcon from '@mui/icons-material/WorkOutlineRounded'
 import AddCardRoundedIcon from '@mui/icons-material/AddCardRounded'
@@ -13,7 +14,8 @@ import useResponsive from '../../../../hooks/useResponsive'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import Loading from '../../../../common/components/Loading/Loading'
-import IncomeChart from '../../components/Dashboard/IncomeChart'
+import PlaylistAddCheckRoundedIcon from '@mui/icons-material/PlaylistAddCheckRounded'
+import AlbumRoundedIcon from '@mui/icons-material/AlbumRounded'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 
@@ -75,10 +77,10 @@ const DashBoard = () => {
 
           <Grid item xs={12} md={4}>
             <BookingWidgetSummary
-              title={t('jobRequest')}
-              total={data.job_request_count}
+              title={t('song')}
+              total={data.song_count}
               icon={
-                <WorkOutlineRoundedIcon
+                <MusicNoteRoundedIcon
                   sx={{
                     width: '100%',
                     height: '100%'
@@ -89,8 +91,8 @@ const DashBoard = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <BookingWidgetSummary
-              title={t('expert')}
-              total={data.expert_count}
+              title={t('artist')}
+              total={data.artist_count}
               icon={
                 <HailRoundedIcon
                   sx={{
@@ -133,8 +135,8 @@ const DashBoard = () => {
               </Grid>
               <Grid item xs={12} md={12}>
                 <BookingWidgetSummary
-                  title={t('major')}
-                  total={data.major_count}
+                  title={t('genre')}
+                  total={data.genre_count}
                   icon={
                     <AlignHorizontalRightRoundedIcon
                       sx={{
@@ -148,18 +150,43 @@ const DashBoard = () => {
             </Grid>
           </Grid>
           <Grid item xs={12} md={4}>
-            <BookingBooked
-              canceled={data.job_request_canceled_count}
-              pending={data.job_request_pending_count}
-              processing={data.job_request_processing_count}
-              done={data.job_request_done_count}
-            />
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={12}>
+                <BookingWidgetSummary
+                  title={t('album')}
+                  total={data.album_count}
+                  icon={
+                    <AlbumRoundedIcon
+                      sx={{
+                        width: '100%',
+                        height: '100%'
+                      }}
+                    />
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <BookingWidgetSummary
+                  title={t('playlist')}
+                  total={data.playlist_count}
+                  icon={
+                    <PlaylistAddCheckRoundedIcon
+                      sx={{
+                        width: '100%',
+                        height: '100%'
+                      }}
+                    />
+                  }
+                />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12} md={4}>
-            <BookingReview data={data.reviews} />
-          </Grid>
-          <Grid item xs={12} md={12}>
-            <IncomeChart />
+            <BookingBooked
+              canceled={data.transaction_cancel_count}
+              processing={data.transaction_processing_count}
+              done={data.transaction_done_count}
+            />
           </Grid>
         </Grid>
       </Container>

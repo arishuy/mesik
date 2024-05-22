@@ -106,31 +106,17 @@ const DetailTransaction = ({ open, setOpen, transaction }) => {
               <KeyboardDoubleArrowRightTwoToneIcon sx={{ fontSize: 50 }} />
             </Grid>
             <Grid item xs={12} sm={5}>
-              {transaction.transaction_type === 'PAYMENT' ? (
-                <Stack direction='row' spacing={2} alignItems='center'>
-                  <Avatar src={transaction.expert.photo_url} />
-                  <Stack direction='column' spacing={0}>
-                    <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                      {transaction.expert.first_name} {transaction.expert.last_name}
-                    </Typography>
-                    <Typography variant='body2' color='text.secondary' noWrap>
-                      {transaction.expert.email}
-                    </Typography>
-                  </Stack>
+              <Stack direction='row' spacing={2} alignItems='center'>
+                <Avatar>Msk</Avatar>
+                <Stack direction='column' spacing={0}>
+                  <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
+                    Mesik Services
+                  </Typography>
+                  <Typography variant='body2' color='text.secondary' noWrap>
+                    mesikadmin@gmail.com
+                  </Typography>
                 </Stack>
-              ) : (
-                <Stack direction='row' spacing={2} alignItems='center'>
-                  <Avatar>EP</Avatar>
-                  <Stack direction='column' spacing={0}>
-                    <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                      Mesik Services
-                    </Typography>
-                    <Typography variant='body2' color='text.secondary' noWrap>
-                      mesikadmin@gmail.com
-                    </Typography>
-                  </Stack>
-                </Stack>
-              )}
+              </Stack>
             </Grid>
           </Grid>
           <Container mt={2}>
