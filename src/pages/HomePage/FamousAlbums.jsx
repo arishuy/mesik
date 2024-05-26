@@ -66,11 +66,6 @@ const FamousAlbums = () => {
           <Grid item xs={12} md={6} lg={3} key={album._id}>
             <div className='song-card'>
               <img className='song-card_image' src={album.photo_url} alt='David Bowie - Aladdin Sane' />
-              <div className='song-card_info'>
-                <div className='song-card_info_artist'>{album.songs.length} bài hát</div>
-                <div className='song-card_info_album'></div>
-                <div className='song-card_info_title'>{album.title}</div>
-              </div>
               <div className='song-card_play'>
                 <Stack direction='row' spacing={1} pt={2}>
                   <Tooltip title='Phát ngay'>
@@ -96,6 +91,17 @@ const FamousAlbums = () => {
                 </Stack>
               </div>
             </div>
+            <Typography variant='h6' sx={{ textAlign: 'left', py: 1, ml: 1 }}>
+              {album.title}
+              <div
+                className='song-card_info_album'
+                style={{
+                  color: 'gray'
+                }}
+              >
+                {album.songs.length} bài hát
+              </div>
+            </Typography>
           </Grid>
         ))}
       </Grid>

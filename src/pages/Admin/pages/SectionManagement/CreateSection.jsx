@@ -31,7 +31,6 @@ const CreateSection = () => {
         console.log(err)
       })
   }
-  console.log(data)
   return (
     <div
       style={
@@ -71,7 +70,7 @@ const CreateSection = () => {
         {data.items.map((item, index) => (
           <Grid item xs={12} md={6} lg={3} key={item._id}>
             <div className='song-card'>
-              <img className='song-card_image' src={item.songs[0]?.photo_url} alt='David Bowie - Aladdin Sane' />
+              <img className='song-card_image' src={item.photo_url} alt='David Bowie - Aladdin Sane' />
               <div className='song-card_info'>
                 <div className='song-card_info_artist'>{item.songs.length} bài hát</div>
                 <div className='song-card_info_album'></div>

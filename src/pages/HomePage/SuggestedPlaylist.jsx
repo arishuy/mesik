@@ -79,9 +79,7 @@ const SuggestedPlaylist = () => {
                 alt='David Bowie - Aladdin Sane'
               />
               <div className='song-card_info'>
-                <div className='song-card_info_artist'>{playlist.playlist.songs.length} bài hát</div>
-                <div className='song-card_info_album'></div>
-                <div className='song-card_info_title'>{playlist.playlist.title}</div>
+                <div className='song-card_info_album'>{playlist.playlist.songs.length} bài hát</div>
               </div>
               <div className='song-card_play'>
                 <Stack direction='row' spacing={1} pt={2}>

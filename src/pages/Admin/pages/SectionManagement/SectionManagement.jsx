@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from '@mui/material'
+import { Button, Divider, Stack, Typography } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import useResponsive from '../../../../hooks/useResponsive'
@@ -7,6 +7,7 @@ import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import { useNavigate } from 'react-router-dom'
 import path from '../../../../constants/path'
 import SectionItem from './SectionItem'
+import AddIcon from '@mui/icons-material/Add'
 
 const SectionManagement = () => {
   const navigate = useNavigate()
@@ -35,14 +36,20 @@ const SectionManagement = () => {
           : { width: '100%', padding: '20px 100px', maxHeight: '93vh', overflow: 'auto' }
       }
     >
-      <Stack direction='row' spacing={2} justifyContent='space-between'>
+      <Stack direction='row' spacing={2} justifyContent='space-between' py={3}>
         <Typography variant='h3' sx={{ margin: '1rem 0' }}>
           {t('sectionManagement')}
         </Typography>
-        <Button variant='contained' color='primary' onClick={() => navigate(path.adminCreateSection)}>
+        <Button
+          variant='contained'
+          color='primary'
+          startIcon={<AddIcon />}
+          onClick={() => navigate(path.adminCreateSection)}
+        >
           {t('addSection')}
         </Button>
       </Stack>
+      <Divider />
       {sections?.map((section) => (
         <SectionItem key={section._id} section={section} fetchData={fetchData} />
       ))}

@@ -10,6 +10,7 @@ import urlConfig from '../../config/UrlConfig'
 import { AppContext } from '../../contexts/app.context'
 import SuggestedPlaylist from './SuggestedPlaylist'
 import FamousAlbums from './FamousAlbums'
+import HomeSection from './HomeSection'
 const HomePage = () => {
   const { isAuthenticated } = useContext(AppContext)
   const [allPlaylists, setAllPlaylists] = React.useState([])
@@ -54,6 +55,7 @@ const HomePage = () => {
           {isAuthenticated && <SuggestedPlaylist />}
           <JustReleased allPlaylists={allPlaylists} />
           <FamousAlbums />
+          <HomeSection />
           <FamousArtists />
         </Grid>
       </Grid>

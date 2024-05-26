@@ -111,7 +111,8 @@ const urlConfig = {
     getAllSections: `${process.env.REACT_APP_API_ENDPOINT}/sections`,
     getSectionById: `${process.env.REACT_APP_API_ENDPOINT}/sections`,
     deleteSection: `${process.env.REACT_APP_API_ENDPOINT}/sections`,
-    updateSection: `${process.env.REACT_APP_API_ENDPOINT}/sections`
+    updateSection: `${process.env.REACT_APP_API_ENDPOINT}/sections`,
+    getNewSection: `${process.env.REACT_APP_API_ENDPOINT}/sections/new`
   },
   premiumPackages: {
     createPremiumPackage: `${process.env.REACT_APP_API_ENDPOINT}/premium-packages`,
