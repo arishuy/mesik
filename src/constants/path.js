@@ -56,7 +56,8 @@ const path = {
   adminAlbum: '/admin/album-management',
   adminPlaylist: '/admin/playlist-management',
   adminRegion: '/admin/region-management',
-  adminPremiumPackage: '/admin/premium-package-management'
+  adminPremiumPackage: '/admin/premium-package-management',
+  adminSection: '/admin/section-management'
 }
 
 export default path

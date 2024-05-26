@@ -202,6 +202,14 @@ export default function AdminSideNav() {
             >
               History Transaction
             </MenuItem>
+            <MenuItem
+              icon={<ReceiptLongOutlinedIcon />}
+              component={
+                <Link to={path.adminSection} style={param.pathname === path.adminSection ? styleActive : styleLink} />
+              }
+            >
+              Section
+            </MenuItem>
           </SubMenu>
         </Menu>
       )}

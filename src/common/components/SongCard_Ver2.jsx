@@ -160,6 +160,14 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
                   e.stopPropagation()
                   navigate(`/artist/${song.artist._id}`)
                 }}
+                noWrap
+                sx={{
+                  cursor: 'pointer',
+                  '&:hover': {
+                    color: 'blue',
+                    textDecoration: 'underline'
+                  }
+                }}
               >
                 {song.artist.display_name}
               </Typography>
