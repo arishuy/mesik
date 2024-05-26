@@ -57,7 +57,8 @@ const path = {
   adminPlaylist: '/admin/playlist-management',
   adminRegion: '/admin/region-management',
   adminPremiumPackage: '/admin/premium-package-management',
-  adminSection: '/admin/section-management'
+  adminSection: '/admin/section-management',
+  adminCreateSection: '/admin/create-section'
 }
 
 export default path

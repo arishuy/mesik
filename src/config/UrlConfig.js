@@ -106,6 +106,13 @@ const urlConfig = {
     deleteGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`,
     updateGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`
   },
+  sections: {
+    createSection: `${process.env.REACT_APP_API_ENDPOINT}/sections`,
+    getAllSections: `${process.env.REACT_APP_API_ENDPOINT}/sections`,
+    getSectionById: `${process.env.REACT_APP_API_ENDPOINT}/sections`,
+    deleteSection: `${process.env.REACT_APP_API_ENDPOINT}/sections`,
+    updateSection: `${process.env.REACT_APP_API_ENDPOINT}/sections`
+  },
   premiumPackages: {
     createPremiumPackage: `${process.env.REACT_APP_API_ENDPOINT}/premium-packages`,
     getAllPremiumPackages: `${process.env.REACT_APP_API_ENDPOINT}/premium-packages`,

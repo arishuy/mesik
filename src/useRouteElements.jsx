@@ -46,6 +46,7 @@ const ReportManagement = lazy(() => import('./pages/Admin/pages/ReportManagement
 const PremiumPackageManagement = lazy(() => import('./pages/Admin/pages/PremiumPackageManagement'))
 const HistoryTransaction = lazy(() => import('./pages/Admin/pages/HistoryTransaction'))
 const SectionManagement = lazy(() => import('./pages/Admin/pages/SectionManagement'))
+const CreateSection = lazy(() => import('./pages/Admin/pages/SectionManagement/CreateSection'))
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -248,6 +249,16 @@ export default function useRouteElements() {
                     <Suspense>
                       <AdminLayout>
                         <SectionManagement />
+                      </AdminLayout>
+                    </Suspense>
+                  )
+                },
+                {
+                  path: path.adminCreateSection,
+                  element: (
+                    <Suspense>
+                      <AdminLayout>
+                        <CreateSection />
                       </AdminLayout>
                     </Suspense>
                   )
