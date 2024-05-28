@@ -44,7 +44,8 @@ export const MusicPlayerProvider = ({ children }) => {
           musicSrc: 'https://mesikaudio.s3.ap-southeast-1.amazonaws.com/quangcao.mp3',
           name: song.title,
           singer: song.artist.display_name,
-          songId: song._id
+          songId: song._id,
+          lyric: song.lyric
         }
       }
       return {
@@ -53,7 +54,8 @@ export const MusicPlayerProvider = ({ children }) => {
         musicSrc: song.file,
         name: song.title,
         singer: song.artist.display_name,
-        songId: song._id
+        songId: song._id,
+        lyric: song.lyric
       }
     })
     setCurrentSong(mappToReactJkMusicPlayerAudioInfo)

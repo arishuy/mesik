@@ -37,16 +37,6 @@ const Header = () => {
       >
         <Stack direction='row' spacing={2}>
           <SearchBar />
-          <Tooltip title='Mesik Bot' arrow>
-            <Avatar
-              alt='logo'
-              src='https://th.bing.com/th/id/OIG1.4gYx47L7n1GpDyVqrk3m?w=1024&h=1024&rs=1&pid=ImgDetMain'
-              sx={{ width: 50, height: 50 }}
-              onClick={() => {
-                setOpenChatbot(!openChatbot)
-              }}
-            />
-          </Tooltip>
         </Stack>
         {openRecharge && <Recharge openRecharge={openRecharge} setOpenRecharge={setOpenRecharge} />}
 

@@ -75,11 +75,11 @@ const SearchBar = () => {
           }
         }}
         fullWidth
-        placeholder='Tìm kiếm bài hát, nghệ sĩ...'
+        placeholder='Tìm kiếm bài hát, nghệ sĩ, lời bài hát...'
         sx={{
           '.MuiInputBase-root': {
             height: '50px',
-            width: '300px',
+            width: '500px',
             borderRadius: '20px',
             zIndex: 999
           }
@@ -99,7 +99,7 @@ const SearchBar = () => {
           horizontal: 'left'
         }}
       >
-        <List component='nav' sx={{ width: '300px' }}>
+        <List component='nav' sx={{ width: '500px' }}>
           <Typography variant='h6' sx={{ padding: '10px', ml: 1 }}>
             Đề xuất cho bạn
           </Typography>

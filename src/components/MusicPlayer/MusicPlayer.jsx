@@ -5,13 +5,16 @@ import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import dayjs from 'dayjs'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
-import { Button, IconButton } from '@mui/material'
+import { Button, Icon, IconButton } from '@mui/material'
 import { AppContext } from '../../contexts/app.context'
 import { SnackbarContext } from '../../contexts/snackbar.context'
+import { ChatbotContext } from '../../contexts/chatbot.context'
+import LyricsRoundedIcon from '@mui/icons-material/LyricsRounded'
 const MusicPlayer = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
   const isPremium = user?.premiumEndDate && dayjs(user.premiumEndDate) > dayjs()
   const { isAuthenticated, likedSong, setLikedSong } = useContext(AppContext)
+  const { openChatbot, setOpenChatbot, playingSong, setPlayingSong } = useContext(ChatbotContext)
   const { snack, setSnack } = useContext(SnackbarContext)
   const { currentSong } = useMusicPlayer()
   const [song, setSong] = useState({})
@@ -70,7 +73,6 @@ const MusicPlayer = () => {
   }, [currentSong])
   return (
     <ReactJkMusicPlayer
-      icon={{ reload: <FavoriteRoundedIcon /> }}
       quietUpdate
       clearPriorAudioLists
       autoPlayInitLoadPlayList
@@ -83,14 +85,27 @@ const MusicPlayer = () => {
       audioLists={audioLists}
       onAudioPlay={(audioInfo) => {
         setSong(audioInfo)
+        setPlayingSong(audioInfo)
         playSong(audioInfo.songId)
       }}
       extendsContent={
         isAuthenticated &&
         audioLists.length > 0 && (
-          <IconButton onClick={() => handleLikeSong()} color={likedSong.includes(song.songId) ? 'success' : 'default'}>
-            <FavoriteRoundedIcon />
-          </IconButton>
+          <>
+            <IconButton onClick={() => setOpenChatbot(!openChatbot)}>
+              <LyricsRoundedIcon
+                sx={{
+                  color: 'white'
+                }}
+              />
+            </IconButton>
+            <IconButton
+              onClick={() => handleLikeSong()}
+              color={likedSong.includes(song.songId) ? 'success' : 'default'}
+            >
+              <FavoriteRoundedIcon />
+            </IconButton>
+          </>
         )
       }
     />
