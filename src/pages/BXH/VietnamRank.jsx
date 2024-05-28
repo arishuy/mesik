@@ -1,101 +1,56 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import Axios from 'axios'
-import urlConfig from '../../config/UrlConfig'
-import Loading from '../../common/components/Loading/Loading'
+import { SnackbarContext } from '../../contexts/snackbar.context'
+import { AppContext } from '../../contexts/app.context'
+import { useMusicPlayer } from '../../contexts/music.context'
 import {
-  Autocomplete,
-  Avatar,
-  Box,
-  Button,
-  IconButton,
-  Pagination,
   Stack,
+  Typography,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
-  Typography
+  Button,
+  Avatar,
+  IconButton,
+  Autocomplete,
+  TextField
 } from '@mui/material'
-import moment from 'moment'
-import { useMusicPlayer } from '../../contexts/music.context'
+import Loading from '../../common/components/Loading/Loading'
+import { Helmet } from 'react-helmet-async'
 import convertToMinutes from '../../common/utils/convertToMinutes'
-import { AppContext } from '../../contexts/app.context'
-import { SnackbarContext } from '../../contexts/snackbar.context'
-import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded'
 import RootModal from '../../components/Modal/RootModal'
+import AxiosInterceptors from '../../common/utils/axiosInterceptors'
+import urlConfig from '../../config/UrlConfig'
+import { useNavigate } from 'react-router-dom'
 
-const ArtistSongs = () => {
-  const user = JSON.parse(localStorage.getItem('profile'))
-  const [pageCount, setPageCount] = useState(1)
-  const [isLoading, setIsLoading] = useState(true)
-  const [totalPages, setTotalPages] = useState(0)
-  const [songs, setSongs] = useState([])
-  const [hoveredRow, setHoveredRow] = useState(null)
-  const { isAuthenticated, likedSong, setLikedSong } = useContext(AppContext)
+const VietnamRank = ({ allPlaylists }) => {
+  const navigate = useNavigate()
   const { playSong } = useMusicPlayer()
+  const [isLoading, setIsLoading] = useState(true)
+  const { isAuthenticated, likedSong, setLikedSong } = useContext(AppContext)
+  const user = JSON.parse(localStorage.getItem('profile'))
+  const [hoveredRow, setHoveredRow] = useState(null)
   const { snack, setSnack } = useContext(SnackbarContext)
   const [open, setOpen] = React.useState(false)
-  const [data, setData] = React.useState({
+  const [addPlaylist, setAddPlaylist] = React.useState({
     song_id: '',
     playlist_id: ''
   })
-  const param = useParams()
-  const [allPlaylists, setAllPlaylists] = React.useState([])
-
-  const fetchAllPlaylists = async () => {
-    await AxiosInterceptors.get(urlConfig.playlists.getAllPlaylistsByUser)
+  const [data, setData] = useState([])
+  const fetchData = async () => {
+    await AxiosInterceptors.get(urlConfig.rank.getVietnamRank)
       .then((res) => {
-        setAllPlaylists(res.data.playlists)
+        setData(res.data.result)
+        setIsLoading(false)
       })
       .catch((err) => {
         console.log(err)
       })
   }
-  const fetchData = async () => {
-    await Axios.get(urlConfig.music.getAllMusicByArtist + `/${param.nameId}?limit=10&page=${pageCount}`)
-      .then((res) => {
-        if (res && res.status === 200) {
-          if (res.data.pagination.songs) {
-            setSongs(res.data.pagination.songs)
-            setTotalPages(res.data.pagination.totalPages)
-            setIsLoading(false)
-          }
-        }
-      })
-      .catch((err) => console.log(err))
-  }
-
-  const handleAddToPlaylist = async () => {
-    // add song to playlist
-    await AxiosInterceptors.post(urlConfig.playlists.addSongToPlaylist, {
-      playlist_id: data.playlist_id,
-      song_id: data.song_id
-    })
-      .then((res) => {
-        setSnack({
-          ...snack,
-          open: true,
-          message: 'Thêm bài hát thành công',
-          type: 'success'
-        })
-        setOpen(false)
-      })
-      .catch((err) => {
-        setSnack({
-          ...snack,
-          open: true,
-          message: 'Bài hát đã có trong playlist này',
-          type: 'error'
-        })
-      })
-  }
-
   const handleLikeSong = async (song) => {
     // like song
     await AxiosInterceptors.get(urlConfig.user.likedSongs + `/${song._id}`)
@@ -131,21 +86,40 @@ const ArtistSongs = () => {
         })
       })
   }
-
+  const handleAddToPlaylist = async () => {
+    // add song to playlist
+    await AxiosInterceptors.post(urlConfig.playlists.addSongToPlaylist, {
+      playlist_id: addPlaylist.playlist_id,
+      song_id: addPlaylist.song_id
+    })
+      .then((res) => {
+        setSnack({
+          ...snack,
+          open: true,
+          message: 'Thêm bài hát thành công',
+          type: 'success'
+        })
+        setOpen(false)
+      })
+      .catch((err) => {
+        setSnack({
+          ...snack,
+          open: true,
+          message: 'Bài hát đã có trong playlist này',
+          type: 'error'
+        })
+      })
+  }
   useEffect(() => {
-    setIsLoading(true)
-    isAuthenticated && fetchAllPlaylists()
     fetchData()
-  }, [pageCount])
-
+  }, [])
   return isLoading ? (
     <Loading />
   ) : (
-    <div
-      style={{
-        padding: '20px 100px'
-      }}
-    >
+    <div>
+      <Helmet>
+        <title>Bảng Xếp Hạng Việt Nam</title>
+      </Helmet>
       <RootModal
         variant='Create'
         title='Thêm vào playlist'
@@ -163,8 +137,8 @@ const ArtistSongs = () => {
           options={allPlaylists}
           getOptionLabel={(option) => option.title}
           onChange={(e, value) => {
-            setData({
-              ...data,
+            setAddPlaylist({
+              ...addPlaylist,
               playlist_id: value._id
             })
           }}
@@ -175,33 +149,33 @@ const ArtistSongs = () => {
       </RootModal>
       <Stack direction='row' justifyContent='space-between' alignItems='center'>
         <Typography variant='h4' py={3}>
-          {songs.length > 0 ? songs[0].artist.display_name : ''} - Tất cả bài hát
+          Bảng Xếp Hạng Việt Nam
         </Typography>
-        {songs.length > 0 && (
+        {data.length > 0 && (
           <Button
             variant='outlined'
             color='primary'
             sx={{
               borderRadius: '20px'
             }}
-            onClick={() => playSong(songs)}
+            onClick={() => playSong(data)}
           >
             Phát tất cả
           </Button>
         )}
       </Stack>
-
       <TableContainer>
         <Table size='small'>
           <TableHead>
             <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell>Duration</TableCell>
-              <TableCell align='right'>Release Date</TableCell>
+              <TableCell></TableCell>
+              <TableCell>Bài Hát</TableCell>
+              <TableCell align='center'>Thời Lượng</TableCell>
+              <TableCell align='right'>Lượt Nghe</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {songs.map((song) => {
+            {data?.map((song, index) => {
               return (
                 <TableRow
                   hover
@@ -209,11 +183,14 @@ const ArtistSongs = () => {
                   onMouseEnter={() => setHoveredRow(song._id)}
                   onMouseLeave={() => setHoveredRow(null)}
                 >
-                  <TableCell
-                    sx={{
-                      width: '500px'
-                    }}
-                  >
+                  <TableCell align='left'>
+                    <Stack direction='row' alignItems='center'>
+                      <Typography variant='h4' color='text.primary' noWrap>
+                        {index + 1}
+                      </Typography>
+                    </Stack>
+                  </TableCell>
+                  <TableCell>
                     <Stack direction='row' spacing={2} alignItems='center'>
                       <Avatar
                         src={song.photo_url}
@@ -234,11 +211,31 @@ const ArtistSongs = () => {
                         <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                           {song.title}
                         </Typography>
-                        <Typography variant='subtitle1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                          {song.artist.display_name}
+                        <Typography
+                          variant='subtitle1'
+                          fontWeight='bold'
+                          color='text.primary'
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            navigate(`/artist/${song.artist._id}`)
+                          }}
+                          noWrap
+                          sx={{
+                            cursor: 'pointer',
+                            '&:hover': {
+                              color: 'blue',
+                              textDecoration: 'underline'
+                            }
+                          }}
+                        >
+                          {song.artist?.display_name}
                         </Typography>
                       </Stack>
-                      {hoveredRow === song._id && isAuthenticated && (
+                    </Stack>
+                  </TableCell>
+                  <TableCell align='center'>
+                    <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
+                      {hoveredRow === song._id && isAuthenticated ? (
                         <>
                           <IconButton
                             onClick={() => handleLikeSong(song)}
@@ -249,8 +246,8 @@ const ArtistSongs = () => {
                           <IconButton
                             onClick={() => {
                               setOpen(true)
-                              setData({
-                                ...data,
+                              setAddPlaylist({
+                                ...addPlaylist,
                                 song_id: song._id
                               })
                             }}
@@ -259,17 +256,14 @@ const ArtistSongs = () => {
                             <AddCircleRoundedIcon />
                           </IconButton>
                         </>
+                      ) : (
+                        convertToMinutes(song.duration)
                       )}
-                    </Stack>
-                  </TableCell>
-                  <TableCell>
-                    <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
-                      {convertToMinutes(song.duration)}
                     </Typography>
                   </TableCell>
                   <TableCell align='right'>
-                    <Typography variant='body1' color='text.primary' fontWeight='bold' gutterBottom noWrap>
-                      {moment(song.release_date).format('DD/MM/YYYY')}
+                    <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
+                      {song.play_count}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -278,18 +272,8 @@ const ArtistSongs = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Pagination
-          count={totalPages}
-          page={pageCount}
-          onChange={(e, value) => setPageCount(value)}
-          sx={{
-            p: 2
-          }}
-        />
-      </Box>
     </div>
   )
 }
 
-export default ArtistSongs
+export default VietnamRank

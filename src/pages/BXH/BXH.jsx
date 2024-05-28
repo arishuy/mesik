@@ -1,171 +1,90 @@
-import {
-  Avatar,
-  Button,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography
-} from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { useMusicPlayer } from '../../contexts/music.context'
+import * as React from 'react'
+import PropTypes from 'prop-types'
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import DailyRank from './DailyRank'
+import VietnamRank from './VietnamRank'
+import GlobalRank from './GlobalRank'
+import { AppContext } from '../../contexts/app.context'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
-import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded'
-import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded'
-import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded'
-import SwitchAccessShortcutRoundedIcon from '@mui/icons-material/SwitchAccessShortcutRounded'
-import Loading from '../../common/components/Loading/Loading'
-import { Helmet } from 'react-helmet-async'
-import convertToMinutes from '../../common/utils/convertToMinutes'
-const BXH = () => {
-  const { playSong } = useMusicPlayer()
-  const [isLoading, setIsLoading] = useState(true)
-  const [data, setData] = useState([
-    {
-      song: {},
-      todayRank: 0,
-      yesterdayRank: 0,
-      rankChange: 0
-    }
-  ])
 
-  const fetchData = async () => {
-    await AxiosInterceptors.get(urlConfig.rank.getDailyRank)
+function CustomTabPanel(props) {
+  const { children, value, index, ...other } = props
+
+  return (
+    <div
+      role='tabpanel'
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  )
+}
+
+CustomTabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired
+}
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`
+  }
+}
+
+export default function BasicTabs() {
+  const [value, setValue] = React.useState(0)
+  const { isAuthenticated } = React.useContext(AppContext)
+  const [allPlaylists, setAllPlaylists] = React.useState([])
+
+  const fetchAllPlaylists = async () => {
+    await AxiosInterceptors.get(urlConfig.playlists.getAllPlaylistsByUser)
       .then((res) => {
-        setData(res.data.result)
-        setIsLoading(false)
+        setAllPlaylists(res.data.playlists)
       })
       .catch((err) => {
         console.log(err)
       })
   }
-  useEffect(() => {
-    fetchData()
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      fetchAllPlaylists()
+    }
   }, [])
-  return isLoading ? (
-    <Loading />
-  ) : (
-    <div
-      style={{
-        padding: '20px 100px'
-      }}
-    >
-      <Helmet>
-        <title>Bảng Xếp Hạng</title>
-      </Helmet>
-      <Stack direction='row' justifyContent='space-between' alignItems='center'>
-        <Typography variant='h4' py={3}>
-          Bảng Xếp Hạng Hàng Ngày
-        </Typography>
-        {data.length > 0 && (
-          <Button
-            variant='outlined'
-            color='primary'
-            sx={{
-              borderRadius: '20px'
-            }}
-            onClick={() => playSong(data.map((item) => item.song))}
-          >
-            Phát tất cả
-          </Button>
-        )}
-      </Stack>
-      <TableContainer>
-        <Table size='small'>
-          <TableHead>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell>Bài Hát</TableCell>
-              <TableCell align='center'>Thời Lượng</TableCell>
-              <TableCell align='right'>Lượt Nghe</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data?.map((majorsOrder) => {
-              return (
-                <TableRow hover key={majorsOrder.song._id}>
-                  <TableCell align='left'>
-                    <Stack direction='row' alignItems='center'>
-                      <Typography variant='h4' color='text.primary' noWrap>
-                        {majorsOrder.todayRank}
-                      </Typography>
-                      {majorsOrder.rankChange > 0 ? (
-                        <>
-                          <Stack direction='row' alignItems='center'>
-                            <ArrowDropUpRoundedIcon style={{ color: 'green' }} />
-                            <Typography variant='body1' color='green' noWrap fontWeight='bold'>
-                              {majorsOrder.rankChange}
-                            </Typography>
-                          </Stack>
-                        </>
-                      ) : majorsOrder.rankChange === 0 ? (
-                        <RemoveRoundedIcon style={{ color: 'blue', padding: '5px', marginLeft: '5px' }} />
-                      ) : majorsOrder.rankChange === 'NEW' ? (
-                        <Stack direction='row' alignItems='center'>
-                          <SwitchAccessShortcutRoundedIcon style={{ color: 'blue', padding: '5px' }} />
-                          <Typography variant='subtile1' color='blue' fontWeight='bold' noWrap>
-                            {majorsOrder.rankChange}
-                          </Typography>
-                        </Stack>
-                      ) : (
-                        <Stack direction='row' alignItems='center'>
-                          <ArrowDropDownRoundedIcon style={{ color: 'red' }} />
-                          <Typography variant='body1' color='red' noWrap fontWeight='bold'>
-                            {majorsOrder.rankChange.toString().replace('-', '')}
-                          </Typography>
-                        </Stack>
-                      )}
-                    </Stack>
-                  </TableCell>
-                  <TableCell>
-                    <Stack direction='row' spacing={2} alignItems='center'>
-                      <Avatar
-                        src={majorsOrder.song.photo_url}
-                        onClick={() => {
-                          playSong([majorsOrder.song])
-                        }}
-                        sx={{
-                          width: 50,
-                          height: 50,
-                          cursor: 'pointer',
-                          '&:hover': {
-                            opacity: 0.7,
-                            transform: 'scale(1.1)'
-                          }
-                        }}
-                      />
-                      <Stack direction='column' spacing={0}>
-                        <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
-                          {majorsOrder.song.title}
-                        </Typography>
-                        <Typography variant='subtitle1' fontWeight='bold' color='text.primary' noWrap>
-                          {majorsOrder.song.artist?.display_name}
-                        </Typography>
-                      </Stack>
-                    </Stack>
-                  </TableCell>
-                  <TableCell align='center'>
-                    <Typography variant='body1' color='text.primary' gutterBottom noWrap>
-                      {convertToMinutes(majorsOrder.song.duration)}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align='right'>
-                    <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                      {majorsOrder.song.play_count_daily}
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              )
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+  return (
+    <Box sx={{ width: '100%', padding: '20px 100px' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label='basic tabs example'>
+          <Tab label='Hàng Ngày' {...a11yProps(0)} />
+          <Tab label='Việt Nam' {...a11yProps(1)} />
+          <Tab label='Quốc Tế' {...a11yProps(2)} />
+        </Tabs>
+      </Box>
+      <CustomTabPanel value={value} index={0}>
+        <DailyRank allPlaylists={allPlaylists} />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}>
+        <VietnamRank allPlaylists={allPlaylists} />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2}>
+        <GlobalRank allPlaylists={allPlaylists} />
+      </CustomTabPanel>
+    </Box>
   )
 }
-
-export default BXH

@@ -76,7 +76,9 @@ const urlConfig = {
     deleteReport: `${process.env.REACT_APP_API_ENDPOINT}/reports`
   },
   rank: {
-    getDailyRank: `${process.env.REACT_APP_API_ENDPOINT}/ranking/daily`
+    getDailyRank: `${process.env.REACT_APP_API_ENDPOINT}/ranking/daily`,
+    getVietnamRank: `${process.env.REACT_APP_API_ENDPOINT}/ranking/vietnam`,
+    getOtherRank: `${process.env.REACT_APP_API_ENDPOINT}/ranking/other`
   },
   music: {
     createMusic: `${process.env.REACT_APP_API_ENDPOINT}/songs`,
