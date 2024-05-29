@@ -101,7 +101,7 @@ const DetailAlbum = () => {
           >
             Phát tất cả
           </Button>
-          {user.artist === album.artist && (
+          {user.artist === album.artist._id && (
             <Button
               sx={{
                 mt: 1
