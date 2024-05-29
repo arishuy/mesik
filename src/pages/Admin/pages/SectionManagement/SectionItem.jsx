@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
-import { Button, Grid, IconButton, Skeleton, Stack, Tooltip, Typography, useTheme } from '@mui/material'
-import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
+import React from 'react'
+import { Grid, IconButton, Stack, Tooltip, Typography, useTheme } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { useMusicPlayer } from '../../../../contexts/music.context'
 import { useTranslation } from 'react-i18next'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
@@ -12,7 +10,6 @@ const SectionItem = ({ section, fetchData }) => {
   const theme = useTheme()
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { playSong } = useMusicPlayer()
   const handleDelete = async () => {
     await AxiosInterceptors.delete(urlConfig.sections.deleteSection + `/${section._id}`)
       .then((res) => {
@@ -46,7 +43,14 @@ const SectionItem = ({ section, fetchData }) => {
       </Stack>
       <Grid container spacing={2}>
         {section.items.map((playlist) => (
-          <Grid item xs={12} md={6} lg={3} key={playlist._id}>
+          <Grid
+            item
+            xs={12}
+            md={6}
+            lg={3}
+            key={playlist._id}
+            onClick={() => navigate(`/admin/edit-album/${playlist._id}`)}
+          >
             <div className='song-card'>
               <img className='song-card_image' src={playlist.photo_url} alt='David Bowie - Aladdin Sane' />
               <div className='song-card_info'>
@@ -54,21 +58,7 @@ const SectionItem = ({ section, fetchData }) => {
                 <div className='song-card_info_album'></div>
                 <div className='song-card_info_title'>{playlist.title}</div>
               </div>
-              <div className='song-card_play'>
-                <Stack direction='row' spacing={1} pt={2}>
-                  <Tooltip title='Phát ngay'>
-                    <IconButton
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        playSong(playlist.songs)
-                      }}
-                      color='success'
-                    >
-                      <PlayCircleFilledWhiteOutlinedIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Stack>
-              </div>
+              <div className='song-card_play'></div>
             </div>
           </Grid>
         ))}

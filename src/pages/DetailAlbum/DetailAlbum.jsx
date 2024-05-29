@@ -88,7 +88,7 @@ const DetailAlbum = () => {
             {album.title}
           </Typography>
           <Typography variant='h5' color='text.primary'>
-            {album.artist.display_name}
+            {album.artist?.display_name}
           </Typography>
           <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
             Cập nhật: {moment(album.updateAt).format('DD/MM/YYYY')}
@@ -101,7 +101,7 @@ const DetailAlbum = () => {
           >
             Phát tất cả
           </Button>
-          {user.artist === album.artist._id && (
+          {user.artist && album.artist && user.artist === album.artist._id && (
             <Button
               sx={{
                 mt: 1

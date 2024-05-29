@@ -15,7 +15,8 @@ import {
   CardHeader,
   Avatar,
   Stack,
-  Container
+  Container,
+  Chip
 } from '@mui/material'
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone'
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
@@ -153,6 +154,7 @@ const MusicTable = ({
                     <TableCell>Duration</TableCell>
                     <TableCell>Nghệ sĩ</TableCell>
                     <TableCell align='right'>Premium</TableCell>
+                    <TableCell align='right'>Has Lyric</TableCell>
                     <TableCell align='right'>Time</TableCell>
                     <TableCell align='right'>Action</TableCell>
                   </TableRow>
@@ -194,6 +196,14 @@ const MusicTable = ({
                           <Typography variant='body1' color='text.primary' gutterBottom noWrap>
                             {majorsOrder.isPremium ? 'Yes' : 'No'}
                           </Typography>
+                        </TableCell>
+                        <TableCell align='right'>
+                          {majorsOrder.lyric ? (
+                            <Chip label='Yes' color='success' variant='outlined' />
+                          ) : (
+                            <Chip label='No' color='error' variant='outlined' />
+                          )}
+                          .
                         </TableCell>
                         <TableCell align='right'>
                           <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>

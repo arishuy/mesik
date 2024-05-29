@@ -59,7 +59,8 @@ const path = {
   adminRegion: '/admin/region-management',
   adminPremiumPackage: '/admin/premium-package-management',
   adminSection: '/admin/section-management',
-  adminCreateSection: '/admin/create-section'
+  adminCreateSection: '/admin/create-section',
+  adminEditAlbum: '/admin/edit-album/:nameId'
 }
 
 export default path

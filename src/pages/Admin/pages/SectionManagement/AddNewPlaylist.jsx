@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import RootModal from '../../../../components/Modal/RootModal'
 import { Autocomplete, Stack, TextField } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import useSnackbar from '../../../../contexts/snackbar.context'
 import { useTranslation } from 'react-i18next'
-import { debounce } from 'lodash'
 import UploadPhoto from '../../../../common/components/UploadPhoto'
 
 const AddNewPlaylist = ({ open, handleClose, section, setSection }) => {
@@ -21,15 +20,15 @@ const AddNewPlaylist = ({ open, handleClose, section, setSection }) => {
   const [allSongs, setAllSongs] = useState([])
 
   const fetchAllSongs = async () => {
-    await AxiosInterceptors.get(urlConfig.music.getAllMusic + `?limit=100&page=1&name=${filterName}`)
+    await AxiosInterceptors.get(urlConfig.music.getAllMusic)
       .then((res) => {
-        setAllSongs(res.data.pagination.songs)
+        setAllSongs(res.data.songs)
       })
       .catch((err) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('fetchDataFail'),
+          message: 'Lấy dữ liệu thất bại',
           type: 'error'
         })
       })
@@ -81,20 +80,9 @@ const AddNewPlaylist = ({ open, handleClose, section, setSection }) => {
       )
   }
 
-  // Debounce filterName changes
-  const debouncedFetchAllSongs = useCallback(debounce(fetchAllSongs, 1000), [filterName])
-
   useEffect(() => {
-    if (filterName === '') {
-      setAllSongs([])
-    } else {
-      debouncedFetchAllSongs()
-    }
-
-    return () => {
-      debouncedFetchAllSongs.cancel()
-    }
-  }, [filterName, debouncedFetchAllSongs])
+    fetchAllSongs()
+  }, [])
 
   return (
     <>

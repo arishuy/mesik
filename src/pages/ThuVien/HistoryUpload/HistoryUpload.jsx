@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import Axios from 'axios'
 import urlConfig from '../../../config/UrlConfig'
 import Loading from '../../../common/components/Loading/Loading'
@@ -18,7 +17,8 @@ import {
   TableRow,
   Tooltip,
   useTheme,
-  Typography
+  Typography,
+  Chip
 } from '@mui/material'
 import moment from 'moment'
 import { useMusicPlayer } from '../../../contexts/music.context'
@@ -134,6 +134,7 @@ const HistoryUpload = () => {
               <TableCell>Title</TableCell>
               <TableCell>Duration</TableCell>
               <TableCell align='right'>Release Date</TableCell>
+              <TableCell align='right'>Has Lyric</TableCell>
               <TableCell align='right'>Action</TableCell>
             </TableRow>
           </TableHead>
@@ -181,6 +182,13 @@ const HistoryUpload = () => {
                     <Typography variant='body1' color='text.primary' fontWeight='bold' gutterBottom noWrap>
                       {moment(song.release_date).format('DD/MM/YYYY')}
                     </Typography>
+                  </TableCell>
+                  <TableCell align='right'>
+                    {song.lyric ? (
+                      <Chip label='Yes' color='success' variant='outlined' />
+                    ) : (
+                      <Chip label='No' color='error' variant='outlined' />
+                    )}
                   </TableCell>
                   <TableCell align='right'>
                     <Tooltip title={t('detailInfo')} arrow>

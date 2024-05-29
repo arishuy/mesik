@@ -52,14 +52,18 @@ const CreateSection = () => {
           setData({ ...data, name: e.target.value })
         }}
       />
-      <Stack direction='row' spacing={2} justifyContent='space-between'>
+      <Stack direction='row' spacing={2} my={2} justifyContent='space-between'>
         <Typography variant='h4' sx={{ margin: '1rem 0' }}>
           Playlist Items
         </Typography>
         <Button
           variant='contained'
           color='primary'
+          disabled={data.items.length === 4}
           onClick={() => {
+            if (data.items.length === 4) {
+              return
+            }
             setOpen(true)
           }}
         >
@@ -83,9 +87,14 @@ const CreateSection = () => {
           </Grid>
         ))}
       </Grid>
-      <Button variant='contained' color='primary' sx={{ marginTop: '1rem' }} onClick={handleCreate}>
-        Create
-      </Button>
+      <Stack direction='row' spacing={2} mt={2}>
+        <Button variant='contained' color='primary' sx={{ marginTop: '1rem' }} onClick={handleCreate}>
+          Create
+        </Button>
+        <Button variant='outlined' color='error' sx={{ marginTop: '1rem' }} onClick={() => navigate(path.adminSection)}>
+          Cancel
+        </Button>
+      </Stack>
     </div>
   )
 }
