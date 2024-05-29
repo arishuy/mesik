@@ -205,7 +205,7 @@ const DetailPlaylist = () => {
                           </Stack>
                         </TableCell>
                         <TableCell>
-                          <Typography variant='body1' color='text.primary' noWrap>
+                          <Typography variant='subtitle1' color='text.primary' noWrap>
                             {convertToMinutes(majorsOrder.duration)}
                           </Typography>
                           {isMyPlaylist && (

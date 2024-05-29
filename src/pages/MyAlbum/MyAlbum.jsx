@@ -6,6 +6,7 @@ import urlConfig from '../../config/UrlConfig'
 import { useMusicPlayer } from '../../contexts/music.context'
 import DeleteConfirm from './DeleteConfirm'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import { useNavigate } from 'react-router-dom'
@@ -69,6 +70,9 @@ const MyAlbum = () => {
                 <Stack direction='row' spacing={1} pt={2}>
                   <IconButton onClick={() => playSong(album.songs)} color='success'>
                     <PlayCircleFilledWhiteOutlinedIcon />
+                  </IconButton>
+                  <IconButton onClick={() => navigation(`/artist/edit-album/${album._id}`)} color='warning'>
+                    <EditOutlinedIcon />
                   </IconButton>
                   <IconButton onClick={() => navigation(`/album/${album._id}`)} color='primary'>
                     <InfoOutlinedIcon />

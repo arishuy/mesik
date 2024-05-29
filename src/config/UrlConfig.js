@@ -151,6 +151,7 @@ const urlConfig = {
   },
   albums: {
     createAlbum: `${process.env.REACT_APP_API_ENDPOINT}/albums`,
+    updateAlbum: `${process.env.REACT_APP_API_ENDPOINT}/albums`,
     getAllAlbums: `${process.env.REACT_APP_API_ENDPOINT}/albums`,
     getAllAlbumsByArtist: `${process.env.REACT_APP_API_ENDPOINT}/albums/artist`,
     getAlbumById: `${process.env.REACT_APP_API_ENDPOINT}/albums`,

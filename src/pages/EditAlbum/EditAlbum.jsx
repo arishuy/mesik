@@ -9,24 +9,30 @@ import {
   Typography,
   Stack,
   Avatar,
-  Button
+  Button,
+  Autocomplete,
+  TextField
 } from '@mui/material'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import { useNavigate, useParams } from 'react-router-dom'
-import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import { useMusicPlayer } from '../../contexts/music.context'
 import Loading from '../../common/components/Loading/Loading'
 import convertToMinutes from '../../common/utils/convertToMinutes'
+import UploadAvatar from './UploadAvatar'
+import useSnackbar from '../../contexts/snackbar.context'
 
 const DetailAlbum = () => {
-  const user = JSON.parse(localStorage.getItem('profile'))
   const id = useParams()
   const navigate = useNavigate()
+  const user = JSON.parse(localStorage.getItem('profile'))
   const [isLoading, setIsLoading] = useState(true)
   const { playSong } = useMusicPlayer()
+  const [formData, setFormData] = useState(new FormData())
+  const [allSongs, setAllSongs] = useState([])
+  const { snack, setSnack } = useSnackbar()
   const [album, setAblum] = useState({
     title: 'Album 1',
     photo_url: 'https://via.placeholder.com/300',
@@ -42,19 +48,47 @@ const DetailAlbum = () => {
         console.log(err)
       })
   }
-  const handlePlayAlbum = async () => {
-    playSong(album.songs)
-    await AxiosInterceptors.post(`${urlConfig.albums.playAlbum}/play`, {
-      id: id.nameId
-    })
+  const fetchAllSongs = async () => {
+    await AxiosInterceptors.get(urlConfig.music.getAllMusicByArtist + `/${user.artist}`)
       .then((res) => {
-        console.log(res)
+        setAllSongs(res.data.result)
+      })
+      .catch((err) => {})
+  }
+  const handleUpdate = async () => {
+    await AxiosInterceptors.put(
+      urlConfig.albums.updateAlbum + `/${album._id}`,
+      {
+        title: album.title,
+        song_id: album.songs.map((song) => song._id),
+        photo: formData.get('photo') || album.photo_url
+      },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+    )
+      .then((res) => {
+        setSnack({
+          ...snack,
+          open: true,
+          message: 'Cập nhật thành công',
+          type: 'success'
+        })
+        navigate(`/album/${album._id}`)
       })
       .catch((err) => {
-        console.log(err)
+        setSnack({
+          ...snack,
+          open: true,
+          message: 'Cập nhật thất bại',
+          type: 'error'
+        })
       })
   }
   useEffect(() => {
+    fetchAllSongs()
     fetchData()
   }, [])
 
@@ -76,53 +110,52 @@ const DetailAlbum = () => {
             alignItems: 'center'
           }}
         >
-          <img
-            src={album.photo_url ? album.photo_url : 'https://via.placeholder.com/300'}
-            alt='album'
-            width='350'
-            style={{
-              borderRadius: '10px'
-            }}
+          <UploadAvatar
+            file={album.photo_url}
+            setFormData={setFormData}
+            information={album}
+            setInformation={setAblum}
           />
-          <Typography variant='h3' color='text.primary'>
-            {album.title}
-          </Typography>
-          <Typography variant='h5' color='text.primary'>
-            {album.artist.display_name}
-          </Typography>
-          <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
-            Cập nhật: {moment(album.updateAt).format('DD/MM/YYYY')}
-          </Typography>
-          <Button
-            onClick={() => {
-              handlePlayAlbum()
-            }}
-            startIcon={<PlayCircleFilledWhiteOutlinedIcon />}
-          >
-            Phát tất cả
-          </Button>
-          {user.artist === album.artist && (
-            <Button
-              sx={{
-                mt: 1
-              }}
-              onClick={() => {
-                navigate(`/artist/edit-album/${album._id}`)
-              }}
-              color='warning'
-            >
-              Sửa Album
+          <TextField
+            label='Tên Album'
+            value={album.title}
+            fullWidth
+            onChange={(e) => setAblum({ ...album, title: e.target.value })}
+          />
+          <Stack direction='row' spacing={2} mt={2}>
+            <Button variant='outlined' color='error' onClick={() => navigate(`/album/${album._id}`)}>
+              Hủy
             </Button>
-          )}
+            <Button variant='outlined' color='primary' onClick={handleUpdate}>
+              Lưu
+            </Button>
+          </Stack>
         </Grid>
         <Grid item xs={8}>
+          <Autocomplete
+            sx={{ m: 1 }}
+            multiple
+            isOptionEqualToValue={(option, value) => option._id === value._id}
+            options={allSongs}
+            getOptionLabel={(option) => option.title}
+            disableCloseOnSelect
+            value={(album?.songs || []).filter((song) => song._id !== null) || []}
+            onChange={(e, value) => {
+              setAblum({
+                ...album,
+                songs: value
+              })
+            }}
+            renderInput={(params) => (
+              <TextField {...params} variant='outlined' label='Songs' placeholder='Select song' />
+            )}
+          />
           <TableContainer>
             <Table size='small'>
               <TableHead>
                 <TableRow>
                   <TableCell>Bài Hát</TableCell>
-                  <TableCell>Thời Lượng</TableCell>
-                  <TableCell align='right'>Ngày Cập Nhật</TableCell>
+                  <TableCell align='right'>Thời Lượng</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -153,17 +186,9 @@ const DetailAlbum = () => {
                           </Stack>
                         </Stack>
                       </TableCell>
-                      <TableCell>
+                      <TableCell align='right'>
                         <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
                           {convertToMinutes(majorsOrder.duration)}
-                        </Typography>
-                      </TableCell>
-                      <TableCell align='right'>
-                        <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                          {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
-                        </Typography>
-                        <Typography variant='body2' color='text.primary' gutterBottom noWrap>
-                          {moment(majorsOrder.createdAt).format('h:mm:ss A')}
                         </Typography>
                       </TableCell>
                     </TableRow>

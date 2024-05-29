@@ -1,6 +1,7 @@
 const path = {
   home: '/',
   detailArtist: '/artist/:nameId',
+  editAlbum: '/artist/edit-album/:nameId',
   artistSongs: '/artist/:nameId/songs',
   detailAlbum: '/album/:nameId',
   detailPlaylist: '/playlist/:nameId',
