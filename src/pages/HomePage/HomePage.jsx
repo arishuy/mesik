@@ -11,6 +11,7 @@ import { AppContext } from '../../contexts/app.context'
 import SuggestedPlaylist from './SuggestedPlaylist'
 import FamousAlbums from './FamousAlbums'
 import HomeSection from './HomeSection'
+import Carousel from './Banner'
 const HomePage = () => {
   const { isAuthenticated } = useContext(AppContext)
   const [allPlaylists, setAllPlaylists] = React.useState([])
@@ -39,17 +40,7 @@ const HomePage = () => {
       </Helmet>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Stack direction='row' spacing={3}>
-            <Card>
-              <img src='https://photo-zmp3.zmdcdn.me/banner/8/1/1/0/8110bbecd7d2a358364047fea6be1e03.jpg' alt='album' />
-            </Card>
-            <Card>
-              <img src='https://photo-zmp3.zmdcdn.me/banner/5/3/c/7/53c750801ec118ba599c0f8e12f76ba0.jpg' alt='album' />
-            </Card>
-            <Card>
-              <img src='https://photo-zmp3.zmdcdn.me/banner/1/e/d/4/1ed445615d7119557c913c2c2cb31b2e.jpg' alt='album' />
-            </Card>
-          </Stack>
+          <Carousel />
           <RandomSong allPlaylists={allPlaylists} />
           {isAuthenticated && <RecentListen allPlaylists={allPlaylists} />}
           {isAuthenticated && <SuggestedPlaylist />}

@@ -4,42 +4,73 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
+import EditTwoToneIcon from '@mui/icons-material/EditTwoTone'
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone'
+import EditSection from './EditSection'
+import DeleteConfirm from './DeleteConfirm'
 
 const SectionItem = ({ section, fetchData }) => {
   const theme = useTheme()
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const handleDelete = async () => {
-    await AxiosInterceptors.delete(urlConfig.sections.deleteSection + `/${section._id}`)
-      .then((res) => {
-        fetchData()
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  const [openEdit, setOpenEdit] = React.useState(false)
+  const [openDelete, setOpenDelete] = React.useState(false)
+
   return (
     <div>
+      {openEdit && (
+        <EditSection
+          open={openEdit}
+          handleClose={() => setOpenEdit(false)}
+          section_data={section}
+          fetchData={fetchData}
+        />
+      )}
+      {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} id={section._id} fetchData={fetchData} />}
       <Stack direction='row' spacing={1} justifyContent='space-between' alignItems='center' py={2}>
-        <Typography variant='h4' py={2}>
-          {section.name}
+        <Typography
+          variant='h4'
+          py={2}
+          color={section.type === 'banner' ? theme.palette.error.main : theme.palette.primary.main}
+        >
+          {section.type === 'banner' ? 'Banner Hiển Thị Ở Đầu Trang Chủ' : section.name}
         </Typography>
-        <Tooltip title={t('delete')} arrow>
-          <IconButton
-            sx={{
-              '&:hover': { background: theme.palette.error.lighter },
-              color: theme.palette.error.main
-            }}
-            color='inherit'
-            size='small'
-            onClick={() => {
-              handleDelete()
-            }}
-          >
-            <DeleteTwoToneIcon fontSize='small' />
-          </IconButton>
-        </Tooltip>
+        <Stack direction='row' spacing={1}>
+          <Tooltip title={t('edit')} arrow>
+            <IconButton
+              sx={{
+                '&:hover': {
+                  background: theme.palette.warning.lighter
+                },
+                color: theme.palette.warning.main
+              }}
+              onClick={() => {
+                setOpenEdit(true)
+              }}
+              color='inherit'
+              size='small'
+            >
+              <EditTwoToneIcon fontSize='small' />
+            </IconButton>
+          </Tooltip>
+          {section.type !== 'banner' && (
+            <Tooltip title={t('delete')} arrow>
+              <IconButton
+                sx={{
+                  '&:hover': { background: theme.palette.error.lighter },
+                  color: theme.palette.error.main
+                }}
+                color='inherit'
+                size='small'
+                onClick={() => {
+                  setOpenDelete(true)
+                }}
+              >
+                <DeleteTwoToneIcon fontSize='small' />
+              </IconButton>
+            </Tooltip>
+          )}
+        </Stack>
       </Stack>
       <Grid container spacing={2}>
         {section.items.map((playlist) => (

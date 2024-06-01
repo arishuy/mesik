@@ -18,7 +18,10 @@ const SectionManagement = () => {
   const fetchData = async () => {
     await AxiosInterceptors.get(urlConfig.sections.getAllSections)
       .then((res) => {
-        setSections(res.data.pagination.sections)
+        setSections(
+          // if type = 'banner', move it to the first position
+          res.data.sections.sort((a, b) => (a.type === 'banner' ? -1 : 1))
+        )
         setIsLoading(false)
       })
       .catch((err) => {

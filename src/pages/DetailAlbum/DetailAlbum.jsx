@@ -80,8 +80,10 @@ const DetailAlbum = () => {
             src={album.photo_url ? album.photo_url : 'https://via.placeholder.com/300'}
             alt='album'
             width='350'
+            height='350'
             style={{
-              borderRadius: '10px'
+              borderRadius: '10px',
+              objectFit: 'cover'
             }}
           />
           <Typography variant='h3' color='text.primary'>
