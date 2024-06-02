@@ -84,7 +84,7 @@ export default function ForgotPassword() {
         setSnack({
           ...snack,
           open: true,
-          message: t('resetPasswordFailed'),
+          message: err.response.data.message,
           type: 'error'
         })
       })

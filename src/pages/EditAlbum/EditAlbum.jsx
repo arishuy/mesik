@@ -23,8 +23,10 @@ import Loading from '../../common/components/Loading/Loading'
 import convertToMinutes from '../../common/utils/convertToMinutes'
 import UploadAvatar from './UploadAvatar'
 import useSnackbar from '../../contexts/snackbar.context'
+import { useTranslation } from 'react-i18next'
 
 const DetailAlbum = () => {
+  const { t } = useTranslation()
   const id = useParams()
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -73,7 +75,7 @@ const DetailAlbum = () => {
         setSnack({
           ...snack,
           open: true,
-          message: 'Cập nhật thành công',
+          message: t('editAlbumSuccess'),
           type: 'success'
         })
         navigate(`/album/${album._id}`)
@@ -82,7 +84,7 @@ const DetailAlbum = () => {
         setSnack({
           ...snack,
           open: true,
-          message: 'Cập nhật thất bại',
+          message: t('editAlbumFail'),
           type: 'error'
         })
       })

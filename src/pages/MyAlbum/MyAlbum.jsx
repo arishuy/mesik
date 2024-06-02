@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import Empty from '../../common/components/Empty'
 import Loading from '../../common/components/Loading/Loading'
 import moment from 'moment'
+import { Helmet } from 'react-helmet-async'
 
 const MyAlbum = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -44,11 +45,21 @@ const MyAlbum = () => {
         padding: '20px 100px'
       }}
     >
+      <Helmet>
+        <title>Album</title>
+      </Helmet>
       {openAdd && <AddNewAlbum open={openAdd} handleClose={() => setOpenAdd(false)} fetchData={fetchData} />}
       {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} fetchData={fetchData} id={id} />}
       <Box sx={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant='h4'>Album của tôi</Typography>
-        <Button variant='contained' color='primary' onClick={() => setOpenAdd(true)}>
+        <Button
+          variant='outlined'
+          color='primary'
+          onClick={() => setOpenAdd(true)}
+          sx={{
+            borderRadius: '20px'
+          }}
+        >
           Tạo album mới
         </Button>
       </Box>

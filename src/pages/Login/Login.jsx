@@ -53,13 +53,17 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const { snack, setSnack } = useSnackbar()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorInput, setErrorInput] = useState({
+    username: false,
+    password: false
+  })
   const login = async () => {
-    if (username === '' || password === '') {
-      setSnack({
-        open: true,
-        type: 'error',
-        message: t('pleaseFillOutAllFields')
-      })
+    if (username === '') {
+      setErrorInput({ ...errorInput, username: true })
+      return
+    }
+    if (password === '') {
+      setErrorInput({ ...errorInput, password: true })
       return
     }
     setIsSubmitting(true)
@@ -134,8 +138,11 @@ export default function LoginPage() {
                   label={t('username')}
                   required
                   onChange={(e) => {
+                    if (username !== '' && errorInput.username) setErrorInput({ ...errorInput, username: false })
                     setUsername(e.target.value)
                   }}
+                  error={errorInput.username}
+                  helperText={errorInput.username ? 'Username is required' : ''}
                 />
 
                 <TextField
@@ -144,6 +151,7 @@ export default function LoginPage() {
                   type='password'
                   required
                   onChange={(e) => {
+                    if (password !== '' && errorInput.password) setErrorInput({ ...errorInput, password: false })
                     setPassword(e.target.value)
                   }}
                   onKeyDown={(e) => {
@@ -151,11 +159,12 @@ export default function LoginPage() {
                       login()
                     }
                   }}
+                  error={errorInput.password}
+                  helperText={errorInput.password ? 'Password is required' : ''}
                 />
               </Stack>
 
-              <Stack direction='row' alignItems='center' justifyContent='space-between' sx={{ my: 2 }}>
-                <FormControlLabel control={<Checkbox defaultChecked />} label={t('rememberMe')} />
+              <Stack direction='row' alignItems='center' justifyContent='flex-end' sx={{ my: 2 }}>
                 <Link
                   variant='subtitle2'
                   underline='hover'

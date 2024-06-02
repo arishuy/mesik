@@ -61,7 +61,7 @@ const AddNewAlbum = ({ open, handleClose, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorSuccess'),
+          message: t('addNewAlbumSuccess'),
           type: 'success'
         })
       })
@@ -69,7 +69,7 @@ const AddNewAlbum = ({ open, handleClose, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorFail'),
+          message: t('addNewAlbumFail'),
           type: 'error'
         })
       )

@@ -44,7 +44,7 @@ const EditSection = ({ open, handleClose, section_data, fetchData }) => {
       {section && section.name && (
         <RootModal
           variant='Create'
-          title={t('section')}
+          title='Edit Section'
           open={open}
           handleClose={handleClose}
           handleOk={() => {

@@ -189,6 +189,15 @@
   "addNewMajorSuccess": "Thêm mới chuyên ngành thành công!",
   "addNewMajorFail": "Thêm mới chuyên ngành không thành công!",
 
+  "addNewAlbumSuccess": "Thêm mới album thành công!",
+  "addNewAlbumFail": "Thêm mới album không thành công!",
+
+  "addNewSectionSuccess": "Thêm mới section thành công!",
+  "addNewSectionFail": "Thêm mới section không thành công!",
+
+  "editAlbumSuccess": "Chỉnh sửa album thành công!",
+  "editAlbumFail": "Chỉnh sửa album không thành công!",
+
   "editMajorSuccess": "Cập nhật thông tin chuyên ngành thành công!",
   "editMajorFail": "Cập nhật thông tin chuyên ngành không thành công!",
 
@@ -331,6 +340,8 @@
   "deletePlaylistSuccess": "Xóa playlist thành công",
   "updatePlaylistSuccess": "Cập nhật playlist thành công",
   "updatePlaylistFail": "Cập nhật playlist thất bại",
+  "updateSectionSuccess": "Cập nhật section thành công",
+  "updateSectionFail": "Cập nhật section thất bại",
 
   "randomMusic": "Trải nghiệm ngẫu nhiên",
   "justReleased": "Vừa phát hành",
@@ -339,5 +350,7 @@
   "playlistForYou": "Playlist cho bạn",
   "artistFamous": "Nghệ sĩ nổi tiếng",
 
-  "displayName": "Tên hiển thị"
+  "displayName": "Tên hiển thị",
+  "sectionManagement": "Quản lý Section",
+  "addSection": "Thêm Section"
 }

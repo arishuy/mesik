@@ -15,6 +15,7 @@ import { RegionContext } from '../../contexts/region.context'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs'
+import Loading from '../../common/components/Loading/Loading'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -35,6 +36,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
   const [formMusic, setFormMusic] = useState(new FormData())
   const { genres, getGenres } = useContext(GenreContext)
   const { regions, getRegions } = useContext(RegionContext)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [newSong, setNewSong] = useState({
     title: '',
     release_date: dayjs(),
@@ -46,7 +48,14 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
     play_count: 0
   })
   const handleAddNew = async () => {
-    if (newSong.title === '' || newSong.release_date === '' || newSong.photo === '' || newSong.genre_id === '') {
+    if (
+      newSong.title === '' ||
+      newSong.release_date === '' ||
+      newSong.photo === '' ||
+      newSong.genre_id === '' ||
+      newSong.region_id === '' ||
+      formMusic.get('audio') === null
+    ) {
       setSnack({
         ...snack,
         open: true,
@@ -64,6 +73,13 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
       })
       return
     }
+    setIsSubmitting(true)
+    setSnack({
+      ...snack,
+      open: true,
+      message: 'Đang tải lên bài hát...',
+      type: 'info'
+    })
     await AxiosInterceptors.post(
       urlConfig.music.uploadMusicByArtist,
       {
@@ -89,6 +105,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
           message: 'Tải lên bài hát thành công',
           type: 'success'
         })
+        setIsSubmitting(false)
         setOpen(false)
       })
       .catch((err) =>
@@ -130,7 +147,9 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
       setFormMusic(new FormData())
     }
   }, [])
-  return (
+  return isSubmitting ? (
+    <Loading />
+  ) : (
     <>
       {genres.length > 0 && (
         <RootModal

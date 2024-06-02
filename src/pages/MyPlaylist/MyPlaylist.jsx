@@ -66,7 +66,14 @@ const MyPlaylist = () => {
       {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} fetchData={fetchData} id={id} />}
       <Box sx={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant='h4'>Playlist của tôi</Typography>
-        <Button variant='contained' color='primary' onClick={() => setOpenAdd(true)}>
+        <Button
+          variant='outlined'
+          color='primary'
+          onClick={() => setOpenAdd(true)}
+          sx={{
+            borderRadius: '20px'
+          }}
+        >
           Tạo playlist mới
         </Button>
       </Box>

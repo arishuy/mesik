@@ -21,6 +21,7 @@ import LyricsOutlinedIcon from '@mui/icons-material/LyricsOutlined'
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined'
 import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined'
+import EventSeatOutlinedIcon from '@mui/icons-material/EventSeatOutlined'
 import ReportIcon from '@mui/icons-material/Report'
 import React from 'react'
 export default function AdminSideNav() {
@@ -203,7 +204,7 @@ export default function AdminSideNav() {
               History Transaction
             </MenuItem>
             <MenuItem
-              icon={<ReceiptLongOutlinedIcon />}
+              icon={<EventSeatOutlinedIcon />}
               component={
                 <Link to={path.adminSection} style={param.pathname === path.adminSection ? styleActive : styleLink} />
               }

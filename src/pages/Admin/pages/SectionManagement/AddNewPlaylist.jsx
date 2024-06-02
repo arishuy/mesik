@@ -66,7 +66,7 @@ const AddNewPlaylist = ({ open, handleClose, section, setSection }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorSuccess'),
+          message: t('addNewPlaylistSuccess'),
           type: 'success'
         })
       })
@@ -74,7 +74,7 @@ const AddNewPlaylist = ({ open, handleClose, section, setSection }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorFail'),
+          message: t('addNewPlaylistFail'),
           type: 'error'
         })
       )
