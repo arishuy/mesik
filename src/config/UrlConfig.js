@@ -95,7 +95,8 @@ const urlConfig = {
     addLyricToSong: `${process.env.REACT_APP_API_ENDPOINT}/songs/lyric`,
     addLyricToSongByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/artist/lyric`,
     updateMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/artist`,
-    deleteMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/artist`
+    deleteMusicByArtist: `${process.env.REACT_APP_API_ENDPOINT}/songs/artist`,
+    addSongToPlay: `${process.env.REACT_APP_API_ENDPOINT}/songs/next-play`
   },
   keyword: {
     get5Keyword: `${process.env.REACT_APP_API_ENDPOINT}/search/keywords`,

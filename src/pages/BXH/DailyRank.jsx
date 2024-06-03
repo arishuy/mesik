@@ -15,7 +15,8 @@ import {
   Avatar,
   IconButton,
   Autocomplete,
-  TextField
+  TextField,
+  Chip
 } from '@mui/material'
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded'
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded'
@@ -169,7 +170,12 @@ const DailyRank = ({ allPlaylists }) => {
             sx={{
               borderRadius: '20px'
             }}
-            onClick={() => playSong(data.map((item) => item.song))}
+            onClick={() =>
+              playSong(
+                data.map((item) => item.song),
+                false
+              )
+            }
           >
             Phát tất cả
           </Button>
@@ -247,6 +253,18 @@ const DailyRank = ({ allPlaylists }) => {
                       <Stack direction='column' spacing={0}>
                         <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                           {majorsOrder.song.title}
+                          {majorsOrder.song.isPremium && hoveredRow === majorsOrder.song._id && (
+                            <Chip
+                              label='Premium'
+                              size='small'
+                              color='primary'
+                              variant='outlined'
+                              sx={{
+                                ml: 1,
+                                fontWeight: 'bold'
+                              }}
+                            />
+                          )}
                         </Typography>
                         <Typography
                           variant='subtitle1'

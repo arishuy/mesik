@@ -27,7 +27,7 @@ const FamousAlbums = () => {
       })
   }
   const handlePlayAlbum = async (album) => {
-    playSong(album.songs)
+    playSong(album.songs, false)
     await AxiosInterceptors.post(`${urlConfig.albums.playAlbum}/play`, {
       id: album._id
     })

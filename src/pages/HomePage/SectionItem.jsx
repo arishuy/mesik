@@ -3,10 +3,8 @@ import { Grid, IconButton, Stack, Tooltip, Typography } from '@mui/material'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import { useNavigate } from 'react-router-dom'
 import { useMusicPlayer } from '../../contexts/music.context'
-import { useTranslation } from 'react-i18next'
 
 const SectionItem = ({ section }) => {
-  const { t } = useTranslation()
   const navigate = useNavigate()
   const { playSong } = useMusicPlayer()
   return (
@@ -30,7 +28,7 @@ const SectionItem = ({ section }) => {
                     <IconButton
                       onClick={(e) => {
                         e.stopPropagation()
-                        playSong(playlist.songs)
+                        playSong(playlist.songs, false)
                       }}
                       color='success'
                     >

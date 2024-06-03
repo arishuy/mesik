@@ -5,7 +5,7 @@ import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import dayjs from 'dayjs'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
-import { Button, Icon, IconButton } from '@mui/material'
+import { IconButton } from '@mui/material'
 import { AppContext } from '../../contexts/app.context'
 import { SnackbarContext } from '../../contexts/snackbar.context'
 import { ChatbotContext } from '../../contexts/chatbot.context'
@@ -14,7 +14,7 @@ const MusicPlayer = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
   const isPremium = user?.premiumEndDate && dayjs(user.premiumEndDate) > dayjs()
   const { isAuthenticated, likedSong, setLikedSong } = useContext(AppContext)
-  const { openChatbot, setOpenChatbot, playingSong, setPlayingSong } = useContext(ChatbotContext)
+  const { openChatbot, setOpenChatbot, setPlayingSong } = useContext(ChatbotContext)
   const { snack, setSnack } = useContext(SnackbarContext)
   const { currentSong } = useMusicPlayer()
   const [song, setSong] = useState({})
@@ -71,6 +71,7 @@ const MusicPlayer = () => {
   useEffect(() => {
     setAudioLists(currentSong)
   }, [currentSong])
+
   return (
     <ReactJkMusicPlayer
       quietUpdate

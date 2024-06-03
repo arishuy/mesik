@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Autocomplete, Badge, Card, Chip, IconButton, List, ListItem, Popover, Typography } from '@mui/material'
+import { Autocomplete, Badge, Card, IconButton, List, ListItem, Popover, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useMusicPlayer } from '../../contexts/music.context'
 import AxiosInterceptors from '../utils/axiosInterceptors'

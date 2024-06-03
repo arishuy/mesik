@@ -48,6 +48,7 @@ const LikedSongs = () => {
           localStorage.setItem('profile', JSON.stringify(user))
           fetchLikedSongs()
           setSnack({
+            ...snack,
             open: true,
             message: 'Xóa bài hát yêu thích thành công',
             type: 'success'
@@ -56,6 +57,7 @@ const LikedSongs = () => {
       })
       .catch((err) => {
         setSnack({
+          ...snack,
           open: true,
           message: 'Xóa bài hát yêu thích thất bại',
           type: 'error'
@@ -80,7 +82,7 @@ const LikedSongs = () => {
             sx={{
               borderRadius: '20px'
             }}
-            onClick={() => playSong(likedSongs)}
+            onClick={() => playSong(likedSongs, false)}
           >
             Phát tất cả
           </Button>

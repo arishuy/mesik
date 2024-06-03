@@ -184,7 +184,7 @@ const ArtistSongs = () => {
             sx={{
               borderRadius: '20px'
             }}
-            onClick={() => playSong(songs)}
+            onClick={() => playSong(songs, false)}
           >
             Phát tất cả
           </Button>

@@ -9,7 +9,6 @@ import {
   Stack,
   TextField,
   Typography,
-  Badge,
   Chip
 } from '@mui/material'
 import { useMusicPlayer } from '../../contexts/music.context'
@@ -21,7 +20,6 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useNavigate } from 'react-router-dom'
-import DiamondRoundedIcon from '@mui/icons-material/DiamondRounded'
 import { AppContext } from '../../contexts/app.context'
 import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded'
 
@@ -147,7 +145,9 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
             transform: 'scale(1.05)'
           }
         }}
-        onClick={() => playSong([song])}
+        onClick={() => {
+          playSong([song])
+        }}
       >
         <div>
           <Stack direction='row' spacing={3}>
@@ -177,9 +177,9 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
                   <Chip
                     label='Premium'
                     size='small'
+                    variant='outlined'
+                    color='primary'
                     sx={{
-                      backgroundColor: '#f0f0f0',
-                      color: 'black',
                       fontWeight: 'bold'
                     }}
                   />

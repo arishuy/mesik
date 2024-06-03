@@ -9,7 +9,8 @@ import {
   Typography,
   Stack,
   Avatar,
-  Button
+  Button,
+  Chip
 } from '@mui/material'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
@@ -43,7 +44,7 @@ const DetailAlbum = () => {
       })
   }
   const handlePlayAlbum = async () => {
-    playSong(album.songs)
+    playSong(album.songs, false)
     await AxiosInterceptors.post(`${urlConfig.albums.playAlbum}/play`, {
       id: id.nameId
     })
@@ -103,7 +104,7 @@ const DetailAlbum = () => {
           >
             Phát tất cả
           </Button>
-          {user.artist && album.artist && user.artist === album.artist._id && (
+          {user?.artist && album.artist && user?.artist === album.artist._id && (
             <Button
               sx={{
                 mt: 1
@@ -151,6 +152,18 @@ const DetailAlbum = () => {
                           <Stack direction='column' spacing={0}>
                             <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
                               {majorsOrder.title}
+                              {majorsOrder.isPremium && (
+                                <Chip
+                                  label='Premium'
+                                  size='small'
+                                  color='primary'
+                                  variant='outlined'
+                                  sx={{
+                                    ml: 1,
+                                    fontWeight: 'bold'
+                                  }}
+                                />
+                              )}
                             </Typography>
                           </Stack>
                         </Stack>

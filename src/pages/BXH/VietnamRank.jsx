@@ -158,7 +158,7 @@ const VietnamRank = ({ allPlaylists }) => {
             sx={{
               borderRadius: '20px'
             }}
-            onClick={() => playSong(data)}
+            onClick={() => playSong(data, false)}
           >
             Phát tất cả
           </Button>
