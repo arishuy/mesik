@@ -16,8 +16,10 @@ import Empty from '../../common/components/Empty'
 import Loading from '../../common/components/Loading/Loading'
 import { Helmet } from 'react-helmet-async'
 import EditPlaylist from './EditPlaylist'
+import useResponsive from '../../hooks/useResponsive'
 
 const MyPlaylist = () => {
+  const isMobile = useResponsive('down', 'sm')
   const user = JSON.parse(localStorage.getItem('profile'))
   const navigation = useNavigate()
   const { playSong } = useMusicPlayer()
@@ -51,11 +53,7 @@ const MyPlaylist = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div
-      style={{
-        padding: '20px 100px'
-      }}
-    >
+    <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
         <title>Playlist</title>
       </Helmet>

@@ -6,8 +6,11 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp'
 import urlConfig from '../../config/UrlConfig'
 import Axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import useResponsive from '../../hooks/useResponsive'
 
 const SearchBar = () => {
+  const isMobile = useResponsive('down', 'sm')
+
   const [searchText, setSearchText] = useState('')
   const [mostKeyword, setMostKeyword] = useState([])
 
@@ -49,7 +52,7 @@ const SearchBar = () => {
       style={{
         position: 'relative',
         borderRadius: '20px',
-        marginLeft: '80px'
+        marginLeft: isMobile ? '0' : '80px'
       }}
     >
       <TextField
@@ -79,7 +82,7 @@ const SearchBar = () => {
         sx={{
           '.MuiInputBase-root': {
             height: '50px',
-            width: '500px',
+            width: isMobile ? '100%' : '500px',
             borderRadius: '20px',
             zIndex: 999
           }

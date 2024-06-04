@@ -21,8 +21,10 @@ import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFil
 import { useMusicPlayer } from '../../contexts/music.context'
 import Loading from '../../common/components/Loading/Loading'
 import convertToMinutes from '../../common/utils/convertToMinutes'
+import useResponsive from '../../hooks/useResponsive'
 
 const DetailAlbum = () => {
+  const isMobile = useResponsive('down', 'sm')
   const user = JSON.parse(localStorage.getItem('profile'))
   const id = useParams()
   const navigate = useNavigate()
@@ -62,19 +64,17 @@ const DetailAlbum = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div
-      style={{
-        padding: '20px 100px'
-      }}
-    >
-      <Grid container spacing={2}>
+    <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
+      <Grid container spacing={isMobile ? 0 : 2}>
         <Grid
           item
-          xs={4}
+          sm={12}
+          md={4}
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center'
+            alignItems: 'center',
+            mx: 'auto'
           }}
         >
           <img
@@ -118,14 +118,14 @@ const DetailAlbum = () => {
             </Button>
           )}
         </Grid>
-        <Grid item xs={8}>
+        <Grid item md={8} sm={12}>
           <TableContainer>
             <Table size='small'>
               <TableHead>
                 <TableRow>
                   <TableCell>Bài Hát</TableCell>
-                  <TableCell>Thời Lượng</TableCell>
-                  <TableCell align='right'>Ngày Cập Nhật</TableCell>
+                  <TableCell align='right'>Thời Lượng</TableCell>
+                  {!isMobile && <TableCell align='right'>Ngày Cập Nhật</TableCell>}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -168,19 +168,21 @@ const DetailAlbum = () => {
                           </Stack>
                         </Stack>
                       </TableCell>
-                      <TableCell>
+                      <TableCell align='right'>
                         <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
                           {convertToMinutes(majorsOrder.duration)}
                         </Typography>
                       </TableCell>
-                      <TableCell align='right'>
-                        <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                          {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
-                        </Typography>
-                        <Typography variant='body2' color='text.primary' gutterBottom noWrap>
-                          {moment(majorsOrder.createdAt).format('h:mm:ss A')}
-                        </Typography>
-                      </TableCell>
+                      {!isMobile && (
+                        <TableCell align='right'>
+                          <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
+                            {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
+                          </Typography>
+                          <Typography variant='body2' color='text.primary' gutterBottom noWrap>
+                            {moment(majorsOrder.createdAt).format('h:mm:ss A')}
+                          </Typography>
+                        </TableCell>
+                      )}
                     </TableRow>
                   )
                 })}

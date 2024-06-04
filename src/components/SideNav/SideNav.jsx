@@ -60,36 +60,31 @@ export default function AdminSideNav({ param }) {
     <Sidebar style={isMobile ? styleMobile : { height: '100%' }} collapsed={false}>
       {isMobile ? (
         <Menu rootStyles={menuMobile}>
-          <MenuItem icon={<SsidChartIcon />} component={<Link to={path.adminDashBoard} style={styleLink} />}></MenuItem>
-          <MenuItem icon={<AccountBoxIcon />} component={<Link to={path.adminProfile} style={styleLink} />}></MenuItem>
           <MenuItem
-            icon={<ManageAccountsIcon />}
-            component={<Link to={path.adminListUser} style={styleLink} />}
+            icon={<HomeIcon />}
+            component={<Link to={path.home} style={param === path.home ? styleActive : styleLink} />}
           ></MenuItem>
+          {isAuthenticated && (
+            <>
+              <MenuItem
+                icon={<LibraryMusicRoundedIcon />}
+                component={<Link to={path.myLibrary} style={param === path.myLibrary ? styleActive : styleLink} />}
+              ></MenuItem>
+              <MenuItem
+                icon={<QueueMusicIcon />}
+                component={<Link to={path.myPlaylist} style={param === path.myPlaylist ? styleActive : styleLink} />}
+              ></MenuItem>
+              {role === 'ARTIST' && (
+                <MenuItem
+                  icon={<AlbumIcon />}
+                  component={<Link to={path.myAlbum} style={param === path.myAlbum ? styleActive : styleLink} />}
+                ></MenuItem>
+              )}
+            </>
+          )}
           <MenuItem
-            icon={<ManageSearchIcon />}
-            component={<Link to={path.adminListMajor} style={styleLink} />}
-          ></MenuItem>
-          <MenuItem
-            icon={<VerifiedUserIcon />}
-            component={<Link to={path.adminVerifyExpert} style={styleLink} />}
-          ></MenuItem>
-          <MenuItem
-            icon={<FindInPageIcon />}
-            component={<Link to={path.adminListDocument} style={styleLink} />}
-          ></MenuItem>
-          <MenuItem
-            icon={<AccountBalanceWalletIcon />}
-            component={<Link to={path.adminListTransaction} style={styleLink} />}
-          ></MenuItem>
-          <MenuItem
-            icon={<AccountBalanceWalletIcon />}
-            component={<Link to={path.adminListReport} style={styleLink} />}
-          ></MenuItem>
-          <MenuItem icon={<ReportIcon />} component={<Link to={path.adminListReport} style={styleLink} />}></MenuItem>
-          <MenuItem
-            icon={<AccountBalanceWalletIcon />}
-            component={<Link to={path.adminWithdraw} style={styleLink} />}
+            icon={<AutoGraphIcon />}
+            component={<Link to={path.chart} style={param === path.chart ? styleActive : styleLink} />}
           ></MenuItem>
         </Menu>
       ) : (

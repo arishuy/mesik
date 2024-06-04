@@ -14,8 +14,10 @@ import Empty from '../../common/components/Empty'
 import Loading from '../../common/components/Loading/Loading'
 import moment from 'moment'
 import { Helmet } from 'react-helmet-async'
+import useResponsive from '../../hooks/useResponsive'
 
 const MyAlbum = () => {
+  const isMobile = useResponsive('down', 'sm')
   const user = JSON.parse(localStorage.getItem('profile'))
   const navigation = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
@@ -40,11 +42,7 @@ const MyAlbum = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div
-      style={{
-        padding: '20px 100px'
-      }}
-    >
+    <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
         <title>Album</title>
       </Helmet>

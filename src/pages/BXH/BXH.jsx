@@ -10,6 +10,7 @@ import GlobalRank from './GlobalRank'
 import { AppContext } from '../../contexts/app.context'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
+import useResponsive from '../../hooks/useResponsive'
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props
@@ -45,6 +46,7 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
+  const isMobile = useResponsive('down', 'sm')
   const [value, setValue] = React.useState(0)
   const { isAuthenticated } = React.useContext(AppContext)
   const [allPlaylists, setAllPlaylists] = React.useState([])
@@ -68,9 +70,15 @@ export default function BasicTabs() {
     }
   }, [])
   return (
-    <Box sx={{ width: '100%', padding: '20px 100px' }}>
+    <Box sx={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label='basic tabs example'>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label='basic tabs example'
+          variant='scrollable'
+          scrollButtons='auto'
+        >
           <Tab label='Hàng Ngày' {...a11yProps(0)} />
           <Tab label='Việt Nam' {...a11yProps(1)} />
           <Tab label='Quốc Tế' {...a11yProps(2)} />

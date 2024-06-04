@@ -10,7 +10,9 @@ import { AppContext } from '../../contexts/app.context'
 import { SnackbarContext } from '../../contexts/snackbar.context'
 import { ChatbotContext } from '../../contexts/chatbot.context'
 import LyricsRoundedIcon from '@mui/icons-material/LyricsRounded'
+import useResponsive from '../../hooks/useResponsive'
 const MusicPlayer = () => {
+  const isMobile = useResponsive('down', 'sm')
   const user = JSON.parse(localStorage.getItem('profile'))
   const isPremium = user?.premiumEndDate && dayjs(user.premiumEndDate) > dayjs()
   const { isAuthenticated, likedSong, setLikedSong } = useContext(AppContext)
@@ -80,8 +82,8 @@ const MusicPlayer = () => {
       showReload={false}
       showThemeSwitch={false}
       showDownload={isPremium ? true : false}
-      mode='full'
-      toggleMode={false}
+      mode={isMobile ? 'mini' : 'full'}
+      toggleMode={isMobile ? true : false}
       defaultPlayMode='orderLoop'
       audioLists={audioLists}
       onAudioPlay={(audioInfo) => {

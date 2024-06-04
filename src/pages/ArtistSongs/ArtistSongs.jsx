@@ -29,8 +29,10 @@ import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded'
 import RootModal from '../../components/Modal/RootModal'
+import useResponsive from '../../hooks/useResponsive'
 
 const ArtistSongs = () => {
+  const isMobile = useResponsive('down', 'sm')
   const user = JSON.parse(localStorage.getItem('profile'))
   const [pageCount, setPageCount] = useState(1)
   const [isLoading, setIsLoading] = useState(true)
@@ -141,11 +143,7 @@ const ArtistSongs = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div
-      style={{
-        padding: '20px 100px'
-      }}
-    >
+    <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <RootModal
         variant='Create'
         title='Thêm vào playlist'
@@ -175,7 +173,7 @@ const ArtistSongs = () => {
       </RootModal>
       <Stack direction='row' justifyContent='space-between' alignItems='center'>
         <Typography variant='h4' py={3}>
-          {songs.length > 0 ? songs[0].artist.display_name : ''} - Tất cả bài hát
+          {songs.length > 0 ? songs[0].artist.display_name : ''} {!isMobile && ' - Tất cả bài hát'}
         </Typography>
         {songs.length > 0 && (
           <Button
@@ -195,7 +193,13 @@ const ArtistSongs = () => {
         <Table size='small'>
           <TableHead>
             <TableRow>
-              <TableCell>Title</TableCell>
+              <TableCell
+                sx={{
+                  width: '500px'
+                }}
+              >
+                Title
+              </TableCell>
               <TableCell>Duration</TableCell>
               <TableCell align='right'>Release Date</TableCell>
             </TableRow>
@@ -238,7 +242,11 @@ const ArtistSongs = () => {
                           {song.artist.display_name}
                         </Typography>
                       </Stack>
-                      {hoveredRow === song._id && isAuthenticated && (
+                    </Stack>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
+                      {hoveredRow === song._id && isAuthenticated ? (
                         <>
                           <IconButton
                             onClick={() => handleLikeSong(song)}
@@ -259,12 +267,9 @@ const ArtistSongs = () => {
                             <AddCircleRoundedIcon />
                           </IconButton>
                         </>
+                      ) : (
+                        convertToMinutes(song.duration)
                       )}
-                    </Stack>
-                  </TableCell>
-                  <TableCell>
-                    <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
-                      {convertToMinutes(song.duration)}
                     </Typography>
                   </TableCell>
                   <TableCell align='right'>

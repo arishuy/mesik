@@ -27,8 +27,10 @@ import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOut
 import Empty from '../../common/components/Empty'
 import Loading from '../../common/components/Loading/Loading'
 import convertToMinutes from '../../common/utils/convertToMinutes'
+import useResponsive from '../../hooks/useResponsive'
 
 const DetailPlaylist = () => {
+  const isMobile = useResponsive('down', 'sm')
   const id = useParams()
   const user = JSON.parse(localStorage.getItem('profile'))
   const [isLoading, setIsLoading] = useState(true)
@@ -107,11 +109,7 @@ const DetailPlaylist = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div
-      style={{
-        padding: '20px 100px'
-      }}
-    >
+    <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Grid container spacing={2}>
         <Grid
           item
@@ -120,7 +118,8 @@ const DetailPlaylist = () => {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center'
+            alignItems: 'center',
+            mx: 'auto'
           }}
         >
           <img
@@ -159,8 +158,7 @@ const DetailPlaylist = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Bài Hát</TableCell>
-                    <TableCell>Thời Lượng</TableCell>
-                    <TableCell align='right'>Ngày Cập Nhật</TableCell>
+                    <TableCell align='right'>Thời Lượng</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -204,7 +202,7 @@ const DetailPlaylist = () => {
                             </Stack>
                           </Stack>
                         </TableCell>
-                        <TableCell>
+                        <TableCell align='right'>
                           <Typography variant='subtitle1' color='text.primary' noWrap>
                             {convertToMinutes(majorsOrder.duration)}
                           </Typography>
@@ -227,14 +225,6 @@ const DetailPlaylist = () => {
                               </IconButton>
                             </Tooltip>
                           )}
-                        </TableCell>
-                        <TableCell align='right'>
-                          <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                            {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
-                          </Typography>
-                          <Typography variant='body2' color='text.primary' gutterBottom noWrap>
-                            {moment(majorsOrder.createdAt).format('h:mm:ss A')}
-                          </Typography>
                         </TableCell>
                       </TableRow>
                     )
@@ -303,8 +293,8 @@ const DetailPlaylist = () => {
                               </Stack>
                             </Stack>
                           </TableCell>
-                          <TableCell>
-                            <Typography variant='body1' color='text.primary' noWrap>
+                          <TableCell align='right'>
+                            <Typography variant='subtitle1' color='text.primary' noWrap>
                               {convertToMinutes(majorsOrder.duration)}
                             </Typography>
                             <Tooltip title='Thêm vào playlist' arrow>
@@ -324,14 +314,6 @@ const DetailPlaylist = () => {
                                 <AddCircleOutlineOutlinedIcon fontSize='small' />
                               </IconButton>
                             </Tooltip>
-                          </TableCell>
-                          <TableCell align='right'>
-                            <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                              {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
-                            </Typography>
-                            <Typography variant='body2' color='text.primary' gutterBottom noWrap>
-                              {moment(majorsOrder.createdAt).format('h:mm:ss A')}
-                            </Typography>
                           </TableCell>
                         </TableRow>
                       )

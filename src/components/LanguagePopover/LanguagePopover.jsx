@@ -1,7 +1,7 @@
 // @mui
 import { styled } from '@mui/material/styles'
 import { alpha } from '@mui/material/styles'
-import { Box, MenuItem, Stack, IconButton, Popover } from '@mui/material'
+import { Box, MenuItem, Stack, IconButton, Popover, Fab } from '@mui/material'
 
 // hooks
 import { useState } from 'react'
@@ -52,19 +52,15 @@ export default function LanguagePopover() {
 
   return (
     <>
-      <IconButton
+      <Fab
+        size='small'
         onClick={handleOpen}
         sx={{
-          padding: 0,
-          width: 48,
-          height: 48,
-          mr: isMobile ? 1 : 2,
-          boxShadow:
-            '0px 3px 5px -1px rgba(145, 158, 171, 0.2), 0px 6px 10px 0px rgba(145, 158, 171, 0.14), 0px 1px 18px 0px rgba(145, 158, 171, 0.12)'
+          padding: 1
         }}
       >
         <img src={currentLang.value === 'vi' ? vnIcon : enIcon} alt={currentLang.label} width={28} height={20} />
-      </IconButton>
+      </Fab>
 
       <Popover
         open={Boolean(open)}

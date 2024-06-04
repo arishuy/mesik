@@ -11,8 +11,10 @@ import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import { useMusicPlayer } from '../../contexts/music.context'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import useResponsive from '../../hooks/useResponsive'
 
 const SearchPage = () => {
+  const isMobile = useResponsive('down', 'sm')
   const navigate = useNavigate()
   const [data, setData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
@@ -71,11 +73,7 @@ const SearchPage = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div
-      style={{
-        padding: '20px 100px'
-      }}
-    >
+    <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
         <title>Tìm Kiếm</title>
       </Helmet>
@@ -123,7 +121,7 @@ const SearchPage = () => {
         )}
 
         {data.artists?.map((artist) => (
-          <Grid item xs={2} key={artist.id}>
+          <Grid item sm={6} md={2} key={artist.id}>
             <Stack
               direction='column'
               alignItems='center'

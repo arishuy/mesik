@@ -8,6 +8,7 @@ import HistoryListen from './HistoryListen'
 import FollowingArtist from './FollowingArtist'
 import HistoryUpload from './HistoryUpload'
 import { useTranslation } from 'react-i18next'
+import useResponsive from '../../hooks/useResponsive'
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props
@@ -42,6 +43,7 @@ function a11yProps(index) {
   }
 }
 const ThuVien = () => {
+  const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
   const [value, setValue] = React.useState(0)
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -59,17 +61,19 @@ const ThuVien = () => {
     checkPermission()
   }, [])
   return (
-    <div
-      style={{
-        padding: '20px 100px'
-      }}
-    >
+    <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
         <title>Thư Viện</title>
       </Helmet>
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label='basic tabs example'>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label='basic tabs example'
+            variant='scrollable'
+            scrollButtons='auto'
+          >
             <Tab label='Bài hát yêu thích' {...a11yProps(0)} />
             <Tab label={t('recentlyListened')} {...a11yProps(1)} />
             <Tab label='Đang theo dõi' {...a11yProps(2)} />

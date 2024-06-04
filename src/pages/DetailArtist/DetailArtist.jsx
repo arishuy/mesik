@@ -17,8 +17,10 @@ import GroupRemoveRoundedIcon from '@mui/icons-material/GroupRemoveRounded'
 import { AppContext } from '../../contexts/app.context'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import RelatedArtists from './RelatedArtists'
+import useResponsive from '../../hooks/useResponsive'
 
 const DetailArtist = () => {
+  const isMobile = useResponsive('down', 'sm')
   const id = useParams()
   const { isAuthenticated, profile } = useContext(AppContext)
   const { playSong } = useMusicPlayer()
@@ -85,11 +87,7 @@ const DetailArtist = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div
-      style={{
-        padding: '20px 100px'
-      }}
-    >
+    <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
         <title>Thông Tin Nghệ Sĩ</title>
       </Helmet>
@@ -102,7 +100,12 @@ const DetailArtist = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <Stack direction='row' spacing={5} justifyContent='space-around' alignItems='center'>
+        <Stack
+          direction={isMobile ? 'column-reverse' : 'row'}
+          spacing={5}
+          justifyContent='space-around'
+          alignItems='center'
+        >
           <Stack direction='column' spacing={3}>
             <Typography
               variant='h1'

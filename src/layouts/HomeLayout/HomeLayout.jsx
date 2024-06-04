@@ -9,7 +9,9 @@ import SideNav from '../../components/SideNav'
 import MusicPlayer from '../../components/MusicPlayer'
 import ChatBot from '../../components/ChatBot'
 import Snackbar from '../../common/components/SnackBar'
+import useResponsive from '../../hooks/useResponsive'
 function HomeLayoutInner({ children }) {
+  const isMobile = useResponsive('down', 'sm')
   const param = useLocation()
   const { isAuthenticated } = useContext(AppContext)
   return (
@@ -50,7 +52,7 @@ function HomeLayoutInner({ children }) {
       </Box>
       <Box
         sx={{
-          display: 'flex',
+          display: isMobile ? 'none' : 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           height: '80px',

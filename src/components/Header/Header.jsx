@@ -9,14 +9,12 @@ import useResponsive from '../../hooks/useResponsive'
 import UploadMusic from './UploadMusic'
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import SearchBar from '../../common/components/SearchBox'
-import { ChatbotContext } from '../../contexts/chatbot.context'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import LanguaguePopover from '../LanguagePopover/LanguagePopover'
 
 import Recharge from './Recharge'
 
 const Header = () => {
-  const { openChatbot, setOpenChatbot } = React.useContext(ChatbotContext)
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -29,20 +27,30 @@ const Header = () => {
       <Box
         sx={{
           display: 'flex',
+          flexDirection: isMobile ? 'column-reverse' : 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          height: '7vh',
-          margin: '0px 20px'
+          height: isMobile ? 'auto' : '7vh',
+          margin: isMobile ? 0 : '0px 20px'
         }}
       >
         <Stack direction='row' spacing={2}>
           <SearchBar />
         </Stack>
+
         {openRecharge && <Recharge openRecharge={openRecharge} setOpenRecharge={setOpenRecharge} />}
 
         <div>
           <Stack direction='row' spacing={isMobile ? 0 : 2} sx={{ padding: '10px' }}>
-            <Box sx={isMobile ? {} : { '& > :not(style)': { m: 1 } }}>
+            <Box
+              sx={
+                isMobile
+                  ? {
+                      zIndex: 1
+                    }
+                  : { '& > :not(style)': { m: 1 } }
+              }
+            >
               {user && user.role === 'ARTIST' && open && <UploadMusic open={open} setOpen={setOpen} />}
               {user.role === 'ARTIST' && (
                 <>
@@ -71,12 +79,6 @@ const Header = () => {
                   <button className='become-artist' onClick={() => navigate('/user/become-artist')}>
                     {t('becomeArtist')}
                   </button>
-                  {/* <Tooltip title={t('createRequest')} arrow>
-                    <Fab size='small' aria-label='add' onClick={() => setOpen(true)}>
-                      <AddIcon />
-                    </Fab>
-                  </Tooltip>
-                  */}
                   <Tooltip title={t('recharge')} arrow>
                     <Fab size='small' aria-label='recharge' onClick={() => setOpenRecharge(true)}>
                       <AttachMoneyIcon />

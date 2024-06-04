@@ -12,7 +12,9 @@ import SuggestedPlaylist from './SuggestedPlaylist'
 import FamousAlbums from './FamousAlbums'
 import HomeSection from './HomeSection'
 import Carousel from './Banner'
+import useResponsive from '../../hooks/useResponsive'
 const HomePage = () => {
+  const isMobile = useResponsive('down', 'sm')
   const { isAuthenticated } = useContext(AppContext)
   const [allPlaylists, setAllPlaylists] = React.useState([])
 
@@ -30,11 +32,7 @@ const HomePage = () => {
     if (isAuthenticated) fetchData()
   }, [])
   return (
-    <div
-      style={{
-        padding: '20px 100px'
-      }}
-    >
+    <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
         <title>Trang Chủ</title>
       </Helmet>

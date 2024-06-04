@@ -8,8 +8,10 @@ import { LoadingButton } from '@mui/lab'
 import Loading from '../../common/components/Loading/Loading'
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
+import useResponsive from '../../hooks/useResponsive'
 
 const BuyPremium = () => {
+  const isMobile = useResponsive('down', 'sm')
   const navigate = useNavigate()
   const theme = useTheme()
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -72,11 +74,7 @@ const BuyPremium = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div
-      style={{
-        padding: '20px 100px'
-      }}
-    >
+    <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
         <title>Gói Premium</title>
       </Helmet>
