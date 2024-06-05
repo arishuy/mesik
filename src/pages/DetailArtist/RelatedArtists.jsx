@@ -4,8 +4,10 @@ import Axios from 'axios'
 import urlConfig from '../../config/UrlConfig'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const RelatedArtists = ({ id }) => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [artists, setArtists] = useState([])
   useEffect(() => {
@@ -20,7 +22,7 @@ const RelatedArtists = ({ id }) => {
   return (
     <>
       <Typography variant='h4' py={3}>
-        Có thể bạn quan tâm
+        {t('maybeInterested')}
       </Typography>
       <Grid container spacing={3}>
         {artists.map((artist) => (
@@ -44,7 +46,7 @@ const RelatedArtists = ({ id }) => {
                 {artist.display_name}
               </Typography>
               <Typography variant='subtitle1' textAlign='center'>
-                {artist.total_followers} người theo dõi
+                {artist.total_followers} {t('followers')}
               </Typography>
             </Stack>
           </Grid>

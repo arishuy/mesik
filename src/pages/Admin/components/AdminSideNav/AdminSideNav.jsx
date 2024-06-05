@@ -61,43 +61,95 @@ export default function AdminSideNav() {
       {isMobile ? (
         <Menu rootStyles={menuMobile}>
           <MenuItem icon={<SsidChartIcon />} component={<Link to={path.adminDashBoard} style={styleLink} />}></MenuItem>
-          <MenuItem icon={<AccountBoxIcon />} component={<Link to={path.adminProfile} style={styleLink} />}></MenuItem>
           <MenuItem
-            icon={<ManageAccountsIcon />}
-            component={<Link to={path.adminListUser} style={styleLink} />}
+            icon={<AccountBoxIcon />}
+            component={
+              <Link to={path.adminProfile} style={param.pathname === path.adminProfile ? styleActive : styleLink} />
+            }
           ></MenuItem>
-          <MenuItem
-            icon={<ManageSearchIcon />}
-            component={<Link to={path.adminListMajor} style={styleLink} />}
-          ></MenuItem>
-          <MenuItem
-            icon={<VerifiedUserIcon />}
-            component={<Link to={path.adminVerifyExpert} style={styleLink} />}
-          ></MenuItem>
-          <MenuItem
-            icon={<FindInPageIcon />}
-            component={<Link to={path.adminListDocument} style={styleLink} />}
-          ></MenuItem>
-          <MenuItem
-            icon={<AccountBalanceWalletIcon />}
-            component={<Link to={path.adminListTransaction} style={styleLink} />}
-          ></MenuItem>
-          <MenuItem
-            icon={<AccountBalanceWalletIcon />}
-            component={<Link to={path.adminListReport} style={styleLink} />}
-          ></MenuItem>
-          <MenuItem icon={<ReportIcon />} component={<Link to={path.adminListReport} style={styleLink} />}></MenuItem>
-          <MenuItem
-            icon={<AccountBalanceWalletIcon />}
-            component={<Link to={path.adminWithdraw} style={styleLink} />}
-          ></MenuItem>
+          <SubMenu label='Management' style={styleLink} icon={<HandymanIcon />}>
+            <MenuItem
+              icon={<ManageAccountsOutlinedIcon />}
+              component={
+                <Link to={path.adminListUser} style={param.pathname === path.adminListUser ? styleActive : styleLink} />
+              }
+            ></MenuItem>
+            <MenuItem
+              icon={<AudioFileOutlinedIcon />}
+              component={
+                <Link to={path.adminMusic} style={param.pathname === path.adminMusic ? styleActive : styleLink} />
+              }
+            ></MenuItem>
+            <MenuItem
+              icon={<LyricsOutlinedIcon />}
+              component={
+                <Link to={path.adminGenre} style={param.pathname === path.adminGenre ? styleActive : styleLink} />
+              }
+            ></MenuItem>
+            <MenuItem
+              icon={<PublicOutlinedIcon />}
+              component={
+                <Link to={path.adminRegion} style={param.pathname === path.adminRegion ? styleActive : styleLink} />
+              }
+            ></MenuItem>
+            <MenuItem
+              icon={<VerifiedUserOutlinedIcon />}
+              component={
+                <Link to={path.adminRequest} style={param.pathname === path.adminRequest ? styleActive : styleLink} />
+              }
+            ></MenuItem>
+            <MenuItem
+              icon={<AlbumOutlinedIcon />}
+              component={
+                <Link to={path.adminAlbum} style={param.pathname === path.adminAlbum ? styleActive : styleLink} />
+              }
+            ></MenuItem>
+            <MenuItem
+              icon={<ArtTrackOutlinedIcon />}
+              component={
+                <Link to={path.adminPlaylist} style={param.pathname === path.adminPlaylist ? styleActive : styleLink} />
+              }
+            ></MenuItem>
+            <MenuItem
+              icon={<ReportProblemOutlinedIcon />}
+              component={
+                <Link
+                  to={path.adminListReport}
+                  style={param.pathname === path.adminListReport ? styleActive : styleLink}
+                />
+              }
+            ></MenuItem>
+            <MenuItem
+              icon={<WorkspacePremiumOutlinedIcon />}
+              component={
+                <Link
+                  to={path.adminPremiumPackage}
+                  style={param.pathname === path.adminPremiumPackage ? styleActive : styleLink}
+                />
+              }
+            ></MenuItem>
+            <MenuItem
+              icon={<ReceiptLongOutlinedIcon />}
+              component={
+                <Link
+                  to={path.adminListTransaction}
+                  style={param.pathname === path.adminListTransaction ? styleActive : styleLink}
+                />
+              }
+            ></MenuItem>
+            <MenuItem
+              icon={<EventSeatOutlinedIcon />}
+              component={
+                <Link to={path.adminSection} style={param.pathname === path.adminSection ? styleActive : styleLink} />
+              }
+            ></MenuItem>
+          </SubMenu>
         </Menu>
       ) : (
         <Menu>
           <MenuItem icon={<SsidChartIcon />} component={<Link to={path.adminDashBoard} style={styleLink} />}>
             {t('statistics')}
           </MenuItem>
-
           <MenuItem
             icon={<AccountBoxIcon />}
             component={

@@ -44,7 +44,7 @@ const AddNewPlaylist = ({ open, handleClose, fetchData }) => {
     <>
       <RootModal
         variant='Create'
-        title='New Playlist'
+        title={t('newPlaylist')}
         open={open}
         handleClose={handleClose}
         handleOk={() => {
@@ -56,7 +56,7 @@ const AddNewPlaylist = ({ open, handleClose, fetchData }) => {
         <Stack spacing={2} direction='column' sx={{ width: '100%', my: 2 }}>
           <TextField
             id='outlined-basic'
-            label='Title'
+            label={t('title')}
             variant='outlined'
             placeholder='Nhập tên playlist'
             fullWidth

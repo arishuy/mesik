@@ -129,7 +129,7 @@ function HeaderUserbox() {
         <List sx={{ p: 1 }} component='nav'>
           <ListItem button to={path.buyPremium} component={NavLink}>
             <Typography variant='body1' color='text.primary' fontWeight='bold'>
-              Gói dịch vụ:
+              {t('servicePackage')}:
             </Typography>
             <Chip
               label={user.premiumEndDate && dayjs(user.premiumEndDate) > dayjs() ? 'PREMIUM' : 'FREE'}

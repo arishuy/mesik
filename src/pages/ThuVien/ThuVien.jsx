@@ -63,7 +63,7 @@ const ThuVien = () => {
   return (
     <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
-        <title>Thư Viện</title>
+        <title>{t('librabry')}</title>
       </Helmet>
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -74,10 +74,10 @@ const ThuVien = () => {
             variant='scrollable'
             scrollButtons='auto'
           >
-            <Tab label='Bài hát yêu thích' {...a11yProps(0)} />
+            <Tab label={t('likedSongs')} {...a11yProps(0)} />
             <Tab label={t('recentlyListened')} {...a11yProps(1)} />
-            <Tab label='Đang theo dõi' {...a11yProps(2)} />
-            {user?.role === 'ARTIST' && <Tab label='Đã tải lên' {...a11yProps(3)} />}
+            <Tab label={t('following')} {...a11yProps(2)} />
+            {user?.role === 'ARTIST' && <Tab label={t('uploaded')} {...a11yProps(3)} />}
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>

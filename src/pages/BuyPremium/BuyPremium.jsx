@@ -9,8 +9,10 @@ import Loading from '../../common/components/Loading/Loading'
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
 
 const BuyPremium = () => {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const navigate = useNavigate()
   const theme = useTheme()
@@ -52,7 +54,7 @@ const BuyPremium = () => {
           localStorage.setItem('profile', JSON.stringify(newData))
           setSnack({
             open: true,
-            message: 'Mua gói Premium thành công',
+            message: t('buyPremiumSuccess'),
             type: 'success'
           })
           setIsSubmitting(false)
@@ -76,15 +78,15 @@ const BuyPremium = () => {
   ) : (
     <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
-        <title>Gói Premium</title>
+        <title>{t('premiumPackage')}</title>
       </Helmet>
       <Stack spacing={2} direction='row' sx={{ justifyContent: 'space-between' }}>
         <div>
           <Typography variant='h3' pt={3}>
-            Mua gói Premium
+            {t('buyPremium')}
           </Typography>
           <Typography variant='h6' gutterBottom pb={3}>
-            Nâng cấp tài khoản để trải nghiệm các tính năng và nội dung cao cấp
+            {t('premiumPackageDescription')}
           </Typography>
         </div>
         <div
@@ -93,7 +95,7 @@ const BuyPremium = () => {
           }}
         >
           <Typography variant='h4' pt={3}>
-            Gói của bạn:{' '}
+            {t('myPackage')}:{' '}
             <Chip
               label={user.premiumEndDate && dayjs(user.premiumEndDate) > dayjs() ? 'PREMIUM' : 'FREE'}
               color={user.premiumEndDate && dayjs(user.premiumEndDate) > dayjs() ? 'secondary' : 'error'}
@@ -105,7 +107,8 @@ const BuyPremium = () => {
             />
           </Typography>
           <Typography variant='h6' gutterBottom pb={3}>
-            Ngày hết hạn: {user.premiumEndDate ? dayjs(user.premiumEndDate).format('DD/MM/YYYY') : 'Chưa mua gói'}
+            {t('expirationDate')}:{' '}
+            {user.premiumEndDate ? dayjs(user.premiumEndDate).format('DD/MM/YYYY') : t('notBuyPackage')}
           </Typography>
         </div>
       </Stack>
@@ -123,11 +126,17 @@ const BuyPremium = () => {
               <Typography variant='h2' gutterBottom>
                 {premiumPackage.name}
               </Typography>
-              <Typography variant='h5' gutterBottom>
-                Thoải mái nghe nhạc không giới hạn
+              <Typography variant='h5' gutterBottom ml={1}>
+                {t('unlimitedListening')}
+              </Typography>
+              <Typography variant='h5' gutterBottom ml={1}>
+                {t('noAds')}
+              </Typography>
+              <Typography variant='h5' gutterBottom ml={1}>
+                {t('canDownload')}
               </Typography>
               <Typography variant='h3'>
-                Chỉ với {convertNumber(premiumPackage.price)} VNĐ/{premiumPackage.durationMonths} tháng
+                {t('justOnly')} {convertNumber(premiumPackage.price)} VNĐ/{premiumPackage.durationMonths} {t('month')}
               </Typography>
               <LoadingButton
                 variant='contained'

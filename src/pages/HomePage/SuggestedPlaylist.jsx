@@ -94,7 +94,7 @@ const SuggestedPlaylist = () => {
                       <PlayCircleFilledWhiteOutlinedIcon />
                     </IconButton>
                   </Tooltip>
-                  <Tooltip title='Thêm vào playlist'>
+                  <Tooltip title={t('addToPlaylist')}>
                     <IconButton
                       onClick={(e) => {
                         e.stopPropagation()

@@ -353,5 +353,66 @@
 
   "displayName": "Display Name",
   "sectionManagement": "Section Management",
-  "addSection": "Add Section"
+  "addSection": "Add Section",
+
+  "listens": "listens",
+  "addToPlaylist": "Add to Playlist",
+  "removeFromPlaylist": "Remove from Playlist",
+  "addToPlaylistSuccess": "Add to Playlist successfully",
+  "alreadyInPlaylist": "Already in Playlist",
+  "removeFromLibrary": "Remove from Library",
+  "addToLibrary": "Add to Library",
+  "addToLibrarySuccess": "Added to library",
+  "removeFromLibrarySuccess": "Removed from library",
+  "addToQueue": "Add to Play Next",
+
+  "song": "Song",
+  "songs": "songs",
+  "album": "Album",
+  "playlist": "Playlist",
+  "artist": "Artist",
+  "section": "Section",
+
+  "duration": "Duration",
+  "likedSongs": "Liked Songs",
+  "following": "Followings",
+  "uploaded": "Uploaded",
+  "playAll": "Play All",
+
+  "myPlaylist": "My Playlist",
+  "addNewPlaylist": "Add New Playlist",
+  "newPlaylist": "New Playlist",
+
+  "ranking": "Ranking",
+  "daily": "Daily",
+  "playCount": "Play Count",
+
+  "searchPlayholder": "Search for songs, artists, lyrics...",
+  "mostSearch": "Most Search",
+  "songWithLyric": "Song with same lyric",
+
+  "follow": "Follow",
+  "unfollow": "Unfollow",
+  "followers": "followers",
+  "featuredSong": "Featured Song",
+  "maybeInterested": "You may be interested",
+  "artistInformation": "Artist Information",
+  "allSongs": "All Songs",
+  "releaseDate": "Release Date",
+
+  "premiumPackage": "Premium Package",
+  "buyPremium": "Buy Premium Package",
+  "myPackage": "My Package",
+  "expirationDate": "Expiration Date",
+  "notBuyPackage": "Not buy package",
+  "premiumPackageDescription": "Upgrade your account to experience premium features and content",
+  "unlimitedListening": "Unlimited listening",
+  "noAds": "No ads",
+  "canDownload": "Can download",
+  "justOnly": "Only",
+  "buyPremiumSuccess": "Buy Premium Package successfully",
+  "servicePackage": "Service package",
+
+  "update": "Update",
+  "refresh": "Refresh"
 }

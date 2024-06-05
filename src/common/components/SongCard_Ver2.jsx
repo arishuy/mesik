@@ -22,8 +22,10 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../../contexts/app.context'
 import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded'
+import { useTranslation } from 'react-i18next'
 
 const SongCardVer2 = ({ song, allPlaylists }) => {
+  const { t } = useTranslation()
   const { isAuthenticated, likedSong, setLikedSong } = useContext(AppContext)
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -56,7 +58,7 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
         setSnack({
           ...snack,
           open: true,
-          message: 'Thêm bài hát thành công',
+          message: t('addToPlaylistSuccess'),
           type: 'success'
         })
         setOpen(false)
@@ -65,7 +67,7 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
         setSnack({
           ...snack,
           open: true,
-          message: 'Bài hát đã có trong playlist này',
+          message: t('alreadyInPlaylist'),
           type: 'error'
         })
       })
@@ -78,7 +80,7 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
           setSnack({
             ...snack,
             open: true,
-            message: 'Đã thêm vào thư viện',
+            message: t('addToLibrarySuccess'),
             type: 'success'
           })
           setLikedSong((prevLikedSong) => [...prevLikedSong, song._id])
@@ -88,7 +90,7 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
           setSnack({
             ...snack,
             open: true,
-            message: 'Đã xóa khỏi thư viện',
+            message: t('removeFromLibrarySuccess'),
             type: 'success'
           })
           setLikedSong((prevLikedSong) => prevLikedSong.filter((item) => item !== song._id))
@@ -109,7 +111,7 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
     <>
       <RootModal
         variant='Create'
-        title='Thêm vào playlist'
+        title={t('addToPlaylist')}
         open={open}
         handleClose={() => {
           setOpen(false)
@@ -172,7 +174,9 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
                 {song.artist.display_name}
               </Typography>
               <Stack direction='row' spacing={1} alignItems='center'>
-                <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>
+                <Typography variant='subtitle2'>
+                  {song.play_count} {t('listens')}
+                </Typography>
                 {song.isPremium && (
                   <Chip
                     label='Premium'
@@ -221,7 +225,7 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
             }}
           >
             <AddRoundedIcon sx={{ mr: 1, fontSize: '20px' }} />
-            <Typography>Thêm vào playlist</Typography>
+            <Typography>{t('addToPlaylist')}</Typography>
           </ListItem>
           <ListItem
             button
@@ -233,12 +237,12 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
             {likedSong.includes(song._id) ? (
               <>
                 <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'blue' }} />
-                <Typography>Xoá khỏi thư viện</Typography>
+                <Typography>{t('removeFromLibrary')}</Typography>
               </>
             ) : (
               <>
                 <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'red' }} />
-                <Typography>Thêm vào thư viện</Typography>
+                <Typography>{t('addToLibrary')}</Typography>
               </>
             )}
           </ListItem>
@@ -250,7 +254,7 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
             }}
           >
             <SkipNextRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'green' }} />
-            <Typography>Phát tiếp theo</Typography>
+            <Typography>{t('addToQueue')}</Typography>
           </ListItem>
         </List>
       </Popover>

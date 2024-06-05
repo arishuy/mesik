@@ -26,8 +26,10 @@ import RootModal from '../../components/Modal/RootModal'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const VietnamRank = ({ allPlaylists }) => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const { playSong } = useMusicPlayer()
   const [isLoading, setIsLoading] = useState(true)
@@ -59,7 +61,7 @@ const VietnamRank = ({ allPlaylists }) => {
           setSnack({
             ...snack,
             open: true,
-            message: 'Đã thêm vào thư viện',
+            message: t('addToLibrarySuccess'),
             type: 'success'
           })
           setLikedSong((prevLikedSong) => [...prevLikedSong, song._id])
@@ -69,7 +71,7 @@ const VietnamRank = ({ allPlaylists }) => {
           setSnack({
             ...snack,
             open: true,
-            message: 'Đã xóa khỏi thư viện',
+            message: t('removeFromLibrarySuccess'),
             type: 'success'
           })
           setLikedSong((prevLikedSong) => prevLikedSong.filter((item) => item !== song._id))
@@ -96,7 +98,7 @@ const VietnamRank = ({ allPlaylists }) => {
         setSnack({
           ...snack,
           open: true,
-          message: 'Thêm bài hát thành công',
+          message: t('addToPlaylistSuccess'),
           type: 'success'
         })
         setOpen(false)
@@ -105,7 +107,7 @@ const VietnamRank = ({ allPlaylists }) => {
         setSnack({
           ...snack,
           open: true,
-          message: 'Bài hát đã có trong playlist này',
+          message: t('alreadyInPlaylist'),
           type: 'error'
         })
       })
@@ -118,11 +120,13 @@ const VietnamRank = ({ allPlaylists }) => {
   ) : (
     <div>
       <Helmet>
-        <title>Bảng Xếp Hạng Việt Nam</title>
+        <title>
+          {t('ranking')} {t('vietnam')}
+        </title>
       </Helmet>
       <RootModal
         variant='Create'
-        title='Thêm vào playlist'
+        title={t('addToPlaylist')}
         open={open}
         handleClose={() => {
           setOpen(false)
@@ -149,7 +153,7 @@ const VietnamRank = ({ allPlaylists }) => {
       </RootModal>
       <Stack direction='row' justifyContent='space-between' alignItems='center'>
         <Typography variant='h4' py={3}>
-          Bảng Xếp Hạng Việt Nam
+          {t('ranking')} {t('vietnam')}
         </Typography>
         {data.length > 0 && (
           <Button
@@ -160,7 +164,7 @@ const VietnamRank = ({ allPlaylists }) => {
             }}
             onClick={() => playSong(data, false)}
           >
-            Phát tất cả
+            {t('playAll')}
           </Button>
         )}
       </Stack>
@@ -169,9 +173,16 @@ const VietnamRank = ({ allPlaylists }) => {
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell>Bài Hát</TableCell>
-              <TableCell align='center'>Thời Lượng</TableCell>
-              <TableCell align='right'>Lượt Nghe</TableCell>
+              <TableCell>{t('song')}</TableCell>
+              <TableCell
+                align='center'
+                sx={{
+                  width: '300px'
+                }}
+              >
+                {t('duration')}
+              </TableCell>
+              <TableCell align='right'>{t('playCount')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -233,7 +244,12 @@ const VietnamRank = ({ allPlaylists }) => {
                       </Stack>
                     </Stack>
                   </TableCell>
-                  <TableCell align='center'>
+                  <TableCell
+                    align='center'
+                    sx={{
+                      width: '300px'
+                    }}
+                  >
                     <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
                       {hoveredRow === song._id && isAuthenticated ? (
                         <>

@@ -45,7 +45,7 @@ const EditPlaylist = ({ open, handleClose, fetchData, item }) => {
     <>
       <RootModal
         variant='Create'
-        title='New Playlist'
+        title={t('edit') + ' ' + t('playlist')}
         open={open}
         handleClose={handleClose}
         handleOk={() => {
@@ -56,7 +56,7 @@ const EditPlaylist = ({ open, handleClose, fetchData, item }) => {
         <Stack spacing={2} direction='column' sx={{ width: '100%', my: 2 }}>
           <TextField
             id='outlined-basic'
-            label='Title'
+            label={t('title')}
             variant='outlined'
             value={playlist.title}
             placeholder='Nhập tên playlist'

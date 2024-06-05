@@ -21,8 +21,10 @@ import Empty from '../../common/components/Empty'
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded'
 import convertToMinutes from '../../common/utils/convertToMinutes'
 import { SnackbarContext } from '../../contexts/snackbar.context'
+import { useTranslation } from 'react-i18next'
 
 const LikedSongs = () => {
+  const { t } = useTranslation()
   const [likedSongs, setLikedSongs] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const { playSong } = useMusicPlayer()
@@ -73,7 +75,7 @@ const LikedSongs = () => {
     <div>
       <Stack direction='row' justifyContent='space-between' alignItems='center'>
         <Typography variant='h4' py={3}>
-          Bài hát yêu thích
+          {t('likedSongs')}
         </Typography>
         {likedSongs.length > 0 && (
           <Button
@@ -84,7 +86,7 @@ const LikedSongs = () => {
             }}
             onClick={() => playSong(likedSongs, false)}
           >
-            Phát tất cả
+            {t('playAll')}
           </Button>
         )}
       </Stack>
@@ -95,9 +97,9 @@ const LikedSongs = () => {
           <Table size='small'>
             <TableHead>
               <TableRow>
-                <TableCell>Bài Hát</TableCell>
-                <TableCell align='right'>Thời Lượng</TableCell>
-                <TableCell align='right'>Hành Động</TableCell>
+                <TableCell>{t('song')}</TableCell>
+                <TableCell align='right'>{t('duration')}</TableCell>
+                <TableCell align='right'>{t('action')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -136,13 +138,13 @@ const LikedSongs = () => {
                       </Stack>
                     </TableCell>
                     <TableCell align='right'>
-                      <Typography variant='body1' color='text.primary' noWrap>
+                      <Typography variant='subtitle1' color='text.primary' noWrap>
                         {convertToMinutes(song.duration)}
                       </Typography>
                     </TableCell>
                     <TableCell align='right'>
-                      <Tooltip title='Xóa khỏi danh sách yêu thích' arrow>
-                        <IconButton onClick={() => removeLikedSong(song._id)} color='error'>
+                      <Tooltip title={t('delete')} arrow>
+                        <IconButton onClick={() => removeLikedSong(song._id)} color='error' size='small'>
                           <DeleteOutlineRoundedIcon />
                         </IconButton>
                       </Tooltip>

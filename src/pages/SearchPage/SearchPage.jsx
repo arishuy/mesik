@@ -12,8 +12,10 @@ import { useMusicPlayer } from '../../contexts/music.context'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
 
 const SearchPage = () => {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const navigate = useNavigate()
   const [data, setData] = useState({})
@@ -75,126 +77,118 @@ const SearchPage = () => {
   ) : (
     <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
-        <title>Tìm Kiếm</title>
+        <title>
+          {t('search')} for {keyword}
+        </title>
       </Helmet>
-      <Typography variant='h4' py={3}>
-        Bài hát
-      </Typography>
-      <Grid container spacing={2}>
-        {data.songs?.length === 0 && (
-          <>
-            <Grid item xs={12}>
-              <Empty message={'Không có bài hát nào'} />
+      {data.songs?.length > 0 && (
+        <>
+          <Typography variant='h4' py={3}>
+            {t('song')}
+          </Typography>
+          <Grid container spacing={2}>
+            {data.songs?.map((song) => (
+              <Grid item xs={12} md={6} key={song._id}>
+                <SongCardVer2 song={song} allPlaylists={allPlaylists} />
+              </Grid>
+            ))}
+          </Grid>
+        </>
+      )}
+      {data.song ? (
+        <>
+          <Typography variant='h4' py={3}>
+            {t('songWithLyric')}
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6} key={data.song._id}>
+              <SongCardVer2 song={data.song} allPlaylists={allPlaylists} />
             </Grid>
-          </>
-        )}
-        {data.songs?.map((song) => (
-          <Grid item xs={12} md={6} key={song._id}>
-            <SongCardVer2 song={song} allPlaylists={allPlaylists} />
           </Grid>
-        ))}
-      </Grid>
-      <Typography variant='h4' py={3}>
-        Bài hát có lời tương ứng
-      </Typography>
-      <Grid container spacing={2}>
-        {data.song ? (
-          <Grid item xs={12} md={6} key={data.song._id}>
-            <SongCardVer2 song={data.song} allPlaylists={allPlaylists} />
-          </Grid>
-        ) : (
-          <Grid item xs={12}>
-            <Empty message={'Không có bài hát nào'} />
-          </Grid>
-        )}
-      </Grid>
-      <Typography variant='h4' py={3}>
-        Nghệ sĩ
-      </Typography>
-      <Grid container spacing={3}>
-        {data.artists?.length === 0 && (
-          <>
-            <Grid item xs={12}>
-              <Empty message={'Không có nghệ sĩ nào'} />
-            </Grid>
-          </>
-        )}
-
-        {data.artists?.map((artist) => (
-          <Grid item sm={6} md={2} key={artist.id}>
-            <Stack
-              direction='column'
-              alignItems='center'
-              key={artist._id}
-              px={3}
-              onClick={() => navigate(`/artist/${artist._id}`)}
-              sx={{
-                cursor: 'pointer',
-                '&:hover': {
-                  opacity: 0.8
-                }
-              }}
-            >
-              <Avatar alt='artist' src={artist.user.photo_url} sx={{ width: 200, height: 200 }} />
-              <Typography variant='h6' padding={3}>
-                {artist.display_name}
-              </Typography>
-            </Stack>
-          </Grid>
-        ))}
-      </Grid>
-      <Typography variant='h4' py={3}>
-        Album
-      </Typography>
-      <Grid container spacing={2}>
-        {data.albums.length === 0 && (
-          <Grid item xs={12}>
-            <Empty message={'Không có album nào'} />
-          </Grid>
-        )}
-        {data.albums.map((album) => (
-          <Grid item xs={12} md={6} lg={3} key={album._id}>
-            <div className='song-card'>
-              <img className='song-card_image' src={album.photo_url} alt='David Bowie - Aladdin Sane' />
-              <div className='song-card_play'>
-                <Stack direction='row' spacing={1} pt={2}>
-                  <Tooltip title='Phát ngay'>
-                    <IconButton
-                      onClick={(e) => {
-                        handlePlayAlbum(album)
-                      }}
-                      color='success'
-                    >
-                      <PlayCircleFilledWhiteOutlinedIcon />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title='Chi tiết'>
-                    <IconButton
-                      onClick={(e) => {
-                        navigate(`/album/${album._id}`)
-                      }}
-                      color='primary'
-                    >
-                      <InfoOutlinedIcon />
-                    </IconButton>
-                  </Tooltip>
+        </>
+      ) : null}
+      {data.artists?.length > 0 && (
+        <>
+          <Typography variant='h4' py={3}>
+            {t('artist')}
+          </Typography>
+          <Grid container spacing={3}>
+            {data.artists?.map((artist) => (
+              <Grid item sm={6} md={2} key={artist.id}>
+                <Stack
+                  direction='column'
+                  alignItems='center'
+                  key={artist._id}
+                  px={3}
+                  onClick={() => navigate(`/artist/${artist._id}`)}
+                  sx={{
+                    cursor: 'pointer',
+                    '&:hover': {
+                      opacity: 0.8
+                    }
+                  }}
+                >
+                  <Avatar alt='artist' src={artist.user.photo_url} sx={{ width: 200, height: 200 }} />
+                  <Typography variant='h6' padding={3}>
+                    {artist.display_name}
+                  </Typography>
                 </Stack>
-              </div>
-            </div>
-            <Typography variant='h6' sx={{ textAlign: 'left', py: 1, ml: 1 }}>
-              {album.title}
-              <div
-                className='song-card_info_album'
-                style={{
-                  color: 'gray'
-                }}
-              >
-                {album.songs.length} bài hát
-              </div>
-            </Typography>
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        </>
+      )}
+      {data.albums.length > 0 && (
+        <>
+          <Typography variant='h4' py={3}>
+            Album
+          </Typography>
+          <Grid container spacing={2}>
+            {data.albums.map((album) => (
+              <Grid item xs={12} md={6} lg={3} key={album._id}>
+                <div className='song-card'>
+                  <img className='song-card_image' src={album.photo_url} alt='David Bowie - Aladdin Sane' />
+                  <div className='song-card_play'>
+                    <Stack direction='row' spacing={1} pt={2}>
+                      <Tooltip title='Phát ngay'>
+                        <IconButton
+                          onClick={(e) => {
+                            handlePlayAlbum(album)
+                          }}
+                          color='success'
+                        >
+                          <PlayCircleFilledWhiteOutlinedIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title={t('detail')}>
+                        <IconButton
+                          onClick={(e) => {
+                            navigate(`/album/${album._id}`)
+                          }}
+                          color='primary'
+                        >
+                          <InfoOutlinedIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </Stack>
+                  </div>
+                </div>
+                <Typography variant='h6' sx={{ textAlign: 'left', py: 1, ml: 1 }}>
+                  {album.title}
+                  <div
+                    className='song-card_info_album'
+                    style={{
+                      color: 'gray'
+                    }}
+                  >
+                    {album.songs.length} {t('songs')}
+                  </div>
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
+        </>
+      )}
     </div>
   )
 }

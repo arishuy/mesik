@@ -30,8 +30,11 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded'
 import RootModal from '../../components/Modal/RootModal'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
+import { Helmet } from 'react-helmet-async'
 
 const ArtistSongs = () => {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const user = JSON.parse(localStorage.getItem('profile'))
   const [pageCount, setPageCount] = useState(1)
@@ -83,7 +86,7 @@ const ArtistSongs = () => {
         setSnack({
           ...snack,
           open: true,
-          message: 'Thêm bài hát thành công',
+          message: t('addToPlaylistSuccess'),
           type: 'success'
         })
         setOpen(false)
@@ -92,7 +95,7 @@ const ArtistSongs = () => {
         setSnack({
           ...snack,
           open: true,
-          message: 'Bài hát đã có trong playlist này',
+          message: t('alreadyInPlaylist'),
           type: 'error'
         })
       })
@@ -106,7 +109,7 @@ const ArtistSongs = () => {
           setSnack({
             ...snack,
             open: true,
-            message: 'Đã thêm vào thư viện',
+            message: t('addToLibrarySuccess'),
             type: 'success'
           })
           setLikedSong((prevLikedSong) => [...prevLikedSong, song._id])
@@ -116,7 +119,7 @@ const ArtistSongs = () => {
           setSnack({
             ...snack,
             open: true,
-            message: 'Đã xóa khỏi thư viện',
+            message: t('removeFromLibrarySuccess'),
             type: 'success'
           })
           setLikedSong((prevLikedSong) => prevLikedSong.filter((item) => item !== song._id))
@@ -146,7 +149,7 @@ const ArtistSongs = () => {
     <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <RootModal
         variant='Create'
-        title='Thêm vào playlist'
+        title={t('addToPlaylist')}
         open={open}
         handleClose={() => {
           setOpen(false)
@@ -171,9 +174,12 @@ const ArtistSongs = () => {
           )}
         />
       </RootModal>
+      <Helmet>
+        <title>{t('allSongs')}</title>
+      </Helmet>
       <Stack direction='row' justifyContent='space-between' alignItems='center'>
         <Typography variant='h4' py={3}>
-          {songs.length > 0 ? songs[0].artist.display_name : ''} {!isMobile && ' - Tất cả bài hát'}
+          {songs.length > 0 ? songs[0].artist.display_name : ''} {!isMobile && ' - ' + t('allSongs')}
         </Typography>
         {songs.length > 0 && (
           <Button
@@ -184,7 +190,7 @@ const ArtistSongs = () => {
             }}
             onClick={() => playSong(songs, false)}
           >
-            Phát tất cả
+            {t('playAll')}
           </Button>
         )}
       </Stack>
@@ -198,10 +204,10 @@ const ArtistSongs = () => {
                   width: '500px'
                 }}
               >
-                Title
+                {t('song')}
               </TableCell>
-              <TableCell>Duration</TableCell>
-              <TableCell align='right'>Release Date</TableCell>
+              <TableCell>{t('duration')}</TableCell>
+              <TableCell align='right'>{t('releaseDate')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

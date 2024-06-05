@@ -18,8 +18,10 @@ import { AppContext } from '../../contexts/app.context'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import RelatedArtists from './RelatedArtists'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
 
 const DetailArtist = () => {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const id = useParams()
   const { isAuthenticated, profile } = useContext(AppContext)
@@ -89,7 +91,7 @@ const DetailArtist = () => {
   ) : (
     <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
-        <title>Thông Tin Nghệ Sĩ</title>
+        <title>{t('artistInformation')}</title>
       </Helmet>
       <Card
         sx={{
@@ -119,7 +121,9 @@ const DetailArtist = () => {
               {artist.display_name}
             </Typography>
             <Stack direction='row' spacing={3} alignItems='center'>
-              <Typography variant='h6'>{totalFollowers} người theo dõi</Typography>
+              <Typography variant='h6'>
+                {totalFollowers} {t('followers')}{' '}
+              </Typography>
               {!isFollow
                 ? isAuthenticated && (
                     <LoadingButton
@@ -135,7 +139,7 @@ const DetailArtist = () => {
                           mr: 1
                         }}
                       />
-                      Theo dõi
+                      {t('follow ')}
                     </LoadingButton>
                   )
                 : isAuthenticated && (
@@ -152,7 +156,7 @@ const DetailArtist = () => {
                           mr: 1
                         }}
                       />
-                      Bỏ theo dõi
+                      {t('unfollow ')}
                     </LoadingButton>
                   )}
             </Stack>
@@ -162,7 +166,7 @@ const DetailArtist = () => {
       </Card>
       <Stack direction='row' justifyContent='space-between' alignItems='center'>
         <Typography variant='h4' py={3}>
-          Bài hát nổi bật
+          {t('featuredSong')}
         </Typography>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Link
@@ -172,7 +176,7 @@ const DetailArtist = () => {
               color: 'black'
             }}
           >
-            Tất cả
+            {t('all')}
           </Link>
           <NavigateNextIcon />
         </div>
@@ -189,7 +193,7 @@ const DetailArtist = () => {
         Album
       </Typography>
       {artist.albums?.length === 0 ? (
-        <Empty message={'Không có album nào'} />
+        <Empty message={t('noResults')} />
       ) : (
         <Grid container spacing={3}>
           {artist.albums?.map((album) => (

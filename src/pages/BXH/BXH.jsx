@@ -11,6 +11,7 @@ import { AppContext } from '../../contexts/app.context'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props
@@ -46,6 +47,7 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const [value, setValue] = React.useState(0)
   const { isAuthenticated } = React.useContext(AppContext)
@@ -79,9 +81,9 @@ export default function BasicTabs() {
           variant='scrollable'
           scrollButtons='auto'
         >
-          <Tab label='Hàng Ngày' {...a11yProps(0)} />
-          <Tab label='Việt Nam' {...a11yProps(1)} />
-          <Tab label='Quốc Tế' {...a11yProps(2)} />
+          <Tab label={t('daily')} {...a11yProps(0)} />
+          <Tab label={t('vietnam')} {...a11yProps(1)} />
+          <Tab label={t('another')} {...a11yProps(2)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>

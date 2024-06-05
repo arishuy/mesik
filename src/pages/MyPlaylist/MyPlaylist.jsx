@@ -17,8 +17,10 @@ import Loading from '../../common/components/Loading/Loading'
 import { Helmet } from 'react-helmet-async'
 import EditPlaylist from './EditPlaylist'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
 
 const MyPlaylist = () => {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const user = JSON.parse(localStorage.getItem('profile'))
   const navigation = useNavigate()
@@ -63,7 +65,7 @@ const MyPlaylist = () => {
       )}
       {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} fetchData={fetchData} id={id} />}
       <Box sx={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant='h4'>Playlist của tôi</Typography>
+        <Typography variant='h4'>{t('myPlaylist')}</Typography>
         <Button
           variant='outlined'
           color='primary'
@@ -72,7 +74,7 @@ const MyPlaylist = () => {
             borderRadius: '20px'
           }}
         >
-          Tạo playlist mới
+          {t('addNewPlaylist')}
         </Button>
       </Box>
       {playlists.length === 0 && <Empty message={'Bạn chưa có playlist nào'} />}
@@ -86,7 +88,9 @@ const MyPlaylist = () => {
                 alt='David Bowie - Aladdin Sane'
               />
               <div className='song-card_info'>
-                <div className='song-card_info_artist'>{playlist.songs.length} bài hát</div>
+                <div className='song-card_info_artist'>
+                  {playlist.songs.length} {t('songs')}
+                </div>
                 <div className='song-card_info_album'>
                   {' '}
                   {moment(playlist.createdAt).format('DD/MM/YYYY')} - {moment(playlist.createdAt).format('HH:mm')}

@@ -28,8 +28,10 @@ import Empty from '../../common/components/Empty'
 import Loading from '../../common/components/Loading/Loading'
 import convertToMinutes from '../../common/utils/convertToMinutes'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
 
 const DetailPlaylist = () => {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const id = useParams()
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -134,7 +136,7 @@ const DetailPlaylist = () => {
             {playlist.title}
           </Typography>
           <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
-            Cập nhật: {moment(playlist.updateAt).format('DD/MM/YYYY')}
+            {t('update')}: {moment(playlist.updateAt).format('DD/MM/YYYY')}
           </Typography>
           <Button
             sx={{
@@ -146,7 +148,7 @@ const DetailPlaylist = () => {
               playSong(playlist.songs)
             }}
           >
-            <PlayCircleFilledWhiteOutlinedIcon /> <span style={{ padding: '5px 5px' }}>Phát tất cả</span>
+            <PlayCircleFilledWhiteOutlinedIcon /> <span style={{ padding: '5px 5px' }}>{t('playAll')}</span>
           </Button>
         </Grid>
         <Grid item sm={12} md={8}>
@@ -157,8 +159,8 @@ const DetailPlaylist = () => {
               <Table size='small'>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Bài Hát</TableCell>
-                    <TableCell align='right'>Thời Lượng</TableCell>
+                    <TableCell>{t('song')}</TableCell>
+                    <TableCell align='right'>{t('duration')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -207,7 +209,7 @@ const DetailPlaylist = () => {
                             {convertToMinutes(majorsOrder.duration)}
                           </Typography>
                           {isMyPlaylist && (
-                            <Tooltip title='Xóa khỏi playlist' arrow>
+                            <Tooltip title={t('removeFromPlaylist')} arrow>
                               <IconButton
                                 sx={{
                                   '&:hover': {
@@ -237,7 +239,7 @@ const DetailPlaylist = () => {
             <>
               <Stack direction='row' justifyContent='space-between' alignItems='center' py={2}>
                 <Typography variant='h4' color='text.primary'>
-                  Bài Hát Ngẫu Nhiên
+                  {t('randomMusic')}
                 </Typography>
                 <Button
                   variant='outlined'
@@ -247,7 +249,7 @@ const DetailPlaylist = () => {
                   }}
                   onClick={fetchSuggestedSongs}
                 >
-                  Làm mới
+                  {t('refresh')}
                 </Button>
               </Stack>
               <TableContainer>
@@ -297,7 +299,7 @@ const DetailPlaylist = () => {
                             <Typography variant='subtitle1' color='text.primary' noWrap>
                               {convertToMinutes(majorsOrder.duration)}
                             </Typography>
-                            <Tooltip title='Thêm vào playlist' arrow>
+                            <Tooltip title={t('addToPlaylist')} arrow>
                               <IconButton
                                 sx={{
                                   '&:hover': {

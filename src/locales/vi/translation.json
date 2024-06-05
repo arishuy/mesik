@@ -352,5 +352,66 @@
 
   "displayName": "Tên hiển thị",
   "sectionManagement": "Quản lý Section",
-  "addSection": "Thêm Section"
+  "addSection": "Thêm Section",
+
+  "listens": "lượt nghe",
+  "addToPlaylist": "Thêm vào playlist",
+  "addToPlaylistSuccess": "Đã thêm vào playlist",
+  "removeFromPlaylist": "Xóa khỏi playlist",
+  "alreadyInPlaylist": "Đã có trong playlist",
+  "removeFromLibrary": "Xóa khỏi thư viện",
+  "addToLibrary": "Thêm vào thư viện",
+  "addToLibrarySuccess": "Đã thêm vào thư viện",
+  "removeFromLibrarySuccess": "Đã xóa khỏi thư viện",
+  "addToQueue": "Phát tiếp theo",
+
+  "song": "Bài hát",
+  "songs": "bài hát",
+  "album": "Album",
+  "playlist": "Playlist",
+  "artist": "Nghệ sĩ",
+  "section": "Section",
+
+  "duration": "Thời lượng",
+
+  "likedSongs": "Bài hát yêu thích",
+  "following": "Đang theo dõi",
+  "uploaded": "Đã tải lên",
+  "playAll": "Phát tất cả",
+
+  "myPlaylist": "Playlist của tôi",
+  "addNewPlaylist": "Thêm mới playlist",
+  "newPlaylist": "Playlist mới",
+
+  "ranking": "Bảng Xếp Hạng",
+  "daily": "Hàng Ngày",
+  "playCount": "Lượt Nghe",
+
+  "searchPlayholder": "Tìm kiếm bài hát, nghệ sĩ, lời bài hát...",
+  "mostSearch": "Tìm kiếm nhiều nhất",
+  "songWithLyric": "Bài hát có lời tương ứng",
+
+  "follow": "Theo dõi",
+  "unfollow": "Bỏ theo dõi",
+  "followers": "người theo dõi",
+  "featuredSong": "Bài hát nổi bật",
+  "maybeInterested": "Có thể bạn quan tâm",
+  "artistInformation": "Thông tin nghệ sĩ",
+  "allSongs": "Tất cả bài hát",
+  "releaseDate": "Ngày phát hành",
+
+  "premiumPackage": "Gói Premium",
+  "buyPremium": "Mua gói Premium",
+  "myPackage": "Gói của tôi",
+  "expirationDate": "Ngày hết hạn",
+  "notBuyPackage": "Bạn chưa mua gói Premium",
+  "premiumPackageDescription": "Nâng cấp tài khoản để trải nghiệm các tính năng và nội dung cao cấp",
+  "unlimitedListening": "Thoải mái nghe nhạc không giới hạn",
+  "noAds": "Không quảng cáo",
+  "canDownload": "Tải nhạc về máy",
+  "justOnly": "Chỉ với",
+  "servicePackage": "Gói dịch vụ",
+
+  "update": "Cập nhật",
+  "refresh": "Làm mới"
 }

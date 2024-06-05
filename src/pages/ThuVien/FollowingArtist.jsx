@@ -5,8 +5,10 @@ import Loading from '../../common/components/Loading/Loading'
 import Empty from '../../common/components/Empty'
 import { Typography, Stack, Avatar, Grid } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const FollowingArtist = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
   const [following, setFollowing] = useState([])
@@ -29,10 +31,10 @@ const FollowingArtist = () => {
   ) : (
     <div>
       <Typography variant='h4' py={3}>
-        Đang theo dõi
+        {t('following')}
       </Typography>
       {following.length === 0 ? (
-        <Empty message={'Không có lịch sử nghe nào!'} />
+        <Empty message={'Không có dữ liệu nào'} />
       ) : (
         <Grid container spacing={3}>
           {following.map((artist) => (

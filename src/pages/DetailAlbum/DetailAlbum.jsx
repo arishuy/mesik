@@ -22,8 +22,10 @@ import { useMusicPlayer } from '../../contexts/music.context'
 import Loading from '../../common/components/Loading/Loading'
 import convertToMinutes from '../../common/utils/convertToMinutes'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
 
 const DetailAlbum = () => {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const user = JSON.parse(localStorage.getItem('profile'))
   const id = useParams()
@@ -94,7 +96,7 @@ const DetailAlbum = () => {
             {album.artist?.display_name}
           </Typography>
           <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
-            Cập nhật: {moment(album.updateAt).format('DD/MM/YYYY')}
+            {t('update')}: {moment(album.updateAt).format('DD/MM/YYYY')}
           </Typography>
           <Button
             onClick={() => {
@@ -102,7 +104,7 @@ const DetailAlbum = () => {
             }}
             startIcon={<PlayCircleFilledWhiteOutlinedIcon />}
           >
-            Phát tất cả
+            {t('playAll')}
           </Button>
           {user?.artist && album.artist && user?.artist === album.artist._id && (
             <Button
@@ -114,7 +116,7 @@ const DetailAlbum = () => {
               }}
               color='warning'
             >
-              Sửa Album
+              {t('edit')} Album
             </Button>
           )}
         </Grid>
@@ -123,9 +125,9 @@ const DetailAlbum = () => {
             <Table size='small'>
               <TableHead>
                 <TableRow>
-                  <TableCell>Bài Hát</TableCell>
-                  <TableCell align='right'>Thời Lượng</TableCell>
-                  {!isMobile && <TableCell align='right'>Ngày Cập Nhật</TableCell>}
+                  <TableCell>{t('song')}</TableCell>
+                  <TableCell align='right'>{t('duration')}</TableCell>
+                  {!isMobile && <TableCell align='right'>{t('releaseDate')}</TableCell>}
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -175,11 +177,8 @@ const DetailAlbum = () => {
                       </TableCell>
                       {!isMobile && (
                         <TableCell align='right'>
-                          <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                            {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
-                          </Typography>
                           <Typography variant='body2' color='text.primary' gutterBottom noWrap>
-                            {moment(majorsOrder.createdAt).format('h:mm:ss A')}
+                            {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
                           </Typography>
                         </TableCell>
                       )}

@@ -22,8 +22,11 @@ import Loading from '../../../../common/components/Loading/Loading'
 import convertToMinutes from '../../../../common/utils/convertToMinutes'
 import UploadAvatar from './UploadAvatar'
 import useSnackbar from '../../../../contexts/snackbar.context'
+import useResponsive from '../../../../hooks/useResponsive'
+import { Helmet } from 'react-helmet-async'
 
 const AdminEditAlbum = () => {
+  const isMobile = useResponsive('down', 'sm')
   const id = useParams()
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(true)
@@ -101,16 +104,15 @@ const AdminEditAlbum = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <div
-      style={{
-        padding: '20px 100px',
-        width: '100%'
-      }}
-    >
+    <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
+      <Helmet>
+        <title>Edit album | Admin</title>
+      </Helmet>
       <Grid container spacing={2}>
         <Grid
           item
-          xs={4}
+          md={4}
+          sm={12}
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -138,7 +140,7 @@ const AdminEditAlbum = () => {
             </Button>
           </Stack>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item md={8} sm={12}>
           <Autocomplete
             sx={{ m: 1 }}
             multiple

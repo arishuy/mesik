@@ -13,8 +13,10 @@ import { memo } from 'react'
 import DiamondRoundedIcon from '@mui/icons-material/DiamondRounded'
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
 import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded'
+import { useTranslation } from 'react-i18next'
 
 const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
+  const { t } = useTranslation()
   const { isAuthenticated, likedSong, setLikedSong } = useContext(AppContext)
   const user = JSON.parse(localStorage.getItem('profile'))
   const [open, setOpen] = React.useState(false)
@@ -51,7 +53,7 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
         setSnack({
           ...snack,
           open: true,
-          message: 'Thêm bài hát thành công',
+          message: t('addToPlaylistSuccess'),
           type: 'success'
         })
         setOpen(false)
@@ -60,7 +62,7 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
         setSnack({
           ...snack,
           open: true,
-          message: 'Bài hát đã có trong playlist này',
+          message: t('alreadyInPlaylist'),
           type: 'error'
         })
       })
@@ -74,7 +76,7 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
           setSnack({
             ...snack,
             open: true,
-            message: 'Đã thêm vào thư viện',
+            message: t('addToLibrarySuccess'),
             type: 'success'
           })
           setLikedSong((prevLikedSong) => [...prevLikedSong, song._id])
@@ -84,7 +86,7 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
           setSnack({
             ...snack,
             open: true,
-            message: 'Đã xóa khỏi thư viện',
+            message: t('removeFromLibrarySuccess'),
             type: 'success'
           })
           setLikedSong((prevLikedSong) => prevLikedSong.filter((item) => item !== song._id))
@@ -105,7 +107,7 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
     <>
       <RootModal
         variant='Create'
-        title='Thêm vào playlist'
+        title={t('addToPlaylist')}
         open={open}
         handleClose={() => {
           setOpen(false)
@@ -198,7 +200,9 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
               {song.artist.display_name}
             </Typography>
             <Stack direction='row' justifyContent='space-between' spacing={1} alignItems='center'>
-              <Typography variant='subtitle2'>{song.play_count} lượt nghe</Typography>{' '}
+              <Typography variant='subtitle2'>
+                {song.play_count} {t('listens')}
+              </Typography>{' '}
             </Stack>
           </div>
           {isAuthenticated && (
@@ -235,7 +239,7 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
             }}
           >
             <AddRoundedIcon sx={{ mr: 1, fontSize: '20px' }} />
-            <Typography>Thêm vào playlist</Typography>
+            <Typography>{t('addToPlaylist')}</Typography>
           </ListItem>
           <ListItem
             button
@@ -247,12 +251,12 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
             {likedSong.includes(song._id) ? (
               <>
                 <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'red' }} />
-                <Typography>Xoá khỏi thư viện</Typography>
+                <Typography>{t('removeFromLibrary')}</Typography>
               </>
             ) : (
               <>
                 <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'blue' }} />
-                <Typography>Thêm vào thư viện</Typography>
+                <Typography>{t('addToLibrary')}</Typography>
               </>
             )}
           </ListItem>
@@ -264,7 +268,7 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
             }}
           >
             <SkipNextRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'green' }} />
-            <Typography>Phát tiếp theo</Typography>
+            <Typography>{t('addToQueue')}</Typography>
           </ListItem>
         </List>
       </Popover>

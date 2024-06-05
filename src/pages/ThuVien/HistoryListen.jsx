@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Loading from '../../common/components/Loading/Loading'
 import Empty from '../../common/components/Empty'
-import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded'
 import { useMusicPlayer } from '../../contexts/music.context'
 import urlConfig from '../../config/UrlConfig'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
 import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded'
-import AddRoundedIcon from '@mui/icons-material/AddRounded'
 
 import {
   Table,
@@ -21,7 +19,6 @@ import {
   Stack,
   Avatar,
   IconButton,
-  Tooltip,
   Popover,
   List,
   ListItem
@@ -71,7 +68,7 @@ const HistoryListen = () => {
           setSnack({
             ...snack,
             open: true,
-            message: 'Đã thêm vào thư viện',
+            message: t('addToLibrarySuccess'),
             type: 'success'
           })
           setLikedSong((prevLikedSong) => [...prevLikedSong, song._id])
@@ -81,7 +78,7 @@ const HistoryListen = () => {
           setSnack({
             ...snack,
             open: true,
-            message: 'Đã xóa khỏi thư viện',
+            message: t('removeFromLibrarySuccess'),
             type: 'success'
           })
           setLikedSong((prevLikedSong) => prevLikedSong.filter((item) => item !== song._id))
@@ -115,9 +112,9 @@ const HistoryListen = () => {
           <Table size='small'>
             <TableHead>
               <TableRow>
-                <TableCell>Bài Hát</TableCell>
-                <TableCell align='right'>Thời Lượng</TableCell>
-                <TableCell align='right'>Hành Động</TableCell>
+                <TableCell>{t('song')}</TableCell>
+                <TableCell align='right'>{t('duration')}</TableCell>
+                <TableCell align='right'>{t('action')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -199,12 +196,12 @@ const HistoryListen = () => {
             {likedSong.includes(song._id) ? (
               <>
                 <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'red' }} />
-                <Typography>Xoá khỏi thư viện</Typography>
+                <Typography>{t('removeFromLibrary')}</Typography>
               </>
             ) : (
               <>
                 <FavoriteBorderRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'blue' }} />
-                <Typography>Thêm vào thư viện</Typography>
+                <Typography>{t('addToLibrary')}</Typography>
               </>
             )}
           </ListItem>
@@ -216,7 +213,7 @@ const HistoryListen = () => {
             }}
           >
             <SkipNextRoundedIcon sx={{ mr: 1, fontSize: '20px', color: 'green' }} />
-            <Typography>Phát tiếp theo</Typography>
+            <Typography>{t('addToQueue')}</Typography>
           </ListItem>
         </List>
       </Popover>

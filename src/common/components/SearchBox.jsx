@@ -7,8 +7,10 @@ import urlConfig from '../../config/UrlConfig'
 import Axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
 
 const SearchBar = () => {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
 
   const [searchText, setSearchText] = useState('')
@@ -78,7 +80,7 @@ const SearchBar = () => {
           }
         }}
         fullWidth
-        placeholder='Tìm kiếm bài hát, nghệ sĩ, lời bài hát...'
+        placeholder={t('searchPlayholder')}
         sx={{
           '.MuiInputBase-root': {
             height: '50px',
@@ -104,7 +106,7 @@ const SearchBar = () => {
       >
         <List component='nav' sx={{ width: '500px' }}>
           <Typography variant='h6' sx={{ padding: '10px', ml: 1 }}>
-            Đề xuất cho bạn
+            {t('mostSearch')}
           </Typography>
           {mostKeyword.map((result, index) => (
             <ListItem
