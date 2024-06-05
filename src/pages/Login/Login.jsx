@@ -93,17 +93,17 @@ export default function LoginPage() {
 
   useEffect(() => {
     /* global google */
-    // if (window.google) {
-    //   google.accounts.id.initialize({
-    //     client_id: process.env.REACT_APP_CLIENT_ID,
-    //     callback: handleGoogle
-    //   })
-    //   google.accounts.id.renderButton(document.getElementById('loginDiv'), {
-    //     theme: 'filled_black',
-    //     text: 'signin_with',
-    //     shape: 'pill'
-    //   })
-    // }
+    if (window.google) {
+      google.accounts.id.initialize({
+        client_id: process.env.REACT_APP_CLIENT_ID,
+        callback: handleGoogle
+      })
+      google.accounts.id.renderButton(document.getElementById('loginDiv'), {
+        theme: 'filled_black',
+        text: 'signin_with',
+        shape: 'pill'
+      })
+    }
   }, [])
   const mdUp = useResponsive('up', 'md')
   if (session) {
@@ -192,9 +192,9 @@ export default function LoginPage() {
               >
                 {t('login')}
               </LoadingButton>
-              {/* <Stack id='loginDiv' sx={{ mb: 2 }}>
+              <Stack id='loginDiv' sx={{ mb: 2 }}>
                 Login with Google
-              </Stack> */}
+              </Stack>
               <Typography variant='body2' sx={{ mb: 5 }}>
                 {t('dontHaveAccount')}{' '}
                 <Link
