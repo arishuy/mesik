@@ -173,13 +173,13 @@ const BecomeArtist = () => {
               {t('becomeArtist')}
             </Typography>
             <Typography variant='body1' sx={{ margin: '1rem' }}>
-              Quyền lợi khi trở thành nghệ sĩ:
+              {t('promoteBenefits')}
             </Typography>
             <Typography variant='body1' sx={{ ml: '3rem' }}>
-              1. Được tải lên bài hát của bạn
+              {t('promoteBenefits_1')}
             </Typography>
             <Typography variant='body1' sx={{ ml: '3rem' }}>
-              2. Được tạo album cá nhân
+              {t('promoteBenefits_2')}
             </Typography>
             <FormControlLabel
               control={<Checkbox checked={check} onChange={(e) => setCheck(e.target.checked)} />}
