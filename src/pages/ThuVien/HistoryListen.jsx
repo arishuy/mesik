@@ -53,7 +53,7 @@ const HistoryListen = () => {
   const fetchHistoryListen = async () => {
     await AxiosInterceptors.get(urlConfig.user.getHistoryListen + `?limit=-1`)
       .then((res) => {
-        setHistoryListen(res.data.songs)
+        setHistoryListen(res.data.songs.reverse())
         setIsLoading(false)
       })
       .catch((err) => {
@@ -153,7 +153,7 @@ const HistoryListen = () => {
                       </Stack>
                     </TableCell>
                     <TableCell align='right'>
-                      <Typography variant='body1' color='text.primary' noWrap>
+                      <Typography variant='subtitle1' color='text.primary' noWrap>
                         {convertToMinutes(majorsOrder.duration)}
                       </Typography>
                     </TableCell>

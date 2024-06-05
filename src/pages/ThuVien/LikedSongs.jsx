@@ -34,7 +34,8 @@ const LikedSongs = () => {
   const fetchLikedSongs = async () => {
     await AxiosInterceptors.get(urlConfig.user.getLikedSongs)
       .then((res) => {
-        setLikedSongs(res.data.songs)
+        // reverse array to show the latest liked song first
+        setLikedSongs(res.data.songs.reverse())
         setIsLoading(false)
       })
       .catch((err) => {
