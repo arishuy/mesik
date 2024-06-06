@@ -201,7 +201,9 @@ const DetailArtist = () => {
               <div className='song-card'>
                 <img className='song-card_image' src={album.photo_url} alt='David Bowie - Aladdin Sane' />
                 <div className='song-card_info'>
-                  <div className='song-card_info_artist'>{album.songs.length} bài hát</div>
+                  <div className='song-card_info_artist'>
+                    {album.songs.length} {t('songs')}
+                  </div>
                   <div className='song-card_info_album'> {moment(album.createdAt).format('DD/MM/YYYY')}</div>
                   <div className='song-card_info_title'>{album.title}</div>
                 </div>

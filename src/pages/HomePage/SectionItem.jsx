@@ -3,6 +3,7 @@ import { Grid, IconButton, Stack, Tooltip, Typography } from '@mui/material'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import { useNavigate } from 'react-router-dom'
 import { useMusicPlayer } from '../../contexts/music.context'
+import { t } from 'i18next'
 
 const SectionItem = ({ section }) => {
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ const SectionItem = ({ section }) => {
               <img className='song-card_image' src={playlist.photo_url} alt='David Bowie - Aladdin Sane' />
               <div className='song-card_play'>
                 <Stack direction='row' spacing={1} pt={2}>
-                  <Tooltip title='Phát ngay'>
+                  <Tooltip title={t('Play Now')}>
                     <IconButton
                       onClick={(e) => {
                         e.stopPropagation()

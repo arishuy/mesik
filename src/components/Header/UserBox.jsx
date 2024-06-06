@@ -18,16 +18,13 @@ import path from '../../constants/path'
 import { styled } from '@mui/material/styles'
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone'
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone'
-import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded'
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone'
 import SsidChartTwoToneIcon from '@mui/icons-material/SsidChartTwoTone'
-import VerifiedUserTwoToneIcon from '@mui/icons-material/VerifiedUserTwoTone'
-import AccountBalanceWalletTwoToneIcon from '@mui/icons-material/AccountBalanceWalletTwoTone'
-import TaskTwoToneIcon from '@mui/icons-material/TaskTwoTone'
 import { useCookies } from 'react-cookie'
 import { useTranslation } from 'react-i18next'
 import pusher from '../../common/utils/pusher'
 import dayjs from 'dayjs'
+import Report from './Report'
 
 const MenuUserBox = styled(Box)(
   ({ theme }) => `
@@ -153,6 +150,7 @@ function HeaderUserbox() {
                 <AccountTreeTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
                 <ListItemText primary={t('changePassword')} />
               </ListItem>
+              <Report />
             </>
           )}
           {user.role === 'ADMIN' && (
@@ -177,6 +175,7 @@ function HeaderUserbox() {
                 <AccountTreeTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
                 <ListItemText primary={t('changePassword')} />
               </ListItem>
+              <Report />
             </>
           )}
         </List>

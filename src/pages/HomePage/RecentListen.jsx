@@ -27,7 +27,7 @@ const RecentListen = ({ allPlaylists }) => {
       <Typography variant='h4' py={3}>
         {t('recentlyListened')}
       </Typography>
-      {!isLoading && songs.length === 0 && <Empty message={'Không có bài hát nào'} />}
+      {!isLoading && songs.length === 0 && <Empty message={t('noData')} />}
       <Grid container spacing={2}>
         {isLoading && (
           <Skeleton

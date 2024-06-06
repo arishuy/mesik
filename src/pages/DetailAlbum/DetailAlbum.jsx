@@ -102,6 +102,9 @@ const DetailAlbum = () => {
             onClick={() => {
               handlePlayAlbum()
             }}
+            sx={{
+              borderRadius: '20px'
+            }}
             startIcon={<PlayCircleFilledWhiteOutlinedIcon />}
           >
             {t('playAll')}

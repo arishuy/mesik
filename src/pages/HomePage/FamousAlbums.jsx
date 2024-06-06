@@ -59,33 +59,29 @@ const FamousAlbums = () => {
         )}
         {!isLoading && albums.length === 0 && (
           <Grid item xs={12}>
-            <Empty message={'Hãy nghe nhạc và tận hưởng âm nhạc cùng chúng tôi!'} />
+            <Empty message={t('Hãy nghe nhạc và tận hưởng âm nhạc cùng chúng tôi!')} />
           </Grid>
         )}
         {albums.map((album) => (
           <Grid item xs={12} md={6} lg={3} key={album._id}>
-            <div className='song-card'>
+            <div
+              className='song-card'
+              onClick={(e) => {
+                navigate(`/album/${album._id}`)
+              }}
+            >
               <img className='song-card_image' src={album.photo_url} alt='David Bowie - Aladdin Sane' />
               <div className='song-card_play'>
                 <Stack direction='row' spacing={1} pt={2}>
-                  <Tooltip title='Phát ngay'>
+                  <Tooltip title={t('Play Now')}>
                     <IconButton
                       onClick={(e) => {
+                        e.stopPropagation()
                         handlePlayAlbum(album)
                       }}
                       color='success'
                     >
                       <PlayCircleFilledWhiteOutlinedIcon />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title='Chi tiết'>
-                    <IconButton
-                      onClick={(e) => {
-                        navigate(`/album/${album._id}`)
-                      }}
-                      color='primary'
-                    >
-                      <InfoOutlinedIcon />
                     </IconButton>
                   </Tooltip>
                 </Stack>
@@ -99,7 +95,7 @@ const FamousAlbums = () => {
                   color: 'gray'
                 }}
               >
-                {album.songs.length} bài hát
+                {album.songs.length} {t('songs')}
               </div>
             </Typography>
           </Grid>

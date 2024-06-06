@@ -92,7 +92,7 @@ const LikedSongs = () => {
         )}
       </Stack>
       {likedSongs.length === 0 ? (
-        <Empty message={'Không có bài hát yêu thích nào!'} />
+        <Empty message={t('noData')} />
       ) : (
         <TableContainer>
           <Table size='small'>

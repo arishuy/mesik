@@ -13,7 +13,9 @@ import FamousAlbums from './FamousAlbums'
 import HomeSection from './HomeSection'
 import Carousel from './Banner'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
 const HomePage = () => {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const { isAuthenticated } = useContext(AppContext)
   const [allPlaylists, setAllPlaylists] = React.useState([])
@@ -34,7 +36,7 @@ const HomePage = () => {
   return (
     <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
-        <title>Trang Chủ</title>
+        <title>{t('homepage')}</title>
       </Helmet>
       <Grid container spacing={3}>
         <Grid item xs={12}>

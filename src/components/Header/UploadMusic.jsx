@@ -68,7 +68,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
       setSnack({
         ...snack,
         open: true,
-        message: 'Ngày phát hành không được lớn hơn ngày hiện tại',
+        message: t('releaseDateError'),
         type: 'error'
       })
       return
@@ -77,7 +77,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
     setSnack({
       ...snack,
       open: true,
-      message: 'Đang tải lên bài hát...',
+      message: t('uploadingSong'),
       type: 'info'
     })
     await AxiosInterceptors.post(
@@ -102,7 +102,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
         setSnack({
           ...snack,
           open: true,
-          message: 'Tải lên bài hát thành công',
+          message: t('uploadSongSuccess'),
           type: 'success'
         })
         setIsSubmitting(false)
@@ -112,7 +112,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
         setSnack({
           ...snack,
           open: true,
-          message: 'Có lỗi xảy ra!',
+          message: t('uploadSongFail'),
           type: 'error'
         })
       )
@@ -154,7 +154,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
       {genres.length > 0 && (
         <RootModal
           variant='Create'
-          title='Add new song'
+          title={t('uploadSong')}
           open={open}
           handleClose={() => setOpen(false)}
           handleOk={() => {
@@ -166,7 +166,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
             <Stack direction='row' spacing={3}>
               <TextField
                 id='outlined-basic'
-                label='Title'
+                label={t('title')}
                 variant='outlined'
                 fullWidth
                 onChange={(e) =>
@@ -178,7 +178,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
               />
               <LocalizationProvider dateAdapter={AdapterDayjs} sx={{ width: '45%', m: 2 }}>
                 <DatePicker
-                  label='Release Date'
+                  label={t('releaseDate')}
                   value={dayjs(newSong.release_date)}
                   onChange={(newValue) =>
                     setNewSong({
@@ -193,7 +193,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
               <TextField
                 id='outlined-select-currency'
                 select
-                label='Genre'
+                label={t('genre')}
                 required
                 defaultValue=''
                 sx={{
@@ -210,7 +210,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
               <TextField
                 id='outlined-select-currency'
                 select
-                label='Region'
+                label={t('region')}
                 required
                 defaultValue=''
                 sx={{
@@ -231,7 +231,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
               </Typography>
             )}
             <Button component='label' variant='contained' startIcon={<CloudUploadIcon />}>
-              Upload audio
+              {t('uploadSong')}
               <VisuallyHiddenInput
                 type='file'
                 accept='audio/mpeg, audio/mp3'

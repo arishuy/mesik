@@ -111,7 +111,7 @@ const HistoryUpload = () => {
       )}
       <Stack direction='row' justifyContent='space-between' alignItems='center'>
         <Typography variant='h4' py={3}>
-          Đã tải lên
+          {t('uploaded')}
         </Typography>
         {songs.length > 0 && (
           <Button
@@ -122,7 +122,7 @@ const HistoryUpload = () => {
             }}
             onClick={() => playSong(songs)}
           >
-            Phát tất cả
+            {t('playAll')}
           </Button>
         )}
       </Stack>
@@ -131,11 +131,11 @@ const HistoryUpload = () => {
         <Table size='small'>
           <TableHead>
             <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell>Duration</TableCell>
-              <TableCell align='right'>Release Date</TableCell>
-              <TableCell align='right'>Has Lyric</TableCell>
-              <TableCell align='right'>Action</TableCell>
+              <TableCell>{t('title')}</TableCell>
+              <TableCell>{t('duration')}</TableCell>
+              <TableCell align='right'>{t('releaseDate')}</TableCell>
+              <TableCell align='right'>{t('hasLyrics')}</TableCell>
+              <TableCell align='right'>{t('action')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

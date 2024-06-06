@@ -2,6 +2,7 @@
   "vi": "Vietnamese",
   "en": "English",
   "dashboard": "Dashboard",
+  "homepage": "Mesik",
   "librabry": "Library",
   "search": "Search",
   "myProfile": "My Profile",
@@ -47,6 +48,7 @@
   "vietnam": "Vietnam",
   "another": "Global",
   "noResults": "No results found!",
+  "noData": "No data found!",
   "next": "Next",
   "previous": "Previous",
   "status": "Status",
@@ -375,6 +377,8 @@
   "playlist": "Playlist",
   "artist": "Artist",
   "section": "Section",
+  "genre": "Genre",
+  "region": "Region",
 
   "duration": "Duration",
   "likedSongs": "Liked Songs",
@@ -385,6 +389,10 @@
   "myPlaylist": "My Playlist",
   "addNewPlaylist": "Add New Playlist",
   "newPlaylist": "New Playlist",
+
+  "myAlbum": "My Album",
+  "addNewAlbum": "Add New Album",
+  "newAlbum": "New Album",
 
   "ranking": "Ranking",
   "daily": "Daily",
@@ -417,5 +425,17 @@
   "servicePackage": "Service package",
 
   "update": "Update",
-  "refresh": "Refresh"
+  "refresh": "Refresh",
+  "uploadSong": "Upload Song",
+  "releaseDateError": "Release date must be less than current date",
+  "uploadingSong": "Uploading song...",
+  "uploadSongSuccess": "Upload song successfully",
+  "uploadSongFail": "Upload song failed",
+  "updateSongSuccess": "Update song successfully",
+  "updateSongFail": "Update song failed",
+  "hasLyrics": "Has Lyrics",
+  "Edit lyric": "Edit lyric",
+  "lyric": "Lyric",
+  "Play Now": "Play Now",
+  "Hãy nghe nhạc và tận hưởng âm nhạc cùng chúng tôi!": "Let's listen to music and enjoy music with us!"
 }

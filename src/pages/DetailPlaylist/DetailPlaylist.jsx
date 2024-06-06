@@ -140,8 +140,6 @@ const DetailPlaylist = () => {
           </Typography>
           <Button
             sx={{
-              color: 'white',
-              backgroundColor: 'black',
               borderRadius: '20px'
             }}
             onClick={() => {

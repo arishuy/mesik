@@ -2,6 +2,7 @@
   "vi": "Tiếng Việt",
   "en": "Tiếng Anh",
   "dashboard": "Trang chủ",
+  "homepage": "Mesik",
   "librabry": "Thư viện",
   "search": "Tìm kiếm",
   "myProfile": "Hồ sơ của tôi",
@@ -47,6 +48,7 @@
   "vietnam": "Việt Nam",
   "another": "Quốc Tế",
   "noResults": "Không có kết quả nào!",
+  "noData": "Không có dữ liệu nào!",
   "next": "Tiếp",
   "previous": "Trước",
   "status": "Trạng thái",
@@ -374,6 +376,8 @@
   "playlist": "Playlist",
   "artist": "Nghệ sĩ",
   "section": "Section",
+  "genre": "Thể loại",
+  "region": "Khu vực",
 
   "duration": "Thời lượng",
 
@@ -385,6 +389,10 @@
   "myPlaylist": "Playlist của tôi",
   "addNewPlaylist": "Thêm mới playlist",
   "newPlaylist": "Playlist mới",
+
+  "myAlbum": "Album của tôi",
+  "addNewAlbum": "Thêm mới album",
+  "newAlbum": "Album mới",
 
   "ranking": "Bảng Xếp Hạng",
   "daily": "Hàng Ngày",
@@ -416,5 +424,17 @@
   "servicePackage": "Gói dịch vụ",
 
   "update": "Cập nhật",
-  "refresh": "Làm mới"
+  "refresh": "Làm mới",
+  "uploadSong": "Tải lên bài hát",
+  "releaseDateError": "Ngày phát hành không được lớn hơn ngày hiện tại",
+  "uploadingSong": "Đang tải lên bài hát...",
+  "uploadSongSuccess": "Tải lên bài hát thành công",
+  "uploadSongFail": "Tải lên bài hát thất bại",
+  "updateSongSuccess": "Cập nhật bài hát thành công",
+  "updateSongFail": "Cập nhật bài hát thất bại",
+  "hasLyrics": "Có lời bài hát",
+  "Edit lyric": "Chỉnh sửa lời bài hát",
+  "lyric": "Lời bài hát",
+  "Play Now": "Phát ngay",
+  "Hãy nghe nhạc và tận hưởng âm nhạc cùng chúng tôi!": "Hãy nghe nhạc và tận hưởng âm nhạc cùng chúng tôi!"
 }

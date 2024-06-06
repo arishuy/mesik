@@ -34,7 +34,7 @@ const FollowingArtist = () => {
         {t('following')}
       </Typography>
       {following.length === 0 ? (
-        <Empty message={'Không có dữ liệu nào'} />
+        <Empty message={t('noData')} />
       ) : (
         <Grid container spacing={3}>
           {following.map((artist) => (

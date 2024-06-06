@@ -15,8 +15,10 @@ import Loading from '../../common/components/Loading/Loading'
 import moment from 'moment'
 import { Helmet } from 'react-helmet-async'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
 
 const MyAlbum = () => {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const user = JSON.parse(localStorage.getItem('profile'))
   const navigation = useNavigate()
@@ -49,7 +51,7 @@ const MyAlbum = () => {
       {openAdd && <AddNewAlbum open={openAdd} handleClose={() => setOpenAdd(false)} fetchData={fetchData} />}
       {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} fetchData={fetchData} id={id} />}
       <Box sx={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant='h4'>Album của tôi</Typography>
+        <Typography variant='h4'>{t('myAlbum')}</Typography>
         <Button
           variant='outlined'
           color='primary'
@@ -58,17 +60,19 @@ const MyAlbum = () => {
             borderRadius: '20px'
           }}
         >
-          Tạo album mới
+          {t('addNewAlbum')}
         </Button>
       </Box>
-      {albums.length === 0 && <Empty message={'Bạn chưa có album nào'} />}
+      {albums.length === 0 && <Empty message={t('noData')} />}
       <Grid container spacing={3}>
         {albums.map((album) => (
           <Grid item xs={12} md={6} lg={3} key={album.id}>
             <div className='song-card'>
               <img className='song-card_image' src={album.photo_url} alt='David Bowie - Aladdin Sane' />
               <div className='song-card_info'>
-                <div className='song-card_info_artist'>{album.songs.length} bài hát</div>
+                <div className='song-card_info_artist'>
+                  {album.songs.length} {t('songs')}
+                </div>
                 <div className='song-card_info_album'>
                   {' '}
                   {moment(album.createdAt).format('DD/MM/YYYY')} - {moment(album.createdAt).format('HH:mm')}

@@ -106,7 +106,7 @@ const HistoryListen = () => {
         {t('recentlyListened')}
       </Typography>
       {historyListen.length === 0 ? (
-        <Empty message={'Không có lịch sử nghe nào!'} />
+        <Empty message={t('noData')} />
       ) : (
         <TableContainer>
           <Table size='small'>

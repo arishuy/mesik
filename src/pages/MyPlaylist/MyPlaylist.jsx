@@ -77,7 +77,7 @@ const MyPlaylist = () => {
           {t('addNewPlaylist')}
         </Button>
       </Box>
-      {playlists.length === 0 && <Empty message={'Bạn chưa có playlist nào'} />}
+      {playlists.length === 0 && <Empty message={t('noData')} />}
       <Grid container spacing={3}>
         {playlists?.map((playlist) => (
           <Grid item xs={12} md={6} lg={3} key={playlist.id}>

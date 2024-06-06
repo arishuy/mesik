@@ -83,7 +83,7 @@ const SuggestedPlaylist = () => {
               </div>
               <div className='song-card_play'>
                 <Stack direction='row' spacing={1} pt={2}>
-                  <Tooltip title='Phát ngay'>
+                  <Tooltip title={t('Play Now')}>
                     <IconButton
                       onClick={(e) => {
                         e.stopPropagation()

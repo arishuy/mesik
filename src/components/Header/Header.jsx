@@ -54,7 +54,7 @@ const Header = () => {
               {user && user.role === 'ARTIST' && open && <UploadMusic open={open} setOpen={setOpen} />}
               {user.role === 'ARTIST' && (
                 <>
-                  <Tooltip title='Tải nhạc lên' arrow>
+                  <Tooltip title={t('uploadSong')} arrow>
                     <Fab size='small' aria-label='notifi' onClick={() => setOpen(true)}>
                       <FileUploadOutlinedIcon />
                     </Fab>
@@ -70,7 +70,6 @@ const Header = () => {
                       <AttachMoneyIcon />
                     </Fab>
                   </Tooltip>
-                  <Report />
                 </>
               )}
               {/* <Notification /> */}
@@ -84,7 +83,6 @@ const Header = () => {
                       <AttachMoneyIcon />
                     </Fab>
                   </Tooltip>
-                  <Report />
                 </>
               )}
               <LanguaguePopover />

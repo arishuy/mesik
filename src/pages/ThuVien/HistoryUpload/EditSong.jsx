@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext, useRef } from 'react'
+import React, { useState } from 'react'
 import RootModal from '../../../components/Modal/RootModal'
-import { Stack, TextField, MenuItem, Button, Typography, FormControlLabel, Checkbox } from '@mui/material'
+import { Stack, TextField, MenuItem, FormControlLabel, Checkbox } from '@mui/material'
 import AxiosInterceptors from '../../../common/utils/axiosInterceptors'
 import { useTranslation } from 'react-i18next'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
@@ -25,7 +25,7 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
       setSnack({
         ...snack,
         open: true,
-        message: 'Ngày phát hành không được lớn hơn ngày hiện tại',
+        message: t('releaseDateError'),
         type: 'error'
       })
       return
@@ -44,7 +44,7 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorSuccess'),
+          message: t('updateSongSuccess'),
           type: 'success'
         })
       })
@@ -52,7 +52,7 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorFail'),
+          message: t('updateSongFail'),
           type: 'error'
         })
       )
@@ -62,7 +62,7 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
       {genres.length > 0 && newSong.artist && newSong.genre && (
         <RootModal
           variant='Create'
-          title='Edit song'
+          title={t('edit') + ' ' + newSong.title}
           open={open}
           handleClose={handleClose}
           handleOk={() => {
@@ -74,7 +74,7 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
           <Stack spacing={2} direction='column' sx={{ width: '100%', my: 2 }}>
             <TextField
               id='outlined-basic'
-              label='Title'
+              label={t('title')}
               variant='outlined'
               fullWidth
               value={newSong.title}
@@ -88,7 +88,7 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
             <Stack direction='row' spacing={3}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  label='Release Date'
+                  label={t('releaseDate')}
                   value={dayjs(newSong.release_date)}
                   onChange={(newValue) =>
                     setNewSong({
@@ -100,7 +100,7 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
               </LocalizationProvider>
               <TextField
                 id='outlined-basic'
-                label='Duration'
+                label={t('duration')}
                 variant='outlined'
                 fullWidth
                 value={newSong.duration}
@@ -121,7 +121,7 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
               <TextField
                 id='outlined-select-currency'
                 select
-                label='Genre'
+                label={t('genre')}
                 required
                 value={newSong.genre}
                 sx={{
@@ -138,7 +138,7 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
               <TextField
                 id='outlined-select-currency'
                 select
-                label='Region'
+                label={t('region')}
                 required
                 value={newSong.region}
                 sx={{
@@ -155,7 +155,7 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
             </Stack>
             <TextField
               id='outlined-select-currency'
-              label='Artist'
+              label={t('artist')}
               required
               value={newSong?.artist?.display_name}
               disabled

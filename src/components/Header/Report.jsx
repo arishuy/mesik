@@ -1,12 +1,13 @@
-import { Fab, Stack, TextField, Tooltip } from '@mui/material'
+import { ListItem, ListItemText, Stack, TextField } from '@mui/material'
+import { NavLink } from 'react-router-dom'
 import React, { useState } from 'react'
-import ReportIcon from '@mui/icons-material/Report'
 import RootModal from '../Modal/RootModal'
 import { useTranslation } from 'react-i18next'
 import UploadReport from './UploadReport'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import useSnackbar from '../../contexts/snackbar.context'
+import ReportTwoToneIcon from '@mui/icons-material/ReportTwoTone'
 const Report = () => {
   const { t } = useTranslation()
   const { snack, setSnack } = useSnackbar()
@@ -18,15 +19,6 @@ const Report = () => {
     photo: ''
   })
   const handleReport = async () => {
-    if (data.title === '' || data.description === '' || data.photo === '') {
-      setSnack({
-        ...snack,
-        open: true,
-        message: t('pleaseFillOutAllFields'),
-        type: 'error'
-      })
-      return
-    }
     await AxiosInterceptors.post(
       urlConfig.report.createReport,
       {
@@ -48,7 +40,6 @@ const Report = () => {
             message: t('reportSuccess'),
             type: 'success'
           })
-          setOpen(false)
         }
       })
       .catch((err) => {
@@ -67,7 +58,21 @@ const Report = () => {
         title={t('report')}
         open={open}
         handleClose={() => setOpen(false)}
-        handleOk={handleReport}
+        handleOk={
+          data.title === '' || data.description === '' || data.photo === ''
+            ? () => {
+                setSnack({
+                  ...snack,
+                  open: true,
+                  message: t('pleaseFillOutAllFields'),
+                  type: 'error'
+                })
+              }
+            : () => {
+                handleReport()
+                setOpen(false)
+              }
+        }
         closeOnly={false}
       >
         <Stack direction='column' sx={{ my: 2 }} spacing={2}>
@@ -96,11 +101,10 @@ const Report = () => {
         </Stack>
         <UploadReport file={data.photo} setFormData={setFormData} information={data} setInformation={setData} />
       </RootModal>
-      <Tooltip title={t('report')} arrow>
-        <Fab size='small' aria-label='notifi' onClick={() => setOpen(true)}>
-          <ReportIcon />
-        </Fab>
-      </Tooltip>
+      <ListItem button component={NavLink} onClick={() => setOpen(true)}>
+        <ReportTwoToneIcon fontSize='small' sx={{ mr: 1 }} />
+        <ListItemText primary={t('report')} />
+      </ListItem>
     </>
   )
 }

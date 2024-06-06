@@ -81,7 +81,7 @@ const AddNewAlbum = ({ open, handleClose, fetchData }) => {
     <>
       <RootModal
         variant='Create'
-        title='New Album'
+        title={t('newAlbum')}
         open={open}
         handleClose={handleClose}
         handleOk={() => {
@@ -93,7 +93,7 @@ const AddNewAlbum = ({ open, handleClose, fetchData }) => {
         <Stack spacing={2} direction='column' sx={{ width: '100%', my: 2 }}>
           <TextField
             id='outlined-basic'
-            label='Title'
+            label={t('title')}
             variant='outlined'
             fullWidth
             onChange={(e) =>
@@ -115,9 +115,7 @@ const AddNewAlbum = ({ open, handleClose, fetchData }) => {
                 song_id: value.map((song) => song._id)
               })
             }}
-            renderInput={(params) => (
-              <TextField {...params} variant='outlined' label='Songs' placeholder='Select song' />
-            )}
+            renderInput={(params) => <TextField {...params} variant='outlined' label={t('song')} />}
           />
         </Stack>
         <UploadPhoto

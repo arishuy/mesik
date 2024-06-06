@@ -69,6 +69,7 @@ const SearchPage = () => {
     fetchPlaylists()
   }, [])
   useEffect(() => {
+    setIsLoading(true)
     fetchData()
   }, [searchParams])
 
@@ -78,9 +79,12 @@ const SearchPage = () => {
     <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
       <Helmet>
         <title>
-          {t('search')} for {keyword}
+          {t('search')} | {keyword}
         </title>
       </Helmet>
+      {data.songs?.length === 0 && data.albums.length === 0 && data.artists?.length === 0 && data.song === null && (
+        <Empty message={t('noResults')} />
+      )}
       {data.songs?.length > 0 && (
         <>
           <Typography variant='h4' py={3}>
@@ -150,7 +154,7 @@ const SearchPage = () => {
                   <img className='song-card_image' src={album.photo_url} alt='David Bowie - Aladdin Sane' />
                   <div className='song-card_play'>
                     <Stack direction='row' spacing={1} pt={2}>
-                      <Tooltip title='Phát ngay'>
+                      <Tooltip title={t('Phát ngay')}>
                         <IconButton
                           onClick={(e) => {
                             handlePlayAlbum(album)
@@ -160,7 +164,7 @@ const SearchPage = () => {
                           <PlayCircleFilledWhiteOutlinedIcon />
                         </IconButton>
                       </Tooltip>
-                      <Tooltip title={t('detail')}>
+                      <Tooltip title={t('detailInfo')}>
                         <IconButton
                           onClick={(e) => {
                             navigate(`/album/${album._id}`)
