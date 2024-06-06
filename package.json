@@ -41,6 +41,7 @@
     "react-slick": "^0.29.0",
     "simplebar-react": "^3.2.4",
     "slick-carousel": "^1.8.1",
+    "use-debounce": "^10.0.1",
     "web-vitals": "^2.1.4",
     "yup": "^1.2.0"
   },

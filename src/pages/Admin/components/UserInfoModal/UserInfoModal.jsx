@@ -21,23 +21,9 @@ import _ from 'lodash'
 import dayjs from 'dayjs'
 import urlConfig from '../../../../config/UrlConfig'
 import useSnackbar from '../../../../contexts/snackbar.context'
-import Snackbar from '../../../../common/components/SnackBar'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import RootModal from '../../../../components/Modal/RootModal'
-import Axios from 'axios'
 import { useTranslation } from 'react-i18next'
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 1000,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-  borderRadius: 2
-}
 
 export default function UserInfoModal({ open, handleCloseModal, user, fetchData }) {
   const [userId, setUserId] = useState('')
@@ -117,7 +103,7 @@ export default function UserInfoModal({ open, handleCloseModal, user, fetchData 
           setRole(0)
           break
         }
-        case 'EXPERT': {
+        case 'ARTIST': {
           setRole(1)
           break
         }
@@ -133,6 +119,7 @@ export default function UserInfoModal({ open, handleCloseModal, user, fetchData 
     }
   }
 
+  console.log('user', user)
   const handleOnclickSaveChangesBtn = async () => {
     const url = urlConfig.user.users + `/${userId}`
     const res = await AxiosInterceptors.put(url, {
@@ -140,7 +127,8 @@ export default function UserInfoModal({ open, handleCloseModal, user, fetchData 
       last_name: lastName,
       gender: gender,
       phone: phone,
-      DoB: DoB
+      DoB: DoB,
+      role: role === 1 ? 'ARTIST' : 'USER'
     })
     if (res.status === 200) {
       fetchData()
@@ -258,10 +246,9 @@ export default function UserInfoModal({ open, handleCloseModal, user, fetchData 
                 value={role}
                 label='Role'
                 onChange={(e) => setRole(e.target.value)}
-                disabled
               >
                 <MenuItem value={0}>{t('USER')}</MenuItem>
-                <MenuItem value={1}>{t('EXPERT')}</MenuItem>
+                <MenuItem value={1}>{t('ARTIST')}</MenuItem>
                 <MenuItem value={2}>{t('ADMIN')}</MenuItem>
               </Select>
             </FormControl>
@@ -281,7 +268,7 @@ export default function UserInfoModal({ open, handleCloseModal, user, fetchData 
               label={t('status')}
               sx={{ width: '100%' }}
               disabled
-              value={isRestricted ? t('active') : t('unactive')}
+              value={!isRestricted ? t('active') : t('unactive')}
             />
           </Grid>
           <Grid item xs={12} sm={6}>

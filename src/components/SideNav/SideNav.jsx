@@ -20,8 +20,10 @@ import logo from '../../assets/images/logo.png'
 import LibraryMusicRoundedIcon from '@mui/icons-material/LibraryMusicRounded'
 import { AppContext } from '../../contexts/app.context'
 import dayjs from 'dayjs'
+import { useTheme } from '@mui/material/styles'
 import { Button, Card, Typography } from '@mui/material'
 export default function AdminSideNav({ param }) {
+  const theme = useTheme()
   const { isAuthenticated, role, profile } = useContext(AppContext)
   const isMobile = useResponsive('down', 'sm')
   const isPremium = profile?.premiumEndDate && dayjs(profile.premiumEndDate) > dayjs()
@@ -32,9 +34,11 @@ export default function AdminSideNav({ param }) {
   }
 
   const styleActive = {
-    color: 'white',
+    color: theme.palette.primary.main,
     fontWeight: 'bold',
-    backgroundColor: '#2065D1'
+    backgroundColor: theme.palette.primary.lighter,
+    borderRadius: '10px',
+    margin: '5px'
   }
 
   const styleMobile = {

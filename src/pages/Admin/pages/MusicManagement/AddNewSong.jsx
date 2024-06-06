@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
 import RootModal from '../../../../components/Modal/RootModal'
-import { Stack, TextField, MenuItem, Button, Typography, Avatar } from '@mui/material'
+import { Stack, TextField, MenuItem, Button, Typography, Avatar, Autocomplete } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import UploadPhoto from '../../../../common/components/UploadPhoto'
@@ -10,6 +10,7 @@ import { styled } from '@mui/material/styles'
 import dayjs from 'dayjs'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import Loading from '../../../../common/components/Loading/Loading'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -28,6 +29,7 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
   const [formData, setFormData] = useState(new FormData())
   const [formMusic, setFormMusic] = useState(new FormData())
   const [artists, setArtists] = useState([])
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [newSong, setNewSong] = useState({
     title: '',
     release_date: dayjs,
@@ -40,7 +42,13 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
     play_count: 0
   })
   const handleAddNew = async () => {
-    if (newSong.title === '' || newSong.release_date === '' || newSong.photo === '' || newSong.genre_id === '') {
+    if (
+      newSong.title === '' ||
+      newSong.release_date === '' ||
+      newSong.photo === '' ||
+      newSong.genre_id === '' ||
+      formMusic.get('audio') === null
+    ) {
       setSnack({
         ...snack,
         open: true,
@@ -53,11 +61,18 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
       setSnack({
         ...snack,
         open: true,
-        message: 'Ngày phát hành không được lớn hơn ngày hiện tại',
+        message: t('releaseDateError'),
         type: 'error'
       })
       return
     }
+    setIsSubmitting(true)
+    setSnack({
+      ...snack,
+      open: true,
+      message: t('uploadingSong'),
+      type: 'info'
+    })
     await AxiosInterceptors.post(
       urlConfig.music.createMusic,
       {
@@ -82,15 +97,16 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorSuccess'),
+          message: t('uploadSongSuccess'),
           type: 'success'
         })
+        setIsSubmitting(false)
       })
       .catch((err) =>
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorFail'),
+          message: t('uploadSongFail'),
           type: 'error'
         })
       )
@@ -110,19 +126,21 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
   const fetchArtist = async () => {
     const res = await AxiosInterceptors.get(urlConfig.artists.getAllArtists)
     if (res.status === 200) {
-      setArtists(res.data.pagination.artists)
+      setArtists(res.data.artists)
     }
   }
 
   useEffect(() => {
     fetchArtist()
   }, [])
-  return (
+  return isSubmitting ? (
+    <Loading />
+  ) : (
     <>
       {genres.length > 0 && (
         <RootModal
           variant='Create'
-          title='Add new song'
+          title={t('uploadSong')}
           open={open}
           handleClose={handleClose}
           handleOk={() => {
@@ -134,7 +152,7 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
           <Stack spacing={2} direction='column' sx={{ width: '100%', my: 2 }}>
             <TextField
               id='outlined-basic'
-              label='Title'
+              label={t('title')}
               variant='outlined'
               fullWidth
               onChange={(e) =>
@@ -146,7 +164,7 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
             />
             <LocalizationProvider dateAdapter={AdapterDayjs} sx={{ width: '45%', m: 2 }}>
               <DatePicker
-                label='Release Date'
+                label={t('releaseDate')}
                 value={dayjs(newSong.release_date)}
                 onChange={(newValue) =>
                   setNewSong({
@@ -160,7 +178,7 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
               <TextField
                 id='outlined-select-currency'
                 select
-                label='Genre'
+                label={t('genre')}
                 required
                 defaultValue=''
                 sx={{
@@ -177,7 +195,7 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
               <TextField
                 id='outlined-select-currency'
                 select
-                label='Region'
+                label={t('region')}
                 required
                 defaultValue=''
                 sx={{
@@ -192,30 +210,27 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
                 ))}
               </TextField>
             </Stack>
-            <TextField
-              id='outlined-select-currency'
-              select
-              label='Artist'
-              required
-              defaultValue=''
-              onChange={(e) => setNewSong({ ...newSong, artist_id: e.target.value })}
-            >
-              {artists?.map((option) => (
-                <MenuItem key={option._id} value={option._id}>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Avatar src={option.user.photo_url} sx={{ width: 24, height: 24, mr: 1 }} />
-                    {option.display_name}
-                  </div>
-                </MenuItem>
-              ))}
-            </TextField>
+            <Autocomplete
+              sx={{ m: 1 }}
+              isOptionEqualToValue={(option, value) => option._id === value._id}
+              options={artists}
+              getOptionLabel={(option) => option.display_name}
+              disableCloseOnSelect
+              onChange={(e, value) => {
+                setNewSong({
+                  ...newSong,
+                  artist_id: value ? value._id : ''
+                })
+              }}
+              renderInput={(params) => <TextField {...params} variant='outlined' label={t('artist')} />}
+            />
             {formMusic.get('audio') && (
               <Typography variant='body2' color='text.secondary' noWrap>
                 {formMusic.get('audio').name}
               </Typography>
             )}
             <Button component='label' variant='contained' startIcon={<CloudUploadIcon />}>
-              Upload audio
+              {t('uploadSong')}
               <VisuallyHiddenInput
                 type='file'
                 accept='audio/mpeg, audio/mp3'

@@ -100,7 +100,8 @@ const urlConfig = {
   },
   keyword: {
     get5Keyword: `${process.env.REACT_APP_API_ENDPOINT}/search/keywords`,
-    search: `${process.env.REACT_APP_API_ENDPOINT}/search`
+    search: `${process.env.REACT_APP_API_ENDPOINT}/search`,
+    getRelatedKeyword: `${process.env.REACT_APP_API_ENDPOINT}/search/keywords`
   },
   genres: {
     createGenre: `${process.env.REACT_APP_API_ENDPOINT}/genres`,

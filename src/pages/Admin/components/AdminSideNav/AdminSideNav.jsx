@@ -2,13 +2,8 @@ import path from '../../../../constants/path'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar'
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
-import ManageSearchIcon from '@mui/icons-material/ManageSearch'
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
-import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
-import FindInPageIcon from '@mui/icons-material/FindInPage'
 import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined'
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
 import SsidChartIcon from '@mui/icons-material/SsidChart'
 import useResponsive from '../../../../hooks/useResponsive'
 import HandymanIcon from '@mui/icons-material/Handyman'
@@ -22,9 +17,10 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined'
 import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined'
 import EventSeatOutlinedIcon from '@mui/icons-material/EventSeatOutlined'
-import ReportIcon from '@mui/icons-material/Report'
+import { useTheme } from '@mui/material/styles'
 import React from 'react'
 export default function AdminSideNav() {
+  const theme = useTheme()
   const param = useLocation()
   const isMobile = useResponsive('down', 'sm')
   const { t } = useTranslation()
@@ -42,9 +38,11 @@ export default function AdminSideNav() {
     backgroundColor: 'white'
   }
   const styleActive = {
-    color: 'white',
+    color: theme.palette.primary.main,
     fontWeight: 'bold',
-    backgroundColor: '#2065D1'
+    backgroundColor: theme.palette.primary.lighter,
+    borderRadius: '10px',
+    margin: '5px'
   }
   const menuMobile = {
     overflow: 'auto',
@@ -147,7 +145,12 @@ export default function AdminSideNav() {
         </Menu>
       ) : (
         <Menu>
-          <MenuItem icon={<SsidChartIcon />} component={<Link to={path.adminDashBoard} style={styleLink} />}>
+          <MenuItem
+            icon={<SsidChartIcon />}
+            component={
+              <Link to={path.adminDashBoard} style={param.pathname === path.adminDashBoard ? styleActive : styleLink} />
+            }
+          >
             {t('statistics')}
           </MenuItem>
           <MenuItem

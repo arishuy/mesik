@@ -1,39 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import { TextField, List, ListItem, ListItemText, Typography, Popover } from '@mui/material'
-import InputAdornment from '@mui/material/InputAdornment'
+import { TextField, List, ListItem, ListItemText, Typography, Box, InputAdornment } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
+import TroubleshootIcon from '@mui/icons-material/Troubleshoot'
 import urlConfig from '../../config/UrlConfig'
 import Axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import useResponsive from '../../hooks/useResponsive'
 import { useTranslation } from 'react-i18next'
+import SimpleBar from 'simplebar-react'
+import { useDebounce } from 'use-debounce'
 
 const SearchBar = () => {
   const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
-
+  const [open, setOpen] = useState(false)
   const [searchText, setSearchText] = useState('')
   const [mostKeyword, setMostKeyword] = useState([])
-
+  const [relatedKeywords, setRelatedKeywords] = useState([])
+  const [debouncedSearchText] = useDebounce(searchText, 500)
   const navigate = useNavigate()
+  const isSearch = searchText !== ''
+  console.log('searchText', searchText)
 
   const handleSearch = (e) => {
     const value = e.target.value
     navigate(`/search?q=${value}`)
     setSearchText(value)
   }
-  const [anchorEl, setAnchorEl] = React.useState(null)
-
-  const handlePopoverOpen = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handlePopoverClose = () => {
-    setAnchorEl(null)
-  }
-
-  const open = Boolean(anchorEl)
 
   const fetchMostKeyword = async () => {
     await Axios.get(urlConfig.keyword.get5Keyword)
@@ -45,9 +39,25 @@ const SearchBar = () => {
       })
   }
 
+  const fetchRelatedKeyword = async () => {
+    await Axios.get(urlConfig.keyword.getRelatedKeyword + `/${debouncedSearchText}`)
+      .then((res) => {
+        setRelatedKeywords(res.data.result)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   useEffect(() => {
     fetchMostKeyword()
   }, [])
+
+  useEffect(() => {
+    if (debouncedSearchText) {
+      fetchRelatedKeyword()
+    }
+  }, [debouncedSearchText])
 
   return (
     <div
@@ -69,10 +79,7 @@ const SearchBar = () => {
         variant='outlined'
         value={searchText}
         onChange={(e) => {
-          // if enter key is pressed
-          if (e.key === 'Enter') {
-            handleSearch(e)
-          } else setSearchText(e.target.value)
+          setSearchText(e.target.value)
         }}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
@@ -89,41 +96,76 @@ const SearchBar = () => {
             zIndex: 999
           }
         }}
-        onClick={handlePopoverOpen}
+        onFocus={() => setOpen(true)}
+        onBlur={() =>
+          setTimeout(() => {
+            setOpen(false)
+          }, 100)
+        }
       />
-      <Popover
-        anchorEl={anchorEl}
-        onClose={handlePopoverClose}
-        open={open}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left'
+      <Box
+        sx={{
+          position: 'absolute',
+          zIndex: 999,
+          width: '500px',
+          top: '50px',
+          backgroundColor: 'white',
+          height: 'auto',
+          display: open ? 'block' : 'none'
         }}
       >
-        <List component='nav' sx={{ width: '500px' }}>
-          <Typography variant='h6' sx={{ padding: '10px', ml: 1 }}>
-            {t('mostSearch')}
-          </Typography>
-          {mostKeyword.map((result, index) => (
-            <ListItem
-              key={index}
-              button
-              onClick={() => {
-                setSearchText(result.keyword)
-                setAnchorEl(null)
-                navigate(`/search?q=${result.keyword}`)
-              }}
-            >
-              <TrendingUpIcon sx={{ mr: 1 }} />
-              <ListItemText primary={result.keyword} />
-            </ListItem>
-          ))}
-        </List>
-      </Popover>
+        {isSearch ? (
+          <List component='nav' sx={{ width: '500px' }}>
+            <Typography variant='h6' sx={{ padding: '10px', ml: 1 }}>
+              {t('relatedSearch')}
+            </Typography>
+            <SimpleBar style={{ maxHeight: 300, overflowX: 'hidden' }} timeout={500} clickOnTrack={false}>
+              {relatedKeywords.length === 0 && (
+                <Typography variant='body1' sx={{ padding: '10px', ml: 1 }}>
+                  {t('noResults')}
+                </Typography>
+              )}
+              {relatedKeywords.map((result, index) => (
+                <ListItem
+                  key={index}
+                  button
+                  onMouseDown={(e) => {
+                    setSearchText(result.keyword)
+                    navigate(`/search?q=${result.keyword}`)
+                  }}
+                >
+                  <TroubleshootIcon sx={{ mr: 1 }} />
+                  <ListItemText
+                    primary={result.keyword}
+                    sx={{
+                      textWrap: 'nowrap'
+                    }}
+                  />
+                </ListItem>
+              ))}
+            </SimpleBar>
+          </List>
+        ) : (
+          <List component='nav' sx={{ width: '500px' }}>
+            <Typography variant='h6' sx={{ padding: '10px', ml: 1 }}>
+              {t('mostSearch')}
+            </Typography>
+            {mostKeyword.map((result, index) => (
+              <ListItem
+                key={index}
+                button
+                onMouseDown={(e) => {
+                  setSearchText(result.keyword)
+                  navigate(`/search?q=${result.keyword}`)
+                }}
+              >
+                <TrendingUpIcon sx={{ mr: 1 }} />
+                <ListItemText primary={result.keyword} />
+              </ListItem>
+            ))}
+          </List>
+        )}
+      </Box>
     </div>
   )
 }

@@ -28,6 +28,7 @@ import Label from '../../../../components/Label'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import LockIcon from '@mui/icons-material/Lock'
+import LockOpenIcon from '@mui/icons-material/LockOpen'
 import Loading from '../../../../common/components/Loading/Loading'
 import UserTableToolbar from './UserTableToolBar'
 // import DocumentModal from './DocumentModal'
@@ -197,10 +198,10 @@ const UsersTable = () => {
     <Loading />
   ) : (
     <>
-      {openModal && (
-        <UserInfoModal open={openModal} handleCloseModal={handleCloseModal} user={currentRow} fetchData={fetchData} />
-      )}
       <Card>
+        {openModal && (
+          <UserInfoModal open={openModal} handleCloseModal={handleCloseModal} user={currentRow} fetchData={fetchData} />
+        )}
         <CardHeader title={t('userManagement')} />
         <Divider />
         <UserTableToolbar
@@ -295,7 +296,7 @@ const UsersTable = () => {
                             color='inherit'
                             size='small'
                           >
-                            <LockIcon fontSize='small' />
+                            {users.isRestricted ? <LockOpenIcon fontSize='small' /> : <LockIcon fontSize='small' />}
                           </IconButton>
                         </Tooltip>
 
