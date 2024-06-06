@@ -149,11 +149,11 @@ export default function AdminSideNav({ param }) {
                 textAlign='center'
                 color='white'
               >
-                Nghe nhạc không quảng cáo cùng Mesik Premium
+                {t('Nghe nhạc không quảng cáo cùng Mesik Premium')}
               </Typography>
               <Button variant='contained' color='warning' sx={{ my: 1, borderRadius: '20px' }}>
                 <Link to={path.buyPremium} style={{ textDecoration: 'none', color: 'black' }}>
-                  Nâng Cấp Premium
+                  {t('Nâng Cấp Premium')}
                 </Link>
               </Button>
             </Card>
