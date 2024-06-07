@@ -88,7 +88,7 @@ const SearchPage = () => {
       {data.songs?.length > 0 && (
         <>
           <Typography variant='h4' py={3}>
-            {t('song')}
+            {t('song')} ({data.songs.length})
           </Typography>
           <Grid container spacing={2}>
             {data.songs?.map((song) => (
@@ -114,7 +114,7 @@ const SearchPage = () => {
       {data.artists?.length > 0 && (
         <>
           <Typography variant='h4' py={3}>
-            {t('artist')}
+            {t('artist')} ({data.artists.length})
           </Typography>
           <Grid container spacing={3}>
             {data.artists?.map((artist) => (
@@ -145,7 +145,7 @@ const SearchPage = () => {
       {data.albums.length > 0 && (
         <>
           <Typography variant='h4' py={3}>
-            Album
+            Album ({data.albums.length})
           </Typography>
           <Grid container spacing={2}>
             {data.albums.map((album) => (
