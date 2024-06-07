@@ -181,24 +181,43 @@ const SongCard = memo(({ song, allPlaylists, snack, setSnack }) => {
         </Typography>
         <Stack direction='row' justifyContent='space-between' spacing={1}>
           <div>
-            <Typography
-              variant='body2'
-              onClick={(e) => {
-                e.stopPropagation()
-                navigate(`/artist/${song.artist._id}`)
-              }}
-              noWrap
-              sx={{
-                cursor: 'pointer',
-                '&:hover': {
-                  color: 'blue',
-                  textDecoration: 'underline'
-                }
-              }}
-            >
-              {' '}
-              {song.artist.display_name}
-            </Typography>
+            <Stack direction='row'>
+              <Typography
+                variant='body2'
+                onClick={(e) => {
+                  e.stopPropagation()
+                  navigate(`/artist/${song.artist._id}`)
+                }}
+                noWrap
+                sx={{
+                  cursor: 'pointer',
+                  '&:hover': {
+                    color: 'primary.main'
+                  }
+                }}
+              >
+                {song.artist.display_name}
+              </Typography>
+              {song.featuredArtists?.length > 0 &&
+                song.featuredArtists?.map((artist) => (
+                  <Typography
+                    variant='body2'
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      navigate(`/artist/${artist._id}`)
+                    }}
+                    noWrap
+                    sx={{
+                      cursor: 'pointer',
+                      '&:hover': {
+                        color: 'primary.main'
+                      }
+                    }}
+                  >
+                    , {artist.display_name}
+                  </Typography>
+                ))}
+            </Stack>
             <Stack direction='row' justifyContent='space-between' spacing={1} alignItems='center'>
               <Typography variant='subtitle2'>
                 {song.play_count} {t('listens')}

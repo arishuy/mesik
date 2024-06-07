@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
 import RootModal from '../../../../components/Modal/RootModal'
-import { Stack, TextField, MenuItem, Button, Typography, FormControlLabel, Checkbox } from '@mui/material'
+import { Stack, TextField, MenuItem, Button, Typography, FormControlLabel, Checkbox, Autocomplete } from '@mui/material'
 import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import { useTranslation } from 'react-i18next'
@@ -10,6 +10,7 @@ import dayjs from 'dayjs'
 
 const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, regions }) => {
   const { t } = useTranslation()
+  const [artists, setArtists] = useState([])
   const [newSong, setNewSong] = useState({})
   const handleUpdate = async () => {
     if (newSong.title === '' || newSong.release_date === '' || newSong.photo === '' || newSong.genre === '') {
@@ -37,7 +38,8 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
       genre: newSong.genre,
       region: newSong.region,
       artist: newSong.artist,
-      isPremium: newSong.isPremium
+      isPremium: newSong.isPremium,
+      featuredArtists: newSong.featuredArtists.map((artist) => artist._id)
     })
       .then((res) => {
         fetchData()
@@ -66,7 +68,14 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
         console.log(err)
       })
   }
+  const fetchArtist = async () => {
+    const res = await AxiosInterceptors.get(urlConfig.artists.getAllArtists)
+    if (res.status === 200) {
+      setArtists(res.data.artists)
+    }
+  }
   useEffect(() => {
+    fetchArtist()
     fetchMusic()
   }, [id])
   return (
@@ -165,6 +174,24 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
                 ))}
               </TextField>
             </Stack>
+            <Autocomplete
+              sx={{ m: 1 }}
+              isOptionEqualToValue={(option, value) => option._id === value._id}
+              options={artists}
+              multiple
+              getOptionLabel={(option) => option.display_name}
+              value={artists.filter((artist) =>
+                newSong.featuredArtists.some((featuredArtist) => featuredArtist._id === artist._id)
+              )}
+              disableCloseOnSelect
+              onChange={(e, value) => {
+                setNewSong({
+                  ...newSong,
+                  featuredArtists: value
+                })
+              }}
+              renderInput={(params) => <TextField {...params} variant='outlined' label={t('featuredArtists')} />}
+            />
             <TextField
               id='outlined-select-currency'
               label={t('artist')}

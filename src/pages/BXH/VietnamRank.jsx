@@ -222,25 +222,42 @@ const VietnamRank = ({ allPlaylists }) => {
                         <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                           {song.title}
                         </Typography>
-                        <Typography
-                          variant='subtitle1'
-                          fontWeight='bold'
-                          color='text.primary'
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            navigate(`/artist/${song.artist._id}`)
-                          }}
-                          noWrap
-                          sx={{
-                            cursor: 'pointer',
-                            '&:hover': {
-                              color: 'blue',
-                              textDecoration: 'underline'
-                            }
-                          }}
-                        >
-                          {song.artist?.display_name}
-                        </Typography>
+                        <Stack direction='row'>
+                          <Typography
+                            variant='subtitle1'
+                            fontWeight='bold'
+                            color='text.primary'
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              navigate(`/artist/${song.artist._id}`)
+                            }}
+                            noWrap
+                            sx={{
+                              cursor: 'pointer',
+                              '&:hover': {
+                                color: 'primary.main'
+                              }
+                            }}
+                          >
+                            {song.artist?.display_name}
+                          </Typography>
+                          {song.featuredArtists?.length > 0 &&
+                            song.featuredArtists?.map((artist) => (
+                              <Typography
+                                variant='body2'
+                                noWrap
+                                onClick={() => navigate(`/artist/${artist._id}`)}
+                                sx={{
+                                  cursor: 'pointer',
+                                  '&:hover': {
+                                    color: 'primary.main'
+                                  }
+                                }}
+                              >
+                                , {artist.display_name}
+                              </Typography>
+                            ))}
+                        </Stack>
                       </Stack>
                     </Stack>
                   </TableCell>

@@ -27,7 +27,9 @@ import convertToMinutes from '../../common/utils/convertToMinutes'
 import { useTranslation } from 'react-i18next'
 import { AppContext } from '../../contexts/app.context'
 import { SnackbarContext } from '../../contexts/snackbar.context'
+import { useNavigate } from 'react-router-dom'
 const HistoryListen = () => {
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(true)
   const [historyListen, setHistoryListen] = useState([])
@@ -146,9 +148,44 @@ const HistoryListen = () => {
                           <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                             {majorsOrder.title}
                           </Typography>
-                          <Typography variant='subtitle1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                            {majorsOrder.artist.display_name}
-                          </Typography>
+                          <Stack direction='row'>
+                            <Typography
+                              variant='subtitle1'
+                              fontWeight='bold'
+                              color='text.primary'
+                              gutterBottom
+                              noWrap
+                              onClick={() => {
+                                navigate(`/artist/${majorsOrder.artist._id}`)
+                              }}
+                              sx={{
+                                cursor: 'pointer',
+                                '&:hover': {
+                                  color: 'primary.main'
+                                }
+                              }}
+                            >
+                              {majorsOrder.artist.display_name}
+                            </Typography>
+                            {majorsOrder.featuredArtists?.length > 0 &&
+                              majorsOrder.featuredArtists?.map((artist) => (
+                                <Typography
+                                  variant='body2'
+                                  noWrap
+                                  onClick={() => {
+                                    navigate(`/artist/${artist._id}`)
+                                  }}
+                                  sx={{
+                                    cursor: 'pointer',
+                                    '&:hover': {
+                                      color: 'primary.main'
+                                    }
+                                  }}
+                                >
+                                  , {artist.display_name}
+                                </Typography>
+                              ))}
+                          </Stack>
                         </Stack>
                       </Stack>
                     </TableCell>

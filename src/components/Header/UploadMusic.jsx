@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
 import RootModal from '../../components/Modal/RootModal'
-import { Stack, TextField, MenuItem, Button, Typography, Tooltip, Fab } from '@mui/material'
+import { Stack, TextField, MenuItem, Button, Typography, Tooltip, Fab, Autocomplete } from '@mui/material'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
 import useSnackbar from '../../contexts/snackbar.context'
@@ -36,6 +36,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
   const [formMusic, setFormMusic] = useState(new FormData())
   const { genres, getGenres } = useContext(GenreContext)
   const { regions, getRegions } = useContext(RegionContext)
+  const [artists, setArtists] = useState([])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [newSong, setNewSong] = useState({
     title: '',
@@ -43,10 +44,19 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
     duration: '',
     genre_id: '',
     region_id: '',
+    featuredArtists: [],
     file: '',
     photo: '',
     play_count: 0
   })
+
+  const fetchArtist = async () => {
+    const res = await AxiosInterceptors.get(urlConfig.artists.getAllArtists)
+    if (res.status === 200) {
+      setArtists(res.data.artists)
+    }
+  }
+  console.log('newSong', newSong)
   const handleAddNew = async () => {
     if (
       newSong.title === '' ||
@@ -130,6 +140,7 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
     }
   }
   useEffect(() => {
+    fetchArtist()
     getGenres()
     getRegions()
     return () => {
@@ -225,6 +236,21 @@ const UploadMusic = memo(function UploadMusic({ open, setOpen }) {
                 ))}
               </TextField>
             </Stack>
+            <Autocomplete
+              sx={{ m: 1 }}
+              isOptionEqualToValue={(option, value) => option._id === value._id}
+              options={artists}
+              multiple
+              getOptionLabel={(option) => option.display_name}
+              disableCloseOnSelect
+              onChange={(e, value) => {
+                setNewSong({
+                  ...newSong,
+                  featuredArtists: value.map((artist) => artist._id)
+                })
+              }}
+              renderInput={(params) => <TextField {...params} variant='outlined' label={t('featuredArtists')} />}
+            />
             {formMusic.get('audio') && (
               <Typography variant='body2' color='text.secondary' noWrap>
                 {formMusic.get('audio').name}

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import RootModal from '../../../components/Modal/RootModal'
-import { Stack, TextField, MenuItem, FormControlLabel, Checkbox } from '@mui/material'
+import { Stack, TextField, MenuItem, FormControlLabel, Checkbox, Autocomplete } from '@mui/material'
 import AxiosInterceptors from '../../../common/utils/axiosInterceptors'
 import { useTranslation } from 'react-i18next'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
@@ -9,8 +9,15 @@ import dayjs from 'dayjs'
 import urlConfig from '../../../config/UrlConfig'
 
 const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres, regions }) => {
+  const [artists, setArtists] = useState([])
   const { t } = useTranslation()
   const [newSong, setNewSong] = useState(song)
+  const fetchArtist = async () => {
+    const res = await AxiosInterceptors.get(urlConfig.artists.getAllArtists)
+    if (res.status === 200) {
+      setArtists(res.data.artists)
+    }
+  }
   const handleUpdate = async () => {
     if (newSong.title === '' || newSong.release_date === '' || newSong.photo === '' || newSong.genre === '') {
       setSnack({
@@ -37,7 +44,8 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
       genre: newSong.genre,
       region: newSong.region,
       artist: newSong.artist,
-      isPremium: newSong.isPremium
+      isPremium: newSong.isPremium,
+      featuredArtists: newSong.featuredArtists.map((artist) => artist._id)
     })
       .then((res) => {
         fetchData()
@@ -57,6 +65,9 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
         })
       )
   }
+  useEffect(() => {
+    fetchArtist()
+  }, [])
   return (
     <>
       {genres.length > 0 && newSong.artist && newSong.genre && (
@@ -153,13 +164,25 @@ const EditSong = ({ open, handleClose, song, fetchData, snack, setSnack, genres,
                 ))}
               </TextField>
             </Stack>
-            <TextField
-              id='outlined-select-currency'
-              label={t('artist')}
-              required
-              value={newSong?.artist?.display_name}
-              disabled
-            ></TextField>
+            <Autocomplete
+              sx={{ m: 1 }}
+              isOptionEqualToValue={(option, value) => option._id === value._id}
+              options={artists}
+              multiple
+              getOptionLabel={(option) => option.display_name}
+              value={artists.filter((artist) =>
+                newSong.featuredArtists.some((featuredArtist) => featuredArtist._id === artist._id)
+              )}
+              disableCloseOnSelect
+              onChange={(e, value) => {
+                setNewSong({
+                  ...newSong,
+                  featuredArtists: value
+                })
+              }}
+              renderInput={(params) => <TextField {...params} variant='outlined' label={t('featuredArtists')} />}
+            />
+
             <FormControlLabel
               control={
                 <Checkbox

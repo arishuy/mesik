@@ -37,6 +37,7 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
     genre_id: '',
     region_id: '',
     artist_id: '',
+    featuredArtists: [],
     file: '',
     photo: '',
     play_count: 0
@@ -82,6 +83,7 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
         genre_id: newSong.genre_id,
         region_id: newSong.region_id,
         artist_id: newSong.artist_id,
+        featuredArtists: newSong.featuredArtists,
         file: formMusic.get('audio'),
         photo: formData.get('photo'),
         play_count: newSong.play_count
@@ -223,6 +225,21 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
                 })
               }}
               renderInput={(params) => <TextField {...params} variant='outlined' label={t('artist')} />}
+            />
+            <Autocomplete
+              sx={{ m: 1 }}
+              isOptionEqualToValue={(option, value) => option._id === value._id}
+              options={artists}
+              multiple
+              getOptionLabel={(option) => option.display_name}
+              disableCloseOnSelect
+              onChange={(e, value) => {
+                setNewSong({
+                  ...newSong,
+                  featuredArtists: value.map((artist) => artist._id)
+                })
+              }}
+              renderInput={(params) => <TextField {...params} variant='outlined' label={t('featuredArtists')} />}
             />
             {formMusic.get('audio') && (
               <Typography variant='body2' color='text.secondary' noWrap>

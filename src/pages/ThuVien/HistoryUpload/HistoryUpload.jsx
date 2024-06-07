@@ -34,8 +34,10 @@ import DeleteConfirm from './DeleteConfirm'
 import { GenreContext } from '../../../contexts/genre.context'
 import { RegionContext } from '../../../contexts/region.context'
 import useSnackbar from '../../../contexts/snackbar.context'
+import { useNavigate } from 'react-router-dom'
 
 const HistoryUpload = () => {
+  const navigate = useNavigate()
   const theme = useTheme()
   const { profile } = useContext(AppContext)
   const { t } = useTranslation()
@@ -167,9 +169,40 @@ const HistoryUpload = () => {
                         <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                           {song.title}
                         </Typography>
-                        <Typography variant='subtitle1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                          {song.artist.display_name}
-                        </Typography>
+                        <Stack direction='row'>
+                          <Typography
+                            variant='subtitle1'
+                            fontWeight='bold'
+                            color='text.primary'
+                            gutterBottom
+                            noWrap
+                            onClick={() => navigate(`/artist/${song.artist._id}`)}
+                            sx={{
+                              cursor: 'pointer',
+                              '&:hover': {
+                                color: 'primary.main'
+                              }
+                            }}
+                          >
+                            {song.artist.display_name}
+                          </Typography>
+                          {song.featuredArtists?.length > 0 &&
+                            song.featuredArtists?.map((artist) => (
+                              <Typography
+                                variant='body2'
+                                noWrap
+                                onClick={() => navigate(`/artist/${artist._id}`)}
+                                sx={{
+                                  cursor: 'pointer',
+                                  '&:hover': {
+                                    color: 'primary.main'
+                                  }
+                                }}
+                              >
+                                , {artist.display_name}
+                              </Typography>
+                            ))}
+                        </Stack>
                       </Stack>
                     </Stack>
                   </TableCell>

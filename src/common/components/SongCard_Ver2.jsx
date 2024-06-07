@@ -156,23 +156,43 @@ const SongCardVer2 = ({ song, allPlaylists }) => {
             <img src={song.photo_url} alt='album' width={100} />
             <Stack direction='column' justifyContent='center' alignItems='start'>
               <Typography variant='h6'>{song.title}</Typography>
-              <Typography
-                variant='body2'
-                onClick={(e) => {
-                  e.stopPropagation()
-                  navigate(`/artist/${song.artist._id}`)
-                }}
-                noWrap
-                sx={{
-                  cursor: 'pointer',
-                  '&:hover': {
-                    color: 'blue',
-                    textDecoration: 'underline'
-                  }
-                }}
-              >
-                {song.artist.display_name}
-              </Typography>
+              <Stack direction='row'>
+                <Typography
+                  variant='body2'
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    navigate(`/artist/${song.artist._id}`)
+                  }}
+                  noWrap
+                  sx={{
+                    cursor: 'pointer',
+                    '&:hover': {
+                      color: 'primary.main'
+                    }
+                  }}
+                >
+                  {song.artist.display_name}
+                </Typography>
+                {song.featuredArtists.length > 0 &&
+                  song.featuredArtists.map((artist) => (
+                    <Typography
+                      variant='body2'
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        navigate(`/artist/${artist._id}`)
+                      }}
+                      noWrap
+                      sx={{
+                        cursor: 'pointer',
+                        '&:hover': {
+                          color: 'primary.main'
+                        }
+                      }}
+                    >
+                      , {artist.display_name}
+                    </Typography>
+                  ))}
+              </Stack>
               <Stack direction='row' spacing={1} alignItems='center'>
                 <Typography variant='subtitle2'>
                   {song.play_count} {t('listens')}

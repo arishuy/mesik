@@ -264,7 +264,7 @@ const DailyRank = ({ allPlaylists }) => {
                       <Stack direction='column' spacing={0}>
                         <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                           {majorsOrder.song.title}
-                          {majorsOrder.song.isPremium && hoveredRow === majorsOrder.song._id && (
+                          {majorsOrder.song.isPremium && (
                             <Chip
                               label='Premium'
                               size='small'
@@ -277,25 +277,42 @@ const DailyRank = ({ allPlaylists }) => {
                             />
                           )}
                         </Typography>
-                        <Typography
-                          variant='subtitle1'
-                          fontWeight='bold'
-                          color='text.primary'
-                          noWrap
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            navigate(`/artist/${majorsOrder.song.artist._id}`)
-                          }}
-                          sx={{
-                            cursor: 'pointer',
-                            '&:hover': {
-                              color: 'blue',
-                              textDecoration: 'underline'
-                            }
-                          }}
-                        >
-                          {majorsOrder.song.artist?.display_name}
-                        </Typography>
+                        <Stack direction='row'>
+                          <Typography
+                            variant='subtitle1'
+                            fontWeight='bold'
+                            color='text.primary'
+                            noWrap
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              navigate(`/artist/${majorsOrder.song.artist._id}`)
+                            }}
+                            sx={{
+                              cursor: 'pointer',
+                              '&:hover': {
+                                color: 'primary.main'
+                              }
+                            }}
+                          >
+                            {majorsOrder.song.artist?.display_name}
+                          </Typography>
+                          {majorsOrder.song.featuredArtists?.length > 0 &&
+                            majorsOrder.song.featuredArtists?.map((artist) => (
+                              <Typography
+                                variant='body2'
+                                noWrap
+                                onClick={() => navigate(`/artist/${artist._id}`)}
+                                sx={{
+                                  cursor: 'pointer',
+                                  '&:hover': {
+                                    color: 'primary.main'
+                                  }
+                                }}
+                              >
+                                , {artist.display_name}
+                              </Typography>
+                            ))}
+                        </Stack>
                       </Stack>
                     </Stack>
                   </TableCell>

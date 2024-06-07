@@ -459,5 +459,6 @@
 
   "name": "Tên",
   "create": "Tạo",
-  "transactions": "Giao dịch"
+  "transactions": "Giao dịch",
+  "featuredArtists": "Nghệ sĩ kết hợp"
 }

@@ -22,8 +22,10 @@ import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded'
 import convertToMinutes from '../../common/utils/convertToMinutes'
 import { SnackbarContext } from '../../contexts/snackbar.context'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 
 const LikedSongs = () => {
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const [likedSongs, setLikedSongs] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -132,9 +134,40 @@ const LikedSongs = () => {
                           <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                             {song.title}
                           </Typography>
-                          <Typography variant='subtitle1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                            {song.artist.display_name}
-                          </Typography>
+                          <Stack direction='row'>
+                            <Typography
+                              variant='subtitle1'
+                              fontWeight='bold'
+                              color='text.primary'
+                              gutterBottom
+                              noWrap
+                              onClick={() => navigate(`/artist/${song.artist._id}`)}
+                              sx={{
+                                cursor: 'pointer',
+                                '&:hover': {
+                                  color: 'primary.main'
+                                }
+                              }}
+                            >
+                              {song.artist.display_name}
+                            </Typography>
+                            {song.featuredArtists?.length > 0 &&
+                              song.featuredArtists?.map((artist) => (
+                                <Typography
+                                  variant='body2'
+                                  noWrap
+                                  onClick={() => navigate(`/artist/${artist._id}`)}
+                                  sx={{
+                                    cursor: 'pointer',
+                                    '&:hover': {
+                                      color: 'primary.main'
+                                    }
+                                  }}
+                                >
+                                  , {artist.display_name}
+                                </Typography>
+                              ))}
+                          </Stack>
                         </Stack>
                       </Stack>
                     </TableCell>

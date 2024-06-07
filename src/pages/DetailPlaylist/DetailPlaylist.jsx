@@ -190,15 +190,23 @@ const DetailPlaylist = () => {
                               <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                                 {majorsOrder.title}
                               </Typography>
-                              <Typography
-                                variant='subtitle1'
-                                fontWeight='bold'
-                                color='text.primary'
-                                gutterBottom
-                                noWrap
-                              >
-                                {majorsOrder.artist.display_name}
-                              </Typography>
+                              <Stack direction='row'>
+                                <Typography
+                                  variant='subtitle1'
+                                  fontWeight='bold'
+                                  color='text.primary'
+                                  gutterBottom
+                                  noWrap
+                                >
+                                  {majorsOrder.artist.display_name}
+                                </Typography>
+                                {majorsOrder.featuredArtists?.length > 0 &&
+                                  majorsOrder.featuredArtists?.map((artist) => (
+                                    <Typography variant='body2' noWrap>
+                                      , {artist.display_name}
+                                    </Typography>
+                                  ))}
+                              </Stack>
                             </Stack>
                           </Stack>
                         </TableCell>
@@ -281,15 +289,33 @@ const DetailPlaylist = () => {
                                 <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                                   {majorsOrder.title}
                                 </Typography>
-                                <Typography
-                                  variant='subtitle1'
-                                  fontWeight='bold'
-                                  color='text.primary'
-                                  gutterBottom
-                                  noWrap
-                                >
-                                  {majorsOrder.artist.display_name}
-                                </Typography>
+                                <Stack direction='row'>
+                                  <Typography
+                                    variant='subtitle1'
+                                    fontWeight='bold'
+                                    color='text.primary'
+                                    gutterBottom
+                                    noWrap
+                                  >
+                                    {majorsOrder.artist.display_name}
+                                  </Typography>
+                                  {majorsOrder.featuredArtists?.length > 0 &&
+                                    majorsOrder.featuredArtists?.map((artist) => (
+                                      <Typography
+                                        variant='body2'
+                                        noWrap
+                                        sx={{
+                                          cursor: 'pointer',
+                                          '&:hover': {
+                                            color: 'blue',
+                                            textDecoration: 'underline'
+                                          }
+                                        }}
+                                      >
+                                        , {artist.display_name}
+                                      </Typography>
+                                    ))}
+                                </Stack>
                               </Stack>
                             </Stack>
                           </TableCell>

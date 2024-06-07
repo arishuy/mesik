@@ -21,7 +21,6 @@ const SearchBar = () => {
   const [debouncedSearchText] = useDebounce(searchText, 500)
   const navigate = useNavigate()
   const isSearch = searchText !== ''
-  console.log('searchText', searchText)
 
   const handleSearch = (e) => {
     const value = e.target.value

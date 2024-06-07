@@ -460,5 +460,6 @@
 
   "name": "Name",
   "create": "Create",
-  "transactions": "Transactions"
+  "transactions": "Transactions",
+  "featuredArtists": "Featured Artists"
 }

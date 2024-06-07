@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Axios from 'axios'
 import urlConfig from '../../config/UrlConfig'
 import Loading from '../../common/components/Loading/Loading'
@@ -34,6 +34,7 @@ import { useTranslation } from 'react-i18next'
 import { Helmet } from 'react-helmet-async'
 
 const ArtistSongs = () => {
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -244,9 +245,40 @@ const ArtistSongs = () => {
                         <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                           {song.title}
                         </Typography>
-                        <Typography variant='subtitle1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                          {song.artist.display_name}
-                        </Typography>
+                        <Stack direction='row'>
+                          <Typography
+                            variant='subtitle1'
+                            fontWeight='bold'
+                            color='text.primary'
+                            gutterBottom
+                            noWrap
+                            onClick={() => navigate(`/artist/${song.artist._id}`)}
+                            sx={{
+                              cursor: 'pointer',
+                              '&:hover': {
+                                color: 'primary.main'
+                              }
+                            }}
+                          >
+                            {song.artist.display_name}
+                          </Typography>
+                          {song.featuredArtists?.length > 0 &&
+                            song.featuredArtists?.map((artist) => (
+                              <Typography
+                                variant='body2'
+                                noWrap
+                                onClick={() => navigate(`/artist/${artist._id}`)}
+                                sx={{
+                                  cursor: 'pointer',
+                                  '&:hover': {
+                                    color: 'primary.main'
+                                  }
+                                }}
+                              >
+                                , {artist.display_name}
+                              </Typography>
+                            ))}
+                        </Stack>
                       </Stack>
                     </Stack>
                   </TableCell>
