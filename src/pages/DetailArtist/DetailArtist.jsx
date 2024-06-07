@@ -200,13 +200,7 @@ const DetailArtist = () => {
             <Grid item xs={12} md={6} lg={3} key={album.id}>
               <div className='song-card'>
                 <img className='song-card_image' src={album.photo_url} alt='David Bowie - Aladdin Sane' />
-                <div className='song-card_info'>
-                  <div className='song-card_info_artist'>
-                    {album.songs.length} {t('songs')}
-                  </div>
-                  <div className='song-card_info_album'> {moment(album.createdAt).format('DD/MM/YYYY')}</div>
-                  <div className='song-card_info_title'>{album.title}</div>
-                </div>
+                <div className='song-card_info'></div>
                 <div className='song-card_play'>
                   <Stack direction='row' spacing={1} pt={2}>
                     <IconButton onClick={() => handlePlayAlbum(album)} color='success'>
@@ -218,6 +212,17 @@ const DetailArtist = () => {
                   </Stack>
                 </div>
               </div>
+              <Typography variant='h6' sx={{ textAlign: 'left', py: 1, ml: 1 }} noWrap>
+                {album.title} ({moment(album.createdAt).format('YYYY')})
+                <div
+                  className='song-card_info_album'
+                  style={{
+                    color: 'gray'
+                  }}
+                >
+                  {album.songs.length} {t('songs')}
+                </div>
+              </Typography>
             </Grid>
           ))}
         </Grid>
