@@ -15,7 +15,7 @@ const ApproveConfirm = ({ open, setOpen, id, fetchData }) => {
           setSnack({
             ...snack,
             open: true,
-            message: t('deleteReportSuccess'),
+            message: t('updateSuccess'),
             type: 'success'
           })
           setOpen(false)
@@ -26,7 +26,7 @@ const ApproveConfirm = ({ open, setOpen, id, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('deleteFail'),
+          message: t('updateFail'),
           type: 'error'
         })
       )

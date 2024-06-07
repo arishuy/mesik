@@ -42,7 +42,7 @@ const GenreManagement = () => {
       }
     >
       <Helmet>
-        <title>{t('GenreManagement')}</title>
+        <title>{t('genreManagement')}</title>
       </Helmet>
       {isLoading ? (
         <Loading />

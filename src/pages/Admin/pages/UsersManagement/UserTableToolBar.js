@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { Stack, InputAdornment, TextField, MenuItem } from '@mui/material'
 import { SearchOutlined } from '@mui/icons-material'
+import { useTranslation } from 'react-i18next'
 // components
 
 // ----------------------------------------------------------------------
@@ -14,12 +15,13 @@ UserTableToolbar.propTypes = {
 }
 
 export default function UserTableToolbar({ filterName, filterRole, onFilterName, onFilterRole, optionsRole }) {
+  const { t } = useTranslation()
   return (
     <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} sx={{ py: 2.5, px: 3 }}>
       <TextField
         fullWidth
         select
-        label='Role'
+        label={t('role')}
         value={filterRole}
         onChange={onFilterRole}
         SelectProps={{
@@ -53,7 +55,7 @@ export default function UserTableToolbar({ filterName, filterRole, onFilterName,
         fullWidth
         value={filterName}
         onChange={(event) => onFilterName(event.target.value)}
-        placeholder='Search user...'
+        placeholder={t('search')}
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>

@@ -25,7 +25,7 @@ const EditGenre = ({ open, handleClose, id, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('updateGenreSuccess'),
+          message: t('updateSuccess'),
           type: 'success'
         })
       })
@@ -33,7 +33,7 @@ const EditGenre = ({ open, handleClose, id, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('updateGenreFail'),
+          message: t('updateFail'),
           type: 'error'
         })
       )
@@ -73,7 +73,7 @@ const EditGenre = ({ open, handleClose, id, fetchData }) => {
           <Stack spacing={2} direction='row' sx={{ width: '100%', my: 2 }}>
             <TextField
               id='outlined-basic'
-              label='Name'
+              label={t('name')}
               variant='outlined'
               fullWidth
               value={genre.name}
@@ -86,7 +86,7 @@ const EditGenre = ({ open, handleClose, id, fetchData }) => {
             />
             <TextField
               id='outlined-basic'
-              label='Description'
+              label={t('description')}
               variant='outlined'
               fullWidth
               value={genre.description}

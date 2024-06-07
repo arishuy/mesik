@@ -25,7 +25,7 @@ const EditSection = ({ open, handleClose, section_data, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('updateSectionSuccess'),
+          message: t('updateSuccess'),
           type: 'success'
         })
       })
@@ -33,7 +33,7 @@ const EditSection = ({ open, handleClose, section_data, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('updateSectionFail'),
+          message: t('updateFail'),
           type: 'error'
         })
       )
@@ -44,7 +44,7 @@ const EditSection = ({ open, handleClose, section_data, fetchData }) => {
       {section && section.name && (
         <RootModal
           variant='Create'
-          title='Edit Section'
+          title={t('edit') + ' Section'}  
           open={open}
           handleClose={handleClose}
           handleOk={() => {
@@ -56,7 +56,7 @@ const EditSection = ({ open, handleClose, section_data, fetchData }) => {
           <Stack spacing={2} direction='row' sx={{ width: '100%', my: 2 }}>
             <TextField
               id='outlined-basic'
-              label='Name'
+              label={t('name')}
               variant='outlined'
               fullWidth
               value={section.name}

@@ -169,7 +169,7 @@
   "cancel": "Cancel",
 
   "USER": "USER",
-  "EXPERT": "EXPERT",
+  "ARTIST": "ARTIST",
   "ADMIN": "ADMIN",
   "YES": "YES",
   "NO": "NO",
@@ -193,6 +193,15 @@
 
   "addNewMajorSuccess": "Add new major successfully!",
   "addNewMajorFail": "Add new major failed!",
+
+  "addNewGenreSuccess": "Add new genre successfully!",
+  "addNewGenreFail": "Add new genre failed!",
+
+  "addRegionSuccess": "Add new region successfully!",
+  "addRegionFail": "Add new region failed!",
+
+  "addNewPackageSuccess": "Add new package successfully!",
+  "addNewPackageFail": "Add new package failed!",
 
   "addNewSectionSuccess": "Add new section successfully!",
   "addNewSectionFail": "Add new section failed!",
@@ -269,6 +278,9 @@
   "songManagement": "Song Management",
   "requestManagement": "Request Management",
   "playlistManagement": "Playlist Management",
+  "genreManagement": "Genre Management",
+  "regionManagement": "Region Management",
+  "premiumPackageManagement": "Premium Package Management",
 
   "pleaseFillOutAllFields": "Please fill out all fields!",
   "new": "New",
@@ -359,6 +371,7 @@
   "displayName": "Display Name",
   "sectionManagement": "Section Management",
   "addSection": "Add Section",
+  "Banner Hiển Thị Ở Đầu Trang Chủ": "Banner Displayed At The Top Of The Homepage",
 
   "listens": "listens",
   "addToPlaylist": "Add to Playlist",
@@ -393,6 +406,8 @@
   "myAlbum": "My Album",
   "addNewAlbum": "Add New Album",
   "newAlbum": "New Album",
+
+  "addNew": "Add New",
 
   "ranking": "Ranking",
   "daily": "Daily",
@@ -440,5 +455,10 @@
   "Play Now": "Play Now",
   "Hãy nghe nhạc và tận hưởng âm nhạc cùng chúng tôi!": "Let's listen to music and enjoy music with us!",
   "Nghe nhạc không quảng cáo cùng Mesik Premium": "Listen to music without ads with Mesik Premium",
-  "Nâng Cấp Premium": "Upgrade Premium"
+  "Nâng Cấp Premium": "Upgrade Premium",
+  "Duration Months": "Duration (Months)",
+
+  "name": "Name",
+  "create": "Create",
+  "transactions": "Transactions"
 }

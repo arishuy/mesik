@@ -30,7 +30,7 @@ const EditPremiumPackage = ({ open, handleClose, id, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('updatePremiumPackageSuccess'),
+          message: t('updateSuccess'),
           type: 'success'
         })
       })
@@ -38,7 +38,7 @@ const EditPremiumPackage = ({ open, handleClose, id, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('updatePremiumPackageFail'),
+          message: t('updateFail'),
           type: 'error'
         })
       )
@@ -78,7 +78,7 @@ const EditPremiumPackage = ({ open, handleClose, id, fetchData }) => {
           <Stack spacing={2} direction='row' sx={{ width: '100%', my: 2 }}>
             <TextField
               id='outlined-basic'
-              label='Name'
+              label={t('name')}
               variant='outlined'
               fullWidth
               value={premiumPackage.name}
@@ -91,7 +91,7 @@ const EditPremiumPackage = ({ open, handleClose, id, fetchData }) => {
             />
             <TextField
               id='outlined-basic'
-              label='Description'
+              label={t('description')}
               variant='outlined'
               fullWidth
               value={premiumPackage.description}
@@ -106,7 +106,7 @@ const EditPremiumPackage = ({ open, handleClose, id, fetchData }) => {
           <Stack spacing={2} direction='row' sx={{ width: '100%', my: 2 }}>
             <TextField
               id='outlined-basic'
-              label='Price'
+              label={t('price')}
               variant='outlined'
               fullWidth
               type='number'
@@ -120,7 +120,7 @@ const EditPremiumPackage = ({ open, handleClose, id, fetchData }) => {
             />
             <TextField
               id='outlined-basic'
-              label='Duration Months'
+              label={t('Duration Months')}
               variant='outlined'
               fullWidth
               type='number'

@@ -25,7 +25,7 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
       setSnack({
         ...snack,
         open: true,
-        message: 'Ngày phát hành không được lớn hơn ngày hiện tại',
+        message: t('releaseDateError'),
         type: 'error'
       })
       return
@@ -44,7 +44,7 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorSuccess'),
+          message: t('updateSuccess'),
           type: 'success'
         })
       })
@@ -52,7 +52,7 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorFail'),
+          message: t('updateFail'),
           type: 'error'
         })
       )
@@ -74,7 +74,7 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
       {genres.length > 0 && newSong.artist && newSong.genre && (
         <RootModal
           variant='Create'
-          title='Edit song'
+          title={t('edit') + ' ' + newSong.title}
           open={open}
           handleClose={handleClose}
           handleOk={() => {
@@ -86,7 +86,7 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
           <Stack spacing={2} direction='column' sx={{ width: '100%', my: 2 }}>
             <TextField
               id='outlined-basic'
-              label='Title'
+              label={t('title')}
               variant='outlined'
               fullWidth
               value={newSong.title}
@@ -100,7 +100,7 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
             <Stack direction='row' spacing={3}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  label='Release Date'
+                  label={t('releaseDate')}
                   value={dayjs(newSong.release_date)}
                   onChange={(newValue) =>
                     setNewSong({
@@ -112,7 +112,7 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
               </LocalizationProvider>
               <TextField
                 id='outlined-basic'
-                label='Duration'
+                label={t('duration')}
                 variant='outlined'
                 fullWidth
                 value={newSong.duration}
@@ -133,7 +133,7 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
               <TextField
                 id='outlined-select-currency'
                 select
-                label='Genre'
+                label={t('genre')}
                 required
                 value={newSong.genre}
                 sx={{
@@ -150,7 +150,7 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
               <TextField
                 id='outlined-select-currency'
                 select
-                label='Region'
+                label={t('region')}
                 required
                 value={newSong.region}
                 sx={{
@@ -167,7 +167,7 @@ const EditSong = ({ open, handleClose, id, fetchData, snack, setSnack, genres, r
             </Stack>
             <TextField
               id='outlined-select-currency'
-              label='Artist'
+              label={t('artist')}
               required
               value={newSong?.artist?.display_name}
               disabled

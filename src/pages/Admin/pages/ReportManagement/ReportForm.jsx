@@ -55,8 +55,8 @@ const ReportForm = ({ open, setOpen, id }) => {
                     </Typography>
                     {report.user.isConfirmed && <VerifiedTwoToneIcon sx={{ color: 'midnightblue' }} />}
                   </Stack>
-                  {report.user.role === 'EXPERT' ? (
-                    <Chip label={t('EXPERT')} color='success' size='small' variant='outlined' />
+                  {report.user.role === 'ARTIST' ? (
+                    <Chip label={t('ARTIST')} color='success' size='small' variant='outlined' />
                   ) : (
                     <Chip label={t('USER')} color='error' size='small' variant='outlined' />
                   )}

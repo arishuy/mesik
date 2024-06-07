@@ -28,7 +28,7 @@ const AddNewGenre = ({ open, handleClose, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorSuccess'),
+          message: t('addNewGenreSuccess'),
           type: 'success'
         })
       })
@@ -36,7 +36,7 @@ const AddNewGenre = ({ open, handleClose, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorFail'),
+          message: t('addNewGenreFail'),
           type: 'error'
         })
       )
@@ -45,7 +45,7 @@ const AddNewGenre = ({ open, handleClose, fetchData }) => {
     <>
       <RootModal
         variant='Create'
-        title={t('newGenre')}
+        title={t('addNew')}
         open={open}
         handleClose={handleClose}
         handleOk={() => {
@@ -57,7 +57,7 @@ const AddNewGenre = ({ open, handleClose, fetchData }) => {
         <Stack spacing={2} direction='row' sx={{ width: '100%', my: 2 }}>
           <TextField
             id='outlined-basic'
-            label='Name'
+            label={t('name')}
             variant='outlined'
             fullWidth
             onChange={(e) =>
@@ -69,7 +69,7 @@ const AddNewGenre = ({ open, handleClose, fetchData }) => {
           />
           <TextField
             id='outlined-basic'
-            label='Description'
+            label={t('description')}
             variant='outlined'
             fullWidth
             onChange={(e) =>

@@ -45,7 +45,7 @@ const AddNewRegion = ({ open, handleClose, fetchData }) => {
     <>
       <RootModal
         variant='Create'
-        title={t('newRegion')}
+        title={t('addNew')}
         open={open}
         handleClose={handleClose}
         handleOk={() => {
@@ -57,7 +57,7 @@ const AddNewRegion = ({ open, handleClose, fetchData }) => {
         <Stack spacing={2} direction='row' sx={{ width: '100%', my: 2 }}>
           <TextField
             id='outlined-basic'
-            label='Name'
+            label={t('name')}
             variant='outlined'
             fullWidth
             onChange={(e) =>
@@ -69,7 +69,7 @@ const AddNewRegion = ({ open, handleClose, fetchData }) => {
           />
           <TextField
             id='outlined-basic'
-            label='Description'
+            label={t('description')}
             variant='outlined'
             fullWidth
             onChange={(e) =>

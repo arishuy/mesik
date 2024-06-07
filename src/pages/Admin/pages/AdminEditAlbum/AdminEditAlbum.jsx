@@ -24,8 +24,10 @@ import UploadAvatar from './UploadAvatar'
 import useSnackbar from '../../../../contexts/snackbar.context'
 import useResponsive from '../../../../hooks/useResponsive'
 import { Helmet } from 'react-helmet-async'
+import { useTranslation } from 'react-i18next'
 
 const AdminEditAlbum = () => {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const id = useParams()
   const navigate = useNavigate()
@@ -81,7 +83,7 @@ const AdminEditAlbum = () => {
         setSnack({
           ...snack,
           open: true,
-          message: 'Cập nhật thành công',
+          message: t('updateSuccess'),
           type: 'success'
         })
         navigate(`/admin/section-management`)
@@ -90,7 +92,7 @@ const AdminEditAlbum = () => {
         setSnack({
           ...snack,
           open: true,
-          message: 'Cập nhật thất bại',
+          message: t('updateFail'),
           type: 'error'
         })
       })
@@ -126,17 +128,17 @@ const AdminEditAlbum = () => {
             setInformation={setAblum}
           />
           <TextField
-            label='Tên Album'
+            label={t('title')}
             value={album.title}
             fullWidth
             onChange={(e) => setAblum({ ...album, title: e.target.value })}
           />
           <Stack direction='row' spacing={2} mt={2}>
             <Button variant='outlined' color='error' onClick={() => navigate(`/admin/section-management`)}>
-              Hủy
+              {t('cancel')}
             </Button>
             <Button variant='outlined' color='primary' onClick={handleUpdate}>
-              Lưu
+              {t('update')}
             </Button>
           </Stack>
         </Grid>
@@ -156,15 +158,19 @@ const AdminEditAlbum = () => {
               })
             }}
             renderInput={(params) => (
-              <TextField {...params} variant='outlined' label='Songs' placeholder='Select song' />
+              <TextField {...params} variant='outlined' label={t('song')} placeholder='Select song' />
             )}
           />
           <TableContainer>
             <Table size='small'>
               <TableHead>
                 <TableRow>
-                  <TableCell>Bài Hát</TableCell>
-                  <TableCell align='right'>Thời Lượng</TableCell>
+                  <TableCell>
+                    {t('song')}
+                  </TableCell>
+                  <TableCell align='right'>
+                    {t('duration')}
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

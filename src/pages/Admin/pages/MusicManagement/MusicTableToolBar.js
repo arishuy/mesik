@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { Stack, InputAdornment, TextField, MenuItem } from '@mui/material'
 import { SearchOutlined } from '@mui/icons-material'
+import { useTranslation } from 'react-i18next'
 // components
 
 // ----------------------------------------------------------------------
@@ -14,12 +15,13 @@ MusicTableToolbar.propTypes = {
 }
 
 export default function MusicTableToolbar({ filterName, filterGenre, onFilterName, onFilterGenre, optionsGenre }) {
+  const { t } = useTranslation()
   return (
     <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} sx={{ py: 2.5, px: 3 }}>
       <TextField
         fullWidth
         select
-        label='Genre'
+        label={t('genre')}
         value={filterGenre}
         onChange={onFilterGenre}
         SelectProps={{
@@ -60,7 +62,7 @@ export default function MusicTableToolbar({ filterName, filterGenre, onFilterNam
             onFilterName(e.target.value, true)
           }
         }}
-        placeholder='Search name...'
+        placeholder={t('search')}
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>

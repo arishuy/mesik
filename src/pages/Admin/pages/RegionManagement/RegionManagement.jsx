@@ -42,7 +42,7 @@ const RegionManagement = () => {
       }
     >
       <Helmet>
-        <title>{t('RegionManagement')}</title>
+        <title>{t('regionManagement')}</title>
       </Helmet>
       {isLoading ? (
         <Loading />

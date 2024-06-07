@@ -15,7 +15,7 @@ const DeleteConfirm = ({ open, setOpen, id, fetchData }) => {
           setSnack({
             ...snack,
             open: true,
-            message: t('deleteRegionSuccess'),
+            message: t('deleteSuccess'),
             type: 'success'
           })
           setOpen(false)

@@ -18,7 +18,7 @@ const RejectConfirm = ({ open, setOpen, id, fetchData }) => {
           setSnack({
             ...snack,
             open: true,
-            message: t('deleteReportSuccess'),
+            message: t('deleteSuccess'),
             type: 'success'
           })
           setOpen(false)

@@ -33,7 +33,7 @@ const SectionItem = ({ section, fetchData }) => {
           py={2}
           color={section.type === 'banner' ? theme.palette.error.main : theme.palette.primary.main}
         >
-          {section.type === 'banner' ? 'Banner Hiển Thị Ở Đầu Trang Chủ' : section.name}
+          {section.type === 'banner' ? t('Banner Hiển Thị Ở Đầu Trang Chủ') : section.name}
         </Typography>
         <Stack direction='row' spacing={1}>
           <Tooltip title={t('edit')} arrow>

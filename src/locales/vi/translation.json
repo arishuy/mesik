@@ -159,8 +159,8 @@
   "expertProfile": "Thông tin chuyên gia",
   "chooseMajor": "Chọn chuyên ngành",
   "showDetail": "Xem chi tiết",
-  "role": "Quyền hạn",
-  "verify": "Xác nhận",
+  "role": "Vai trò",
+  "verify": "Xác thực",
   "userManagement": "Quản lý người dùng",
   "unlock": "Mở khóa",
   "lock": "Khóa",
@@ -169,7 +169,7 @@
   "cancel": "Hủy",
 
   "USER": "Người dùng",
-  "EXPERT": "Chuyên gia",
+  "ARTIST": "Nghệ sĩ",
   "ADMIN": "Quản trị viên",
   "YES": "Đã xác nhận",
   "NO": "Chưa xác nhận",
@@ -193,6 +193,15 @@
 
   "addNewMajorSuccess": "Thêm mới chuyên ngành thành công!",
   "addNewMajorFail": "Thêm mới chuyên ngành không thành công!",
+
+  "addNewGenreSuccess": "Thêm mới thể loại thành công!",
+  "addNewGenreFail": "Thêm mới thể loại không thành công!",
+
+  "addRegionSuccess": "Thêm mới khu vực thành công!",
+  "addRegionFail": "Thêm mới khu vực không thành công!",
+
+  "addNewPackageSuccess": "Thêm mới gói Premium thành công!",
+  "addNewPackageFail": "Thêm mới gói Premium không thành công!",
 
   "addNewAlbumSuccess": "Thêm mới album thành công!",
   "addNewAlbumFail": "Thêm mới album không thành công!",
@@ -269,6 +278,9 @@
   "songManagement": "Quản lý bài hát",
   "requestManagement": "Quản lý yêu cầu ",
   "playlistManagement": "Quản lý playlist",
+  "genreManagement": "Quản lý thể loại",
+  "regionManagement": "Quản lý khu vực",
+  "premiumPackageManagement": "Quản lý gói Premium",
 
   "pleaseFillOutAllFields": "Vui lòng điền đầy đủ thông tin!",
   "new": "Mới",
@@ -358,6 +370,7 @@
   "displayName": "Tên hiển thị",
   "sectionManagement": "Quản lý Section",
   "addSection": "Thêm Section",
+  "Banner Hiển Thị Ở Đầu Trang Chủ": "Banner Hiển Thị Ở Đầu Trang Chủ",
 
   "listens": "lượt nghe",
   "addToPlaylist": "Thêm vào playlist",
@@ -393,6 +406,8 @@
   "myAlbum": "Album của tôi",
   "addNewAlbum": "Thêm mới album",
   "newAlbum": "Album mới",
+
+  "addNew": "Thêm mới",
 
   "ranking": "Bảng Xếp Hạng",
   "daily": "Hàng Ngày",
@@ -439,5 +454,10 @@
   "Play Now": "Phát ngay",
   "Hãy nghe nhạc và tận hưởng âm nhạc cùng chúng tôi!": "Hãy nghe nhạc và tận hưởng âm nhạc cùng chúng tôi!",
   "Nghe nhạc không quảng cáo cùng Mesik Premium": "Nghe nhạc không quảng cáo cùng Mesik Premium",
-  "Nâng Cấp Premium": "Nâng Cấp Premium"
+  "Nâng Cấp Premium": "Nâng Cấp Premium",
+  "Duration Months": "Thời hạn (tháng)",
+
+  "name": "Tên",
+  "create": "Tạo",
+  "transactions": "Giao dịch"
 }

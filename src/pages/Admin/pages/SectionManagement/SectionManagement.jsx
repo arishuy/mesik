@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import path from '../../../../constants/path'
 import SectionItem from './SectionItem'
 import AddIcon from '@mui/icons-material/Add'
+import { Helmet } from 'react-helmet-async'
 
 const SectionManagement = () => {
   const navigate = useNavigate()
@@ -40,6 +41,9 @@ const SectionManagement = () => {
       }
     >
       <Stack direction='row' spacing={2} justifyContent='space-between' py={3}>
+        <Helmet>
+          <title>{t('sectionManagement')}</title>
+        </Helmet>
         <Typography variant='h3' sx={{ margin: '1rem 0' }}>
           {t('sectionManagement')}
         </Typography>

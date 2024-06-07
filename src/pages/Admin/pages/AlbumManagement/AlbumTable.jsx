@@ -46,10 +46,10 @@ const AlbumTable = ({ majorsOrder, fetchData }) => {
             <TableHead>
               <TableRow>
                 <TableCell>#</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Số bài hát</TableCell>
-                <TableCell align='right'>Time</TableCell>
-                <TableCell align='right'>Action</TableCell>
+                <TableCell>{t('album')}</TableCell>
+                <TableCell>{t('song')}</TableCell>
+                <TableCell align='right'>{t('time')}</TableCell>
+                <TableCell align='right'>{t('action')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

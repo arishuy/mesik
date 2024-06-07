@@ -22,10 +22,10 @@ const AddLyric = ({ open, handleClose, id, fetchData, snack, setSnack }) => {
     await AxiosInterceptors.post(`${urlConfig.music.addLyricToSong}/${id}`, { lyric: lyric })
       .then((res) => {
         fetchData()
-        setSnack({ open: true, message: 'Add lyric successfully', status: 'success' })
+        setSnack({ open: true, message: t('updateSuccess'), status: 'success' })
       })
       .catch((err) => {
-        setSnack({ open: true, message: 'Add lyric failed', status: 'error' })
+        setSnack({ open: true, message: t('updateFail'), status: 'error' })
       })
   }
   useEffect(() => {
@@ -37,7 +37,7 @@ const AddLyric = ({ open, handleClose, id, fetchData, snack, setSnack }) => {
     <>
       <RootModal
         variant='Edit'
-        title='Edit Lyric'
+        title={t('Edit lyric')}
         open={open}
         handleClose={handleClose}
         handleOk={() => {
@@ -49,7 +49,7 @@ const AddLyric = ({ open, handleClose, id, fetchData, snack, setSnack }) => {
         <Stack spacing={2} direction='column' sx={{ width: '100%', my: 2 }}>
           <TextField
             fullWidth
-            label='Lyric'
+            label={t('lyric')}
             multiline
             rows={6}
             onChange={(e) => setLyric(e.target.value)}

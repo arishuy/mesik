@@ -6,8 +6,10 @@ import AxiosInterceptors from '../../../../common/utils/axiosInterceptors'
 import urlConfig from '../../../../config/UrlConfig'
 import { useNavigate } from 'react-router-dom'
 import path from '../../../../constants/path'
+import { useTranslation } from 'react-i18next'
 
 const CreateSection = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const isMobile = useResponsive('down', 'sm')
   const [open, setOpen] = React.useState(false)
@@ -41,10 +43,10 @@ const CreateSection = () => {
     >
       {open && <AddNewPlaylist open={open} handleClose={() => setOpen(false)} section={data} setSection={setData} />}
       <Typography variant='h3' sx={{ margin: '1rem 0' }}>
-        Create Section
+        {t('addNew')} Section
       </Typography>
       <TextField
-        label='Section Name'
+        label={t('name')}
         fullWidth
         sx={{ marginBottom: '1rem' }}
         value={data.name}
@@ -54,7 +56,7 @@ const CreateSection = () => {
       />
       <Stack direction='row' spacing={2} my={2} justifyContent='space-between'>
         <Typography variant='h4' sx={{ margin: '1rem 0' }}>
-          Playlist Items
+          Playlist
         </Typography>
         <Button
           variant='contained'
@@ -67,7 +69,7 @@ const CreateSection = () => {
             setOpen(true)
           }}
         >
-          Add Item
+          {t('addNew')} Playlist
         </Button>
       </Stack>
       <Grid container spacing={2}>
@@ -89,7 +91,7 @@ const CreateSection = () => {
       </Grid>
       <Stack direction='row' spacing={2} mt={2}>
         <Button variant='contained' color='primary' sx={{ marginTop: '1rem' }} onClick={handleCreate}>
-          Create
+          {t('create')}
         </Button>
         <Button variant='outlined' color='error' sx={{ marginTop: '1rem' }} onClick={() => navigate(path.adminSection)}>
           Cancel

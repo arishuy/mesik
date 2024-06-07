@@ -10,7 +10,7 @@ export default function BookingBooked({ pending, canceled, done, processing }) {
   ]
   return (
     <Card>
-      <CardHeader title='Transaction' />
+      <CardHeader title={t('transactions')} />
       <Stack spacing={3} sx={{ px: 3, my: 5 }}>
         {_bookingsOverview.map((progress) => (
           <LinearProgress

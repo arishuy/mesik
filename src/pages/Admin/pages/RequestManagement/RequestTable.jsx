@@ -71,18 +71,18 @@ const RequestTable = ({ majorsOrder, fetchData }) => {
             <TableHead>
               <TableRow>
                 <TableCell>#</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Display Name</TableCell>
+                <TableCell>{t('user')}</TableCell>
+                <TableCell>{t('displayName')}</TableCell>
                 <TableCell
                   sx={{
                     width: '500px'
                   }}
                 >
-                  Description
+                  {t('description')}
                 </TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell align='right'>Time</TableCell>
-                <TableCell align='right'>Action</TableCell>
+                <TableCell>{t('status')}</TableCell>
+                <TableCell align='right'>{t('time')}</TableCell>
+                <TableCell align='right'>{t('action')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -95,10 +95,10 @@ const RequestTable = ({ majorsOrder, fetchData }) => {
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>
                       <Stack direction='row' spacing={2} alignItems='center'>
-                        <Avatar src={majorsOrder.user.photo_url} />
+                        <Avatar src={majorsOrder.user?.photo_url} />
                         <Stack direction='column' spacing={0}>
                           <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>
-                            {majorsOrder.user.first_name} {majorsOrder.user.last_name}
+                            {majorsOrder.user?.first_name} {majorsOrder?.user?.last_name}
                           </Typography>
                         </Stack>
                       </Stack>
@@ -135,7 +135,7 @@ const RequestTable = ({ majorsOrder, fetchData }) => {
                     <TableCell align='right'>
                       {majorsOrder.status === 'PENDING' ? (
                         <>
-                          <Tooltip title={t('edit')} arrow>
+                          <Tooltip title={t('confirm')} arrow>
                             <IconButton
                               sx={{
                                 '&:hover': {

@@ -52,7 +52,7 @@ const PremiumPackageTable = ({ majorsOrder, fetchData }) => {
       {openDelete && <DeleteConfirm open={openDelete} setOpen={setOpenDelete} fetchData={fetchData} id={id} />}
       <Card>
         <CardHeader
-          title={'Premium Package Management'}
+          title={t('premiumPackageManagement')}
           action={
             <Box width={isMobile ? '' : 150}>
               <Button
@@ -62,7 +62,7 @@ const PremiumPackageTable = ({ majorsOrder, fetchData }) => {
                 fullWidth
                 startIcon={<AddIcon />}
               >
-                {isMobile ? '' : 'Add New'}
+                {isMobile ? '' : t('addNew')}
               </Button>
             </Box>
           }
@@ -75,10 +75,10 @@ const PremiumPackageTable = ({ majorsOrder, fetchData }) => {
                 <TableHead>
                   <TableRow>
                     <TableCell>#</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Description</TableCell>
-                    <TableCell align='right'>Time</TableCell>
-                    <TableCell align='right'>Action</TableCell>
+                    <TableCell>{t('name')}</TableCell>
+                    <TableCell>{t('description')}</TableCell>
+                    <TableCell align='right'>{t('time')}</TableCell>
+                    <TableCell align='right'>{t('action')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

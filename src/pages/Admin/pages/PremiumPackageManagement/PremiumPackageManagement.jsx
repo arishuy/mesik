@@ -41,7 +41,7 @@ const PremiumPackageManagement = () => {
       }
     >
       <Helmet>
-        <title>{t('PremiumPackageManagement')}</title>
+        <title>{t('premiumPackageManagement')}</title>
       </Helmet>
       {isLoading ? (
         <Loading />

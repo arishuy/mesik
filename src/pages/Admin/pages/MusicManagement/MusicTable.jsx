@@ -120,7 +120,7 @@ const MusicTable = ({
                 fullWidth
                 startIcon={<AddIcon />}
               >
-                {isMobile ? '' : 'Add song'}
+                {isMobile ? '' : t('addNew')}
               </Button>
             </Box>
           }
@@ -135,7 +135,7 @@ const MusicTable = ({
             optionsGenre={[
               {
                 _id: 'all',
-                name: 'All'
+                name: t('all')
               },
               ...genres.map((genre) => ({
                 _id: genre._id,
@@ -149,14 +149,14 @@ const MusicTable = ({
                 <TableHead>
                   <TableRow>
                     <TableCell>#</TableCell>
-                    <TableCell>Title</TableCell>
-                    <TableCell>Release Date</TableCell>
-                    <TableCell>Duration</TableCell>
-                    <TableCell>Nghệ sĩ</TableCell>
+                    <TableCell>{t('title')}</TableCell>
+                    <TableCell>{t('releaseDate')}</TableCell>
+                    <TableCell>{t('duration')}</TableCell>
+                    <TableCell>{t('artist')}</TableCell>
                     <TableCell align='right'>Premium</TableCell>
-                    <TableCell align='right'>Has Lyric</TableCell>
-                    <TableCell align='right'>Time</TableCell>
-                    <TableCell align='right'>Action</TableCell>
+                    <TableCell align='right'>{t('hasLyrics')}</TableCell>
+                    <TableCell align='right'>{t('time')}</TableCell>
+                    <TableCell align='right'>{t('action')} </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -194,7 +194,11 @@ const MusicTable = ({
                         </TableCell>
                         <TableCell align='right'>
                           <Typography variant='body1' color='text.primary' gutterBottom noWrap>
-                            {majorsOrder.isPremium ? 'Yes' : 'No'}
+                            {majorsOrder.isPremium ? (
+                              <Chip label='Yes' color='success' variant='outlined' />
+                            ) : (
+                              <Chip label='No' color='error' variant='outlined' />
+                            )}
                           </Typography>
                         </TableCell>
                         <TableCell align='right'>
@@ -203,7 +207,6 @@ const MusicTable = ({
                           ) : (
                             <Chip label='No' color='error' variant='outlined' />
                           )}
-                          .
                         </TableCell>
                         <TableCell align='right'>
                           <Typography variant='body1' fontWeight='bold' color='text.primary' gutterBottom noWrap>

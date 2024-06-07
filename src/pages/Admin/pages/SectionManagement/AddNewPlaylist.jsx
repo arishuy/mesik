@@ -88,7 +88,7 @@ const AddNewPlaylist = ({ open, handleClose, section, setSection }) => {
     <>
       <RootModal
         variant='Create'
-        title='New Playlist'
+        title={t('addNew') + ' ' + t('playlist')}
         open={open}
         handleClose={handleClose}
         handleOk={() => {
@@ -100,7 +100,7 @@ const AddNewPlaylist = ({ open, handleClose, section, setSection }) => {
         <Stack spacing={2} direction='column' sx={{ width: '100%', my: 2 }}>
           <TextField
             id='outlined-basic'
-            label='Title'
+            label={t('title')}
             variant='outlined'
             placeholder='Nhập tên playlist'
             fullWidth
@@ -127,7 +127,7 @@ const AddNewPlaylist = ({ open, handleClose, section, setSection }) => {
               <TextField
                 {...params}
                 variant='outlined'
-                label='Songs'
+                label={t('song')}
                 placeholder='Select song'
                 onChange={(e) => setFilterName(e.target.value)}
               />

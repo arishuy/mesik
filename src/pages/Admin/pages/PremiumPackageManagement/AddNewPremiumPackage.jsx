@@ -35,7 +35,7 @@ const AddNewPremiumPackage = ({ open, handleClose, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorSuccess'),
+          message: t('addNewPackageSuccess'),
           type: 'success'
         })
       })
@@ -43,7 +43,7 @@ const AddNewPremiumPackage = ({ open, handleClose, fetchData }) => {
         setSnack({
           ...snack,
           open: true,
-          message: t('addNewMajorFail'),
+          message: t('addNewPackageFail'),
           type: 'error'
         })
       )
@@ -52,7 +52,7 @@ const AddNewPremiumPackage = ({ open, handleClose, fetchData }) => {
     <>
       <RootModal
         variant='Create'
-        title={t('newPremiumPackage')}
+        title={t('addNew')}
         open={open}
         handleClose={handleClose}
         handleOk={() => {
@@ -64,7 +64,7 @@ const AddNewPremiumPackage = ({ open, handleClose, fetchData }) => {
         <Stack spacing={2} direction='row' sx={{ width: '100%', my: 2 }}>
           <TextField
             id='outlined-basic'
-            label='Name'
+            label={t('name')}
             variant='outlined'
             fullWidth
             onChange={(e) =>
@@ -76,7 +76,7 @@ const AddNewPremiumPackage = ({ open, handleClose, fetchData }) => {
           />
           <TextField
             id='outlined-basic'
-            label='Description'
+            label={t('description')}
             variant='outlined'
             fullWidth
             onChange={(e) =>
@@ -90,7 +90,7 @@ const AddNewPremiumPackage = ({ open, handleClose, fetchData }) => {
         <Stack spacing={2} direction='row' sx={{ width: '100%', my: 2 }}>
           <TextField
             id='outlined-basic'
-            label='Price'
+            label={t('price')}
             variant='outlined'
             fullWidth
             type='number'
@@ -103,7 +103,7 @@ const AddNewPremiumPackage = ({ open, handleClose, fetchData }) => {
           />
           <TextField
             id='outlined-basic'
-            label='Duration Months'
+            label={t('Duration Months')}
             variant='outlined'
             fullWidth
             type='number'

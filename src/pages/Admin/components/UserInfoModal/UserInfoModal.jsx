@@ -119,7 +119,6 @@ export default function UserInfoModal({ open, handleCloseModal, user, fetchData 
     }
   }
 
-  console.log('user', user)
   const handleOnclickSaveChangesBtn = async () => {
     const url = urlConfig.user.users + `/${userId}`
     const res = await AxiosInterceptors.put(url, {
