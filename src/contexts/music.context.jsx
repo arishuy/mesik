@@ -64,8 +64,11 @@ export const MusicPlayerProvider = ({ children }) => {
       const nextSong = await Axios.post(urlConfig.music.addSongToPlay, {
         song_id: song.map((item) => item._id)
       })
-      nextSong.data.result.map((song) => {
-        mappToReactJkMusicPlayerAudioInfo.push({
+
+      // remove current song from next song
+      let filteredSong = nextSong.data.result.filter((item) => !song.find((song) => song._id === item._id))
+      filteredSong.map((song) => {
+        return mappToReactJkMusicPlayerAudioInfo.push({
           cover: song.photo_url,
           duration: song.duration,
           musicSrc: song.file,
