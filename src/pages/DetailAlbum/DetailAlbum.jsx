@@ -23,6 +23,7 @@ import Loading from '../../common/components/Loading/Loading'
 import convertToMinutes from '../../common/utils/convertToMinutes'
 import useResponsive from '../../hooks/useResponsive'
 import { useTranslation } from 'react-i18next'
+import { Helmet } from 'react-helmet-async'
 
 const DetailAlbum = () => {
   const { t } = useTranslation()
@@ -67,6 +68,9 @@ const DetailAlbum = () => {
     <Loading />
   ) : (
     <div style={isMobile ? { width: '100%', padding: '20px 20px' } : { width: '100%', padding: '20px 100px' }}>
+      <Helmet>
+        <title>Album | {album.title}</title>
+      </Helmet>
       <Grid container spacing={isMobile ? 0 : 2}>
         <Grid
           item

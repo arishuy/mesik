@@ -68,6 +68,17 @@ export const MusicPlayerProvider = ({ children }) => {
       // remove current song from next song
       let filteredSong = nextSong.data.result.filter((item) => !song.find((song) => song._id === item._id))
       filteredSong.map((song) => {
+        if (song.isPremium && !isPremium) {
+          return mappToReactJkMusicPlayerAudioInfo.push({
+            cover: song.photo_url,
+            duration: song.duration,
+            musicSrc: 'https://mesikaudio.s3.ap-southeast-1.amazonaws.com/quangcao.mp3',
+            name: song.title,
+            singer: song.artist.display_name,
+            songId: song._id,
+            lyric: song.lyric
+          })
+        }
         return mappToReactJkMusicPlayerAudioInfo.push({
           cover: song.photo_url,
           duration: song.duration,
