@@ -320,7 +320,7 @@
   "joinedDate": "Ngày tham gia",
 
   "updateSuccess": "Cập nhật thành công",
-  "updateFailed": "Cập nhật thất bại",
+  "updateFail": "Cập nhật thất bại",
 
   "documentInfo": "Thông tin tài liệu",
   "paymentInfo": "Thông tin thanh toán",

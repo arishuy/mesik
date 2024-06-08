@@ -104,7 +104,7 @@ export default function ChatBot() {
               ) : (
                 <div
                   style={{
-                    width: '100vw',
+                    width: isMobile ? '100vw' : '100%',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',

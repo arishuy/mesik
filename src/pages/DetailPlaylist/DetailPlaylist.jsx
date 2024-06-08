@@ -18,7 +18,7 @@ import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined'
 import { useMusicPlayer } from '../../contexts/music.context'
 import img_default from '../../assets/images/album_default.png'
@@ -31,6 +31,7 @@ import useResponsive from '../../hooks/useResponsive'
 import { useTranslation } from 'react-i18next'
 
 const DetailPlaylist = () => {
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const id = useParams()
@@ -136,7 +137,7 @@ const DetailPlaylist = () => {
             {playlist.title}
           </Typography>
           <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
-            {t('update')}: {moment(playlist.updateAt).format('DD/MM/YYYY')}
+            {t('update')}: {moment(playlist.updatedAt).format('DD/MM/YYYY')}
           </Typography>
           <Button
             sx={{
@@ -197,12 +198,33 @@ const DetailPlaylist = () => {
                                   color='text.primary'
                                   gutterBottom
                                   noWrap
+                                  onClick={() => {
+                                    navigate(`/artist/${majorsOrder.artist._id}`)
+                                  }}
+                                  sx={{
+                                    cursor: 'pointer',
+                                    '&:hover': {
+                                      color: 'primary.main'
+                                    }
+                                  }}
                                 >
                                   {majorsOrder.artist.display_name}
                                 </Typography>
                                 {majorsOrder.featuredArtists?.length > 0 &&
                                   majorsOrder.featuredArtists?.map((artist) => (
-                                    <Typography variant='body2' noWrap>
+                                    <Typography
+                                      variant='body2'
+                                      noWrap
+                                      onClick={() => {
+                                        navigate(`/artist/${artist._id}`)
+                                      }}
+                                      sx={{
+                                        cursor: 'pointer',
+                                        '&:hover': {
+                                          color: 'primary.main'
+                                        }
+                                      }}
+                                    >
                                       , {artist.display_name}
                                     </Typography>
                                   ))}

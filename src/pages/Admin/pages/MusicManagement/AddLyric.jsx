@@ -22,10 +22,10 @@ const AddLyric = ({ open, handleClose, id, fetchData, snack, setSnack }) => {
     await AxiosInterceptors.post(`${urlConfig.music.addLyricToSong}/${id}`, { lyric: lyric })
       .then((res) => {
         fetchData()
-        setSnack({ open: true, message: t('updateSuccess'), status: 'success' })
+        setSnack({ open: true, message: t('updateSuccess'), type: 'success' })
       })
       .catch((err) => {
-        setSnack({ open: true, message: t('updateFail'), status: 'error' })
+        setSnack({ open: true, message: t('updateFail'), type: 'error' })
       })
   }
   useEffect(() => {

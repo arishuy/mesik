@@ -96,7 +96,7 @@ const DetailAlbum = () => {
             {album.artist?.display_name}
           </Typography>
           <Typography variant='subtitle1' color='text.primary' gutterBottom noWrap>
-            {t('update')}: {moment(album.updateAt).format('DD/MM/YYYY')}
+            {t('update')}: {moment(album.updatedAt).format('DD/MM/YYYY')}
           </Typography>
           <Button
             onClick={() => {
@@ -170,6 +170,44 @@ const DetailAlbum = () => {
                                 />
                               )}
                             </Typography>
+                            <Stack direction='row'>
+                              <Typography
+                                variant='subtitle1'
+                                fontWeight='bold'
+                                color='text.primary'
+                                gutterBottom
+                                noWrap
+                                onClick={() => {
+                                  navigate(`/artist/${majorsOrder.artist._id}`)
+                                }}
+                                sx={{
+                                  cursor: 'pointer',
+                                  '&:hover': {
+                                    color: 'primary.main'
+                                  }
+                                }}
+                              >
+                                {majorsOrder.artist.display_name}
+                              </Typography>
+                              {majorsOrder.featuredArtists?.length > 0 &&
+                                majorsOrder.featuredArtists?.map((artist) => (
+                                  <Typography
+                                    variant='body2'
+                                    noWrap
+                                    onClick={() => {
+                                      navigate(`/artist/${artist._id}`)
+                                    }}
+                                    sx={{
+                                      cursor: 'pointer',
+                                      '&:hover': {
+                                        color: 'primary.main'
+                                      }
+                                    }}
+                                  >
+                                    , {artist.display_name}
+                                  </Typography>
+                                ))}
+                            </Stack>
                           </Stack>
                         </Stack>
                       </TableCell>
@@ -181,7 +219,7 @@ const DetailAlbum = () => {
                       {!isMobile && (
                         <TableCell align='right'>
                           <Typography variant='body2' color='text.primary' gutterBottom noWrap>
-                            {moment(majorsOrder.createdAt).format('DD/MM/YYYY')}
+                            {moment(majorsOrder.release_date).format('DD/MM/YYYY')}
                           </Typography>
                         </TableCell>
                       )}

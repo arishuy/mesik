@@ -320,7 +320,7 @@
   "joinedDate": "Joined date",
 
   "updateSuccess": "Update successfully",
-  "updateFailed": "Update failed",
+  "updateFail": "Update failed",
 
   "documentInfo": "Document information",
   "paymentInfo": "Payment information",
