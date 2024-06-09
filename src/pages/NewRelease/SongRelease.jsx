@@ -137,7 +137,7 @@ const SongRelease = ({ allPlaylists }) => {
     <div>
       <Helmet>
         <title>
-          {t('ranking')} {t('vietnam')}
+          {t('justReleased')} | {t('song')}
         </title>
       </Helmet>
       <RootModal

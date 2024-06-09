@@ -46,7 +46,7 @@ const AlbumRelease = ({ allPlaylists }) => {
     <div>
       <Helmet>
         <title>
-          {t('ranking')} {t('vietnam')}
+          {t('justReleased')} | {t('album')}
         </title>
       </Helmet>
       <TableContainer>
