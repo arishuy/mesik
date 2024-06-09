@@ -6,6 +6,8 @@ import { useMusicPlayer } from '../../contexts/music.context'
 import SongCardVer2 from '../../common/components/SongCard_Ver2'
 import useSnackbar from '../../contexts/snackbar.context'
 import { useTranslation } from 'react-i18next'
+import NavigateNextIcon from '@mui/icons-material/NavigateNext'
+import { Link } from 'react-router-dom'
 const JustReleased = ({ allPlaylists }) => {
   const { t } = useTranslation()
   const [songs, setSongs] = useState([])
@@ -37,14 +39,26 @@ const JustReleased = ({ allPlaylists }) => {
   return (
     <>
       <Stack direction='row' spacing={2} mb={2} justifyContent='space-between' alignItems='center'>
-        <Typography variant='h4' py={3}>
+        <Typography variant='h4' pt={3}>
           {t('justReleased')}
         </Typography>
-        <Stack direction='row' spacing={1} alignItems='center' justifyContent='center'>
-          <Chip label={t('all')} onClick={() => setRegion(0)} color={region === 0 ? 'primary' : 'default'} />
-          <Chip label={t('vietnam')} onClick={() => setRegion(1)} color={region === 1 ? 'primary' : 'default'} />
-          <Chip label={t('another')} onClick={() => setRegion(2)} color={region === 2 ? 'primary' : 'default'} />
-        </Stack>
+        <div style={{ display: 'flex', alignItems: 'center', paddingTop: '24px' }}>
+          <Link
+            to={`/new-release/`}
+            style={{
+              textDecoration: 'none',
+              color: 'black'
+            }}
+          >
+            {t('all')}
+          </Link>
+          <NavigateNextIcon />
+        </div>
+      </Stack>
+      <Stack direction='row' spacing={1} alignItems='center' pb={2}>
+        <Chip label={t('all')} onClick={() => setRegion(0)} color={region === 0 ? 'primary' : 'default'} />
+        <Chip label={t('vietnam')} onClick={() => setRegion(1)} color={region === 1 ? 'primary' : 'default'} />
+        <Chip label={t('another')} onClick={() => setRegion(2)} color={region === 2 ? 'primary' : 'default'} />
       </Stack>
       <Grid container spacing={2}>
         {isLoading && (

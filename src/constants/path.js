@@ -28,6 +28,7 @@ const path = {
   paymentResponse: '/payment-response',
   becomeArtist: '/user/become-artist',
   buyPremium: '/buy-premium',
+  newRelease: '/new-release',
 
   //Artist
   artist: '/artist',

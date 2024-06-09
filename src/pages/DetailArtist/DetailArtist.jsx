@@ -139,7 +139,7 @@ const DetailArtist = () => {
                           mr: 1
                         }}
                       />
-                      {t('follow ')}
+                      {t('follow')}
                     </LoadingButton>
                   )
                 : isAuthenticated && (
@@ -156,7 +156,7 @@ const DetailArtist = () => {
                           mr: 1
                         }}
                       />
-                      {t('unfollow ')}
+                      {t('unfollow')}
                     </LoadingButton>
                   )}
             </Stack>
