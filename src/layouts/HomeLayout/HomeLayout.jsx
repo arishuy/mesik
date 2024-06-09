@@ -36,6 +36,7 @@ function HomeLayoutInner({ children }) {
             height: 'calc(100vh - 80px)',
             overflowY: 'auto'
           }}
+          id='scrollableDiv'
         >
           {!isAuthenticated ? <HomeHeader /> : <Header />}
           <Box

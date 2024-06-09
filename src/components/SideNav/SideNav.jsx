@@ -15,6 +15,7 @@ import AlbumIcon from '@mui/icons-material/Album'
 import ReportIcon from '@mui/icons-material/Report'
 import QueueMusicIcon from '@mui/icons-material/QueueMusic'
 import HomeIcon from '@mui/icons-material/Home'
+import FiberNewRoundedIcon from '@mui/icons-material/FiberNewRounded'
 import React, { useContext } from 'react'
 import logo from '../../assets/images/logo.png'
 import LibraryMusicRoundedIcon from '@mui/icons-material/LibraryMusicRounded'
@@ -68,6 +69,10 @@ export default function AdminSideNav({ param }) {
             icon={<HomeIcon />}
             component={<Link to={path.home} style={param === path.home ? styleActive : styleLink} />}
           ></MenuItem>
+          <MenuItem
+            icon={<FiberNewRoundedIcon />}
+            component={<Link to={path.newRelease} style={param === path.newRelease ? styleActive : styleLink} />}
+          ></MenuItem>
           {isAuthenticated && (
             <>
               <MenuItem
@@ -102,6 +107,12 @@ export default function AdminSideNav({ param }) {
             >
               {t('dashboard')}
             </MenuItem>
+            <MenuItem
+              icon={<FiberNewRoundedIcon />}
+              component={<Link to={path.newRelease} style={param === path.newRelease ? styleActive : styleLink} />}
+            >
+              {t('justReleased')}
+            </MenuItem>
             {isAuthenticated && (
               <>
                 <MenuItem
@@ -133,7 +144,7 @@ export default function AdminSideNav({ param }) {
               MesikChart
             </MenuItem>
           </Menu>
-          {!isPremium && profile && (
+          {!isPremium && isAuthenticated && (
             <Card
               sx={{
                 p: 1,

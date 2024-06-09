@@ -14,7 +14,8 @@ import {
   Avatar,
   IconButton,
   Tooltip,
-  Button
+  Button,
+  Chip
 } from '@mui/material'
 import Loading from '../../common/components/Loading/Loading'
 import Empty from '../../common/components/Empty'
@@ -133,6 +134,18 @@ const LikedSongs = () => {
                         <Stack direction='column' spacing={0}>
                           <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                             {song.title}
+                            {song.isPremium && (
+                              <Chip
+                                label='Premium'
+                                size='small'
+                                color='primary'
+                                variant='outlined'
+                                sx={{
+                                  ml: 1,
+                                  fontWeight: 'bold'
+                                }}
+                              />
+                            )}
                           </Typography>
                           <Stack direction='row'>
                             <Typography

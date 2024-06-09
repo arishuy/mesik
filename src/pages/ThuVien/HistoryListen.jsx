@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Loading from '../../common/components/Loading/Loading'
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import Empty from '../../common/components/Empty'
 import { useMusicPlayer } from '../../contexts/music.context'
 import urlConfig from '../../config/UrlConfig'
@@ -21,7 +20,9 @@ import {
   IconButton,
   Popover,
   List,
-  ListItem
+  ListItem,
+  Skeleton,
+  Chip
 } from '@mui/material'
 import convertToMinutes from '../../common/utils/convertToMinutes'
 import { useTranslation } from 'react-i18next'
@@ -34,12 +35,14 @@ const HistoryListen = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [historyListen, setHistoryListen] = useState([])
   const { isAuthenticated, likedSong, setLikedSong } = useContext(AppContext)
+  const [hasMore, setHasMore] = useState(true)
   const user = JSON.parse(localStorage.getItem('profile'))
   const { snack, setSnack } = useContext(SnackbarContext)
-  const [open, setOpen] = useState(false)
   const [song, setSong] = useState({})
+  const [page, setPage] = useState(2)
   const { playSong, addToPlaylist } = useMusicPlayer()
   const [anchorEl, setAnchorEl] = React.useState(null)
+  const loaderRef = useRef(null)
 
   const handleClick = (event, majorsOrder) => {
     setAnchorEl(event.currentTarget)
@@ -52,16 +55,6 @@ const HistoryListen = () => {
 
   const openPopup = Boolean(anchorEl)
   const id = openPopup ? 'simple-popover' : undefined
-  const fetchHistoryListen = async () => {
-    await AxiosInterceptors.get(urlConfig.user.getHistoryListen + `?limit=-1`)
-      .then((res) => {
-        setHistoryListen(res.data.songs.reverse())
-        setIsLoading(false)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
   const handleLikeSong = async () => {
     // like song
     await AxiosInterceptors.get(urlConfig.user.likedSongs + `/${song._id}`)
@@ -97,17 +90,62 @@ const HistoryListen = () => {
         })
       })
   }
+  const fetchData = useCallback(async () => {
+    if (isLoading) return
+
+    setIsLoading(true)
+    await AxiosInterceptors.get(urlConfig.user.getHistoryListen + `?limit=10&page=${page}`)
+      .then((res) => {
+        setHistoryListen((prevItems) => [...prevItems, ...res.data.songs])
+        if (res.data.songs.length === 0) {
+          setHasMore(false)
+        }
+      })
+      .catch((err) => console.log(err))
+
+    setPage((prevIndex) => prevIndex + 1)
+
+    setIsLoading(false)
+  }, [page, isLoading])
+
   useEffect(() => {
-    fetchHistoryListen()
+    const observer = new IntersectionObserver((entries) => {
+      const target = entries[0]
+      if (target.isIntersecting) {
+        fetchData()
+      }
+    })
+
+    if (loaderRef.current) {
+      observer.observe(loaderRef.current)
+    }
+
+    return () => {
+      if (loaderRef.current) {
+        observer.unobserve(loaderRef.current)
+      }
+    }
+  }, [fetchData])
+
+  useEffect(() => {
+    const getData = async () => {
+      setIsLoading(true)
+      try {
+        const response = await AxiosInterceptors.get(urlConfig.user.getHistoryListen + `?limit=10&page=1`)
+        setHistoryListen(response.data.songs)
+      } catch (error) {
+        console.log(error)
+      }
+      setIsLoading(false)
+    }
+    getData()
   }, [])
-  return isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <div>
       <Typography variant='h4' py={3}>
         {t('recentlyListened')}
       </Typography>
-      {historyListen.length === 0 ? (
+      {!isLoading && historyListen.length === 0 ? (
         <Empty message={t('noData')} />
       ) : (
         <TableContainer>
@@ -147,6 +185,18 @@ const HistoryListen = () => {
                         <Stack direction='column' spacing={0}>
                           <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                             {majorsOrder.title}
+                            {majorsOrder.isPremium && (
+                              <Chip
+                                label='Premium'
+                                size='small'
+                                color='primary'
+                                variant='outlined'
+                                sx={{
+                                  ml: 1,
+                                  fontWeight: 'bold'
+                                }}
+                              />
+                            )}
                           </Typography>
                           <Stack direction='row'>
                             <Typography
@@ -212,6 +262,31 @@ const HistoryListen = () => {
           </Table>
         </TableContainer>
       )}
+      {hasMore && (
+        <div ref={loaderRef}>
+          {isLoading && (
+            <TableRow>
+              <TableCell
+                sx={{
+                  width: '500px'
+                }}
+              >
+                <Stack direction='row' spacing={2} alignItems='center'>
+                  <Skeleton variant='circular' width={50} height={50} />
+                  <Stack direction='column' spacing={0}>
+                    <Skeleton variant='text' width={200} />
+                    <Skeleton variant='text' width={100} />
+                  </Stack>
+                </Stack>
+              </TableCell>
+              <TableCell align='right'>
+                <Skeleton variant='text' />
+              </TableCell>
+            </TableRow>
+          )}
+        </div>
+      )}
+
       <Popover
         id={id}
         open={openPopup}

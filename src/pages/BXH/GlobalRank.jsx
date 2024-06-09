@@ -15,7 +15,8 @@ import {
   Avatar,
   IconButton,
   Autocomplete,
-  TextField
+  TextField,
+  Chip
 } from '@mui/material'
 import { Helmet } from 'react-helmet-async'
 import convertToMinutes from '../../common/utils/convertToMinutes'
@@ -221,6 +222,18 @@ const GlobalRank = ({ allPlaylists }) => {
                       <Stack direction='column' spacing={0}>
                         <Typography variant='body1' fontWeight='bold' color='text.primary' noWrap>
                           {song.title}
+                          {song.isPremium && (
+                            <Chip
+                              label='Premium'
+                              size='small'
+                              color='primary'
+                              variant='outlined'
+                              sx={{
+                                ml: 1,
+                                fontWeight: 'bold'
+                              }}
+                            />
+                          )}
                         </Typography>
                         <Stack direction='row'>
                           <Typography

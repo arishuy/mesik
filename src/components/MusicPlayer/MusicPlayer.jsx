@@ -11,7 +11,9 @@ import { SnackbarContext } from '../../contexts/snackbar.context'
 import { ChatbotContext } from '../../contexts/chatbot.context'
 import LyricsRoundedIcon from '@mui/icons-material/LyricsRounded'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
 const MusicPlayer = () => {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const user = JSON.parse(localStorage.getItem('profile'))
   const isPremium = user?.premiumEndDate && dayjs(user.premiumEndDate) > dayjs()
@@ -30,7 +32,7 @@ const MusicPlayer = () => {
     }
   ])
   const playSong = async (id) => {
-    if (!user) {
+    if (!isAuthenticated) {
       return
     }
     await AxiosInterceptors.post(`${urlConfig.music.playSong}/play`, { id })
@@ -43,7 +45,7 @@ const MusicPlayer = () => {
           setSnack({
             ...snack,
             open: true,
-            message: 'Đã thêm vào thư viện',
+            message: t('addToLibrarySuccess'),
             type: 'success'
           })
           setLikedSong((prevLikedSong) => [...prevLikedSong, song.songId])
@@ -53,7 +55,7 @@ const MusicPlayer = () => {
           setSnack({
             ...snack,
             open: true,
-            message: 'Đã xóa khỏi thư viện',
+            message: t('removeFromLibrarySuccess'),
             type: 'success'
           })
           setLikedSong((prevLikedSong) => prevLikedSong.filter((item) => item !== song.songId))
@@ -81,7 +83,7 @@ const MusicPlayer = () => {
       autoPlayInitLoadPlayList
       showReload={false}
       showThemeSwitch={false}
-      showDownload={isPremium ? true : false}
+      showDownload={isPremium && audioLists.length > 0 ? true : false}
       mode={isMobile ? 'mini' : 'full'}
       toggleMode={isMobile ? true : false}
       defaultPlayMode='orderLoop'
