@@ -59,17 +59,6 @@ const Header = () => {
                       <FileUploadOutlinedIcon />
                     </Fab>
                   </Tooltip>
-                  {/* <Tooltip title={t('createRequest')} arrow>
-                    <Fab size='small' aria-label='add' onClick={() => setOpen(true)}>
-                      <AddIcon />
-                    </Fab>
-                  </Tooltip>
-                  */}
-                  <Tooltip title={t('recharge')} arrow>
-                    <Fab size='small' aria-label='recharge' onClick={() => setOpenRecharge(true)}>
-                      <AttachMoneyIcon />
-                    </Fab>
-                  </Tooltip>
                 </>
               )}
               {/* <Notification /> */}
@@ -78,11 +67,6 @@ const Header = () => {
                   <button className='become-artist' onClick={() => navigate('/user/become-artist')}>
                     {t('becomeArtist')}
                   </button>
-                  <Tooltip title={t('recharge')} arrow>
-                    <Fab size='small' aria-label='recharge' onClick={() => setOpenRecharge(true)}>
-                      <AttachMoneyIcon />
-                    </Fab>
-                  </Tooltip>
                 </>
               )}
               <LanguaguePopover />

@@ -62,9 +62,9 @@ function HeaderUserbox() {
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
   const user = JSON.parse(localStorage.getItem('profile'))
   const channel = pusher.subscribe(`user-${user._id}`)
-  channel.bind('update_balance', function (data) {
+  channel.bind('update_premium', function (data) {
     if (user) {
-      localStorage.setItem('profile', JSON.stringify({ ...user, balance: data.balance }))
+      localStorage.setItem('profile', JSON.stringify({ ...user, premiumEndDate: data.premiumEndDate }))
     }
   })
   const logOut = async () => {
@@ -121,7 +121,7 @@ function HeaderUserbox() {
             </UserBoxLabel>
 
             <UserBoxDescription variant='body2'>
-              {user.balance.toLocaleString('vi', { style: 'currency', currency: 'VND' })}
+              <UserBoxDescription variant='body2'>{user.username}</UserBoxDescription>
             </UserBoxDescription>
           </UserBoxText>
         </MenuUserBox>

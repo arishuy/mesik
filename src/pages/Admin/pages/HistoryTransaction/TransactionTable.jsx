@@ -97,10 +97,6 @@ const TransactionTable = ({ transaction }) => {
     {
       id: 'CANCELED',
       name: 'Canceled'
-    },
-    {
-      id: 'PENDING',
-      name: 'Pending'
     }
   ]
 

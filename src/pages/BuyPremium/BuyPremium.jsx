@@ -1,4 +1,4 @@
-import { Card, Grid, Typography, Button, useTheme, Stack, Chip } from '@mui/material'
+import { Card, Grid, Typography, useTheme, Stack, Chip } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import AxiosInterceptors from '../../common/utils/axiosInterceptors'
 import urlConfig from '../../config/UrlConfig'
@@ -45,29 +45,24 @@ const BuyPremium = () => {
   const convertNumber = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
   }
-  const handleBuyPremiumPackages = async (id) => {
+  const handleBuyPremiumPackages = async (premiumPackage) => {
     setIsSubmitting(true)
-    await AxiosInterceptors.post(urlConfig.user.buyPremium + `/${id}`)
+    await AxiosInterceptors.post(urlConfig.transaction.recharge, {
+      amount: Number(premiumPackage.price)
+    })
       .then((res) => {
-        if (res && res.status === 200) {
-          const newData = { ...user, premiumEndDate: res.data.result.premiumEndDate, balance: res.data.result.balance }
-          localStorage.setItem('profile', JSON.stringify(newData))
-          setSnack({
-            open: true,
-            message: t('buyPremiumSuccess'),
-            type: 'success'
-          })
-          setIsSubmitting(false)
-        }
+        // open new page to pay
+        window.open(res.data.paymentUrl, '_blank')
       })
       .catch((err) => {
         setSnack({
+          ...snack,
           open: true,
           message: err.response.data.message,
           type: 'error'
         })
-        setIsSubmitting(false)
       })
+    setIsSubmitting(false)
   }
   useEffect(() => {
     checkPermission()
@@ -118,7 +113,6 @@ const BuyPremium = () => {
             <Card
               sx={{
                 p: 5,
-                background: 'rgb(2,0,36)',
                 background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)',
                 color: theme.palette.primary.contrastText
               }}
@@ -141,7 +135,7 @@ const BuyPremium = () => {
               <LoadingButton
                 variant='contained'
                 color='primary'
-                onClick={() => handleBuyPremiumPackages(premiumPackage._id)}
+                onClick={() => handleBuyPremiumPackages(premiumPackage)}
                 fullWidth
                 loading={isSubmitting}
                 sx={{
