@@ -96,7 +96,7 @@ const DetailArtist = () => {
       <Card
         sx={{
           padding: '20px',
-          backgroundImage: `url(https://api-prod-minimal-v510.vercel.app/assets/images/cover/cover_19.jpg)`,
+          backgroundImage: `url(https://api-dev-minimal-v6.vercel.app/assets/images/cover/cover-19.webp)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
