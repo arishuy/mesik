@@ -269,6 +269,7 @@
   "reportFailed": "Phản hồi không thành công!",
   "deleteReportSuccess": "Xóa phản hồi thành công!",
   "report": "Phản hồi",
+  "request": "Yêu cầu",
 
   "verifyExpert": "Xác thực chuyên gia",
   "documentManagement": "Quản lý tài liệu",
@@ -460,5 +461,6 @@
   "name": "Tên",
   "create": "Tạo",
   "transactions": "Giao dịch",
-  "featuredArtists": "Nghệ sĩ kết hợp"
+  "featuredArtists": "Nghệ sĩ kết hợp",
+  "noLyric": "Không có lời bài hát"
 }

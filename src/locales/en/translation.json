@@ -269,6 +269,7 @@
   "reportFailed": "Report failed!",
   "deleteReportSuccess": "Delete report successfully!",
   "report": "Report",
+  "request": "Request",
 
   "verifyExpert": "Verify Expert",
   "documentManagement": "Document Management",
@@ -461,5 +462,6 @@
   "name": "Name",
   "create": "Create",
   "transactions": "Transactions",
-  "featuredArtists": "Featured Artists"
+  "featuredArtists": "Featured Artists",
+  "noLyric": "No lyric available"
 }

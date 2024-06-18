@@ -9,12 +9,14 @@ import Slide from '@mui/material/Slide'
 import { ChatbotContext } from '../../contexts/chatbot.context'
 import { Box, Grid } from '@mui/material'
 import useResponsive from '../../hooks/useResponsive'
+import { useTranslation } from 'react-i18next'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
 })
 
 export default function ChatBot() {
+  const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
   const { openChatbot, setOpenChatbot, playingSong, setPlayingSong } = React.useContext(ChatbotContext)
 
@@ -112,7 +114,7 @@ export default function ChatBot() {
                   }}
                 >
                   <Typography variant='h3' component='div'>
-                    Không có lời bài hát
+                    {t('noLyric')}
                   </Typography>
                 </div>
               )}

@@ -99,7 +99,7 @@ const MyPlaylist = () => {
               </div>
               <div className='song-card_play'>
                 <Stack direction='row' spacing={1} pt={2}>
-                  <IconButton onClick={() => playSong(playlist.songs)} color='success'>
+                  <IconButton onClick={() => playSong(playlist.songs, false)} color='success'>
                     <PlayCircleFilledWhiteOutlinedIcon />
                   </IconButton>
                   <IconButton onClick={() => navigation(`/playlist/${playlist._id}`)} color='primary'>

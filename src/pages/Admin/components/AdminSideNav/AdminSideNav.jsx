@@ -159,16 +159,16 @@ export default function AdminSideNav() {
               <Link to={path.adminProfile} style={param.pathname === path.adminProfile ? styleActive : styleLink} />
             }
           >
-            Profile
+            {t('profile')}
           </MenuItem>
-          <SubMenu label='Management' style={styleLink} icon={<HandymanIcon />}>
+          <SubMenu label={t('management')} style={styleLink} icon={<HandymanIcon />}>
             <MenuItem
               icon={<ManageAccountsOutlinedIcon />}
               component={
                 <Link to={path.adminListUser} style={param.pathname === path.adminListUser ? styleActive : styleLink} />
               }
             >
-              User
+              {t('user')}
             </MenuItem>
             <MenuItem
               icon={<AudioFileOutlinedIcon />}
@@ -176,7 +176,7 @@ export default function AdminSideNav() {
                 <Link to={path.adminMusic} style={param.pathname === path.adminMusic ? styleActive : styleLink} />
               }
             >
-              Song
+              {t('song')}
             </MenuItem>
             <MenuItem
               icon={<LyricsOutlinedIcon />}
@@ -184,7 +184,7 @@ export default function AdminSideNav() {
                 <Link to={path.adminGenre} style={param.pathname === path.adminGenre ? styleActive : styleLink} />
               }
             >
-              Genre
+              {t('genre')}
             </MenuItem>
             <MenuItem
               icon={<PublicOutlinedIcon />}
@@ -192,7 +192,7 @@ export default function AdminSideNav() {
                 <Link to={path.adminRegion} style={param.pathname === path.adminRegion ? styleActive : styleLink} />
               }
             >
-              Region
+              {t('region')}
             </MenuItem>
             <MenuItem
               icon={<VerifiedUserOutlinedIcon />}
@@ -200,7 +200,7 @@ export default function AdminSideNav() {
                 <Link to={path.adminRequest} style={param.pathname === path.adminRequest ? styleActive : styleLink} />
               }
             >
-              Request
+              {t('request')}
             </MenuItem>
             {/* <MenuItem
               icon={<SupervisedUserCircleOutlinedIcon />}
@@ -215,7 +215,7 @@ export default function AdminSideNav() {
                 <Link to={path.adminAlbum} style={param.pathname === path.adminAlbum ? styleActive : styleLink} />
               }
             >
-              Album
+              {t('album')}
             </MenuItem>
             <MenuItem
               icon={<ArtTrackOutlinedIcon />}
@@ -223,7 +223,7 @@ export default function AdminSideNav() {
                 <Link to={path.adminPlaylist} style={param.pathname === path.adminPlaylist ? styleActive : styleLink} />
               }
             >
-              Playlist
+              {t('playlist')}
             </MenuItem>
             <MenuItem
               icon={<ReportProblemOutlinedIcon />}
@@ -234,7 +234,7 @@ export default function AdminSideNav() {
                 />
               }
             >
-              Report
+              {t('report')}
             </MenuItem>
             <MenuItem
               icon={<WorkspacePremiumOutlinedIcon />}
@@ -245,7 +245,7 @@ export default function AdminSideNav() {
                 />
               }
             >
-              Premium Package
+              {t('premiumPackage')}
             </MenuItem>
             <MenuItem
               icon={<ReceiptLongOutlinedIcon />}
@@ -256,7 +256,7 @@ export default function AdminSideNav() {
                 />
               }
             >
-              History Transaction
+              {t('transactions')}
             </MenuItem>
             <MenuItem
               icon={<EventSeatOutlinedIcon />}
