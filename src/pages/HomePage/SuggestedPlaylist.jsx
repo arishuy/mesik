@@ -87,7 +87,7 @@ const SuggestedPlaylist = () => {
                     <IconButton
                       onClick={(e) => {
                         e.stopPropagation()
-                        playSong(playlist.playlist.songs)
+                        playSong(playlist.playlist.songs, false)
                       }}
                       color='success'
                     >

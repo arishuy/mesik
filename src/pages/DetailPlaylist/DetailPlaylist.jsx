@@ -144,7 +144,7 @@ const DetailPlaylist = () => {
               borderRadius: '20px'
             }}
             onClick={() => {
-              playSong(playlist.songs)
+              playSong(playlist.songs, false)
             }}
           >
             <PlayCircleFilledWhiteOutlinedIcon /> <span style={{ padding: '5px 5px' }}>{t('playAll')}</span>
