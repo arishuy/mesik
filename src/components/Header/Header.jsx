@@ -52,7 +52,7 @@ const Header = () => {
               }
             >
               {user && user.role === 'ARTIST' && open && <UploadMusic open={open} setOpen={setOpen} />}
-              {user.role === 'ARTIST' && (
+              {/* {user.role === 'ARTIST' && (
                 <>
                   <Tooltip title={t('uploadSong')} arrow>
                     <Fab size='small' aria-label='notifi' onClick={() => setOpen(true)}>
@@ -60,7 +60,7 @@ const Header = () => {
                     </Fab>
                   </Tooltip>
                 </>
-              )}
+              )} */}
               {/* <Notification /> */}
               {user.role === 'USER' && (
                 <>

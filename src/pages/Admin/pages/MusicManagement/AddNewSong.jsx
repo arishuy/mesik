@@ -27,7 +27,7 @@ const VisuallyHiddenInput = styled('input')({
 const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, regions }) => {
   const { t } = useTranslation()
   const [formData, setFormData] = useState(new FormData())
-  const [formMusic, setFormMusic] = useState(new FormData())
+  // const [formMusic, setFormMusic] = useState(new FormData())
   const [artists, setArtists] = useState([])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [newSong, setNewSong] = useState({
@@ -47,8 +47,8 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
       newSong.title === '' ||
       newSong.release_date === '' ||
       newSong.photo === '' ||
-      newSong.genre_id === '' ||
-      formMusic.get('audio') === null
+      newSong.genre_id === ''
+      // formMusic.get('audio') === null
     ) {
       setSnack({
         ...snack,
@@ -84,7 +84,7 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
         region_id: newSong.region_id,
         artist_id: newSong.artist_id,
         featuredArtists: newSong.featuredArtists,
-        file: formMusic.get('audio'),
+        file: newSong.file,
         photo: formData.get('photo'),
         play_count: newSong.play_count
       },
@@ -212,6 +212,18 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
                 ))}
               </TextField>
             </Stack>
+            <TextField
+              id='outlined-basic'
+              label={'Link ' + t('song')}
+              variant='outlined'
+              fullWidth
+              onChange={(e) =>
+                setNewSong({
+                  ...newSong,
+                  file: e.target.value
+                })
+              }
+            />
             <Autocomplete
               sx={{ m: 1 }}
               isOptionEqualToValue={(option, value) => option._id === value._id}
@@ -241,7 +253,7 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
               }}
               renderInput={(params) => <TextField {...params} variant='outlined' label={t('featuredArtists')} />}
             />
-            {formMusic.get('audio') && (
+            {/* {formMusic.get('audio') && (
               <Typography variant='body2' color='text.secondary' noWrap>
                 {formMusic.get('audio').name}
               </Typography>
@@ -267,7 +279,7 @@ const AddNewSong = ({ open, handleClose, fetchData, snack, setSnack, genres, reg
                   getAudioDuration(file)
                 }}
               />
-            </Button>
+            </Button> */}
             <UploadPhoto
               file={newSong.photo}
               setFormData={setFormData}
