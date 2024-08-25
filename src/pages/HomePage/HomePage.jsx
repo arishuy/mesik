@@ -14,6 +14,7 @@ import HomeSection from './HomeSection'
 import Carousel from './Banner'
 import useResponsive from '../../hooks/useResponsive'
 import { useTranslation } from 'react-i18next'
+import News from './News'
 const HomePage = () => {
   const { t } = useTranslation()
   const isMobile = useResponsive('down', 'sm')
@@ -41,6 +42,7 @@ const HomePage = () => {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Carousel />
+          <News />
           <RandomSong allPlaylists={allPlaylists} />
           {isAuthenticated && <RecentListen allPlaylists={allPlaylists} />}
           {isAuthenticated && <SuggestedPlaylist />}
